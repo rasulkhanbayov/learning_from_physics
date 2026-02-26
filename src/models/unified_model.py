@@ -9,7 +9,7 @@ from typing import Dict, Optional
 
 from .encoder_unified import EncoderUnified
 from .interaction_graph import InteractionPhysicsBlock
-from src.losses.loss import physics_loss
+from src.losses.loss import physics_loss, physics_loss_multistep
 
 
 class UnifiedPhysicsModel(nn.Module):
@@ -26,6 +26,9 @@ class UnifiedPhysicsModel(nn.Module):
         self.dt = config["dt"]
         self.prior_mu = config.get("prior_mu", 0.0)
         self.prior_sigma = config.get("prior_sigma", 1.0)
+        self.use_multistep_loss = config.get("use_multistep_loss", False)
+        self.multistep_num_steps = config.get("multistep_num_steps", 5)
+        self.multistep_weights = config.get("multistep_step_weights", [1.0, 1.0, 0.5, 0.5, 0.25])
 
         self.encoder = EncoderUnified(
             input_dim=config["input_dim"],
@@ -86,12 +89,21 @@ class UnifiedPhysicsModel(nn.Module):
         Z_target = Z_enc[:, self.ode_order + 1 :]
 
         B, Tp, N, d = Z_target.shape
-        z_target_flat = Z_target.reshape(B * Tp, N, d)
-        z_pred_flat = Z_pred.reshape(B * Tp, N, d)
-
-        loss = physics_loss(
-            z_target_flat, z_pred_flat, self.prior_mu, self.prior_sigma
-        )
+        if self.use_multistep_loss:
+            loss = physics_loss_multistep(
+                Z_target,
+                Z_pred,
+                self.prior_mu,
+                self.prior_sigma,
+                num_steps=self.multistep_num_steps,
+                step_weights=self.multistep_weights[: self.multistep_num_steps],
+            )
+        else:
+            z_target_flat = Z_target.reshape(B * Tp, N, d)
+            z_pred_flat = Z_pred.reshape(B * Tp, N, d)
+            loss = physics_loss(
+                z_target_flat, z_pred_flat, self.prior_mu, self.prior_sigma
+            )
 
         params = {}
         for name, p in self.physics.named_parameters():

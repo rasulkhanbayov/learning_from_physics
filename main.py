@@ -1,3 +1,15 @@
+"""
+Main pipeline: identify both equation form and parameters from video.
+
+Two-stage narrative (no new data needed):
+  1. Equation-family selection: A VLM (or a tiny classifier) chooses which ODE
+     from a small library applies to the video (e.g. pendulum, dropped_ball, led).
+  2. Parameter estimation: The model estimates parameters (alpha, beta, etc.)
+     for that chosen ODE.
+
+Use --use_vlm to run Stage 1 with a vision-language model; otherwise dynamics
+are inferred from path keywords. Stage 2 is always the same physics model.
+"""
 from src.models import model as mainmodel
 from src import train
 from src import loader
@@ -282,12 +294,14 @@ def iterate_folders_and_process(root_folder, output_folder='output', dt=0.01, us
 
                 print(f"Processing {file_path}...")
 
-                # Ground-truth dynamics from path (for VLM evaluation and fallback)
+                # -------------------------------------------------------------------------
+                # Stage 1: Equation-family selection (which ODE from the library applies?)
+                # VLM or path-based keyword selects dynamics; no new data needed.
+                # -------------------------------------------------------------------------
                 gt_from_path = get_dynamics(file_path)
                 gt_norm = _normalize_gt_for_vlm(gt_from_path) if gt_from_path else None
 
                 try:
-                    # Execute the experiment
                     experiment = '_'.join(component.replace(' ', '') for component in path_components)
                     if use_vlm:
                         if use_vlm_improved:
@@ -308,6 +322,10 @@ def iterate_folders_and_process(root_folder, output_folder='output', dt=0.01, us
                         print(f"Current dynamics: {current_dynamics}")
                     if current_dynamics is None:
                         raise ValueError(f"Could not determine dynamics for {file_path}. Use --use_vlm or ensure path contains a known dynamics keyword.")
+
+                    # -------------------------------------------------------------------------
+                    # Stage 2: Parameter estimation for the chosen ODE
+                    # -------------------------------------------------------------------------
                     video_number += 1
                     model, [a, b, max_z, min_z, z0, z1] = execute_experiment(file_path, current_dynamics, output_folder, dt, loss_name=loss_name)
 
@@ -414,7 +432,7 @@ def main():
     parser.add_argument("--dt", type=str, required=True, help="Delta time")
     parser.add_argument("--path", type=str, required=True, help="Data path")
     parser.add_argument("--outfolder", type=str, default="output.csv", help="Output CSV file name")
-    parser.add_argument("--use_vlm", action="store_true", help="Use VLM (OpenRouter) to detect dynamics from frames instead of path keywords. Set OPENROUTER_API_KEY.")
+    parser.add_argument("--use_vlm", action="store_true", help="Stage 1: Use VLM (OpenRouter) to select equation family from video. Otherwise use path keywords. Set OPENROUTER_API_KEY.")
     parser.add_argument("--vlm_improved", action="store_true", help="Use improved VLM (enhanced prompt + 5 frames). Implies --use_vlm. Saves metrics to same output folder for comparison.")
     parser.add_argument("--loss", type=str, default="latent_loss", choices=["latent_loss", "latent_loss_multistep"], help="Loss: latent_loss (1-step) or latent_loss_multistep (weighted 1..5 step).")
     args = parser.parse_args()

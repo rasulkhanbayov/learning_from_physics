@@ -1,0 +1,31 @@
+\subsection{Area / Title}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textit{VLM-Phys: A Framework for Semantic Motion Identification and Physical Parameter Estimation in Video}
+\end{itemize}
+
+\subsection{Problem or Gap Identified}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Limited automation:} Existing pipelines (e.g., Garcia et al., CVPR 2025) rely on path-based keywords or manual specification of motion type and parameters. We address this by using Vision-Language Models (VLMs) to automatically identify motion type (equation family) from video before estimating parameters.
+    \item \textbf{Single-step vs.\ long-horizon consistency:} Standard latent loss compares encoder and physics predictions only at one step, which can limit parameter identifiability; we introduce a multi-step latent loss to enforce consistency over several horizons.
+    \item \textbf{Single vs.\ multi-object pipelines:} Prior work often branches on the number of objects ($N=1$ vs.\ $N>1$). We propose a unified architecture that handles both with one encoder, one physics block, and one loss (graph-structured physics, pluggable integrators).
+    \item \textbf{Dataset scope:} The Delfys75 benchmark covers five motion scenarios (dropped ball, free fall, LED decay, pendulum, sliding block, Torricelli) with limited settings. We use it for evaluation and additionally create our own dataset including multi-object interaction videos for future work.
+\end{itemize}
+
+\subsection{Our Contribution}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Two-stage pipeline and narrative:} We identify both equation form and parameters from video: Stage~1 selects the equation family (VLM motion recognition or path-based fallback), Stage~2 estimates physical parameters for the chosen ODE. This is made explicit in the main pipeline with optional \texttt{--use\_vlm} / \texttt{--vlm\_improved}.
+    \item \textbf{VLM motion recognition:} An improved VLM variant (enhanced prompt with per-class descriptions and five temporal frames) classifies dynamics from video; when correct, it improves parameter estimates (e.g., free-fall $g$, pendulum length, LED decay). We report accuracy and confusion metrics and compare parameter errors: path-based vs.\ equation-family (VLM) selection.
+    \item \textbf{Multi-step loss:} Weighted latent consistency at horizons 1--5 (\texttt{latent\_loss\_multistep}) to improve long-horizon consistency and parameter identifiability. We show gains over 1-step baseline on dropped-ball and free-fall $g$ and on several pendulum settings.
+    \item \textbf{Unified ECCV-style model:} One architecture for $N=1$ and $N>1$ (graph physics, symplectic/higher-order integrators, identifiability analysis). We fix the Forward Euler position update so gradients flow to physics parameters (gamma). Comparisons vs.\ main-pipeline baseline show large gains on pendulum length, sliding-block friction, Torricelli $k$, and LED decay; baseline remains stronger on $g$ and pendulum damping in the current setup.
+    \item \textbf{Comparison tools and result files:} Scripts to run the unified model over Delfys75 and to compare any two runs (baseline vs.\ multi-step, vs.\ unified, vs.\ equation-family) against ground-truth parameters, with clear mapping of which comparison file corresponds to which improvement.
+    \item \textbf{Own dataset and multi-object videos:} We created our own dataset for this line of work, including multi-object interaction videos intended for future extension of the unified pipeline to multi-body scenarios.
+\end{itemize}
+
+\subsection{Dataset and Benchmarks}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Datasets:} We evaluate on the Delfys75 benchmark (five motion types, multiple settings, ground-truth parameters in \texttt{parameters.json}). We also created our own dataset with additional scenarios and multi-object interaction videos for future work.
+    \item \textbf{Benchmarks:} We compare against the following baseline:
+    \begin{enumerate}
+        \item Garcia et al., ``Learning Physics From Video: Unsupervised Physical Parameter Estimation for Continuous Dynamics,'' CVPR 2025~\cite{garcia2025learning} (main pipeline: 1-step latent loss, path-based dynamics, EndPhys). Our improved runs use multi-step loss, VLM equation-family selection, and/or the unified physics model; parameter errors are compared to ground truth and reported in baseline-vs-improved tables (multi-step, unified, equation-family).
+    \end{enumerate}
+\end{itemize}

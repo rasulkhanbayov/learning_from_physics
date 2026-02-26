@@ -4,8 +4,14 @@ in the same CSV format as main.py (run, alpha, beta, max_z, min_z, z0, z1)
 so you can compare with baseline and run parameter-error comparison.
 
 Usage:
+  # Unified model only (path-based dynamics)
   python scripts/run_unified_delfys75.py --path ./delfys75 --outfolder delfys75_unified --dt 0.05
-  python scripts/run_unified_delfys75.py --path ./delfys75 --outfolder delfys75_unified --dt 0.05 --config config_unified.yaml --epochs 300
+
+  # All improvements together: VLM equation-family selection + unified model + multi-step loss
+  python scripts/run_unified_delfys75.py --path ./delfys75 --outfolder delfys75_all --dt 0.05 --vlm_improved --multistep
+
+  # Options: --use_vlm / --vlm_improved (equation family from video), --multistep (multi-step physics loss)
+  python scripts/run_unified_delfys75.py --path ./delfys75 --outfolder delfys75_unified --dt 0.05 --config config_unified.yaml --epochs 300 --vlm_improved --multistep
 """
 
 import argparse
@@ -23,7 +29,7 @@ if ROOT not in sys.path:
 from src.models.unified_model import UnifiedPhysicsModel
 
 
-def get_dynamics(path: str) -> str:
+def get_dynamics_from_path(path: str) -> str:
     """Extract dynamics keyword from path (same logic as main.py)."""
     dynamics_keywords = [
         "pendulum", "sliding_block", "bouncing_ball", "dropped_ball",
@@ -34,6 +40,30 @@ def get_dynamics(path: str) -> str:
         if keyword in normalized:
             return keyword
     return None
+
+
+def get_dynamics(
+    file_path: str,
+    use_vlm: bool = False,
+    vlm_improved: bool = False,
+) -> str:
+    """
+    Get dynamics for this video: VLM (if enabled) or path-based.
+    Returns dynamics keyword or None if unknown.
+    """
+    if use_vlm:
+        try:
+            if vlm_improved:
+                from src.utils.vlm_improved import detect_dynamics_from_npy
+            else:
+                from src.utils.vlm_dynamics import detect_dynamics_from_npy
+            pred = detect_dynamics_from_npy(file_path)
+            if pred is not None:
+                return pred
+        except Exception as e:
+            print(f"  VLM failed ({e}); falling back to path.")
+        return get_dynamics_from_path(file_path)
+    return get_dynamics_from_path(file_path)
 
 
 def load_video_tensor(path: str) -> torch.Tensor:
@@ -109,12 +139,19 @@ def run_pipeline(
     config_path: str,
     epochs: int = 500,
     log_interval: int = 50,
+    use_vlm: bool = False,
+    vlm_improved: bool = False,
+    use_multistep_loss: bool = False,
 ):
     with open(config_path) as f:
         config = yaml.safe_load(f)
     config["input_dim"] = config.get("input_dim", 5600)
     config["dt"] = dt
     config["epochs"] = epochs
+    config["use_multistep_loss"] = use_multistep_loss
+    if use_multistep_loss:
+        config.setdefault("multistep_num_steps", 5)
+        config.setdefault("multistep_step_weights", [1.0, 1.0, 0.5, 0.5, 0.25])
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     results = []
@@ -129,12 +166,15 @@ def run_pipeline(
             relative = os.path.relpath(folder_name, root_folder)
             path_components = relative.split(os.sep)
 
-            dynamics = get_dynamics(file_path)
+            dynamics = get_dynamics(file_path, use_vlm=use_vlm, vlm_improved=vlm_improved)
             if dynamics is None:
                 print(f"Skipping (no dynamics in path): {file_path}")
                 continue
 
-            print(f"Processing {file_path} ...")
+            if use_vlm:
+                print(f"Processing {file_path} (dynamics={dynamics}) ...")
+            else:
+                print(f"Processing {file_path} ...")
             try:
                 video = load_video_tensor(file_path).to(device)
                 if video.shape[1] < 3:
@@ -164,15 +204,22 @@ def run_pipeline(
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Run unified model on Delfys75 and write main.py-style CSV")
+    ap = argparse.ArgumentParser(
+        description="Run unified model on Delfys75 and write main.py-style CSV. "
+        "Use --use_vlm/--vlm_improved for equation-family selection and --multistep for multi-step loss to combine all improvements."
+    )
     ap.add_argument("--path", type=str, required=True, help="Root folder containing .npy files (e.g. ./delfys75)")
     ap.add_argument("--outfolder", type=str, default="delfys75_unified", help="Output folder under ./Results/")
     ap.add_argument("--dt", type=float, default=0.05, help="Time step (e.g. 0.05 for Delfys75)")
     ap.add_argument("--config", type=str, default="config_unified.yaml", help="Unified model config")
     ap.add_argument("--epochs", type=int, default=500)
     ap.add_argument("--log_interval", type=int, default=50)
+    ap.add_argument("--use_vlm", action="store_true", help="Stage 1: Use VLM to select equation family from video (else path-based).")
+    ap.add_argument("--vlm_improved", action="store_true", help="Use improved VLM (enhanced prompt + 5 frames). Implies --use_vlm.")
+    ap.add_argument("--multistep", action="store_true", help="Use multi-step physics loss (horizons 1..5, weighted).")
     args = ap.parse_args()
 
+    use_vlm = args.use_vlm or args.vlm_improved
     config_path = args.config
     if not os.path.isabs(config_path):
         config_path = os.path.join(ROOT, config_path)
@@ -183,6 +230,9 @@ def main():
         config_path,
         epochs=args.epochs,
         log_interval=args.log_interval,
+        use_vlm=use_vlm,
+        vlm_improved=args.vlm_improved,
+        use_multistep_loss=args.multistep,
     )
 
 
