@@ -67,6 +67,8 @@ We extended the original "Learning Physics From Video" codebase along five lines
 | **Unified model** | `Results/delfys75_0437/parameter_errors_comparison.txt` | Baseline (main.py) | Unified (run_unified_delfys75.py) | Unified better |
 | **Equation family (VLM)** | `Results/delfys75_equation_family/parameter_errors_comparison.txt` | Baseline (path-based) | Equation_family (VLM selection) | VLM run better |
 | **All-in-one** | `Results/delfys75_all/parameter_errors_comparison.txt` | Baseline (main.py) | All-in-one (unified + VLM + multistep) | All-in-one better |
+| **VLM eval (temporal)** | `Results/vlm_temporal_reasoning/vlm_eval_summary.txt` | — | 73.33% accuracy (1 call) | — |
+| **VLM eval (describe-then-classify)** | `Results/vlm_describe_then_classify/vlm_eval_summary.txt` | — | 61.11% accuracy (2 calls) | — |
 
 ### 3.1 Multi-step loss vs 1-step baseline
 
@@ -160,6 +162,21 @@ We extended the original "Learning Physics From Video" codebase along five lines
 
 - One encoder, one physics block, one loss; N=1 is one node and zero edges, N>1 adds coupling edges. Same tensor contract `[batch, N, d]` everywhere; no `if num_objects == 1` or `squeeze(1)`. Reproducibility and ablation (integrators, coupling) are straightforward; switching between single and multi-body is config-only.
 
+### 3.8 VLM dynamics recognition (accuracy on Delfys75)
+
+Dynamics selection (Stage 1) can use path keywords, a baseline VLM, an improved VLM with reasoning, or a small trained video classifier. Accuracy is on the full Delfys75 set (90 videos, 6 classes, 15 per class).
+
+| Method | Accuracy | Notes |
+|--------|----------|--------|
+| **Baseline VLM** (1 call, simple prompt) | ~61–67% | `evaluate_vlm_dynamics.py` |
+| **Temporal reasoning** (1 call, first vs last frame) | **73.33%** | `vlm_improved` with `use_temporal_reasoning=True`; best single-call VLM. |
+| **Describe-then-classify** (2 calls: describe motion, then classify from text) | **61.11%** | `--describe_then_classify` in `evaluate_vlm_dynamics_improved.py`. Dropped_ball 100%, free_fall 0%, sliding_block 80%, torricelli 73%, led 60%, pendulum 53%. |
+| **VLM fine-tuning (LoRA)** | ~16.67% (collapse) | Model ignores image; scores identical for every video. Not recommended. See `src/utils/vlm_finetune/README.md`. |
+| **VLM fine-tuning (frozen VLM + classifier head)** | ~16.67% (collapse) | Head collapses to one class (e.g. pendulum or torricelli). Class weights, label smoothing, best-by-val checkpoint did not fix. Not recommended. |
+| **Video classifier** (ResNet18 + temporal mean, trained on Delfys75) | **100%** (eval set) | `scripts/train_video_classifier.py` + `evaluate_video_classifier.py`; no VLM. Eval is on same distribution as train; use held-out test for generalization. |
+
+**Recommendation for pipeline:** Use **temporal reasoning** (`--vlm_improved`, default) for best VLM accuracy without training, or the **video classifier** for maximum accuracy when training on the same data is acceptable. See `src/utils/vlm_improved/VLM_REASONING_ALTERNATIVES.md` for other reasoning options (CoT, hierarchical, few-shot, self-consistency).
+
 ---
 
 ## 4. How to Run (Quick Reference)
@@ -185,6 +202,12 @@ python scripts/run_unified_delfys75.py --path ./delfys75 --outfolder delfys75_al
 
 # Compare baseline vs unified
 python scripts/compare_baseline_unified.py --baseline Results/delfys75_original/delfys75_original.csv --unified Results/delfys75_unified/delfys75_unified.csv --out Results/delfys75
+
+# VLM dynamics accuracy (temporal reasoning, 1 call, ~73%)
+python scripts/evaluate_vlm_dynamics_improved.py --path ./delfys75 --out Results/vlm_temporal_reasoning
+
+# VLM dynamics accuracy (describe-then-classify, 2 calls, ~61%)
+python scripts/evaluate_vlm_dynamics_improved.py --path ./delfys75 --out Results/vlm_describe_then_classify --describe_then_classify
 ```
 
 In the comparison output: **negative Diff_err** = second CSV has lower error (better); **positive Diff_err** = first CSV has lower error.
@@ -204,7 +227,9 @@ In the comparison output: **negative Diff_err** = second CSV has lower error (be
 |------|--------|
 | Main pipeline | `main.py` (docstring, stage comments, argparse, `--loss`) |
 | Loss (main) | `src/loss_func.py` (`latent_loss_multistep`, weighted 1..5 step) |
-| VLM motion recognition | `src/utils/vlm_dynamics.py`, `src/utils/vlm_improved/` (enhanced prompt + 5 frames); `scripts/evaluate_vlm_dynamics.py`, `scripts/evaluate_vlm_dynamics_improved.py` |
+| VLM motion recognition | `src/utils/vlm_dynamics.py`, `src/utils/vlm_improved/` (temporal reasoning, describe-then-classify, `VLM_REASONING_ALTERNATIVES.md`); `scripts/evaluate_vlm_dynamics.py`, `scripts/evaluate_vlm_dynamics_improved.py` |
+| VLM fine-tuning (optional, not recommended) | `src/utils/vlm_finetune/` (LoRA, frozen VLM + classifier), `scripts/train_vlm_dynamics.py`, `scripts/train_vlm_dynamics_classifier.py`, `scripts/evaluate_vlm_finetune.py`; see README for limitations |
+| Video classifier (dynamics from frames) | `src/utils/video_classifier/`, `scripts/train_video_classifier.py`, `scripts/evaluate_video_classifier.py` |
 | Integrators | `src/integrators/__init__.py`, `src/integrators/integrators.py` (Euler fix, Verlet, RK4, Yoshida4) |
 | Loss | `src/losses/__init__.py`, `src/losses/loss.py` |
 | Models | `src/models/interaction_graph.py`, `src/models/encoder_unified.py`, `src/models/unified_model.py` |
@@ -217,4 +242,4 @@ In the comparison output: **negative Diff_err** = second CSV has lower error (be
 
 ## 6. One-Sentence Summary
 
-We added **VLM motion recognition** (equation-family selection from video, with an improved variant: enhanced prompt + 5 frames), **multi-step loss** (weighted 1..5 step latent consistency), a **unified physics model** (one architecture for 1 and N objects, symplectic integrators, identifiability), and **pipelines and comparison scripts** for Delfys75, plus a **gradient fix** for the Euler integrator. Comparisons show **VLM improves parameter estimates when it selects the right dynamics** (e.g. free_fall, pendulum_45) and the **unified model improves pendulum length, friction, and torricelli k**; the **all-in-one run** (unified + VLM + multistep) strongly improves pendulum length, sliding_block friction, LED decay (led_2s, led_5s), and torricelli medium, while baseline (main.py) remains better on g, pendulum damping, led_10s, and some torricelli settings.
+We added **VLM motion recognition** (equation-family selection from video: baseline VLM, **temporal reasoning** ~73%, **describe-then-classify** ~61%, plus optional **video classifier** 100% on eval set; VLM fine-tuning was tried but collapses to one class and is not recommended), **multi-step loss** (weighted 1..5 step latent consistency), a **unified physics model** (one architecture for 1 and N objects, symplectic integrators, identifiability), and **pipelines and comparison scripts** for Delfys75, plus a **gradient fix** for the Euler integrator. Comparisons show **VLM improves parameter estimates when it selects the right dynamics** (e.g. free_fall, pendulum_45) and the **unified model improves pendulum length, friction, and torricelli k**; the **all-in-one run** (unified + VLM + multistep) strongly improves pendulum length, sliding_block friction, LED decay (led_2s, led_5s), and torricelli medium, while baseline (main.py) remains better on g, pendulum damping, led_10s, and some torricelli settings.

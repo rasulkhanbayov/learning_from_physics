@@ -33,7 +33,7 @@ def normalize_gt_for_vlm(gt: str) -> str:
     return gt
 
 
-def run_evaluation(data_path: str, output_dir: str) -> None:
+def run_evaluation(data_path: str, output_dir: str, use_describe_then_classify: bool = False) -> None:
     from src.utils.vlm_improved import detect_dynamics_from_npy
 
     rows = []
@@ -46,7 +46,11 @@ def run_evaluation(data_path: str, output_dir: str) -> None:
             if gt is None:
                 continue
             gt_norm = normalize_gt_for_vlm(gt)
-            pred = detect_dynamics_from_npy(file_path)
+            pred = detect_dynamics_from_npy(
+                file_path,
+                use_temporal_reasoning=not use_describe_then_classify,
+                use_describe_then_classify=use_describe_then_classify,
+            )
             if pred is None:
                 pred = ""
             correct = (pred == gt_norm)
@@ -63,7 +67,8 @@ def run_evaluation(data_path: str, output_dir: str) -> None:
     pred_all = [r["pred"] for r in rows]
     classes = sorted(set(gt_all))
 
-    print("\n--- VLM IMPROVED dynamics evaluation (enhanced prompt + 5 frames) ---")
+    mode = "describe-then-classify (2 calls)" if use_describe_then_classify else "temporal reasoning (1 call)"
+    print(f"\n--- VLM IMPROVED dynamics evaluation [{mode}] ---")
     print(f"Total videos: {len(rows)}")
     print(f"Correct: {correct_count}")
     print(f"Accuracy: {accuracy:.2%}")
@@ -131,8 +136,9 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluate IMPROVED VLM dynamics (prompt + 5 frames).")
     parser.add_argument("--path", type=str, required=True, help="Root folder with .npy files (e.g. ./delfys75)")
     parser.add_argument("--out", type=str, default="./Results/vlm_eval_improved", help="Output directory (default: vlm_eval_improved for comparison)")
+    parser.add_argument("--describe_then_classify", action="store_true", help="Use two-step reasoning: describe motion then classify from text (2 API calls per video)")
     args = parser.parse_args()
-    run_evaluation(args.path, args.out)
+    run_evaluation(args.path, args.out, use_describe_then_classify=args.describe_then_classify)
 
 
 if __name__ == "__main__":
