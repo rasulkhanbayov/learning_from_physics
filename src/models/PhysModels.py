@@ -349,6 +349,35 @@ class torricelli(nn.Module):
 
       return  y_hat
 
+
+class Rotation(nn.Module):
+    """
+    Rotation ODE: cone on rotatable wood (damped rotation).
+    Second-order: z'' + beta*z' + alpha*z = 0 with z = angle.
+    alpha = torsional stiffness (optional), beta = angular damping.
+    """
+    def __init__(self, init_phys=None):
+        super().__init__()
+        if init_phys is not None:
+            self.alpha = torch.tensor([init_phys * 0.1], requires_grad=True).float()
+            self.beta = torch.tensor([init_phys * 0.05], requires_grad=True).float()
+        else:
+            self.alpha = torch.tensor([0.1], requires_grad=True).float()
+            self.beta = torch.tensor([0.05], requires_grad=True).float()
+        self.alpha = nn.Parameter(self.alpha)
+        self.beta = nn.Parameter(self.beta)
+        self.order = 2
+
+    def forward(self, z, dt):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        dt = torch.tensor([dt], requires_grad=False).float().to(device)
+        y1 = z[:, 1:2]
+        y0 = z[:, 0:1]
+        # z'' + beta*z' + alpha*z = 0  ->  z_{t+1} = 2*z_t - z_{t-1} - dt^2*(alpha*z_t + beta*(z_t - z_{t-1})/dt)
+        y_hat = 2 * y1 - y0 - dt * (self.beta * (y1 - y0) + dt * self.alpha * y1)
+        return y_hat
+
+
 def getModel(name, init_phys = None):
 
     if name == "IntegratedFire":
@@ -378,10 +407,23 @@ def getModel(name, init_phys = None):
         return Sliding_block(init_phys)
     elif name == "bouncing_ball" or name == "dropped_ball" or name == "free_fall":
         return free_fall(init_phys)
+    # IRIS dataset: same ODEs as above where applicable
+    elif name == "dropping_ball" or name == "falling_ball":
+        return free_fall(init_phys)
+    elif name == "sliding_cone":
+        return Sliding_block(init_phys)
+    elif name == "hitting_cones":
+        # Ball hitting cones: gravity + collision damping (same interface as free_fall)
+        return free_fall(init_phys)
+    elif name in ("two_moving_pendulums", "two_moving_pendulum_one_static"):
+        # Two pendulums: use single Pendulum for main.py (unified pipeline with N=2 for full coupling)
+        return Pendulum(init_phys)
     elif name == "led":
         return led(init_phys)
     elif name == "torricelli":
         return torricelli(init_phys)
+    elif name == "rotation":
+        return Rotation(init_phys)
     else:
         return None
     

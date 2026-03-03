@@ -10,17 +10,14 @@ def iterate_and_process_videos(base_path):
     for root, dirs, files in os.walk(base_path):
         # If no subdirectories, we are in a terminal folder
         if not dirs:
-            # Iterate over mp4 files that don't contain 'mask' in the filename
-            mp4_files = [f for f in files if f.endswith('.MP4') and 'mask' not in f]
+            # Iterate over mp4 files (case-insensitive) that don't contain 'mask' in the filename
+            mp4_files = [f for f in files if f.lower().endswith('.mp4') and 'mask' not in f.lower()]
             for mp4_file in mp4_files:
-                # print(mp4_file)
                 video_path = os.path.join(root, mp4_file)
-                # print(video_path)
                 print(f"Processing video: {video_path}")
-                if os.path.basename(root)=="":
-                    numpy_save_path = os.path.join(root, f"{mp4_file.split('.')[0]}.npy")
-                else:
-                    numpy_save_path = os.path.join(root, f"{os.path.basename(root)}.npy")
+                # One .npy per video file (e.g. 01.mp4 -> 01.npy) so multiple videos per folder work (e.g. IRIS)
+                stem = os.path.splitext(mp4_file)[0]
+                numpy_save_path = os.path.join(root, f"{stem}.npy")
                 print(f"Saving numpy array to: {numpy_save_path}")
                 video_array = process_video(video_path, new_width=100, new_height=56)
                 if video_array is not None and len(video_array) > 0:

@@ -32,8 +32,10 @@ from src.models.unified_model import UnifiedPhysicsModel
 def get_dynamics_from_path(path: str) -> str:
     """Extract dynamics keyword from path (same logic as main.py)."""
     dynamics_keywords = [
+        "two_moving_pendulum_one_static", "two_moving_pendulums",
+        "dropping_ball", "falling_ball", "sliding_cone", "hitting_cones", "rotation",
         "pendulum", "sliding_block", "bouncing_ball", "dropped_ball",
-        "led", "free_fall", "torricelli"
+        "led", "free_fall", "torricelli",
     ]
     normalized = path.replace(" ", "").lower()
     for keyword in dynamics_keywords:
@@ -100,6 +102,19 @@ def configure_optimizer(model, config: dict):
     return torch.optim.Adam(param_groups)
 
 
+# Multi-object dynamics: use num_objects=2 and coupling (IRIS)
+MULTI_OBJECT_DYNAMICS = ("hitting_cones", "two_moving_pendulums", "two_moving_pendulum_one_static")
+
+
+def config_for_dynamics(base_config: dict, dynamics: str) -> dict:
+    """Override config for multi-object dynamics (N=2, coupling)."""
+    config = dict(base_config)
+    if dynamics in MULTI_OBJECT_DYNAMICS:
+        config["num_objects"] = 2
+        config["coupling_type"] = "contact" if dynamics == "hitting_cones" else "double_pendulum"
+    return config
+
+
 def train_one_video(config: dict, video: torch.Tensor, device: torch.device, epochs: int, log_interval: int):
     """Train UnifiedPhysicsModel on one video; return model and [alpha, beta, max_z, min_z, z0, z1]."""
     model = UnifiedPhysicsModel(config).to(device)
@@ -115,7 +130,7 @@ def train_one_video(config: dict, video: torch.Tensor, device: torch.device, epo
         if log_interval and (epoch + 1) % log_interval == 0:
             print(f"  Epoch {epoch+1}: loss={loss.item():.6f}")
 
-    # Extract alpha, beta (unified uses gamma_0_0, gamma_0_1; map to same names as baseline)
+    # Extract alpha, beta (object 0: gamma_0_0, gamma_0_1; for CSV compatibility)
     alpha = model.physics.gamma["gamma_0_0"].detach().cpu().item()
     beta = model.physics.gamma["gamma_0_1"].detach().cpu().item()
 
@@ -181,8 +196,10 @@ def run_pipeline(
                     print(f"  Skip: too few frames ({video.shape[1]})")
                     results.append(path_components + [0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
                     continue
+                # Multi-object dynamics: use N=2 and coupling (hitting_cones, two pendulums)
+                run_config = config_for_dynamics(config, dynamics)
                 _, [a, b, max_z, min_z, z0, z1] = train_one_video(
-                    config, video, device, epochs=epochs, log_interval=log_interval
+                    run_config, video, device, epochs=epochs, log_interval=log_interval
                 )
                 results.append(path_components + [a, b, max_z, min_z, z0, z1])
             except Exception as e:

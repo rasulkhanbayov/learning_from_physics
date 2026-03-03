@@ -254,7 +254,12 @@ def get_dynamics(path):
     Returns:
         str: The dynamic type found in the path, if any, else None.
     '''	
-    dynamics_keywords = ['pendulum', 'sliding_block', 'bouncing_ball', 'dropped_ball', 'led', 'free_fall', 'torricelli' ]  # Add more keywords as needed
+    # Order matters: more specific (IRIS) before substrings (e.g. dropping_ball before dropped_ball)
+    dynamics_keywords = [
+        'two_moving_pendulum_one_static', 'two_moving_pendulums',
+        'dropping_ball', 'falling_ball', 'sliding_cone', 'hitting_cones', 'rotation',
+        'pendulum', 'sliding_block', 'bouncing_ball', 'dropped_ball', 'led', 'free_fall', 'torricelli',
+    ]
 
     # Normalize the path to ignore case and spaces
     normalized_path = path.replace(' ', '').lower()

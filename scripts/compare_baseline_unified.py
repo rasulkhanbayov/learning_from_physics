@@ -26,17 +26,18 @@ def load_csv(path: str):
         reader = csv.reader(f)
         header = next(reader)
         for row in reader:
-            if len(row) < 9:
+            # Last 6 columns are always alpha, beta, max_z, min_z, z0, z1 (main.py padding)
+            if len(row) < 8:
                 continue
-            # run = first 3 cols (dynamics, setting, video_id), then alpha, beta, max_z, min_z, z0, z1
-            dynamics = row[0].strip()
-            setting = row[1].strip()
-            video_id = row[2].strip()
             try:
-                alpha = float(row[3])
-                beta = float(row[4])
+                alpha = float(row[-6])
+                beta = float(row[-5])
             except (ValueError, IndexError):
                 continue
+            # Path components are first columns (dynamics, setting, optional video_id, ...)
+            dynamics = row[0].strip().lower()
+            setting = row[1].strip().lower()
+            video_id = row[2].strip() if len(row) > 8 else ""
             rows.append({
                 "dynamics": dynamics,
                 "setting": setting,
@@ -50,8 +51,8 @@ def load_csv(path: str):
 def get_gt_params(params_json: dict, dynamics: str, setting: str):
     """Get ground-truth param means for (dynamics, setting) from parameters.json."""
     out = {}
-    # Standard g for dropped_ball and free_fall (not in JSON)
-    if dynamics in ("dropped_ball", "free_fall"):
+    # Standard g for dropped_ball, free_fall, dropping_ball, falling_ball (not always in JSON)
+    if dynamics in ("dropped_ball", "free_fall", "dropping_ball", "falling_ball"):
         out["g"] = 9.80665
     d = params_json.get(dynamics)
     if not d:
@@ -62,6 +63,7 @@ def get_gt_params(params_json: dict, dynamics: str, setting: str):
     for param_name, v in s.items():
         if isinstance(v, dict) and "mean" in v:
             out[param_name] = v["mean"]
+    # rotation: IRIS has camera_to_object only; no GT for angular_stiffness/damping in JSON
     return out
 
 
@@ -71,24 +73,39 @@ def alpha_beta_to_physical(dynamics: str, setting: str, alpha: float, beta: floa
     Returns dict param_name -> estimated value.
     """
     est = {}
-    if dynamics in ("dropped_ball", "free_fall"):
-        # ODE z'' + beta*z' + alpha*z = 0; in free fall / dropped ball, alpha ~ g
+    if dynamics in ("dropped_ball", "free_fall", "dropping_ball", "falling_ball"):
+        # ODE z'' + beta*z' + alpha*z = 0; alpha ~ g
+        est["g"] = alpha if alpha > 0 else 0.0
+    elif dynamics == "hitting_cones":
+        # Ball + cones: alpha ~ g, beta ~ damping from collisions
         est["g"] = alpha if alpha > 0 else 0.0
     elif dynamics == "led":
-        # Decay: beta often used as decay rate
         est["decay"] = beta if beta > 0 else 0.0
     elif dynamics == "pendulum":
-        # alpha = omega^2 = g/L -> L = g/alpha; damping ~ -beta
         g = 9.80665
         est["damping"] = -beta
         est["length"] = g / alpha if alpha > 0 else 0.0
+        est["rope_length"] = g / alpha if alpha > 0 else 0.0
+    elif dynamics in ("two_moving_pendulums", "two_moving_pendulum_one_static"):
+        # Single effective length from alpha (main.py uses one Pendulum)
+        g = 9.80665
+        est["rope_length_1"] = g / alpha if alpha > 0 else 0.0
+        est["rope_length_2"] = g / alpha if alpha > 0 else 0.0
     elif dynamics == "sliding_block":
-        # Angle from setting name; friction from beta
         angle_map = {"low": 20.0, "mid": 25.0, "high": 30.0}
         est["angle"] = angle_map.get(setting, 25.0)
         est["friction"] = beta if beta >= 0 else 0.0
+    elif dynamics == "sliding_cone":
+        # cone_45 -> 45, cone_60 -> 60, cone_80 -> 80
+        angle_map = {"cone_45": 45.0, "cone_60": 60.0, "cone_80": 80.0}
+        est["angle"] = angle_map.get(setting, 45.0)
+        est["friction"] = beta if beta >= 0 else 0.0
     elif dynamics == "torricelli":
         est["k"] = alpha if alpha > 0 else 0.0
+    elif dynamics == "rotation":
+        # Rotation ODE: alpha = torsional stiffness, beta = angular damping
+        est["angular_stiffness"] = alpha
+        est["angular_damping"] = beta if beta >= 0 else 0.0
     return est
 
 
@@ -98,6 +115,7 @@ def param_name_for_output(dynamics: str, param: str) -> str:
         return "length_m"
     if param == "angle":
         return "angle_deg"
+    # IRIS keeps rope_length, rope_length_1, rope_length_2, drop_height, etc. as-is
     return param
 
 
