@@ -44,6 +44,7 @@ def train_epoch(model, loader,loss_fn, optimizer, device='cpu'):
         loss  = loss_fn(x0 , outputs ,x1 )
 
         loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
 
         running_loss += loss.item()
@@ -162,6 +163,8 @@ def train(model, train_loader, val_loader, lr_phys = 1.0,loss_name=None, experim
     best_loss = float('inf')  # Initialize with a large value
     best_val_loss = float('inf')  # Initialize with a large value
     best_model_state = None
+    best_a = model.pModel.alpha[0].detach().cpu().numpy().item() if hasattr(model, 'pModel') else 0.0
+    best_b = model.pModel.beta[0].detach().cpu().numpy().item() if hasattr(model, 'pModel') else 0.0
 
     # Model training
     try:
@@ -170,9 +173,10 @@ def train(model, train_loader, val_loader, lr_phys = 1.0,loss_name=None, experim
 
         print(f"Loss is NaN! on the 1st evaluation, {e}")
         if log_wandb:
-            wandb.finish()  
-        model.load_state_dict(best_model_state)
-        return model, log
+            wandb.finish()
+        if best_model_state is not None:
+            model.load_state_dict(best_model_state)
+        return model, log, [best_a, best_b]
 
     
     # Model validation
@@ -216,13 +220,14 @@ def train(model, train_loader, val_loader, lr_phys = 1.0,loss_name=None, experim
         if log_wandb:
             wandb.log(dict_log)
 
-        if np.isnan(train_loss) :            
+        if np.isnan(train_loss):
             print("Loss is NaN! Epoch:", epoch)
             if log_wandb:
-                wandb.finish()  
-            model.load_state_dict(best_model_state)
-            return model, log     
-        
+                wandb.finish()
+            if best_model_state is not None:
+                model.load_state_dict(best_model_state)
+            return model, log, [best_a, best_b]
+
         # Early stopping
         try:
             if val_losses[-1]>=val_losses[-2]:

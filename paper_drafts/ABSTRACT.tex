@@ -1,0 +1,30 @@
+% =============================================================================
+% ABSTRACT — Refined for clarity, accuracy, and impact
+% =============================================================================
+% Use \input{paper_drafts/ABSTRACT} in main.tex, or copy the paragraph below.
+%
+% Plain-text version (no LaTeX):
+%   Unsupervised physical parameter estimation from video lacks a common
+%   benchmark: existing methods are evaluated on disjoint synthetic setups,
+%   the only public real-world dataset is limited to single-body systems, and
+%   there is no standard protocol for both equation identification and
+%   parameter accuracy. We introduce IRIS, a benchmark of over 200 real-world
+%   videos with high temporal resolution (60 fps), covering single-body
+%   dynamics (e.g., pendulum, free fall, sliding, rotation) and multi-body
+%   dynamics (e.g., hitting cones, two pendulums). Each setting is recorded
+%   under controlled conditions with independently measured ground-truth
+%   parameters and uncertainty estimates (mean, std, min, max), and each
+%   phenomenon is paired with its governing ODE to support principled ablation.
+%   We define a standardized evaluation protocol along five axes: parameter
+%   accuracy, governing-equation selection accuracy, identifiability,
+%   robustness, and extrapolation. We compare a latent-space physics baseline
+%   (path-based equation selection, one-step loss) with a VLM-augmented
+%   pipeline that identifies the equation family from video and estimates
+%   parameters via a shared ODE bank and optional multi-step loss; we also
+%   situate encoder-decoder and neural-implicit approaches relative to this
+%   benchmark. The dataset, annotations (parameters.json), evaluation toolkit,
+%   and baseline implementations will be publicly released.
+
+\begin{abstract}
+Unsupervised physical parameter estimation from video lacks a common benchmark: existing methods are evaluated on disjoint synthetic setups, the only public real-world dataset is limited to single-body systems, and there is no standard protocol for both equation identification and parameter accuracy. We introduce \textbf{IRIS}, a benchmark of over 200 real-world videos with high temporal resolution (60\,fps), covering single-body dynamics (e.g., pendulum, free fall, sliding, rotation) and multi-body dynamics (e.g., hitting cones, two pendulums). Each setting is recorded under controlled conditions with independently measured ground-truth parameters and uncertainty estimates (mean, std, min, max), and each phenomenon is paired with its governing ODE to support principled ablation. We define a standardized evaluation protocol along five axes: parameter accuracy, governing-equation selection accuracy, identifiability, robustness, and extrapolation. We compare a latent-space physics baseline (path-based equation selection, one-step loss) with a VLM-augmented pipeline that identifies the equation family from video and estimates parameters via a shared ODE bank and optional multi-step loss; we also situate encoder-decoder and neural-implicit approaches relative to this benchmark. The dataset, annotations (\texttt{parameters.json}), evaluation toolkit, and baseline implementations will be publicly released.
+\end{abstract}

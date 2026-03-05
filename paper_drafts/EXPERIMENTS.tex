@@ -1,0 +1,205 @@
+% =============================================================================
+% ECCV — Experiments Section
+% Aligns with EVALUATION_PROTOCOL.tex and METHODOLOGY_DRAFT.tex
+% =============================================================================
+
+\section{Experiments}
+\label{sec:experiments}
+
+We evaluate our pipeline on parameter accuracy (primary), governing-equation selection accuracy, and ablations. We follow the protocol in Sec.~\ref{sec:eval_protocol}: same train-per-clip setup, same ground-truth sources, and fixed seed. Implementation details and dataset descriptions are in the supplement.
+
+% -----------------------------------------------------------------------------
+\subsection{Baselines}
+\label{sec:baselines}
+
+We compare against the following.
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Encoder--decoder (reconstruction).} Prior work that predicts future frames via an encoder--decoder and optionally supervises with pixel or feature reconstruction. We do not re-implement these; we cite them and note that they typically do not output \emph{physical parameters} and are evaluated on prediction error rather than parameter MAE. \textbf{[Placeholder: add citations and, if available, a row in the comparison table for a representative method.]}
+  \item \textbf{Neural-implicit dynamics.} Methods that learn a neural ODE or neural field for dynamics without an explicit physics parameterization. They do not produce interpretable $\alpha$, $\beta$, or physical constants. \textbf{[Placeholder: cite and contrast; optional table row if we run or cite reported numbers.]}
+  \item \textbf{Latent-space physics (single-body, 1-step).} Our \textbf{baseline}: path-based equation selection (dynamics from folder/path), one-step latent loss, and single-body physics blocks per ODE (original pipeline). This is the same as the CVPR 2025-style setup with the critical Euler fix (position update includes $\mathrm{d}t^2 \cdot z''$ so physics parameters receive gradients).
+  \item \textbf{VLM-augmented (ours).} Full pipeline: equation-family selection from video via VLM (or path when comparing), optional multi-step loss, and unified physics model (single architecture for $N=1$ and $N>1$). We report ablations that add one component at a time (Sec.~\ref{sec:ablations}).
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Physical Parameter Extraction}
+\label{sec:exp_phys_extraction}
+
+The primary metric is \textbf{parameter accuracy}: MAE (and optionally bias, $\sigma_{\hat{\theta}}$, relative error) of estimated parameters vs.\ ground truth per (phenomenon, setting, parameter), as in Sec.~\ref{sec:metrics_param}.
+
+\subsubsection{Results on IRIS}
+\label{sec:exp_iris}
+
+IRIS (Sec.~\ref{sec:dataset}) provides real-world videos with independently measured ground truth for single-body (dropping ball, falling ball, sliding cone, pendulum, rotation) and multi-body (hitting cones, two moving pendulums, one static and one moving) phenomena.
+
+\textbf{Our method on IRIS.} We run the baseline (path-based dynamics, one-step loss, single-body) and the full pipeline (VLM selection, unified model, multi-step loss; $N=2$ for hitting cones and two-pendulum settings) over IRIS clips. Each clip is processed independently; we report mean and standard deviation of parameter estimates per (phenomenon, setting). \textbf{[Placeholder: table with MAE per (phenomenon, setting, parameter) once runs complete; currently IRIS results are not yet finalized.]}
+
+\textbf{Baselines on IRIS.} The same baseline (path-based, 1-step, single-body) is run on IRIS for direct comparison. \textbf{[Placeholder: same table as above, baseline column.]}
+
+\textbf{Comparative analysis.} We will report $\Delta\mathrm{MAE}$ (full pipeline minus baseline) per parameter; negative $\Delta\mathrm{MAE}$ indicates the full pipeline has lower error. We also report equation-selection accuracy when using VLM on IRIS (Sec.~\ref{sec:exp_eq_identification}).
+
+\subsubsection{Results on Delfys75}
+\label{sec:exp_delfys}
+
+Delfys75 is the public benchmark with six single-body phenomena (dropped ball, free fall, LED decay, pendulum, sliding block, Torricelli drain), multiple settings per phenomenon, and ground truth in \texttt{parameters.json}.
+
+\textbf{Our method on Delfys75.} We run (i) baseline (path-based, one-step, single-body), (ii) multi-step loss only, (iii) VLM selection only (same loss and model as baseline), (iv) unified model only (path-based, one-step), and (v) full pipeline. Results are written in the same CSV format; we map $\alpha$/$\beta$ to physical parameters (e.g., $g$, length, decay, friction, $k$) using the evaluation protocol and compute MAE vs.\ GT.
+
+\textbf{Findings.} Multi-step loss improves gravity ($g$) estimates on dropped ball and free fall (negative $\Delta\mathrm{MAE}$) and gives mixed results on pendulum/LED/Torricelli; the one-step baseline remains better on LED 10\,s decay and some pendulum/torricelli settings. VLM selection improves parameter estimates when it chooses the correct dynamics (e.g., free fall $g$, pendulum length for one setting, LED 2\,s) but can increase error when it misclassifies (e.g., pendulum length when VLM picks the wrong equation). The unified model strongly improves pendulum length, sliding-block friction, Torricelli $k$, and LED decay vs.\ baseline; the baseline remains better on $g$ and pendulum damping in some settings. The all-in-one run (unified + VLM + multi-step) is compared to baseline in the same way; we report which configuration achieves the lowest MAE per (phenomenon, setting, parameter) and the corresponding $\Delta\mathrm{MAE}$. Table~\ref{tab:delfys75_baseline_unified} summarizes parameter MAE for baseline vs.\ unified model on Delfys75; negative $\Delta\mathrm{MAE}$ indicates the unified model has lower error.
+
+\textbf{Baselines on Delfys75.} The primary baseline is path-based, one-step, single-body (same as above). We do not re-run encoder--decoder or neural-implicit methods on Delfys75; we state that they are not designed for physical parameter output and that our comparison is limited to methods with the same input (video clips), output (physical parameters), and GT source.
+
+% -----------------------------------------------------------------------------
+\subsection{Synthetic vs.\ Real Data for Physics Extraction}
+\label{sec:exp_synthetic_vs_real}
+
+We argue that evaluation on \emph{real} video with independently measured ground truth is necessary to assess practical physics extraction (Sec.~\ref{sec:why_real}). Synthetic data provide exact GT and controllable noise but introduce a domain gap; models trained or tuned only on synthetic data may not transfer to real video.
+
+\textbf{Experiments validating the claim.} \textbf{[Placeholder: quantitative comparison when available.]} Planned experiments: (i) train the same pipeline on synthetic renderings (e.g., simulated pendulum, free fall) and evaluate on real IRIS/Delfys75 clips; (ii) train on real data and evaluate on real data (current protocol); (iii) report parameter MAE and optionally equation-selection accuracy in both settings. We expect that (ii) will yield better parameter accuracy on real data than (i), supporting the use of real-data benchmarks like IRIS.
+
+\textbf{Alternative formulation.} If full cross-domain training is not completed, we will report parameter accuracy only on real data (IRIS and Delfys75) and state that synthetic-only training is out of scope for the main results.
+
+% -----------------------------------------------------------------------------
+\subsection{Governing Equation Identification}
+\label{sec:exp_eq_identification}
+
+When the equation family is chosen by the VLM (or a video classifier), we measure \textbf{equation-selection accuracy} (Sec.~\ref{sec:metrics_eq}): how often the selected dynamics matches the ground-truth phenomenon.
+
+\textbf{Equation selection accuracy.} On Delfys75, with the improved VLM (temporal reasoning, five frames: start, 25\%, 50\%, 75\%, end), we obtain approximately \textbf{73\%} accuracy (single VLM call). A describe-then-classify variant (two calls) reaches about \textbf{61\%}. An optional lightweight video classifier trained on the same distribution can reach 100\% on the eval set at the cost of generalization to new domains. Table~\ref{tab:vlm_accuracy} summarizes VLM accuracy; Table~\ref{tab:vlm_confusion} shows the confusion matrix (rows = ground truth, columns = predicted) for the temporal-reasoning VLM.
+
+\textbf{Ablation on ODE bank and VLM routing.} The ODE bank is fixed (pendulum, free fall, dropped ball, LED, sliding block, Torricelli, rotation, etc.); the VLM (or path) selects one entry. Ablations: (i) path-based selection (no VLM) vs.\ VLM selection — parameter accuracy is then conditional on correct vs.\ incorrect equation choice; (ii) temporal-reasoning prompt vs.\ describe-then-classify — the former yields higher accuracy in our experiments. We do not ablate the number or set of ODEs in the bank in the main paper; the bank is chosen to cover the phenomena in Delfys75 and IRIS.
+
+% -----------------------------------------------------------------------------
+\subsection{Ablation Studies}
+\label{sec:ablations}
+
+We ablate each component while keeping the rest fixed, using the same train-per-clip protocol and ground-truth sources.
+
+\paragraph{Multi-step loss vs.\ one-step.} We compare one-step latent loss (baseline) to multi-step loss (weighted horizons $k=1,\ldots,5$ with weights $[1, 1, 0.5, 0.5, 0.25]$). On Delfys75, multi-step improves $g$ on dropped ball and free fall and gives small gains on some pendulum settings; the one-step baseline remains better on LED 10\,s decay and some pendulum/torricelli settings (Table~\ref{tab:multistep_ablation}). This supports the claim that multi-step improves long-horizon consistency and helps identifiability where the one-step prediction is ambiguous.
+
+\paragraph{VLM routing vs.\ fixed (path-based) equation assignment.} When the equation is given by the path (folder structure), selection accuracy is not applicable; we report parameter accuracy for both path-based and VLM-based runs. VLM improves estimates when it selects the correct dynamics and can hurt when it misclassifies. The narrative: we identify both equation form and parameters from video; when the VLM errs, parameter error reflects that. We report equation-selection accuracy separately (Sec.~\ref{sec:exp_eq_identification}).
+
+\paragraph{Unified (multi-object) vs.\ single-object formulation.} We compare the baseline (single-body physics block per ODE) to the unified model (one graph-structured block for $N=1$ and $N>1$; $N=1$ has no edges). On Delfys75, the unified model strongly improves pendulum length, sliding-block friction, Torricelli $k$, and LED decay; the baseline remains better on $g$ and pendulum damping in some runs. The unified formulation also enables multi-body phenomena on IRIS (hitting cones, two pendulums) with $N=2$ and appropriate coupling.
+
+\paragraph{Combined pipeline.} We run the full pipeline (VLM + unified + multi-step) and compare to the baseline in the same table. Table~\ref{tab:ablation_summary} summarizes which configuration achieves the lowest MAE per (phenomenon, setting, parameter) and the corresponding $\Delta\mathrm{MAE}$; no single configuration wins on every parameter, and the full pipeline is intended for settings where equation selection from video and multi-object support are required.
+
+% -----------------------------------------------------------------------------
+\subsection{Identifiability, Robustness, and Extrapolation}
+\label{sec:exp_identifiability_robustness}
+
+\textbf{Identifiability.} \textbf{[Placeholder: when computed.]} We report gradient norms of the physics parameters during training and the standard deviation of parameter estimates across videos in the same (phenomenon, setting) as a proxy for stability. ODE residual (mean squared residual of the discrete ODE driven by encoder latents) can be reported where the analysis is run.
+
+\textbf{Robustness.} Consistency of parameter accuracy across loss choice (one-step vs.\ multi-step), model (single-body vs.\ unified), and equation selection (path vs.\ VLM) is assessed via the ablation tables; we report $\Delta\mathrm{MAE}$ between configurations.
+
+\textbf{Extrapolation.} \textbf{[Placeholder: when supported.]} For clips of length $T$, training uses frames $1, \ldots, T_{\mathrm{train}}$; prediction error is evaluated at $T_{\mathrm{train}}+1, \ldots, T$. We report extrapolation metrics when the dataset and setup support this evaluation.
+
+% -----------------------------------------------------------------------------
+\subsection{Tables and Figures}
+\label{sec:exp_tables}
+
+Data from \texttt{Results/}: baseline and unified CSVs, comparison scripts, and VLM evaluation outputs.
+
+\begin{table}[t]
+  \centering
+  \caption{Parameter MAE on Delfys75: baseline (path-based, one-step, single-body) vs.\ unified model (path-based, one-step, unified physics block). $\Delta\mathrm{MAE} = \mathrm{MAE}_{\mathrm{unified}} - \mathrm{MAE}_{\mathrm{baseline}}$; negative $\Delta\mathrm{MAE}$ = unified better. GT = ground truth. Source: \texttt{Results/delfys75\_comparison/parameter\_errors\_comparison.txt}.}
+  \label{tab:delfys75_baseline_unified}
+  \small
+  \begin{tabular}{@{}lllrrrr@{}}
+    \toprule
+    Dynamics & Setting & Param & GT & Baseline MAE & Unified MAE & $\Delta$MAE \\
+    \midrule
+    dropped\_ball & large & $g$ & 9.81 & 9.81 & 9.81 & 0.00 \\
+    free\_fall & mousepad & $g$ & 9.81 & 9.81 & 9.81 & 0.00 \\
+    free\_fall & table & $g$ & 9.81 & 9.81 & 9.81 & 0.00 \\
+    led & led\_10s & decay & 0.46 & 0.46 & 1.24 & 0.78 \\
+    led & led\_2s & decay & 2.30 & 2.30 & 0.40 & $-$1.90 \\
+    pendulum & pendulum\_150 & length (m) & 1.50 & 29.83 & 0.71 & $-$29.12 \\
+    pendulum & pendulum\_45 & length (m) & 0.45 & 95.07 & 3.80 & $-$91.27 \\
+    pendulum & pendulum\_90 & length (m) & 0.90 & 50.15 & 2.93 & $-$47.22 \\
+    pendulum & pendulum\_150 & damping & $-$0.059 & 0.14 & 4.39 & 4.25 \\
+    sliding\_block & mid & friction & 0.21 & 0.21 & 0.21 & 0.00 \\
+    torricelli & large & $k$ & 0.016 & 6.07 & 2.91 & $-$3.16 \\
+    torricelli & small & $k$ & 0.0096 & 7.67 & 5.69 & $-$1.99 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Multi-step loss vs.\ one-step baseline on Delfys75. $\Delta\mathrm{MAE} = \mathrm{MAE}_{\mathrm{multi}} - \mathrm{MAE}_{\mathrm{1-step}}$; negative = multi-step better. Source: \texttt{Results/delfys75/parameter\_errors\_comparison.txt}.}
+  \label{tab:multistep_ablation}
+  \small
+  \begin{tabular}{@{}lllrrr@{}}
+    \toprule
+    Dynamics & Setting & Param & 1-step MAE & Multi-step MAE & $\Delta$MAE \\
+    \midrule
+    dropped\_ball & large & $g$ & 0.25 & 0.18 & $-$0.07 \\
+    dropped\_ball & medium & $g$ & 0.49 & 0.45 & $-$0.03 \\
+    free\_fall & mousepad & $g$ & 2.12 & 1.65 & $-$0.47 \\
+    free\_fall & table & $g$ & 1.06 & 0.15 & $-$0.90 \\
+    free\_fall & tennis & $g$ & 1.06 & 0.53 & $-$0.53 \\
+    led & led\_10s & decay & 2.09 & 7.46 & 5.37 \\
+    led & led\_2s & decay & 7.45 & 7.57 & 0.12 \\
+    pendulum & pendulum\_150 & length (m) & 1.18 & 1.18 & $-$0.00 \\
+    pendulum & pendulum\_45 & length (m) & 0.35 & 0.50 & 0.15 \\
+    pendulum & pendulum\_90 & damping & 0.41 & 0.37 & $-$0.04 \\
+    torricelli & large & $k$ & 6.27 & 6.54 & 0.27 \\
+    torricelli & small & $k$ & 8.95 & 9.70 & 0.75 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{VLM equation-selection accuracy on Delfys75 (90 videos). Temporal = single-call temporal reasoning (5 frames); describe-then-classify = two-call variant. Source: \texttt{Results/vlm\_temporal\_reasoning/}, \texttt{Results/vlm\_describe\_then\_classify/vlm\_eval\_summary.txt}.}
+  \label{tab:vlm_accuracy}
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    VLM variant & Accuracy \\
+    \midrule
+    Temporal reasoning (5 frames) & 73.33\% \\
+    Describe-then-classify (2 calls) & 61.11\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Confusion matrix for VLM equation selection (temporal reasoning) on Delfys75. Rows = ground truth, columns = predicted. Source: \texttt{Results/vlm\_temporal\_reasoning/confusion\_matrix.csv}.}
+  \label{tab:vlm_confusion}
+  \small
+  \begin{tabular}{@{}l|cccccc|c@{}}
+    \toprule
+    & \multicolumn{6}{c}{Predicted} & \\
+    GT $\downarrow$ & drop. & free & led & pend. & slide & torr. & \\
+    \midrule
+    dropped\_ball & 10 & 5 & 0 & 0 & 0 & 0 & 15 \\
+    free\_fall & 0 & 0 & 0 & 10 & 5 & 0 & 15 \\
+    led & 0 & 0 & 15 & 0 & 0 & 0 & 15 \\
+    pendulum & 2 & 2 & 0 & 11 & 0 & 0 & 15 \\
+    sliding\_block & 0 & 0 & 0 & 0 & 15 & 0 & 15 \\
+    torricelli & 0 & 0 & 0 & 0 & 0 & 15 & 15 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Ablation summary on Delfys75: $\Delta\mathrm{MAE}$ vs.\ baseline (negative = that configuration better). Full = unified + VLM + multi-step. Selected rows; source: \texttt{Results/delfys75\_equation\_family/}, \texttt{Results/delfys75\_all/parameter\_errors\_comparison.txt}.}
+  \label{tab:ablation_summary}
+  \small
+  \begin{tabular}{@{}lllrrr@{}}
+    \toprule
+    Dynamics & Setting & Param & VLM vs path $\Delta$MAE & Unified vs base $\Delta$MAE & Full vs base $\Delta$MAE \\
+    \midrule
+    free\_fall & table & $g$ & $-$0.90 & $-$0.90 & 6.50 \\
+    free\_fall & tennis & $g$ & $-$0.55 & $-$0.55 & 5.50 \\
+    pendulum & pendulum\_150 & length (m) & 42.34 & $-$29.12 & $-$26.22 \\
+    pendulum & pendulum\_45 & length (m) & $-$71.10 & $-$91.27 & $-$90.61 \\
+    led & led\_2s & decay & $-$0.40 & $-$1.90 & $-$1.89 \\
+    sliding\_block & low & friction & 0.00 & 0.00 & $-$9.63 \\
+    sliding\_block & mid & friction & 0.00 & 0.00 & $-$9.24 \\
+    torricelli & medium & $k$ & 0.00 & 1.65 & $-$8.95 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

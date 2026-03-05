@@ -1,0 +1,98 @@
+% =============================================================================
+% ECCV Methodology Section — Initial Draft
+% Refine notation, numbers, and citations as needed.
+% =============================================================================
+
+\subsection{Notation and Problem Formulation}
+\label{sec:notation}
+
+We consider the problem of \emph{physics identification from monocular video}: given a sequence of frames, we wish to (i) identify the governing dynamical system and (ii) estimate its physical parameters.
+
+\textbf{Input.} Let $\mathcal{V} = \{I_1, \ldots, I_T\}$ denote a monocular video of $T$ frames. We assume a fixed spatial resolution (e.g., $H \times W$) and work with a short clip representation: each clip is encoded as a tensor of shape $(N_{\mathrm{samples}}, n_f, C, H, W)$, where $n_f$ is the number of frames per sample (e.g., 10), $C$ is the number of channels (e.g., 1 for grayscale), and $N_{\mathrm{samples}}$ is the number of overlapping windows extracted from the video.
+
+\textbf{Latent dynamics.} We assume that the observed motion is driven by a low-dimensional latent state $\mathbf{z}_t \in \mathbb{R}^d$ ($d \geq 1$) that evolves according to an ordinary differential equation (ODE). The encoder network $\phi$ maps a frame (or a short frame sequence) to this latent: $\hat{\mathbf{z}}_t = \phi(I_t; \ldots)$. The physics block implements a discrete-time evolution of the form $\mathbf{z}_{t+1} = \mathcal{P}(\mathbf{z}_{t-k:t}; \theta, \Delta t)$, where $\theta$ denotes the physical parameters (e.g., coefficients of the ODE) and $\Delta t$ is the time step.
+
+\textbf{Goal.} (1) \emph{Equation-family selection}: choose which ODE from a finite bank $\{\mathcal{P}_1, \ldots, \mathcal{P}_K\}$ applies to the scene (e.g., pendulum, free fall, damped rotation). (2) \emph{Parameter estimation}: for the chosen $\mathcal{P}_k$, estimate $\theta$ such that the predicted latent trajectory matches the encoder output. We do not assume that the equation family is given by metadata (e.g., folder structure); it may be inferred from the video (e.g., via a vision-language model or a classifier).
+
+% -----------------------------------------------------------------------------
+\subsection{The IRIS Dataset}
+\label{sec:dataset}
+
+We introduce IRIS, a dataset of real-world videos designed for evaluating physics identification under controlled conditions and with reliable ground truth.
+
+\subsubsection{Design Principles and Acquisition Protocol}
+\label{sec:dataset_design}
+
+IRIS is built with the following principles. (1) \textbf{Controlled recording}: videos are captured under fixed lighting and camera placement where possible to reduce confounding factors. (2) \textbf{High temporal resolution}: we use 60\,fps (or equivalent) acquisition so that short-time dynamics (e.g., collisions, fast rotation) are temporally resolved. (3) \textbf{Independent ground truth}: physical parameters (lengths, angles, distances, damping coefficients, etc.) are measured or set independently of the video, and recorded in a structured format (e.g., \texttt{parameters.json}) with optional uncertainty estimates (mean, std, min, max). (4) \textbf{Repeated trials}: multiple recordings per physical setting (e.g., 10 videos per variant) allow evaluation of stability and variance of the estimated parameters.
+
+\subsubsection{Physical Phenomena and Variants}
+\label{sec:dataset_phenomena}
+
+IRIS covers both \textbf{single-body} and \textbf{multi-body} phenomena.
+
+\textbf{Single-body dynamics} include: (i) \emph{dropping ball} and \emph{falling ball} (gravity-dominated, second-order linear ODE $z'' + \beta z' + \alpha z \approx 0$ with $\alpha \approx g$); (ii) \emph{sliding cone} on an inclined plane (angle and friction); (iii) \emph{pendulum} (damped, with rope length and damping); (iv) \emph{rotation} (cone on rotatable wood, damped rotation ODE $z'' + \beta z' + \alpha z = 0$ with $z$ the angle). Each category has multiple variants (e.g., drop heights, cone angles, pendulum lengths), yielding on the order of tens of settings and more than 200 real-world videos in total.
+
+\textbf{Multi-body dynamics} include: (v) \emph{hitting cones} (ball colliding with a pyramid of cones); (vi) \emph{two moving pendulums} (both released from the same initial angle, colliding and eventually stopping); (vii) \emph{one static and one moving pendulum} (moving pendulum strikes the static one). These are modeled with a unified multi-object ODE framework (see \ref{sec:multi_object}).
+
+The dataset also aligns with existing benchmarks (e.g., Delfys75) for single-body phenomena (dropped ball, free fall, LED decay, pendulum, sliding block, Torricelli drain) to allow direct comparison with prior work.
+
+\subsubsection{Annotations and Ground Truth}
+\label{sec:dataset_annotations}
+
+For each recording we provide: (1) \textbf{Video clips} converted to a standard tensor format (e.g., $(N, n_f, 1, H, W)$) suitable for the encoder. (2) \textbf{Ground-truth physical parameters} per (phenomenon, setting): e.g., drop height, rope length, angle, friction, angular stiffness/damping, ball-to-cones distance, with optional standard deviation and min/max. (3) \textbf{Equation family}: each phenomenon is associated with a governing ODE (or a multi-object extension) used for parameter estimation. Optionally, per-frame segmentation masks can be included for multi-object setups. All metadata are stored in human- and machine-readable form (e.g., JSON and optional \texttt{.txt} descriptions).
+
+\subsubsection{Why Not Synthetic Data for ODE-Based Physics Extraction?}
+\label{sec:why_real}
+
+Synthetic data offer exact ground truth and controllable noise, but they suffer from a \textbf{domain gap}: rendering and physics simulators typically use idealized geometry, lighting, and noise models, so models trained or tuned only on synthetic data may not transfer to real video. Moreover, many real-world effects (e.g., motion blur, partial occlusions, lighting changes, and non-rigid or contact-rich interactions) are difficult to simulate faithfully. For \textbf{inverse problems} such as ODE parameter estimation, we argue that evaluation on \emph{real} video with independently measured ground truth is necessary to assess practical performance. IRIS provides such a testbed while retaining controlled conditions and repeatability.
+
+% -----------------------------------------------------------------------------
+\subsection{VLM-Augmented Physics Identification Pipeline}
+\label{sec:vlm_pipeline}
+
+Our pipeline has two stages: (1) identify the governing equation family from the video; (2) estimate the parameters of that equation.
+
+\subsubsection{VLM Routing and Scene Understanding}
+\label{sec:vlm_routing}
+
+In the wild, the equation family is not given. We use a \textbf{vision-language model (VLM)} to classify the observed motion into one of the known phenomena (e.g., pendulum, free fall, dropped ball, sliding block, rotation, hitting cones, two pendulums). The VLM receives a small set of representative frames (e.g., start, 25\%, 50\%, 75\%, end) and optionally a textual description of each class. We use \textbf{temporal reasoning}: the model is prompted to compare early vs.\ late frames to disambiguate dynamics (e.g., oscillatory vs.\ one-directional motion). The output is a single label that indexes into the physics ODE bank. This replaces the need for path-based or metadata-based equation selection and allows the same pipeline to be applied to unorganized video. On Delfys75, this VLM-based routing reaches approximately 73\% accuracy; an optional lightweight video classifier trained on the same data can be used when higher accuracy on the same distribution is acceptable (at the cost of generalization). We also discuss alternatives (e.g., describe-then-classify, chain-of-thought) in the supplement.
+
+\subsubsection{Physics ODE Bank}
+\label{sec:ode_bank}
+
+We maintain a \textbf{library of candidate ODEs} $\{\mathcal{P}_1, \ldots, \mathcal{P}_K\}$, each parameterized by a small set of scalars (e.g., $\alpha$, $\beta$). Examples include:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Second-order linear (damped oscillator)}: $z'' + \beta z' + \alpha z = 0$ — used for pendulum (with $\alpha = g/L$, $\beta$ damping), dropped/falling ball ($\alpha \approx g$), and rotation ($\alpha$ torsional stiffness, $\beta$ angular damping).
+  \item \textbf{First-order decay}: $z' = -\lambda z$ — for LED intensity decay.
+  \item \textbf{First-order nonlinear}: $z' = -k\sqrt{z}$ — for Torricelli-style drainage.
+  \item \textbf{Inclined plane}: constant acceleration plus friction — for sliding block/cone.
+  \item \textbf{Rotation}: $z'' + \beta z' + \alpha z = 0$ with $z$ the angle — for cone on rotatable wood.
+\end{itemize}
+
+The VLM output selects one entry from this bank. Parameter estimation then fits $\theta = (\alpha, \beta, \ldots)$ for the chosen ODE. The bank can be extended with new equations and new data; we also consider post-hoc correction or fine-tuning of the VLM to improve routing accuracy.
+
+\subsubsection{Multi-Object Unified Framework}
+\label{sec:multi_object}
+
+Single-body systems are described by one latent state $\mathbf{z}_t \in \mathbb{R}^d$ per time step. For \textbf{multi-body} systems (e.g., ball and cones, two pendulums), we use a \textbf{unified representation}: the state is $\mathbf{Z}_t \in \mathbb{R}^{N \times d}$, where $N$ is the number of objects. The encoder is extended to output $\mathbf{Z}_t$ (e.g., one MLP that maps the full frame to $N \cdot d$ dimensions, then reshaped). The physics block is a single \textbf{graph-structured} module: each node $i$ has its own self-dynamics (e.g., $z_i'' + \gamma_{i,1} z_i' + \gamma_{i,0} z_i$), and edges represent \textbf{coupling} (e.g., linear spring-like $\kappa_{ij}(z_i - z_j)$, contact/repulsion, or double-pendulum coupling). For $N=1$, the graph has no edges and the block reduces to the standard single-body ODE. For $N=2$, we use this formulation for hitting cones (contact coupling) and two pendulums (double-pendulum coupling). Time integration is performed with a shared scheme (e.g., Euler, Störmer--Verlet, or RK4); we fix a bug in the baseline Euler step so that the position update depends on acceleration, allowing gradients to reach the physics parameters. This design avoids separate code paths for single vs.\ multi-object and scales to more objects by adding nodes and edges.
+
+% -----------------------------------------------------------------------------
+\subsection{Multi-Step Loss Formulation}
+\label{sec:multistep_loss}
+
+The baseline objective supervises only the \emph{one-step} prediction: the loss compares the encoder latent at time $t+1$ with the physics-predicted latent at $t+1$. This can underconstrain the parameters and lead to poor long-horizon consistency. We introduce a \textbf{multi-step loss} that enforces agreement between the encoder and the physics rollout over several future steps.
+
+Let $\hat{\mathbf{z}}_t = \phi(\cdot)$ denote the encoder output at $t$, and $\tilde{\mathbf{z}}_{t+k}$ the state predicted by the physics block $k$ steps ahead from $t$. We define
+\begin{equation}
+  \mathcal{L}_{\mathrm{multi}} = \sum_{k=1}^{K} w_k \, \bigl\| \hat{\mathbf{z}}_{t+k} - \tilde{\mathbf{z}}_{t+k} \bigr\|^2 + \mathcal{L}_{\mathrm{prior}}(\hat{\mathbf{z}}),
+\end{equation}
+where $w_k$ are fixed weights (e.g., $[1, 1, 0.5, 0.5, 0.25]$ for $K=5$ steps to emphasize earlier horizons) and $\mathcal{L}_{\mathrm{prior}}$ encourages the encoder latents to follow a simple prior (e.g., KL toward a standard normal). This multi-step term improves \textbf{long-horizon consistency} and helps \textbf{parameter identifiability}, especially when the one-step prediction is ambiguous. We keep the same encoder and physics parameterization; only the loss is changed. Empirically, multi-step training improves estimation of the gravitational constant $g$ on dropped-ball and free-fall phenomena and gives mixed but sometimes better results on other categories compared to the one-step baseline.
+
+% -----------------------------------------------------------------------------
+\subsection{Training and Evaluation Protocol}
+\label{sec:training_eval}
+
+\textbf{Training.} For each video clip we (i) determine the equation family (path-based or VLM-based), (ii) instantiate the corresponding physics block (single-body or unified multi-object), (iii) train the encoder and physics parameters jointly by minimizing the chosen loss (one-step or multi-step) over the clip. We use parameter-adaptive learning rates for the physics parameters (scaled by their magnitude) and a fixed learning rate for the encoder. No cross-video training is required for the physics block; the VLM or classifier can be pre-trained or fine-tuned separately.
+
+\textbf{Evaluation.} We report \textbf{parameter error} vs.\ ground truth: for each (phenomenon, setting, parameter) we compute the mean absolute error between the estimated value and the GT mean. We compare baseline (path-based equation selection, one-step loss, single-body only) to our full pipeline (VLM routing, optional multi-step loss, unified model with multi-object for hitting cones and two pendulums) on both Delfys75 and IRIS, using the same CSV output format and the same \texttt{parameters.json} (or equivalent) for GT.

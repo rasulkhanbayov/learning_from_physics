@@ -211,19 +211,17 @@ class Pendulum(nn.Module):
 
         self.order = 2
 
-    def forward(self, z,dt):    
-
+    def forward(self, z, dt):
       device = "cuda" if torch.cuda.is_available() else "cpu"
       dt = torch.tensor([dt], requires_grad=False).float().to(device)
 
-      y1 = z[:,1:2]
-      y0 = z[:,0:1]
-
-      dt = dt
-
-      y_hat = y1 +(y1 - y0) - dt*(self.beta*(y1-y0) +dt*(9.80665/ (torch.abs(self.alpha)+1e-5)  )*torch.sin(y1) )
-
-      return  y_hat
+      y1 = z[:, 1:2]
+      y0 = z[:, 0:1]
+      # Clamp length (1/alpha) to avoid NaNs: 1/alpha in [1e-3, 1e3]
+      length = torch.clamp(torch.abs(self.alpha) + 1e-5, min=1e-2, max=1e3)
+      grav_term = 9.80665 / length
+      y_hat = y1 + (y1 - y0) - dt * (self.beta * (y1 - y0) + dt * grav_term * torch.sin(y1))
+      return y_hat
 
 class Sliding_block(nn.Module):
     def __init__(self, init_phys = None):

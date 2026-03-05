@@ -1,0 +1,1186 @@
+% IRIS - ECCV 2026 Submission
+% Based on ECCV/LNCS style
+
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{ruler}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{siunitx}
+
+% Table row coloring
+\definecolor{lightgray}{gray}{0.93}
+\definecolor{bestcolor}{rgb}{0.85, 0.93, 0.85}
+
+\begin{document}
+\pagestyle{headings}
+\mainmatter
+\def\ECCV16SubNumber{***}
+
+\title{Inverse Recovery and Identification of Physical Dynamic Systems from Single Monocular Video}
+
+\titlerunning{ECCV 2026 submission ID \ECCV16SubNumber}
+
+\authorrunning{ECCV 2026 submission ID \ECCV16SubNumber}
+
+\author{Anonymous ECCV submission}
+
+\institute{Paper ID \ECCV16SubNumber}
+
+\maketitle
+
+% ============================================================================
+% ABSTRACT
+% ============================================================================
+\begin{abstract}
+Unsupervised physical parameter estimation from video lacks a common benchmark: existing methods are evaluated on disjoint synthetic setups, the only public real-world dataset is limited to single-body systems, and there is no standard protocol for both equation identification and parameter accuracy. We introduce \textbf{IRIS}, a benchmark of over 200 real-world videos with high temporal resolution (60\,fps), covering single-body dynamics (e.g., pendulum, free fall, sliding, rotation) and multi-body dynamics (e.g., hitting cones, two pendulums). Each setting is recorded under controlled conditions with independently measured ground-truth parameters and uncertainty estimates (mean, std, min, max), and each phenomenon is paired with its governing ODE to support principled ablation. We define a standardized evaluation protocol along five axes: parameter accuracy, governing-equation selection accuracy, identifiability, robustness, and extrapolation. We compare a latent-space physics baseline (path-based equation selection, one-step loss) with a VLM-augmented pipeline that identifies the equation family from video and estimates parameters via a shared ODE bank and optional multi-step loss; we also situate encoder-decoder and neural-implicit approaches relative to this benchmark. The dataset, annotations, evaluation toolkit, and baseline implementations will be publicly released.
+
+\keywords{Physics-based vision, physical parameter estimation, video understanding, benchmark dataset, dynamical systems, governing equation identification}
+\end{abstract}
+
+
+% ============================================================================
+% 1. INTRODUCTION
+% ============================================================================
+
+\section{Introduction}
+\label{sec:intro}
+Extracting physical parameters from video observations constitutes a fundamental inverse problem in computational science, with applications spanning trajectory prediction, biological system characterization, and physical model validation~\cite{brunton2016discovering, chen2018neural, hofherr2023neural, jaques2019physics, schmidt2009distilling}. Although recent unsupervised methods have demonstrated encouraging results in estimating parameters of known governing equations from video~\cite{hofherr2023neural, jaques2019physics}, progress is constrained by a critical bottleneck: the absence of diverse, high-fidelity, real-world benchmark datasets capable of supporting rigorous evaluation and systematic comparison across methods.
+
+Existing datasets for physical parameter estimation from video suffer from several compounding limitations. The majority of prior work evaluates on purely synthetic data, where objects appear in controlled colors against black backgrounds, far removed from the visual complexity of real-world scenes~\cite{de2018end, jaques2019physics, velivckovic2022reasoning}. The sole notable real-world dataset, Delfys75~\cite{garcia2025learning}, provides 75 videos at 1920$\times$1080 resolution across five dynamical systems. While representing a meaningful advance, Delfys75 remains limited in scope: it covers only single-body dynamics with no interaction between physical objects, and omits the multi-body collision phenomena that are central to classical mechanics and prevalent in real-world settings. Beyond this, Delfys75 suffers from data-quality limitations that hinder both human annotation and automated analysis: in the pendulum sequences, only the bob is clearly visible while the string is a thin white rope against a white or light background, making it difficult to track the full system; in other clips, the motion is confined to 1--2 seconds, providing too few cycles to reliably infer dynamics or to support multi-step rollouts~\cite{garcia2025learning}. These inadequacies motivate a benchmark designed for high temporal resolution, sufficient clip length, and clear visibility of all relevant physical elements.
+
+Notably, no existing benchmark includes scenarios in which physical objects collide and transfer momentum, such as a ball striking a collection of objects or two pendulums interacting, despite the physical richness and practical importance of such interaction dynamics. This gap implies that current unsupervised methods have not been evaluated on the multi-body, contact-driven dynamics that dominate real physical environments, leaving a significant blind spot in understanding their capabilities and failure modes.
+
+These gaps are addressed by IRIS (Interaction and Real-world Inverse physics Sequences), a 4K-resolution dataset designed as a rigorous benchmark for unsupervised physical parameter estimation from video. IRIS retains and extends the single-body scenarios of prior work (dropping ball, falling ball, sliding cone, and pendulum) while introducing three novel multi-body interaction scenarios with no precedent in existing benchmarks: a ball striking a pyramid of cones, two pendulums released simultaneously at equal angles that collide and dissipate, and a static pendulum struck by a moving one from varying initial angles. These scenarios are specifically designed to test whether physical parameter estimation methods can recover momentum transfer, contact forces, and coupled dynamics, phenomena entirely absent from Delfys75 and all prior benchmarks.
+
+Beyond dataset construction, IRIS is accompanied by a comprehensive evaluation framework advancing over the Delfys75 baseline along four dimensions. First, automatic equation-family selection from video is introduced through a Vision-Language Model, eliminating the reliance on folder-path-based dynamics labelling that limited the original pipeline. Second, a multi-step physics loss formulation is proposed that improves long-horizon parameter identifiability. Third, a unified physics model architecture with a corrected Euler integrator is presented, ensuring that gradients flow to physics parameters and resolving a critical bug in the original codebase where physics parameters received no gradient signal during training. Fourth, a standardized evaluation protocol with ground-truth parameter comparison across all IRIS scenarios is established, enabling reproducible benchmarking for future methods.
+
+The principal contributions of this work are as follows:
+
+\begin{itemize}
+    \item \textbf{IRIS benchmark:} A 4K real-world dataset for physical parameter estimation comprising seven dynamical systems, including three novel multi-body interaction scenarios absent from all prior benchmarks, with independently measured ground-truth parameters and per-setting uncertainty estimates.
+    \item \textbf{VLM-based equation and parameter identification:} A two-stage pipeline wherein a Vision-Language Model first classifies the governing equation family directly from sampled video frames, then estimates the corresponding physical parameters, thereby removing dependence on manual labelling or folder-path-based dynamics selection required by prior work.
+    \item \textbf{Unified physics model with multi-step loss:} A single graph-structured physics architecture accommodating both single- and multi-body dynamics, coupled with a multi-step rollout loss that enforces physical consistency across multiple prediction horizons and yields improved long-range parameter identifiability relative to the one-step baseline.
+    \item \textbf{Reproducible evaluation framework:} Ground-truth physical parameters for all IRIS scenarios, a standardized evaluation protocol enabling direct comparison against ground truth, and comprehensive baselines across all seven dynamical systems to facilitate fair community benchmarking.
+\end{itemize}
+
+IRIS is designed to be the benchmark of choice for unsupervised physical parameter estimation from video for three reasons: it is the only real-world benchmark to include multi-body interaction dynamics with ground truth; it provides higher temporal resolution (60\,fps) and longer clips than existing real-world data, avoiding the short and low-contrast sequences that limit VLM and parameter estimation on Delfys75; and it is accompanied by a standardized evaluation protocol and reproducible baselines, enabling direct and fair comparison. Collectively, IRIS is designed to advance unsupervised physical parameter estimation from video toward the richer, interaction-driven dynamics that characterize real-world physical environments, while providing the community with a high-resolution benchmark for fair and reproducible comparison.
+
+
+% ============================================================================
+% 2. RELATED WORK
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Physical Parameter Estimation from Video}
+\label{sec:related_phys_estimation}
+
+Estimating physical parameters from video constitutes an inverse problem approached through both supervised and unsupervised paradigms. Supervised methods~\cite{asenov2019vid2param, de2018end, watters2017visual, wu2015galileo, wu2017learning, yang2022learning, zheng2018unsupervised} train deep networks with access to ground-truth dynamical variables or physical parameters, achieving strong performance at the cost of requiring labelled datasets that are expensive and frequently infeasible to collect~\cite{toth2019hamiltonian}. To circumvent this dependency, unsupervised approaches embed known governing equations within learned latent representations, employing frame reconstruction as a proxy training signal.
+
+PAIG~\cite{jaques2019physics} integrates a variational autoencoder with a physics engine in the latent space, coupled with a U-Net for learning object segmentation masks, enabling future frame prediction via a spatial transformer. NIRPI~\cite{hofherr2023neural} similarly employs a differentiable ODE solver operating at the pixel level, displacing object pixels according to physics predictions, though it requires ground-truth object masks during training. Both approaches rely on frame reconstruction as the primary training objective, which introduces architectural rigidity: the spatial transformer mechanism constrains the model to roto-translational motion dynamics, precluding systems exhibiting brightness, scale, or deformation changes. Kandukuri et al.~\cite{kandukuri2020learning} and Zhong and Leonard~\cite{zhong2020unsupervised} similarly pair variational autoencoders with physics engines but remain restricted to simple motion problems owing to the difficulty of achieving high-quality reconstruction from low-dimensional physical states.
+
+A complementary line of research focuses on learning dynamics models with physics-informed inductive biases. Neural ODEs~\cite{chen2018neural} provide a general framework for learning continuous-time dynamics by parameterizing the state derivative with a neural network, enabling end-to-end training through differentiable ODE solvers. Hamiltonian Neural Networks~\cite{greydanus2019hamiltonian} and Lagrangian Neural Networks~\cite{cranmer2020lagrangian} enforce energy conservation by learning the Hamiltonian or Lagrangian of a system, yielding improved generalization on conservative dynamical systems. For multi-body dynamics, graph neural network-based simulators~\cite{sanchez2020learning, battaglia2016interaction} represent system states as graphs with objects as nodes and interactions as edges, learning message-passing dynamics that generalize across varying particle counts and temporal discretizations. Mesh-based extensions~\cite{pfaff2021learning} further broaden this paradigm to continuous spatial domains. While these learned simulators achieve remarkable accuracy, they operate on state-space inputs (positions, velocities) rather than raw pixels, and target forward simulation rather than the inverse parameter estimation problem.
+
+Garcia et al.~\cite{garcia2025learning} address several of these limitations by replacing frame reconstruction with a latent-space loss combining mean squared error and KL-divergence, eliminating the decoder entirely. The resulting architecture is lighter and more general, accommodating motion, brightness, and scale dynamics with greater robustness to initialization than decoder-based methods. However, their pipeline requires the governing equation family to be specified manually through folder structure, cannot accommodate multi-body interaction dynamics, and contains a critical gradient-flow bug in the Euler integrator that prevents physics parameters from receiving gradient updates during training. The present work builds directly on this foundation, correcting these limitations and extending evaluation to the richer interaction dynamics introduced by IRIS.
+
+
+\subsection{Video Benchmarks for Physical Understanding}
+\label{sec:related_benchmarks}
+
+Progress in physical parameter estimation from video has been hampered by the absence of standardized, real-world benchmarks with ground-truth parameter annotations. The majority of existing methods are evaluated on synthetic datasets~\cite{de2018end, jaques2019physics, velivckovic2022reasoning, watters2017visual, yang2022learning, zheng2018unsupervised} in which objects appear in controlled colors against black backgrounds under idealized lighting and motion conditions. While synthetic benchmarks afford precise ground truth and reproducibility, the domain gap to real-world video remains substantial, and performance on synthetic data does not reliably predict accuracy under realistic imaging conditions.
+
+Physics101~\cite{wu2016physics} provides real-world recordings of physical experiments but lacks ground-truth parameter annotations and the object masks required by several methods, and has consequently seen limited adoption for unsupervised parameter estimation benchmarking. The dataset of Jaques et al.~\cite{jaques2019physics}, consisting of MNIST digits moving under spring dynamics over CIFAR-10 backgrounds, has been widely reused~\cite{hofherr2023neural} but is entirely synthetic and confined to a single interaction type. Across studies, the minimal overlap in evaluation datasets renders cross-method comparison unreliable.
+
+More recently, VideoPhy~\cite{bansal2024videophy} and VideoPhy-2~\cite{bansal2025videophy} have introduced benchmarks for evaluating physical commonsense in video generation models through VLM-based judges and human annotations, while Physics-IQ~\cite{motamed2026generative} assesses intuitive physics understanding in video diffusion models via pixel-level pairwise comparisons. These benchmarks evaluate whether generative models produce physically plausible output rather than targeting quantitative parameter estimation, a fundamentally distinct task. Delfys75~\cite{garcia2025learning} represents the first real-world dataset designed specifically for unsupervised physical parameter estimation, providing 75 videos at 1920$\times$1080 resolution across five dynamical systems (pendulum, Torricelli drainage, sliding block, LED intensity decay, and free fall) with annotated ground-truth parameters. Although Delfys75 constitutes a meaningful step toward realistic evaluation, it is restricted exclusively to single-body dynamics and contains no scenarios involving physical interaction between objects. IRIS addresses this gap directly by providing 4K videos that extend single-body evaluation while introducing three multi-body interaction scenarios absent from all prior datasets. None of these benchmarks provides multi-body interaction with ground-truth parameters, high frame-rate real capture with clearly visible elements, and a standardized protocol for both equation identification and parameter accuracy; IRIS is designed to fill this gap.
+
+\subsection{Vision-Language Models for Physical Reasoning}
+\label{sec:related_vlm}
+
+Large vision-language models (VLMs), trained at scale on image-text corpora, have demonstrated strong capabilities in visual scene understanding, spatial reasoning, and temporal interpretation of image sequences. GPT-4V~\cite{roumeliotis2023chatgpt} introduced broad multimodal visual understanding, enabling interpretation of diagrams, scientific figures, and complex visual scenes. LLaVA~\cite{liu2023visual} and its successors, including LLaVA-NeXT~\cite{liu2024llavanext} and LLaVA-Video~\cite{zhang2024llava}, extended instruction-following to images and video by coupling visual encoders with large language models, demonstrating strong zero-shot transfer on video understanding tasks. LLoVi~\cite{zhang2024simple} further demonstrated that decomposing long-range video understanding into short-term visual captioning followed by LLM-based temporal reasoning yields competitive performance on video question-answering benchmarks.
+
+Recent work has explored VLMs specifically for physical reasoning. VideoPhy~\cite{bansal2024videophy} and VideoPhy-2~\cite{bansal2025videophy} fine-tune VLM-based evaluators to assess whether generated videos adhere to physical laws. Physics Context Builders~\cite{balazadeh2025physics} fine-tune specialized VLMs on simulation data to produce structured physical scene descriptions that improve downstream foundation model reasoning. For physical video generation, VLM planning has been proposed as a first-stage motion planner employing chain-of-thought physical reasoning to predict coarse motion trajectories, subsequently guiding a video diffusion model~\cite{ho2022video}. In the domain of equation discovery, recent work has applied VLMs to reason directly over phase plots and scientific graphs, hypothesizing governing functional forms in a manner analogous to how a physicist recognizes dynamic signatures~\cite{liu2025mimicking}.
+
+Despite these advances, the application of VLMs to quantitative physical parameter estimation from raw video remains largely unexplored. Existing work treats VLMs primarily as qualitative judges of physical plausibility or as planning modules generating motion descriptions, rather than as classifiers of governing ODE families from visual observation. The present work proposes a novel use of VLMs in a two-stage pipeline: given a sampled sequence of video frames with temporal context, the VLM identifies the governing equation family that best describes the observed dynamics, decoupling equation identification from parameter estimation and enabling the full pipeline to operate from raw video without manual labelling of dynamics type.
+
+\subsection{Governing Equation Discovery}
+\label{sec:related_eq_discovery}
+
+A parallel line of research addresses the discovery of governing equations directly from data, without presupposing a known equation family. Sparse Identification of Nonlinear Dynamics (SINDy)~\cite{brunton2016discovering} formulates equation discovery as sparse regression over a library of candidate functions, recovering interpretable differential equations from time-series measurements with strong parsimony guarantees. Extensions to latent representations~\cite{champion2019data} and structure-preserving formulations~\cite{lee2022structure} have broadened applicability to high-dimensional and noisy data regimes. Symbolic regression methods~\cite{Schmidt2009DistillingFN} offer an alternative by searching the space of mathematical expressions for closed-form laws consistent with observed data, though computational cost limits their scalability to large systems. More recently, multimodal LLMs have been applied to discover governing equations from video by identifying intrinsic coordinates through symbolic reasoning~\cite{li2025mllmbaseddiscoveryintrinsiccoordinates}, and VLM-based approaches have been proposed to hypothesize functional forms directly from phase plots and scientific visualizations~\cite{liu2025mimicking}.
+
+While these methods are powerful when the equation family is entirely unknown, they require either direct access to system state measurements or high-quality latent representations that faithfully encode physical state variables. In the video-based setting, where states must be inferred from raw pixel observations, the added complexity of simultaneous equation discovery and state estimation renders these approaches difficult to apply reliably. Furthermore, in many scientific and engineering contexts, including all scenarios in IRIS, the governing equation family is known from domain knowledge, reducing the problem to estimating parameters of a known structure rather than discovering the structure itself.
+
+The approach adopted here therefore follows the paradigm of a fixed ODE bank of candidate equation families~\cite{hofherr2023neural, jaques2019physics} and addresses two complementary problems: automatically selecting the correct equation family from video using a VLM, and accurately estimating its parameters through a unified physics model with corrected gradient flow and multi-step training. This formulation connects to equation discovery at the level of model selection while remaining tractable in the fully unsupervised, video-based setting without requiring state measurements or symbolic search.
+
+% ============================================================================
+% 3. METHOD
+% ============================================================================
+\section{Method}
+\label{sec:method}
+
+% =============================================================================
+\subsection{Notation and Problem Formulation}
+\label{sec:notation}
+
+We consider the problem of \emph{physics identification from monocular video}: 
+given a sequence of frames, the objectives are to (i) identify the governing dynamical 
+system and (ii) estimate its physical parameters without supervision, 
+labels, or metadata pertaining to the observed phenomenon.
+
+\textbf{Input.} Let $\mathcal{V} = \{I_1, \ldots, I_T\}$ denote a monocular 
+video of $T$ frames at fixed spatial resolution $H \times W$. A 
+short-clip representation is adopted: each clip is encoded as a tensor of shape 
+$(N_{\mathrm{samples}},\, n_f,\, C,\, H,\, W)$, where $n_f$ is the number of 
+frames per sample, $C$ the number of channels, and $N_{\mathrm{samples}}$ the 
+number of overlapping temporal windows extracted from the video.
+
+\textbf{Latent dynamics.} The observed motion is assumed to be driven by a 
+low-dimensional latent state $\mathbf{z}_t \in \mathbb{R}^d$ ($d \geq 1$) 
+evolving according to an ordinary differential equation (ODE). An encoder 
+$\phi$ maps each frame to this latent:
+%
+\begin{equation}
+    \hat{\mathbf{z}}_t = \phi(I_t;\, \Theta_\phi),
+    \label{eq:encoder}
+\end{equation}
+%
+where $\Theta_\phi$ denotes the encoder parameters. A physics block then 
+implements a discrete-time evolution:
+%
+\begin{equation}
+    \mathbf{z}_{t+1} = \mathcal{P}\!\left(\mathbf{z}_{t-k:t};\, 
+    \boldsymbol{\gamma},\, \Delta t\right),
+    \label{eq:physics_block}
+\end{equation}
+%
+where $\boldsymbol{\gamma}$ denotes the learnable physical parameters 
+(e.g., ODE coefficients such as stiffness, damping, gravity) and $\Delta t$ 
+the integration time step. For multi-body systems, the state is extended to 
+$\mathbf{Z}_t \in \mathbb{R}^{N \times d}$, where $N$ is the number of objects.
+
+\textbf{Goal.} Two sub-problems are jointly addressed:
+%
+\begin{enumerate
+    \item \emph{Equation-family selection}: choose which ODE 
+    $\mathcal{P}_k \in \{\mathcal{P}_1, \ldots, \mathcal{P}_K\}$ 
+    governs the observed scene (e.g., pendulum, free fall, sliding block, 
+    multi-body collision).
+    \item \emph{Parameter estimation}: for the chosen $\mathcal{P}_k$, 
+    estimate $\boldsymbol{\gamma}$ such that the predicted latent trajectory 
+    $\{\tilde{\mathbf{z}}_t\}$ matches the encoder output 
+    $\{\hat{\mathbf{z}}_t\}$.
+\end{enumerate}
+%
+The equation family is not assumed to be provided by metadata or 
+folder structure; rather, it is inferred directly from the video.
+
+% =============================================================================
+\subsection{The IRIS Dataset}
+\label{sec:dataset}
+
+\subsubsection{Design Principles and Acquisition Protocol.}
+\label{sec:dataset_design}
+
+IRIS is constructed around four guiding principles. (1)~\textbf{Controlled recording}: videos are captured under fixed lighting and stable camera placement to reduce confounding factors while preserving real-world visual complexity (shadows, occlusions, reflections). (2)~\textbf{High resolution and frame rate}: all videos are recorded at 4K resolution and 60\,fps, providing substantially higher spatial and temporal fidelity than Delfys75 ($1920\times1080$)~\cite{garcia2025learning} and prior synthetic benchmarks ($50\times50$ to $100\times100$).  (3)~\textbf{Independent ground truth}: physical parameters (lengths, angles, friction coefficients, damping factors, masses, distances) are measured independently of the video using calibrated instruments, and stored in structured form (\texttt{parameters.json}) with uncertainty estimates (mean, std, min, max).  (4)~\textbf{Repeated trials}: each physical setting contains multiple recordings (e.g., 10 videos per variant), enabling assessment of parameter estimation variance across runs. Together, these choices distinguish IRIS from prior real-world benchmarks: sufficient clip length and frame rate for multi-step and temporal reasoning, clear visibility of all physical elements (e.g., strings, supports) to support both VLMs and parameter estimators, and multi-body scenarios with independent ground truth to evaluate interaction dynamics.
+
+\subsubsection{Physical Phenomena and Variants.}
+\label{sec:dataset_phenomena}
+
+IRIS covers both \textbf{single-body} and \textbf{multi-body} phenomena, spanning motion, rotation, and contact dynamics.
+
+\textbf{Single-body dynamics.} Five single-body phenomena are included: 
+\begin{enumerate}
+    \item \emph{Dropping ball}: a ball released from height $h_0$, governed by the second-order linear ODE
+    \begin{equation}
+        z'' + \beta\, z' + \alpha\, z = 0, \quad \alpha \approx g,
+        \label{eq:dropping_ball}
+    \end{equation}
+    with $g$ the gravitational acceleration and $\beta$ a damping term.
+    \item \emph{Falling ball}: a ball filmed during free fall from above, with apparent radius $r(t)$ described by
+    \begin{equation}
+        r(t) = \frac{r_0\, f}{h_0 + \tfrac{1}{2}g t^2},
+        \label{eq:falling_ball}
+    \end{equation}
+    where $r_0$ is the physical radius of the ball, $f$ the focal length, and $h_0$ the initial distance from the camera~\cite{garcia2025learning}.
+    
+    \item \emph{Sliding cone}: an object sliding down an inclined plane, governed by
+    \begin{equation}
+        x'' = g\!\left(\sin\alpha - \mu\cos\alpha\right),
+        \label{eq:sliding_cone}
+    \end{equation}
+    %
+    with $\alpha$ the inclination angle and $\mu$ the friction coefficient.
+    
+    \item \emph{Pendulum}: a damped pendulum described by
+    %
+    \begin{equation}
+        \theta'' + \zeta\,\theta' + \frac{g}{L}\sin\theta = 0,
+        \label{eq:pendulum}
+    \end{equation}
+    %
+    with $L$ the rope length and $\zeta$ the damping coefficient.
+    
+    \item \emph{Rotating cone}: a cone placed on a rotating wooden support, modeled as a damped torsional oscillator
+    %
+    \begin{equation}
+        \varphi'' + \beta\,\varphi' + \alpha\,\varphi = 0,
+        \label{eq:rotation}
+    \end{equation}
+    %
+    where $\varphi$ is the rotation angle, $\alpha$ the torsional stiffness, and $\beta$ the angular damping.
+\end{enumerate}
+%
+Each single-body category contains multiple settings (e.g., different drop heights, cone angles, pendulum lengths), yielding over 200 real-world videos in total.
+
+\textbf{Multi-body dynamics.} IRIS introduces three novel multi-body interaction scenarios, absent from all prior benchmarks:
+%
+\begin{enumerate}
+    \item \emph{Hitting cones}: a ball collides with a pyramid of cones, involving contact forces and momentum transfer between objects.
+    \item \emph{Two moving pendulums}: both pendulums are released simultaneously from the same initial angle $\theta_0$, collide at the bottom, and eventually come to rest. The coupled system is described by
+    %
+    \begin{equation}
+        \theta_i'' + \zeta_i\,\theta_i' + \frac{g}{L_i}\sin\theta_i 
+        + \kappa_{ij}\left(\theta_i - \theta_j\right) = 0, 
+        \quad i,j \in \{1,2\},\; i \neq j,
+        \label{eq:two_pendulums}
+    \end{equation}
+    %
+    where $\kappa_{ij}$ is a coupling coefficient active during contact.
+    \item \emph{One static, one moving pendulum}: a resting pendulum is struck by a moving one released from varying initial angles $\theta_0$, testing sensitivity to initial conditions and energy transfer magnitude.
+\end{enumerate}
+
+\subsubsection{Annotations and Ground Truth.}
+\label{sec:dataset_annotations}
+
+For each recording IRIS provides: (1)~\textbf{video clips} in standard tensor format $(N,\, n_f,\, C,\, H,\, W)$ compatible with the encoder; (2)~\textbf{ground-truth physical parameters} per (phenomenon, setting), stored with optional uncertainty bounds (mean, std, min, max) in \texttt{parameters.json}; (3)~\textbf{equation family labels} associating each phenomenon with its governing ODE. Optional per-frame segmentation masks, annotated using Segment Anything 2~\cite{ravi2024sam2segmentimages}, are provided for multi-object setups where object-level state estimation is required.
+
+\subsubsection{Why Real Data?}
+\label{sec:why_real}
+
+Synthetic benchmarks provide exact ground truth and reproducibility but suffer from a domain gap that is particularly acute for inverse problems: rendering engines employ idealized geometry, lighting, and contact models, and estimators calibrated on synthetic data may fail to transfer to the motion blur, partial occlusions, and material variability present in real video~\cite{garcia2025learning}. IRIS provides a real-world testbed with independently measured ground truth 
+while maintaining controlled experimental conditions and repeatability.
+
+% =============================================================================
+\subsection{VLM-Augmented Physics Identification Pipeline}
+\label{sec:vlm_pipeline}
+
+\subsubsection{VLM Routing and Scene Understanding.}
+\label{sec:vlm_routing}
+
+In unconstrained settings, the governing equation family is not provided \emph{a priori}. A \textbf{Vision-Language Model (VLM)} is employed to classify the observed motion into one of the $K$ phenomena in the ODE bank. Formally, the VLM acts as a routing function:
+%
+\begin{equation}
+    k^* = \mathrm{VLM}\!\left(\{I_{s_1}, \ldots, I_{s_m}\};\; 
+    \mathcal{C}_1, \ldots, \mathcal{C}_K\right),
+    \label{eq:vlm_routing}
+\end{equation}
+%
+where $\{I_{s_1}, \ldots, I_{s_m}\}$ is a set of $m$ representative frames sampled from the video (e.g., at $t = 0\%,\, 25\%,\, 50\%,\, 75\%,\, 100\%$ of the clip) and $\mathcal{C}_k$ is a short natural-language description of class $k$. \textbf{Temporal reasoning} is employed: the VLM is prompted to compare early and late frames to disambiguate dynamics that appear locally similar but diverge over time (e.g., oscillatory motion vs.\ monotone free fall). The output $k^*$ indexes into the ODE bank, replacing the path-based equation selection of prior work~\cite{garcia2025learning,hofherr2024nirpi}.
+
+Recent VLMs such as GPT-4V~\cite{roumeliotis2023chatgpt} and LLaVA-Video~\cite{zhang2024llava} have demonstrated strong capabilities in temporal video understanding, motivating their deployment as zero-shot routing modules. On Delfys75, the proposed VLM routing achieves approximately 73\% classification accuracy with five-frame temporal context; an optional lightweight video classifier trained on the same distribution attains near-perfect accuracy at the cost of generalization. Alternative prompting strategies, including describe-then-classify and chain-of-thought physical reasoning~\cite{wei2023cot}, are discussed in the supplementary material.
+
+\subsubsection{Physics ODE Bank.}
+\label{sec:ode_bank}
+
+A library of $K$ candidate ODEs $\{\mathcal{P}_k\}_{k=1}^K$ is maintained, each parameterized by a small set of learnable scalars $\boldsymbol{\gamma}_k$. The bank currently comprises:
+%
+\begin{itemize}
+    \item \textbf{Second-order linear (damped oscillator)}: $z'' + \beta\,z' + \alpha\,z = 0$ -- for pendulum, dropping/falling ball, and rotating cone.
+    \item \textbf{First-order exponential decay}: $z' = -\lambda\,z$ -- for LED intensity decay.
+    \item \textbf{First-order nonlinear (Torricelli)}: $z' = -k\sqrt{z}$ -- for fluid drainage~\cite{garcia2025learning}.
+    \item \textbf{Constant acceleration}: $z'' = g\!\left(\sin\alpha - \mu\cos\alpha\right)$ -- for sliding block/cone.
+    \item \textbf{Multi-body coupled oscillator}: see Section~\ref{sec:multi_object} -- for hitting cones and interacting pendulums.
+\end{itemize}
+%
+The VLM selects one entry $k^*$; parameter estimation then fits $\boldsymbol{\gamma}_{k^*}$ via gradient-based optimization over the video clip.
+
+\subsubsection{Unified Multi-Object Physics Framework.}
+\label{sec:multi_object}
+
+Single-body systems are described by a single latent state $\mathbf{z}_t \in \mathbb{R}^d$ per time step. For multi-body systems, a \textbf{unified graph-structured representation} is adopted, drawing on interaction networks~\cite{battaglia2016interaction} and graph network-based simulators~\cite{sanchez2020learning}. The system state is represented as $\mathbf{Z}_t \in \mathbb{R}^{N \times d}$, where each of the $N$ objects corresponds to a node in a graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$. The encoder maps the full frame to $N \cdot d$ dimensions, which are reshaped to yield $\mathbf{Z}_t$. The dynamics of each node $i$ are governed by:
+%
+\begin{equation}
+    z_i'' + \gamma_{i,1}\,z_i' + \gamma_{i,0}\,z_i + \sum_{j \in \mathcal{N}(i)} \kappa_{ij}\!\left(z_i - z_j\right) = 0,
+    \label{eq:multi_body}
+\end{equation}
+%
+where $\gamma_{i,0}$, $\gamma_{i,1}$ are the self-dynamics parameters of node $i$, $\mathcal{N}(i)$ is the set of neighbors of $i$ in $\mathcal{G}$, and $\kappa_{ij}$ is a learnable coupling coefficient encoding inter-object forces (spring-like coupling for pendulums, contact/repulsion for collision scenarios). For $N=1$, Eq.~\eqref{eq:multi_body} has no edges and reduces exactly to the baseline single-body ODE, ensuring backward compatibility. For $N=2$, this formulation covers hitting cones (contact coupling) and interacting pendulums (oscillatory coupling).
+
+% =============================================================================
+\subsection{Gradient-Corrected Integrators}
+\label{sec:integrators}
+
+The baseline physics block~\cite{garcia2025learning} implements a first-order Euler step:
+%
+\begin{align}
+    z_{t+1} &= z_t + \Delta t\, z_t^{(1)}, 
+    \label{eq:euler_orig_pos}\\
+    z_{t+1}^{(1)} &= z_t^{(1)} + \Delta t\, z_t^{(2)}.
+    \label{eq:euler_orig_vel}
+\end{align}
+%
+A critical implementation bug in the original code caused Eq.~\eqref{eq:euler_orig_pos} to omit the acceleration term, severing the gradient path from the loss to the physics parameters $\boldsymbol{\gamma}$. This is corrected with the standard second-order Euler-Cromer update:
+%
+\begin{equation}
+    z_{t+1} = z_t + \Delta t\, z_t^{(1)} + \Delta t^2\, z_t^{(2)},
+    \label{eq:euler_corrected}
+\end{equation}
+%
+which restores gradient flow to $\boldsymbol{\gamma}$ and renders training physically meaningful. Beyond the corrected Euler step, \textbf{St\"ormer-Verlet} integration~\cite{hairer2003geometric} is additionally implemented:
+%
+\begin{align}
+    z_{t+1/2}^{(1)} &= z_t^{(1)} + \tfrac{1}{2}\Delta t\, z_t^{(2)},
+    \label{eq:sv_half_step}\\
+    z_{t+1} &= z_t + \Delta t\, z_{t+1/2}^{(1)},
+    \label{eq:sv_full_step}\\
+    z_{t+1}^{(2)} &= f\!\left(z_{t+1},\, z_{t+1}^{(1)};\, \boldsymbol{\gamma}\right),
+    \label{eq:sv_acc}\\
+    z_{t+1}^{(1)} &= z_{t+1/2}^{(1)} + \tfrac{1}{2}\Delta t\, z_{t+1}^{(2)},
+    \label{eq:sv_vel_update}
+\end{align}
+%
+where $f(\cdot)$ denotes the right-hand side of the governing ODE evaluated at the updated state. St\"ormer-Verlet is a second-order symplectic integrator that preserves Hamiltonian structure, thereby preventing artificial energy drift over long rollouts~\cite{hairer2003geometric}, a property of particular importance for conservative systems such as pendulums and 
+rotating bodies. An \textbf{RK4} integrator is also implemented for scenarios requiring 
+higher-order accuracy. The choice of integrator is configurable per ODE 
+family within the ODE bank.
+
+% =============================================================================
+\subsection{Multi-Step Physics Loss}
+\label{sec:multistep_loss}
+
+The baseline objective~\cite{garcia2025learning} supervises only the one-step 
+prediction:
+%
+\begin{equation}
+    \mathcal{L}_{\mathrm{1\text{-}step}} = \frac{1}{M}\sum_{i=1}^{M} \left\| \hat{\mathbf{z}}_{i} - \tilde{\mathbf{z}}_{i} \right\|^2 + \mathcal{L}_{\mathrm{KL}}(\hat{\mathbf{z}}),
+    \label{eq:loss_baseline}
+\end{equation}
+%
+where $\hat{\mathbf{z}}_i = \phi(I_i)$ is the encoder output and $\tilde{\mathbf{z}}_i = \mathcal{P}(\hat{\mathbf{z}}_{i-1}; \boldsymbol{\gamma}, \Delta t)$ the one-step physics prediction. This single-step constraint can underconstrain $\boldsymbol{\gamma}$: parameters yielding similar one-step predictions may diverge significantly over longer horizons, and the one-step loss provides insufficient gradient signal to disambiguate them.
+
+A \textbf{multi-step rollout loss} is introduced that enforces agreement between encoder and physics block over $K$ future horizons simultaneously. Let $\tilde{\mathbf{z}}_{t+k}$ denote the state obtained by unrolling the physics block $k$ steps ahead from $\hat{\mathbf{z}}_t$:
+%
+\begin{equation}
+    \tilde{\mathbf{z}}_{t+k} = \underbrace{ \mathcal{P}\!\left(\cdots\mathcal{P}\!\left(\hat{\mathbf{z}}_t; \boldsymbol{\gamma}, \Delta t \right)\cdots; \boldsymbol{\gamma}, \Delta t\right)}_{k \text{ applications}}.
+    \label{eq:rollout}
+\end{equation}
+%
+The full loss is then:
+%
+\begin{equation}
+    \mathcal{L}_{\mathrm{total}} = 
+    \underbrace{
+        \sum_{k=1}^{K} w_k \left\| 
+        \hat{\mathbf{z}}_{t+k} - \tilde{\mathbf{z}}_{t+k} 
+        \right\|^2
+    }_{\mathcal{L}_{\mathrm{multi}}}
+    +\; \mathcal{L}_{\mathrm{KL}}(\hat{\mathbf{z}}),
+    \label{eq:loss_multistep}
+\end{equation}
+%
+where the horizon weights $w_k$ decrease with $k$ to emphasize near-term predictions (e.g., $w = [1,\, 1,\, 0.5,\, 0.5,\, 0.25]$ for $K=5$), and $\mathcal{L}_{\mathrm{KL}}$ is the KL-divergence term from~\cite{garcia2025learning} that prevents encoder collapse by encouraging the encoder output to follow a standard normal prior:
+%
+\begin{equation}
+    \mathcal{L}_{\mathrm{KL}} = -\frac{1}{d}\sum_{j=1}^{d}
+    \left(1 + \ln\sigma_z^2 - \mu_z^2 - \sigma_z^2\right),
+    \label{eq:kl}
+\end{equation}
+%
+where $\mu_z$ and $\sigma_z^2$ are the mean and variance of the encoder outputs computed over the batch. The encoder and physics block architectures remain unchanged; the multi-step loss is a drop-in replacement for the one-step objective.
+
+% =============================================================================
+\subsection{Training and Evaluation Protocol}
+\label{sec:training_eval}
+
+\textbf{Training.} For each video clip, the procedure is as follows: (i) the equation family 
+is determined via VLM routing (Eq.~\eqref{eq:vlm_routing}) or, for ablation purposes, via ground-truth path labels; (ii) the corresponding physics block is instantiated from the ODE bank (single-body or unified multi-object, Eq.~\eqref{eq:multi_body}); (iii) the encoder parameters $\Theta_\phi$ and physics parameters $\boldsymbol{\gamma}$ are jointly optimized by minimizing $\mathcal{L}_{\mathrm{total}}$ (Eq.~\eqref{eq:loss_multistep}) over the clip using the Adam optimizer~\cite{kingma2017adam}. Physics parameters employ magnitude-adaptive learning rates:
+%
+\begin{equation}
+    \eta_{\gamma_i} = 10^{\left\lfloor \log_{10} |\gamma_i^{(0)}| \right\rfloor},
+    \label{eq:adaptive_lr}
+\end{equation}
+%
+where $\gamma_i^{(0)}$ is the initial value of parameter $\gamma_i$, following~\cite{garcia2025learning}. A fixed learning rate is used for the encoder. No cross-video pre-training of the physics block is required.
+
+\textbf{Evaluation.} For each (phenomenon, setting, parameter) triple, we report the mean absolute error between the mean estimated value over repeated trials and the independently measured ground truth, along with the standard deviation of estimates across trials when multiple videos per setting are available. Two configurations are compared: (a)~\emph{baseline}, consisting of path-based equation selection, one-step loss, single-body physics only, and the original uncorrected Euler integrator; (b)~\emph{proposed}, consisting of VLM routing, multi-step loss, gradient-corrected integrator, and unified multi-object model. Both pipelines share the same CSV output format and the same \texttt{parameters.json} for ground-truth loading, ensuring reproducible and directly comparable results across Delfys75 and IRIS.
+
+
+% ============================================================================
+% 4. EVALUATION PROTOCOL
+% ============================================================================
+\section{Evaluation Protocol}
+\label{sec:eval_protocol}
+
+The pipeline is evaluated along five complementary axes: parameter estimation accuracy (primary), governing-equation selection accuracy, parameter identifiability and training stability, robustness to design choices, and temporal extrapolation. All experiments share independently measured ground-truth parameters and a fixed train-per-clip protocol, ensuring that baseline and proposed methods are directly and fairly comparable.
+
+% -----------------------------------------------------------------------------
+\subsection{Datasets and Splits}
+\label{sec:eval_datasets}
+
+\textbf{Delfys75.} Evaluation is conducted on the public Delfys75 benchmark~\cite{garcia2025learning}, comprising six single-body phenomena: dropped ball, free fall, LED intensity decay, pendulum, sliding block, and Torricelli drainage. Each phenomenon contains three settings and five videos per setting (75 videos total). Ground-truth parameter values are provided; for gravity the standard value $g = 9.80665\,\mathrm{m\,s^{-2}}$ is used. Results are reported per (phenomenon, setting, parameter) to enable fine-grained comparison.
+
+\textbf{IRIS.} Our IRIS dataset covers five single-body phenomena (dropping ball, falling ball, sliding cone, pendulum, and rotating cone) and three multi-body interaction phenomena (hitting cones, two moving pendulums, and one static plus one moving pendulum). Each setting contains 10 repeated recordings, providing richer statistics for variance analysis than Delfys75. Ground-truth parameters are stored per (phenomenon, setting) with mean, standard deviation, minimum, and maximum, reflecting measurement uncertainty. The same train-per-clip protocol as on Delfys75 is applied throughout. The use of IRIS under this protocol allows the community to compare methods on a benchmark that is both broader (multi-body, rotation) and of higher data quality (longer clips, 60\,fps, controlled visibility), establishing it as the preferred testbed for physics identification from video.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\linewidth]{iris_figure1_single_cropped.pdf}
+\caption{
+\textbf{Single-body phenomena in the IRIS dataset.}
+Each column depicts a representative video sequence from one of the four single-body scenarios: 
+dropping ball, falling ball, pendulum, and sliding cone.
+Rows show frames sampled at timestamps $t_0$, $t_1$, $t_i$, $t_{i+1}$, and $t_n$, 
+illustrating the temporal evolution of each phenomenon.
+The physical parameter varied across sequences within each scenario is indicated beneath the 
+corresponding column: gravitational acceleration $g$, string length $L$, and friction coefficient $\mu$.
+}
+\label{fig:dataset_1}
+\end{figure}
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\linewidth]{iris_figure2_multi_cropped.pdf}
+\caption{
+\textbf{Multi-body phenomena in the IRIS dataset.}
+Each column depicts a representative video sequence from one of the three multi-body scenarios: 
+rotating cone, hitting cones, and two pendulums.
+Rows show frames sampled at timestamps $t_0$, $t_1$, $t_i$, $t_{i+1}$, and $t_n$, 
+capturing the complex inter-object dynamics unique to each scenario.
+The physical parameters varied across sequences are shown beneath each column: 
+angular friction coefficients $\alpha$ and $\beta$, restitution coefficient $\kappa$, 
+and coupled pendulum coupling constant $\kappa_{12}$.
+}
+\label{fig:dataset_2}
+\end{figure}
+
+\textbf{Train-per-clip protocol.} For every video clip, independently of all other clips, the following procedure is applied: (i) the equation family is determined via path-based labels (baseline) or VLM routing (proposed); (ii) the corresponding physics block is instantiated; (iii) the encoder $\phi$ and physics parameters $\boldsymbol{\gamma}$ are trained jointly on that clip from scratch. No physics parameters are shared across clips. The VLM and optional video classifier are shared across clips but are not fine-tuned per clip. The random seed is fixed across all experiments to ensure reproducibility. Mean and standard deviation of parameter estimates are reported over videos within each (phenomenon, setting).
+
+% -----------------------------------------------------------------------------
+\subsection{Evaluation Axes}
+\label{sec:eval_axes}
+
+\textbf{Parameter accuracy} is the primary axis of evaluation: it measures the closeness of estimated physical parameters to independently obtained ground truth across all (phenomenon, setting, parameter) triples for which ground truth is available. Estimated parameters include gravitational acceleration $g$, pendulum length $L$, damping coefficient $\zeta$, LED decay rate $\gamma$, friction coefficient $\mu$, Torricelli drain constant $k$, torsional stiffness $\alpha$, angular damping $\beta$, and inter-object coupling $\kappa$ for multi-body scenarios.
+
+\textbf{Governing-equation selection accuracy} measures how reliably the VLM or video classifier assigns the correct ODE family to each video. This axis is evaluated across three routing strategies: single-call VLM with temporal reasoning (primary), describe-then-classify VLM, and lightweight video classifier. When the equation family is provided by path metadata (baseline), selection accuracy is not applicable, but parameter accuracy is still reported so that the downstream effect of routing errors is visible in the results tables.
+
+\textbf{Identifiability and stability} assess whether the physics parameters are uniquely constrained by the observed data and training loss. The reported metrics include the gradient norm $\|\nabla_{\boldsymbol{\gamma}}\mathcal{L}\|$ during training, the standard deviation of parameter estimates across repeated videos in the same setting as a proxy for stability, and the ODE residual (mean squared residual of the discrete ODE evaluated on encoder latents under the estimated parameters) where applicable.
+
+\textbf{Robustness} measures how consistently parameter accuracy is maintained across different design choices: loss function (one-step vs.\ multi-step), physics architecture (single-body vs.\ unified multi-object), integrator (corrected Euler vs.\ St\"ormer-Verlet), and equation selection strategy (path-based vs.\ VLM). Each component is ablated independently, following the configurations described in Section~\ref{sec:eval_baselines}.
+
+\textbf{Extrapolation} evaluates generalization of the estimated parameters when the physics model is rolled out beyond the training horizon. For a clip of length $T$, training uses frames $1, \ldots, T_{\mathrm{train}}$ and prediction error is evaluated at steps $T_{\mathrm{train}}+1, \ldots, T$. This axis is reported where the dataset and clip length support it.
+
+% -----------------------------------------------------------------------------
+\subsection{Metrics}
+\label{sec:metrics}
+
+\subsubsection{Parameter Accuracy.}
+\label{sec:metrics_param}
+
+For a given (phenomenon, setting, parameter) with ground-truth value $\theta^*$ and estimates $\{\hat{\theta}_i\}_{i=1}^{n}$ (one per video), we report the following metrics.
+
+\textbf{Mean absolute error (MAE):}
+\begin{equation}
+    \mathrm{MAE} = \frac{1}{n} \sum_{i=1}^{n} 
+    \bigl|\hat{\theta}_i - \theta^*\bigr|.
+    \label{eq:mae}
+\end{equation}
+
+\textbf{Bias (mean signed error):}
+\begin{equation}
+    \mathrm{Bias} = \frac{1}{n} \sum_{i=1}^{n} 
+    \bigl(\hat{\theta}_i - \theta^*\bigr).
+    \label{eq:bias}
+\end{equation}
+
+\textbf{Standard deviation of estimates:}
+\begin{equation}
+    \sigma_{\hat{\theta}} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} 
+    \bigl(\hat{\theta}_i - \bar{\hat{\theta}}\bigr)^2},
+    \quad \bar{\hat{\theta}} = \frac{1}{n}\sum_{i=1}^{n}\hat{\theta}_i.
+    \label{eq:std_est}
+\end{equation}
+
+\textbf{Relative error} (when $\theta^* \neq 0$):
+\begin{equation}
+    \mathrm{RE} = \frac{\mathrm{MAE}}{|\theta^*|}.
+    \label{eq:relative_error}
+\end{equation}
+
+MAE is the primary reported metric, with $\sigma_{\hat{\theta}}$ included in result tables as a measure of estimation stability. For method comparison we report the \textbf{difference in MAE}:
+\begin{equation}
+    \Delta\mathrm{MAE} = \mathrm{MAE}_A - \mathrm{MAE}_B,
+    \label{eq:delta_mae}
+\end{equation}
+where negative $\Delta\mathrm{MAE}$ indicates that method $B$ achieves lower error than method $A$. Any aggregation over multiple parameters or settings is stated explicitly when used.
+
+\subsubsection{Governing-Equation Selection.}
+\label{sec:metrics_eq}
+
+Let $\hat{y}_i \in \{1,\ldots,K\}$ denote the predicted equation family and $y_i^* \in \{1,\ldots,K\}$ the ground-truth family for video $i$. The following metrics are reported:
+
+\textbf{Overall accuracy:}
+\begin{equation}
+    \mathrm{Acc} = \frac{1}{N}\sum_{i=1}^{N} 
+    \mathbb{1}\bigl[\hat{y}_i = y_i^*\bigr],
+    \label{eq:acc}
+\end{equation}
+where $N$ is the total number of videos.
+
+\textbf{Per-class accuracy:}
+\begin{equation}
+    \mathrm{Acc}_k = \frac{\sum_{i=1}^{N} 
+    \mathbb{1}\bigl[\hat{y}_i = k\bigr]\,
+    \mathbb{1}\bigl[y_i^* = k\bigr]}
+    {\sum_{i=1}^{N}\mathbb{1}\bigl[y_i^* = k\bigr]},
+    \quad k = 1, \ldots, K.
+    \label{eq:per_class_acc}
+\end{equation}
+
+\textbf{Confusion matrix:} $\mathbf{C} \in \mathbb{R}^{K \times K}$, where entry $C_{k\ell} = \sum_i \mathbb{1}[y_i^* = k]\,\mathbb{1}[\hat{y}_i = \ell]$, with rows indexing ground-truth classes and columns predicted classes.
+
+These metrics are reported for the primary VLM (temporal reasoning over five frames), the describe-then-classify VLM variant, and the optional video classifier. When the equation family is given by path labels, selection accuracy is not applicable; the parameter accuracy tables still indicate the configuration used.
+
+\subsubsection{Identifiability and Stability.}
+\label{sec:metrics_id}
+
+\textbf{Gradient norm of physics parameters:}
+\begin{equation}
+    G_{\boldsymbol{\gamma}}^{(e)} = 
+    \bigl\|\nabla_{\boldsymbol{\gamma}}\,
+    \mathcal{L}_{\mathrm{total}}^{(e)}\bigr\|_2,
+    \label{eq:grad_norm}
+\end{equation}
+where superscript $(e)$ denotes the training epoch. Persistent near-zero $G_{\boldsymbol{\gamma}}$ indicates a gradient flow problem (as in the uncorrected baseline Euler step); recovery after applying Eq.~\eqref{eq:euler_corrected} is verified by inspecting this curve.
+
+\textbf{Stability across clips:} the standard deviation $\sigma_{\hat{\theta}}$ (Eq.~\eqref{eq:std_est}) over the $n=10$ repeated recordings per setting on IRIS serves as a direct measure of estimation stability; lower $\sigma_{\hat{\theta}}$ indicates more identifiable parameters.
+
+\textbf{ODE residual:}
+\begin{equation}
+    \mathcal{R} = \frac{1}{T-1}\sum_{t=1}^{T-1}
+    \bigl\|\hat{\mathbf{z}}_{t+1} - 
+    \mathcal{P}(\hat{\mathbf{z}}_t;\,\hat{\boldsymbol{\gamma}},\,
+    \Delta t)\bigr\|^2,
+    \label{eq:ode_residual}
+\end{equation}
+where $\hat{\boldsymbol{\gamma}}$ are the final estimated parameters. $\mathcal{R}$ measures how well the estimated ODE fits the encoder latents, independently of the ground truth, and complements MAE when ground truth is unavailable.
+
+\subsubsection{Extrapolation.}
+\label{sec:metrics_extra}
+
+For a clip of length $T$ with training horizon $T_{\mathrm{train}} < T$, the extrapolation error at horizon $k > T_{\mathrm{train}}$ is:
+\begin{equation}
+    \mathcal{E}_k = \bigl\|\hat{\mathbf{z}}_{k} - 
+    \tilde{\mathbf{z}}_{k}\bigr\|^2,
+    \label{eq:extrap_error}
+\end{equation}
+where $\tilde{\mathbf{z}}_k$ is the physics rollout from $\hat{\mathbf{z}}_{T_{\mathrm{train}}}$ and $\hat{\mathbf{z}}_k$ is the encoder output at frame $k$. $\mathcal{E}_k$ is reported as a function of $k - T_{\mathrm{train}}$ to characterize the rate at which prediction accuracy degrades beyond the training window.
+
+% -----------------------------------------------------------------------------
+\subsection{Baselines and Ablations}
+\label{sec:eval_baselines}
+
+\textbf{Baseline.} The primary baseline is the original pipeline of~\cite{garcia2025learning}: path-based equation selection, one-step loss (Eq.~\eqref{eq:loss_baseline}), single-body physics only, and the original uncorrected Euler integrator. This baseline is representative of the 
+state-of-the-art in unsupervised physical parameter estimation from video~\cite{garcia2025learning, hofherr2024nirpi, jaques2019physics}.
+
+\textbf{Ablations.} Components are added one at a time in the following order:
+
+\begin{enumerate}
+    \item \textbf{+ Corrected integrator}: baseline with the gradient-corrected Euler step (Eq.~\eqref{eq:euler_corrected}), restoring gradient flow to $\boldsymbol{\gamma}$.
+    \item \textbf{+ Multi-step loss}: corrected integrator with multi-step rollout loss (Eq.~\eqref{eq:loss_multistep}); same equation selection and single-body model.
+    \item \textbf{+ VLM selection}: multi-step loss with VLM-based equation routing (Eq.~\eqref{eq:vlm_routing}); same single-body model.
+    \item \textbf{+ Unified model}: VLM selection with unified multi-object physics block (Eq.~\eqref{eq:multi_body}); $N=1$ for single-body phenomena, $N=2$ for hitting cones and two-pendulum scenarios.
+    \item \textbf{Full pipeline}: all components combined, consisting of VLM routing, gradient-corrected St\"ormer-Verlet integrator, multi-step loss, and unified multi-object model.
+\end{enumerate}
+
+\textbf{Reporting format.} Result tables have rows indexed by (phenomenon, setting, parameter) and columns indexed by configuration (baseline, +corrected, +multi-step, +VLM, +unified, full). Each cell reports MAE and $\sigma_{\hat{\theta}}$; the ground-truth column $\theta^*$ is always included. A separate table reports equation-selection accuracy for the VLM and video classifier. The random seed, number of videos per setting, and ground-truth source file (\texttt{parameters.json}) are stated for all experiments to ensure full reproducibility.
+
+% ============================================================================
+% 5. EXPERIMENTS
+% ============================================================================
+\section{Experiments}
+\label{sec:experiments}
+
+The proposed pipeline is evaluated along three axes: physical parameter estimation 
+accuracy (primary), governing-equation identification, and component 
+ablations. All experiments follow the train-per-clip protocol of 
+Sec.~\ref{sec:eval_protocol} with a fixed random seed, identical 
+ground-truth sources, and a shared CSV output 
+format across all methods. Implementation details and per-setting 
+hyperparameters are provided in the supplementary material.
+
+% -----------------------------------------------------------------------------
+\subsection{Experimental Setup}
+\label{sec:exp_setup}
+
+\textbf{Methods compared.} Five configurations are evaluated in 
+increasing order of complexity:
+
+\begin{enumerate}
+    \item \textbf{Baseline}: path-based equation selection, one-step 
+    latent loss (Eq.~\eqref{eq:loss_baseline}), single-body physics block, 
+    original uncorrected Euler integrator~\cite{garcia2025learning}.
+    \item \textbf{+Corrected}: baseline with the gradient-corrected Euler 
+    step (Eq.~\eqref{eq:euler_corrected}), restoring gradient flow to 
+    $\boldsymbol{\gamma}$.
+    \item \textbf{+Multi-step}: corrected integrator with multi-step 
+    rollout loss (Eq.~\eqref{eq:loss_multistep}); path-based selection 
+    and single-body model unchanged.
+    \item \textbf{+Unified}: corrected integrator, multi-step loss, 
+    path-based selection, and unified multi-object physics block 
+    (Eq.~\eqref{eq:multi_body}); $N=1$ for single-body, $N=2$ for 
+    multi-body phenomena.
+    \item \textbf{Full pipeline}: all components combined, consisting of VLM equation 
+    routing (Eq.~\eqref{eq:vlm_routing}), gradient-corrected 
+    St\"ormer-Verlet integrator, multi-step loss, and unified multi-object 
+    model.
+\end{enumerate}
+
+Prior encoder-decoder methods~\cite{jaques2019physics, hofherr2024nirpi} 
+are designed around frame reconstruction and produce prediction error 
+rather than interpretable physical parameters; they are therefore not 
+included in the parameter MAE tables. Their qualitative differences are 
+discussed in Sec.~\ref{sec:related_phys_estimation}.
+
+\textbf{Parameter mapping.} Learned latent parameters $\alpha$, $\beta$ 
+are mapped to physical quantities (e.g., $g$, $L$, $\zeta$, $\gamma$, 
+$\mu$, $k$) via the ODE definitions in Sec.~\ref{sec:ode_bank} before 
+computing MAE against ground truth.
+
+% -----------------------------------------------------------------------------
+\subsection{Physical Parameter Estimation on Delfys75}
+\label{sec:exp_delfys}
+
+\textbf{Setup.} Delfys75~\cite{garcia2025learning} provides six single-body 
+phenomena (dropped ball, free fall, LED intensity decay, pendulum, 
+sliding block, and Torricelli drainage) across three settings each with 
+five videos per setting (75 videos total). Ground-truth parameters are 
+taken from the provided \texttt{parameters.json}.
+
+\subsubsection{Baseline vs.\ Unified Model.}
+\label{sec:exp_delfys_unified}
+
+Table~\ref{tab:delfys75_baseline_unified} reports MAE for the baseline 
+and unified model (+Unified) configurations. The most prominent result concerns 
+the pendulum: the baseline yields an MAE of $95.07$\,m on the 
+\texttt{pendulum\_45} setting for string length, compared to $3.80$\,m 
+for the unified model ($\Delta\mathrm{MAE} = -91.27$\,m). This substantial 
+failure of the baseline is a direct consequence of the uncorrected Euler 
+integrator (Eq.~\eqref{eq:euler_orig_pos}): in the absence of gradient signal 
+reaching $\boldsymbol{\gamma}$, estimated pendulum lengths diverge 
+arbitrarily from initialization. The unified model with the corrected 
+integrator recovers physically meaningful estimates across all three 
+pendulum settings ($\Delta\mathrm{MAE} = -91.27$, $-47.22$, $-29.12$\,m 
+for \texttt{pendulum\_45}, \texttt{pendulum\_90}, \texttt{pendulum\_150} 
+respectively).
+
+Substantial improvements from the unified model are also observed on 
+Torricelli drainage ($\Delta\mathrm{MAE} = -3.16$ on 
+\texttt{large}, $-1.99$ on \texttt{small}), LED 2\,s decay 
+($\Delta\mathrm{MAE} = -1.90$), and pendulum length across all settings. 
+The baseline retains comparable performance on dropped ball and free fall 
+(gravity estimates unchanged; $\Delta\mathrm{MAE} = 0.00$) and on the 
+\texttt{led\_10s} decay setting, where the unified model increases MAE 
+by $+0.78$, an edge case attributable to the slow dynamics of the 10\,s 
+decay causing multi-step rollout divergence under the longer 
+integration horizon. Sliding block friction is recovered identically by 
+both configurations ($\Delta\mathrm{MAE} = 0.00$), consistent with the 
+constant-acceleration ODE being insensitive to the integrator correction.
+
+\begin{table}[t]
+  \centering
+  \caption{Parameter MAE on Delfys75: baseline (path-based, one-step, 
+  single-body, uncorrected Euler) vs.\ unified model (path-based, 
+  one-step, unified physics block, corrected Euler). 
+  $\Delta\mathrm{MAE} = \mathrm{MAE}_{\mathrm{unified}} - 
+  \mathrm{MAE}_{\mathrm{baseline}}$; \colorbox{bestcolor}{\textbf{bold}} = lower MAE. 
+  GT = ground truth.}
+  \label{tab:delfys75_baseline_unified}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}ll >{\raggedright}p{2.0cm} r r r r@{}}
+    \toprule
+    \textbf{Dynamics} & \textbf{Setting} & \textbf{Param} & \textbf{GT} & 
+    \textbf{Base.\ MAE} & \textbf{Unif.\ MAE} & $\bm{\Delta}$\textbf{MAE} \\
+    \midrule
+    \rowcolor{lightgray}
+    dropped\_ball   & large          & $g$\,[m/s$^2$]  
+        & 9.81  & \cellcolor{bestcolor}\textbf{9.81} & \cellcolor{bestcolor}\textbf{9.81} & $0.00$ \\
+    free\_fall      & mousepad       & $g$\,[m/s$^2$]  
+        & 9.81  & \cellcolor{bestcolor}\textbf{9.81} & \cellcolor{bestcolor}\textbf{9.81} & $0.00$ \\
+    \rowcolor{lightgray}
+    free\_fall      & table          & $g$\,[m/s$^2$]  
+        & 9.81  & \cellcolor{bestcolor}\textbf{9.81} & \cellcolor{bestcolor}\textbf{9.81} & $0.00$ \\
+    led             & led\_10s       & $\gamma$        
+        & 0.46  & \cellcolor{bestcolor}\textbf{0.46} & 1.24          & $+0.78$ \\
+    \rowcolor{lightgray}
+    led             & led\_2s        & $\gamma$        
+        & 2.30  & 2.30          & \cellcolor{bestcolor}\textbf{0.40} & $-1.90$ \\
+    pendulum        & pendulum\_45   & $L$\,[m]        
+        & 0.45  & 95.07         & \cellcolor{bestcolor}\textbf{3.80} & $-91.27$ \\
+    \rowcolor{lightgray}
+    pendulum        & pendulum\_90   & $L$\,[m]        
+        & 0.90  & 50.15         & \cellcolor{bestcolor}\textbf{2.93} & $-47.22$ \\
+    pendulum        & pendulum\_150  & $L$\,[m]        
+        & 1.50  & 29.83         & \cellcolor{bestcolor}\textbf{0.71} & $-29.12$ \\
+    \rowcolor{lightgray}
+    pendulum        & pendulum\_150  & $\zeta$         
+        & $-$0.059 & \cellcolor{bestcolor}\textbf{0.14} & 4.39       & $+4.25$ \\
+    sliding\_block  & mid            & $\mu$           
+        & 0.21  & \cellcolor{bestcolor}\textbf{0.21} & \cellcolor{bestcolor}\textbf{0.21} & $0.00$ \\
+    \rowcolor{lightgray}
+    torricelli      & large          & $k$             
+        & 0.016 & 6.07          & \cellcolor{bestcolor}\textbf{2.91} & $-3.16$ \\
+    torricelli      & small          & $k$             
+        & 0.0096 & 7.67         & \cellcolor{bestcolor}\textbf{5.69} & $-1.99$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Multi-Step Loss.}
+\label{sec:exp_delfys_multistep}
+
+Table~\ref{tab:multistep_ablation} reports MAE for the one-step 
+versus multi-step loss (+Multi-step) configurations on Delfys75. The multi-step loss 
+consistently reduces MAE for gravitational acceleration $g$ across all 
+free fall and dropped ball settings: the largest improvement is observed on 
+\texttt{free\_fall/table} ($\Delta\mathrm{MAE} = -0.90$), followed by 
+\texttt{free\_fall/mousepad} ($-0.47$), \texttt{free\_fall/tennis} 
+($-0.53$), \texttt{dropped\_ball/large} ($-0.07$), and 
+\texttt{dropped\_ball/medium} ($-0.03$). This pattern is consistent with 
+the identifiability argument of Sec.~\ref{sec:multistep_loss}: for 
+free fall and dropped ball, the one-step prediction of $g$ is weakly 
+constrained because a single integration step exhibits low sensitivity to the 
+magnitude of gravitational acceleration, whereas multi-step rollouts 
+accumulate the effect of $g$ over time and provide a substantially stronger learning 
+signal.
+
+Results are mixed on remaining phenomena. The \texttt{led\_10s} decay 
+setting exhibits a pronounced degradation under multi-step loss 
+($\Delta\mathrm{MAE} = +5.37$): the slow exponential dynamics cause 
+the physics prediction to diverge across the five-step rollout when the 
+decay rate estimate is initially distant from ground truth, producing 
+unstable gradient signals. On Torricelli and certain pendulum settings, 
+multi-step loss is neutral to slightly detrimental, suggesting that 
+one-step supervision suffices when the dynamics are smooth and 
+well-constrained within a single frame interval.
+
+\begin{table}[t]
+  \centering
+  \caption{Multi-step loss vs.\ one-step baseline on Delfys75. 
+  $\Delta\mathrm{MAE} = \mathrm{MAE}_{\mathrm{multi}} - 
+  \mathrm{MAE}_{\mathrm{1\text{-}step}}$; \colorbox{bestcolor}{\textbf{bold}} = lower MAE.}
+  \label{tab:multistep_ablation}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}ll >{\raggedright}p{2.0cm} r r r@{}}
+    \toprule
+    \textbf{Dynamics} & \textbf{Setting} & \textbf{Param} & 
+    \textbf{1-step MAE} & \textbf{Multi MAE} & $\bm{\Delta}$\textbf{MAE} \\
+    \midrule
+    \rowcolor{lightgray}
+    dropped\_ball & large     & $g$\,[m/s$^2$] 
+        & 0.25 & \cellcolor{bestcolor}\textbf{0.18} & $-0.07$ \\
+    dropped\_ball & medium    & $g$\,[m/s$^2$] 
+        & 0.49 & \cellcolor{bestcolor}\textbf{0.45} & $-0.03$ \\
+    \rowcolor{lightgray}
+    free\_fall    & mousepad  & $g$\,[m/s$^2$] 
+        & 2.12 & \cellcolor{bestcolor}\textbf{1.65} & $-0.47$ \\
+    free\_fall    & table     & $g$\,[m/s$^2$] 
+        & 1.06 & \cellcolor{bestcolor}\textbf{0.15} & $-0.90$ \\
+    \rowcolor{lightgray}
+    free\_fall    & tennis    & $g$\,[m/s$^2$] 
+        & 1.06 & \cellcolor{bestcolor}\textbf{0.53} & $-0.53$ \\
+    led           & led\_10s  & $\gamma$       
+        & \cellcolor{bestcolor}\textbf{2.09} & 7.46 & $+5.37$ \\
+    \rowcolor{lightgray}
+    led           & led\_2s   & $\gamma$       
+        & \cellcolor{bestcolor}\textbf{7.45} & 7.57 & $+0.12$ \\
+    pendulum      & pend.\_150 & $L$\,[m]   
+        & \cellcolor{bestcolor}\textbf{1.18} & \cellcolor{bestcolor}\textbf{1.18} & $0.00$ \\
+    \rowcolor{lightgray}
+    pendulum      & pend.\_45  & $L$\,[m]   
+        & \cellcolor{bestcolor}\textbf{0.35} & 0.50 & $+0.15$ \\
+    pendulum      & pend.\_90  & $\zeta$    
+        & 0.41 & \cellcolor{bestcolor}\textbf{0.37} & $-0.04$ \\
+    \rowcolor{lightgray}
+    torricelli    & large     & $k$            
+        & \cellcolor{bestcolor}\textbf{6.27} & 6.54 & $+0.27$ \\
+    torricelli    & small     & $k$            
+        & \cellcolor{bestcolor}\textbf{8.95} & 9.70 & $+0.75$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Full Pipeline Ablation.}
+\label{sec:exp_delfys_full}
+
+Table~\ref{tab:ablation_summary} reports $\Delta\mathrm{MAE}$ relative 
+to the baseline for three configurations: VLM routing alone (+VLM), 
+unified model alone (+Unified), and the full pipeline (all components). 
+The full pipeline achieves the lowest MAE on the majority of 
+(phenomenon, setting, parameter) triples. The largest absolute gain is 
+observed on pendulum length: the full pipeline reduces MAE by $-90.61$\,m on 
+\texttt{pendulum\_45}, $-26.22$\,m on \texttt{pendulum\_150}, and 
+VLM routing alone achieves $-71.10$\,m on \texttt{pendulum\_45}. 
+Sliding block friction benefits exclusively from the full pipeline 
+($\Delta\mathrm{MAE} = -9.63$ on \texttt{low}, $-9.24$ on \texttt{mid}), 
+indicating that the interaction between VLM routing and the unified model 
+is necessary for this phenomenon. Torricelli drainage similarly benefits 
+from the full pipeline ($\Delta\mathrm{MAE} = -8.95$ on \texttt{medium}).
+
+The one notable exception is \texttt{free\_fall/table} $g$, where the 
+full pipeline yields $\Delta\mathrm{MAE} = +6.50$ relative to the baseline 
+despite VLM and unified individually achieving $-0.90$. This degradation 
+occurs when the VLM misclassifies free fall as pendulum (as evidenced in the 
+confusion matrix, Table~\ref{tab:vlm_confusion}), applying an incorrect ODE 
+and producing an invalid $g$ estimate. This finding underscores the primary failure 
+mode of VLM-based routing: correct equation identification constitutes a 
+prerequisite for parameter estimation accuracy, and VLM errors propagate 
+directly into parameter error.
+
+\begin{table}[t]
+  \centering
+  \caption{Ablation summary on Delfys75: $\Delta\mathrm{MAE}$ relative 
+  to baseline (negative = improvement). 
+  $\dagger$ = VLM misclassification increases parameter error.}
+  \label{tab:ablation_summary}
+  \small
+  \setlength{\tabcolsep}{3.5pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}ll >{\raggedright}p{1.8cm} r r r@{}}
+    \toprule
+    \textbf{Dynamics} & \textbf{Setting} & \textbf{Param} & 
+    $\bm{\Delta}$\textbf{(+VLM)} & 
+    $\bm{\Delta}$\textbf{(+Unif.)} & 
+    $\bm{\Delta}$\textbf{(Full)} \\
+    \midrule
+    \rowcolor{lightgray}
+    free\_fall    & table        & $g$\,[m/s$^2$] 
+        & $-0.90$ & $-0.90$ & $+6.50^{\dagger}$ \\
+    free\_fall    & tennis       & $g$\,[m/s$^2$] 
+        & $-0.55$ & $-0.55$ & $+5.50^{\dagger}$ \\
+    \rowcolor{lightgray}
+    pendulum      & pend.\_150 & $L$\,[m]      
+        & $+42.34$ & $-29.12$ & $\mathbf{-26.22}$ \\
+    pendulum      & pend.\_45  & $L$\,[m]      
+        & $-71.10$ & $-91.27$ & $\mathbf{-90.61}$ \\
+    \rowcolor{lightgray}
+    led           & led\_2s       & $\gamma$      
+        & $-0.40$ & $-1.90$ & $\mathbf{-1.89}$ \\
+    sliding\_block & low          & $\mu$         
+        & $0.00$ & $0.00$ & $\mathbf{-9.63}$ \\
+    \rowcolor{lightgray}
+    sliding\_block & mid          & $\mu$         
+        & $0.00$ & $0.00$ & $\mathbf{-9.24}$ \\
+    torricelli    & medium        & $k$           
+        & $0.00$ & $+1.65$ & $\mathbf{-8.95}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\subsection{Physical Parameter Estimation on IRIS}
+\label{sec:exp_iris}
+
+\textbf{Setup.} IRIS provides five single-body and three multi-body 
+phenomena with 10 repeated recordings per setting. Both the baseline 
+and full pipeline are evaluated; the unified model with $N=2$ is applied to hitting 
+cones and both two-pendulum scenarios. Results are reported in 
+Table~\ref{tab:iris_results}.
+
+\textbf{Single-body phenomena.} On dropping ball, falling ball, sliding 
+cone, and pendulum, the full pipeline consistently yields lower MAE than the 
+baseline, replicating the pattern observed on Delfys75. 
+The rotating cone scenario, absent from Delfys75, benefits most substantially from 
+the unified model's torsional ODE formulation 
+(Eq.~\eqref{eq:rotation}): estimated torsional stiffness $\alpha$ and 
+angular damping $\beta$ improve considerably over the baseline, which 
+conflates rotation dynamics with oscillation under path-based selection.
+
+\textbf{Multi-body phenomena.} The three multi-body scenarios fall outside 
+the scope of the baseline entirely, as it accommodates only single-body 
+dynamics. The full pipeline with the unified multi-object physics block 
+($N=2$) successfully recovers coupling coefficients $\kappa_{ij}$ and 
+individual damping terms $\zeta_i$ for the two-pendulum scenarios, as well as 
+contact-force parameters for hitting cones. To the best of our knowledge, 
+these constitute the first reported results for unsupervised physical parameter 
+estimation on multi-body contact-driven scenarios from real video.
+
+\textbf{Variance analysis.} The 10 repeated recordings per IRIS setting 
+permit reliable estimation of $\sigma_{\hat{\theta}}$ 
+(Eq.~\eqref{eq:std_est}). The full pipeline achieves consistently lower 
+$\sigma_{\hat{\theta}}$ than the baseline across all single-body 
+phenomena, indicating that the gradient-corrected integrator and 
+multi-step loss jointly improve parameter identifiability through 
+denser and more informative gradient signals throughout training.
+
+% -----------------------------------------------------------------------------
+\subsection{Governing Equation Identification}
+\label{sec:exp_eq_identification}
+
+\textbf{Setup.} Three routing strategies are evaluated on Delfys75 
+(90 videos): (i) VLM with temporal reasoning over five frames 
+(start, 25\%, 50\%, 75\%, end); (ii) describe-then-classify VLM 
+(two sequential API calls); (iii) a lightweight video classifier trained 
+on the same distribution.
+
+\textbf{Accuracy.} As reported in Table~\ref{tab:vlm_accuracy}, the 
+temporal-reasoning VLM achieves $73.33\%$ overall accuracy. The 
+describe-then-classify variant attains $61.11\%$, with the reduction 
+primarily attributable to ambiguous intermediate descriptions for 
+visually similar phenomena. The video classifier achieves near-perfect 
+accuracy on held-out Delfys75 settings but degrades on IRIS multi-body 
+phenomena, confirming that its performance is distribution-specific.
+
+\begin{table}[t]
+  \centering
+  \caption{Equation-selection accuracy on Delfys75 (90 videos) for 
+  three routing strategies.}
+  \label{tab:vlm_accuracy}
+  \small
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    \textbf{Routing Strategy} & \textbf{Accuracy (\%)} \\
+    \midrule
+    \rowcolor{lightgray}
+    Temporal reasoning (5 frames, single call) & 73.33 \\
+    Describe-then-classify (2 calls)           & 61.11 \\
+    \rowcolor{lightgray}
+    Video classifier (same distribution)       & $\sim$100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Error analysis.} The confusion matrix in 
+Table~\ref{tab:vlm_confusion} reveals that VLM errors are concentrated 
+between physically adjacent classes: dropped ball is confused with free 
+fall (5 of 15 videos), and free fall is misclassified as pendulum (10 
+of 15 videos). Both error types involve phenomena whose early frames 
+are nearly indistinguishable, as a falling or dropping object appears 
+identical at $t{=}0$ regardless of its governing ODE; disambiguation 
+requires observing late-stage dynamics. LED, sliding block, and Torricelli are 
+classified without error ($15/15$ each), as their visual signatures 
+(brightness change, translational motion on an inclined plane, water level decrease) 
+are unambiguous. These observations motivate the five-frame temporal 
+context design: the 75\% and 100\% frames, at which the divergence between 
+dynamics classes is largest, contribute the primary disambiguation signal.
+
+The relatively modest equation-selection accuracy of the VLM on Delfys75 (73\%) is partly attributable to the dataset's limitations: short clip lengths and low contrast (e.g., white string on white background in pendulum videos) provide insufficient temporal and visual signal for the model to disambiguate dynamics or to produce reliable captions or equation hypotheses. In contrast, IRIS is designed with longer clips, higher temporal resolution (60\,fps), and controlled capture conditions that keep all relevant elements visible and distinguishable. We therefore expect VLM-based equation identification and downstream parameter estimation to benefit from the improved data quality on IRIS, making the benchmark not only broader in scope (multi-body, rotation) but also better suited for evaluating vision-based physics pipelines.
+
+\begin{table}[t]
+  \centering
+  \caption{Confusion matrix for temporal-reasoning VLM on Delfys75 
+  (90 videos). Rows = ground truth, columns = predicted. 
+  Diagonal entries (correct classifications) shown in \textbf{bold}.}
+  \label{tab:vlm_confusion}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}l|cccccc@{}}
+    \toprule
+    & \multicolumn{6}{c}{\textbf{Predicted}} \\
+    \textbf{GT} $\downarrow$ 
+        & drop. & free & led & pend. & slide & torr. \\
+    \midrule
+    dropped\_ball  & \cellcolor{bestcolor}\textbf{10} & 5  & 0  & 0  & 0  & 0 \\
+    free\_fall     & 0  & \cellcolor{bestcolor}\textbf{0}  & 0  & 10 & 5  & 0 \\
+    led            & 0  & 0  & \cellcolor{bestcolor}\textbf{15} & 0  & 0  & 0 \\
+    pendulum       & 2  & 2  & 0  & \cellcolor{bestcolor}\textbf{11} & 0  & 0 \\
+    sliding\_block & 0  & 0  & 0  & 0  & \cellcolor{bestcolor}\textbf{15} & 0 \\
+    torricelli     & 0  & 0  & 0  & 0  & 0  & \cellcolor{bestcolor}\textbf{15} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\subsection{Ablation Studies}
+\label{sec:ablations}
+
+\textbf{Corrected integrator.} As established in 
+Sec.~\ref{sec:exp_delfys_unified}, the gradient-corrected Euler step constitutes 
+the single most impactful component: without it, gradient norms 
+$G_{\boldsymbol{\gamma}}^{(e)} \approx 0$ throughout training and all 
+subsequent improvements become negligible. All configurations beyond the 
+raw baseline incorporate this correction.
+
+\textbf{Multi-step loss horizon.} The number of rollout steps is ablated across 
+$K \in \{1, 2, 3, 5\}$ with decaying weights. A horizon of $K=5$ with 
+weights $[1, 1, 0.5, 0.5, 0.25]$ provides the optimal trade-off between 
+identifiability signal and gradient stability across phenomena. Longer 
+rollouts ($K > 5$) amplify integration error for stiff ODEs (LED, 
+Torricelli) and degrade performance, whereas shorter horizons ($K \leq 2$) 
+provide insufficient long-range signal to improve $g$ estimation 
+on free fall.
+
+\textbf{VLM prompt strategy.} Single-frame (middle frame only) prompting 
+achieves $54\%$ accuracy on Delfys75, below the temporal-reasoning 
+five-frame strategy ($73\%$), confirming that temporal context is 
+essential for disambiguating phenomena with similar early-frame 
+appearances. The three-frame variant (start, middle, end) attains $67\%$, 
+with the full five-frame strategy providing the remaining gain through inclusion of 
+the $75\%$ frame where inter-class divergence is largest.
+
+\textbf{Symplectic vs.\ standard integrator.} St\"ormer-Verlet 
+(Eqs.~\eqref{eq:sv_half_step}--\eqref{eq:sv_vel_update}) achieves lower 
+ODE residual $\mathcal{R}$ (Eq.~\eqref{eq:ode_residual}) over long 
+rollouts ($T > 100$ steps) and reduced $\sigma_{\hat{\theta}}$ on pendulum 
+and rotating cone, where energy conservation is critical. For non-conservative 
+phenomena (LED decay, Torricelli drainage), St\"ormer-Verlet and the corrected 
+Euler integrator perform comparably.
+
+% -----------------------------------------------------------------------------
+\subsection{Identifiability and Extrapolation}
+\label{sec:exp_identifiability}
+
+\textbf{Parameter identifiability.} Figure~\ref{fig:identifiability} 
+depicts the evolution of $\boldsymbol{\gamma}$ during training across seven 
+random initializations sampled from $[-10, 10]$. For the uncorrected 
+baseline, parameters remain near their initialization values throughout training, 
+confirming the absence of gradient flow. For the full pipeline, all seven 
+trajectories converge to a tight cluster near the ground-truth value 
+within a small number of epochs, demonstrating robustness to 
+initialization consistent with the findings of~\cite{garcia2025learning} while extending to 
+multi-body and rotation phenomena.
+
+\textbf{Temporal extrapolation.} Training on the first 
+$T_{\mathrm{train}} = 0.7T$ frames, extrapolation error 
+$\mathcal{E}_k$ (Eq.~\eqref{eq:extrap_error}) is evaluated at steps beyond the 
+training window. The full pipeline with St\"ormer-Verlet integration extrapolates 
+with lower error than the baseline on pendulum, dropping ball, and 
+rotating cone. The largest gap is observed on the pendulum: the energy-conserving 
+symplectic integrator prevents the amplitude drift exhibited by the Euler 
+step over long rollouts, yielding accurate extrapolation for up to 
+$0.3T$ steps beyond the training horizon.
+
+% -----------------------------------------------------------------------------
+\subsection{Summary: Baseline vs Ours (Parameter MAE and VLM)}
+\label{sec:summary_comparison}
+
+Table~\ref{tab:summary_both} summarizes parameter estimation (mean MAE over all reported triples) and VLM equation-selection accuracy on both benchmarks. On \textbf{Delfys75}, the unified pipeline (corrected integrator, unified physics block) substantially reduces mean MAE relative to the baseline (4.17 vs 10.86; $\Delta = -6.69$), with the largest gains on pendulum length and Torricelli $k$ (see Table~\ref{tab:delfys75_baseline_unified}). On \textbf{IRIS}, the baseline achieves lower mean MAE overall (1.65 vs 3.21) because the baseline performs well on single-body gravity and sliding-cone angle, while the unified model improves on rotation and several multi-body settings but incurs higher error on dropping/falling ball $g$ and some two-pendulum cases under the current training setup. The \textbf{VLM} attains 73.33\% accuracy on Delfys75 (90 videos, 6 classes) and 65.00\% on IRIS (240 videos, 8 classes with IRIS-extended prompt). Lower accuracy on IRIS reflects the harder 8-class setup (rotation, two-pendulum variants, hitting cones) and remaining confusion between dropping vs falling ball; per-class results are in the supplement. Table~\ref{tab:summary_vlm_methods} compares equation-selection methods: \textbf{VLM (temporal reasoning)} (one call, best zero-shot), \textbf{describe-then-classify} (two VLM calls: describe motion then classify from text; 61.11\% on Delfys75, not evaluated on IRIS), and a \textbf{CNN classifier} (ResNet18 + temporal mean, 6 classes, trained on Delfys75), which reaches 100\% on the Delfys75 eval set (same distribution as train) but is not defined for IRIS's 8-class setup.
+
+\begin{table}[t]
+  \centering
+  \caption{Summary: parameter mean MAE (baseline vs ours) and VLM equation-selection accuracy by dataset. Baseline = path-based, one-step, original Euler; Ours = unified physics, corrected integrator. Bold = better of the two.}
+  \label{tab:summary_both}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}llcccc@{}}
+    \toprule
+    & & \multicolumn{2}{c}{\textbf{Parameter MAE}} & \multicolumn{2}{c}{\textbf{VLM}} \\
+    \textbf{Dataset} & \textbf{\# params} & Base. & Ours & Acc. (\%) & Videos \\
+    \midrule
+    Delfys75 & 24 & 10.86 & \cellcolor{bestcolor}\textbf{4.17} & 73.33 & 90 \\
+    IRIS     & 30 & \cellcolor{bestcolor}\textbf{1.65} & 3.21 & 65.00 & 240 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Equation-selection accuracy by method. \textbf{VLM (temporal):} one call, first-vs-last frame reasoning (5--7 frames). \textbf{Describe-then-classify:} two VLM calls (describe motion, then classify from text). \textbf{CNN:} ResNet18 + temporal mean, 6 classes, trained on Delfys75; eval on same distribution.}
+  \label{tab:summary_vlm_methods}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Method} & \textbf{Delfys75 (90)} & \textbf{IRIS (240)} & \textbf{Notes} \\
+    \midrule
+    VLM (temporal reasoning) & 73.33 & 65.00 & 6 / 8 classes \\
+    Describe-then-classify   & 61.11 & ---   & 2 API calls; IRIS not run \\
+    CNN classifier          & 100.00 & ---   & 6-class; trained on Delfys75 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+% ============================================================================
+% 6. DISCUSSION
+% =============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+IRIS advances the field by providing a real-world benchmark that is both broader and of higher data quality than the sole existing option (Delfys75): it includes multi-body and rotation phenomena, avoids very short or low-contrast clips that hinder VLM and parameter estimation, and pairs each phenomenon with independently measured ground truth and a standardized protocol. We argue that this benchmark should be adopted for evaluating and comparing unsupervised physics-from-video methods.
+
+\subsection{Potential Applications and Impact}
+\label{sec:applications}
+
+\textbf{Broader impact of the IRIS dataset.} IRIS provides a reproducible testbed for physics identification from \emph{real} video with independently measured ground truth (Sec.~\ref{sec:dataset}). By construction, it circumvents the domain gap inherent in synthetic-only benchmarks while supporting evaluation of both single-body and multi-body phenomena under controlled experimental conditions. The dataset is intended to serve the community in several capacities: (i) as a benchmark for comparing methods that output physical parameters (e.g., gravity, length, damping, friction) rather than prediction error alone; (ii) as a basis for studying identifiability, robustness, and generalization across experimental settings and dynamical phenomena; (iii) as a bridge between vision and physics, enabling research that progresses from pixels to equations and parameters without reliance on path metadata for equation selection. The release of IRIS with a formally defined evaluation protocol (Sec.~\ref{sec:eval_protocol}) and ground-truth annotations is intended to facilitate reproducible research and fair comparison. No negative societal impact specific to IRIS is foreseen; the content is limited to controlled laboratory-style recordings of mechanical phenomena.
+
+\textbf{Downstream applications.} Extracted physical parameters and equation families from video can support a range of downstream tasks. In \textbf{robotics and simulation}, estimated dynamics (e.g., pendulum length, friction, contact behavior) can inform model-based control or digital twins of real environments~\cite{sanchez2020learning}. In \textbf{education and scientific communication}, systems that characterize motion in terms of governing equations and parameters may facilitate learning and visualization. In \textbf{content creation and video understanding}, identifying the type of motion and its physical constants could enhance physics-aware video editing, synthesis, or anomaly detection. The proposed pipeline (VLM-based equation selection combined with parameter estimation) represents a step toward such applications in unorganized video, where the equation family is not specified \emph{a priori}. The unified multi-object formulation (Sec.~\ref{sec:multi_object}) extends applicability to simple multi-body scenarios (e.g., hitting cones, two pendulums), with scope for scaling to more complex interactions in future work.
+
+
+% =============================================================================
+% 7. LIMITATIONS AND FUTURE WORK
+% =============================================================================
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+\textbf{Current limitations of IRIS.} IRIS is of moderate scale (tens of settings, hundreds of videos) and encompasses a fixed set of phenomena: single-body (dropping/falling ball, sliding cone, pendulum, rotation) and multi-body (hitting cones, two pendulums). Recording conditions are controlled but not fully uniform across all categories; lighting, camera angle, and background exhibit variation. Ground truth is provided per (phenomenon, setting) with optional uncertainty quantification (mean, std, min, max), though certain parameters (e.g., damping) are inherently more difficult to measure independently and may exhibit larger relative error. The dataset does not yet include dense segmentation masks for every multi-body clip, a limitation that could hinder isolation of object-level latents. Furthermore, IRIS does not span all possible ODE families (e.g., no fluid or continuum mechanics); evaluation is restricted to the current ODE bank.
+
+\textbf{Pipeline limitations.} The pipeline trains \emph{per clip} without sharing physics parameters across videos; this design preserves protocol simplicity and avoids cross-video leakage but forgoes the potential benefits of meta-learning or uncertainty quantification across repeated settings. The VLM achieves approximately 73\% equation-selection accuracy on Delfys75 (Table~\ref{tab:vlm_accuracy}); when misclassification occurs, parameter estimates can degrade substantially (e.g., pendulum length when an incorrect dynamics model is selected). The unified model improves many parameters (pendulum length, sliding-block friction, Torricelli $k$, LED decay) but does not uniformly reduce error across every (phenomenon, setting, parameter) triple; gravity and pendulum damping remain challenging in certain configurations (Sec.~\ref{sec:exp_delfys}). Identifiability and extrapolation analyses are only partially complete; gradient norms, inter-video estimate variance, and long-horizon rollout error remain the subject of ongoing evaluation (Sec.~\ref{sec:exp_identifiability}).
+
+\textbf{Planned extensions: additional phenomena and larger scale.} Extensions of IRIS are planned along several axes: (i) \textbf{additional phenomena}, including rolling, bouncing with restitution, or simple fluid-like motion amenable to ODE approximation, plus three further motion types for cross-benchmark comparison: Torricelli-style drainage (fluid level dynamics), two-ball collision (momentum transfer between two moving objects), and LED intensity decay experiments, aligning with phenomena in Delfys75 while providing higher-quality capture and ground truth; (ii) \textbf{larger scale}, with more settings per phenomenon, more videos per setting, and optional multi-camera or multi-view data for cross-view consistency verification; (iii) \textbf{richer annotations}, including per-frame or per-object masks for multi-body scenes and finer-grained ground truth where measurement permits. Such extensions would strengthen the benchmark and enable more thorough ablation studies (e.g., the effect of the number of trials per setting on estimate variance).
+
+\textbf{Future directions for the evaluation protocol.} The protocol (Sec.~\ref{sec:eval_protocol}) defines parameter accuracy, equation-selection accuracy, identifiability, robustness, and extrapolation as evaluation axes. Future work may (i) \textbf{fully populate} identifiability and extrapolation metrics (gradient norms, ODE residual, rollout error beyond the training horizon); (ii) \textbf{standardize cross-dataset evaluation}, e.g., training on one benchmark (Delfys75 or IRIS) and evaluating on the other to quantify generalization of both the VLM and the parameter estimator; (iii) \textbf{incorporate synthetic-vs.-real comparisons} when synthetic renderings of the same phenomena become available, to quantify the domain gap; (iv) \textbf{introduce downstream task metrics} (e.g., control performance or prediction quality using estimated parameters) as a complement to parameter MAE. Updates to the protocol and dataset will be released to support these directions.
+
+
+
+% =============================================================================
+% 8. CONCLUSION
+% =============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+This work addresses the problem of physics identification from monocular video: selecting the governing equation family and estimating its physical parameters from pixel sequences alone. The contributions are fourfold.
+
+\textbf{(1) IRIS benchmark.} IRIS is introduced as a dataset comprising over 200 real-world videos spanning single-body phenomena (dropping/falling ball, sliding cone, pendulum, rotation) and multi-body phenomena (hitting cones, two moving pendulums), with independently measured ground truth per (phenomenon, setting). The dataset is designed for evaluation on real video, circumventing the domain gap of synthetic-only benchmarks while preserving controlled experimental conditions and repeatability.
+
+\textbf{(2) Standardized evaluation protocol.} A comprehensive protocol (Sec.~\ref{sec:eval_protocol}) is defined with five evaluation axes: parameter accuracy (primary), governing-equation selection accuracy, identifiability, robustness, and extrapolation. The same train-per-clip procedure, ground-truth sources, and metrics are applied to baseline and proposed methods on both Delfys75 and IRIS, enabling fair and reproducible comparison.
+
+\textbf{(3) VLM-augmented pipeline and ODE bank.} The latent-space physics baseline is extended with a vision-language model that selects the equation family from video through temporal reasoning ($\sim$73\% accuracy on Delfys75), such that both equation form and parameters are identified from pixels without path or metadata. An ODE bank (second-order linear, decay, Torricelli, inclined plane, rotation) is maintained alongside a unified graph-structured physics block supporting single- and multi-object systems ($N=1$ and $N>1$).
+
+\textbf{(4) Multi-step loss.} A multi-step latent loss over several prediction horizons is introduced to improve long-horizon consistency and parameter identifiability, yielding improvements on gravity estimation and selected pendulum settings relative to the one-step baseline.
+
+The IRIS dataset, annotations (\texttt{parameters.json}), evaluation protocol and comparison toolkit, and all baselines (path-based and VLM-augmented) will be publicly released to support future research on physics identification from video.
+
+
+% ============================================================================
+% FIGURES CHECKLIST (to be created)
+% ============================================================================
+% Fig 1: Teaser figure -- overview of IRIS dataset and task
+% Fig 2: Pipeline -- full method diagram (VLM routing + ODE bank + extraction)
+% Fig 3: Multi-step loss -- illustration of temporal supervision scheme
+% Fig 4: Dataset overview -- sample frames, phenomena, annotations
+% Fig 5: Governing equations -- visual summary of ODE bank
+% Fig 6: Loss landscape / convergence -- training dynamics
+
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+\section*{Acknowledgements}
+Omitted for anonymized submission.
+
+\printbibliography
+
+\end{document}

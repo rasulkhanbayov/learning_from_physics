@@ -5,7 +5,7 @@
 #
 # Optional: set SKIP_VIDEO2NPY=1 if .npy files already exist.
 #
-
+SKIP_VIDEO2NPY=1
 set -e
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"

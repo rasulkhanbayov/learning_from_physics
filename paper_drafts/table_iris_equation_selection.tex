@@ -1,0 +1,21 @@
+% IRIS equation-selection (dynamics classification) comparison.
+% 240 videos, 8 classes. Sources: vlm_eval_iris (temporal), vlm_eval_iris_describe_then.
+% CNN: train with train_video_classifier.py --path ./IRIS --iris, then evaluate with --iris.
+
+\begin{table}[t]
+  \centering
+  \caption{Equation-selection accuracy on IRIS (240 videos, 8 classes). \textbf{VLM (temporal):} one call, first-vs-last frame reasoning with IRIS-extended prompt. \textbf{VLM (describe-then-classify):} two VLM calls (describe motion, then classify from text). \textbf{CNN:} ResNet18 + temporal mean; train on IRIS with \texttt{--iris} then evaluate with \texttt{--iris} to report accuracy here.}
+  \label{tab:iris_equation_selection}
+  \small
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    \textbf{Method} & \textbf{Accuracy (\%)} \\
+    \midrule
+    VLM (describe-then-classify) & \textbf{72.92} \\
+    VLM (temporal reasoning)     & 65.00 \\
+    CNN (8-class, trained on IRIS) & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}

@@ -1,0 +1,82 @@
+% Summary comparison tables: parameter MAE (baseline vs ours) and VLM accuracy (Delfys75 vs IRIS).
+% Include in main.tex where appropriate: \input{tables_summary_comparison}
+
+% -----------------------------------------------------------------------------
+% Table: Parameter MAE — Baseline (their loss) vs Ours (unified pipeline)
+% -----------------------------------------------------------------------------
+\begin{table}[t]
+  \centering
+  \caption{Parameter estimation: mean absolute error (MAE) over all (phenomenon, setting, parameter) triples. Baseline = path-based equation selection, one-step loss, original Euler; Ours = unified physics block, corrected integrator (and multi-step where noted). $\Delta = \mathrm{MAE}_{\mathrm{ours}} - \mathrm{MAE}_{\mathrm{baseline}}$ (negative = ours better).}
+  \label{tab:summary_param_mae}
+  \small
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Dataset} & \textbf{Baseline MAE} & \textbf{Ours MAE} & $\bm{\Delta}$ \\
+    \midrule
+    Delfys75 (24 params)  & 10.86 & \cellcolor{bestcolor}\textbf{4.17} & $-6.69$ \\
+    IRIS (30 params)      & \cellcolor{bestcolor}\textbf{1.65} & 3.21 & $+1.56$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------
+% Table: VLM equation-selection accuracy — Delfys75 vs IRIS (single row = temporal)
+% -----------------------------------------------------------------------------
+\begin{table}[t]
+  \centering
+  \caption{VLM equation-selection accuracy: temporal-reasoning prompt (5--7 frames). Delfys75: 6 classes (90 videos). IRIS: 8 classes with IRIS-extended prompt (240 videos).}
+  \label{tab:summary_vlm}
+  \small
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Dataset} & \textbf{Videos} & \textbf{Accuracy (\%)} \\
+    \midrule
+    Delfys75 & 90  & 73.33 \\
+    IRIS     & 240 & 65.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------
+% Table: Equation-selection — VLM (temporal), describe-then-classify, CNN (merged)
+% -----------------------------------------------------------------------------
+\begin{table}[t]
+  \centering
+  \caption{Equation-selection accuracy by method and dataset. \textbf{VLM (temporal):} one call, first-vs-last frame reasoning (5--7 frames). \textbf{Describe-then-classify:} two VLM calls (describe motion, then classify from text). \textbf{CNN:} ResNet18 + temporal mean (Delfys75: 6-class, trained on Delfys75; IRIS: 8-class requires training on IRIS). Bold = best per column.}
+  \label{tab:summary_vlm_methods}
+  \small
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Method} & \textbf{Delfys75 (90)} & \textbf{IRIS (240)} \\
+    \midrule
+    CNN (video classifier)   & \cellcolor{bestcolor}\textbf{98.40} & \textit{n/a} \\
+    VLM (temporal reasoning) & 73.33 & 65.00 \\
+    VLM (describe-then-classify) & 61.11 & \cellcolor{bestcolor}\textbf{72.92} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% Optional: side-by-side or single table with both comparisons
+\begin{table}[t]
+  \centering
+  \caption{Summary: parameter MAE (baseline vs ours) and VLM accuracy by dataset.}
+  \label{tab:summary_both}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}llcccc@{}}
+    \toprule
+    & & \multicolumn{2}{c}{\textbf{Parameter MAE}} & \multicolumn{2}{c}{\textbf{VLM}} \\
+    \textbf{Dataset} & \textbf{Params} & Base. & Ours & Acc. (\%) & Videos \\
+    \midrule
+    Delfys75 & 24 & 10.86 & \cellcolor{bestcolor}\textbf{4.17} & 73.33 & 90 \\
+    IRIS     & 30 & \cellcolor{bestcolor}\textbf{1.65} & 3.21 & 65.00 & 240 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

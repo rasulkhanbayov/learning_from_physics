@@ -1,10 +1,12 @@
 """
-Train the small video dynamics classifier on Delfys75 (labels from folder path).
-Saves best checkpoint and prints train/val accuracy. No API key required.
+Train the small video dynamics classifier (ResNet18 + temporal mean) on Delfys75 or IRIS.
+Labels from folder path. Saves best checkpoint and prints train/val accuracy. No API key required.
 
 Usage:
+  # Delfys75 (6 classes)
   python scripts/train_video_classifier.py --path ./delfys75 --out Results/video_classifier
-  python scripts/train_video_classifier.py --path ./delfys75 --out Results/video_classifier --epochs 30 --batch 8
+  # IRIS (8 classes)
+  python scripts/train_video_classifier.py --path ./IRIS --out Results/video_classifier_iris --iris --epochs 25 --batch 8
 """
 
 import argparse
@@ -17,13 +19,14 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
-from src.utils.video_classifier import DynamicsDataset, VideoDynamicsClassifier, DYNAMICS_CLASSES
+from src.utils.video_classifier import DynamicsDataset, VideoDynamicsClassifier, DYNAMICS_CLASSES, IRIS_DYNAMICS_CLASSES
 
 
 def main():
     ap = argparse.ArgumentParser(description="Train video dynamics classifier on .npy videos")
     ap.add_argument("--path", type=str, default="./delfys75", help="Root folder containing dynamics subfolders with .npy")
     ap.add_argument("--out", type=str, default="Results/video_classifier", help="Output dir for checkpoint and log")
+    ap.add_argument("--iris", action="store_true", help="Use IRIS 8-class dataset (path should be ./IRIS)")
     ap.add_argument("--epochs", type=int, default=25)
     ap.add_argument("--batch", type=int, default=8)
     ap.add_argument("--lr", type=float, default=1e-3)
@@ -37,11 +40,12 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     os.makedirs(args.out, exist_ok=True)
 
-    dataset = DynamicsDataset(args.path, num_frames=args.num_frames)
+    dataset = DynamicsDataset(args.path, num_frames=args.num_frames, use_iris=args.iris)
     n = len(dataset)
     if n == 0:
         print(f"No .npy files with known dynamics under {args.path}. Check path.")
         return
+    n_classes = len(IRIS_DYNAMICS_CLASSES) if args.iris else len(DYNAMICS_CLASSES)
     n_val = max(1, int(n * args.val_ratio))
     n_train = n - n_val
     train_ds, val_ds = random_split(dataset, [n_train, n_val], generator=torch.Generator().manual_seed(args.seed))
@@ -49,7 +53,7 @@ def main():
     train_loader = DataLoader(train_ds, batch_size=args.batch, shuffle=True, num_workers=0, pin_memory=(device.type == "cuda"))
     val_loader = DataLoader(val_ds, batch_size=args.batch, shuffle=False, num_workers=0)
 
-    model = VideoDynamicsClassifier(num_classes=len(DYNAMICS_CLASSES), pretrained=True, freeze_backbone_epochs=args.freeze_epochs).to(device)
+    model = VideoDynamicsClassifier(num_classes=n_classes, pretrained=True, freeze_backbone_epochs=args.freeze_epochs).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.CrossEntropyLoss()
 

@@ -1,0 +1,55 @@
+% =============================================================================
+% 6. DISCUSSION
+% =============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Potential Applications and Impact}
+\label{sec:applications}
+
+\textbf{Broader impact of the IRIS dataset.} IRIS provides a reproducible testbed for physics identification from \emph{real} video with independently measured ground truth (Sec.~\ref{sec:dataset}). By design, it avoids the domain gap of synthetic-only benchmarks and supports evaluation of both single-body and multi-body phenomena under controlled conditions. The dataset can serve the community in several ways: (i) as a benchmark for comparing methods that output physical parameters (e.g., gravity, length, damping, friction) rather than only prediction error; (ii) as a basis for studying identifiability, robustness, and generalization across settings and phenomena; (iii) as a bridge between vision and physics—enabling work that goes from pixels to equations and parameters without relying on path or metadata for equation selection. Releasing IRIS with a clear evaluation protocol (Sec.~\ref{sec:eval_protocol}) and ground-truth annotations encourages reproducible research and fair comparison. We do not foresee negative societal impact specific to IRIS; the content is limited to controlled laboratory-style recordings of mechanical phenomena.
+
+\textbf{Downstream applications.} Extracted physical parameters and equation families from video can support a range of downstream tasks. In \textbf{robotics and simulation}, estimated dynamics (e.g., pendulum length, friction, contact behavior) can inform model-based control or digital twins of real environments. In \textbf{education and scientific communication}, systems that explain motion in terms of governing equations and parameters could aid learning and visualization. In \textbf{content creation and video understanding}, identifying the type of motion and its physical constants could improve physics-aware video editing, synthesis, or anomaly detection. Our pipeline (VLM-based equation selection plus parameter estimation) is a step toward such applications in unorganized video, where the equation family is not given in advance. The unified multi-object formulation (Sec.~\ref{sec:multi_object}) extends applicability to simple multi-body scenarios (e.g., hitting cones, two pendulums), with room for scaling to more complex interactions in future work.
+
+% --- Optional (if time permits) ---
+% \subsection{Downstream Task: Depth Estimation from Extracted Physics}
+% \label{sec:downstream_depth}
+% Extracted physics (e.g., gravity, trajectory) could constrain or refine depth and 3D structure from monocular video; we leave this as future work.
+
+% \subsection{Downstream Task: Image-to-Video Generation}
+% \label{sec:downstream_i2v}
+% Physics parameters could condition or regularize image-to-video models so that generated motion obeys identified dynamics; we leave this as future work.
+
+
+% =============================================================================
+% 7. LIMITATIONS AND FUTURE WORK
+% =============================================================================
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+\textbf{Current limitations of IRIS.} IRIS is of moderate scale (tens of settings, hundreds of videos) and focuses on a fixed set of phenomena: single-body (dropping/falling ball, sliding cone, pendulum, rotation) and multi-body (hitting cones, two pendulums). Recording conditions are controlled but not fully uniform across all categories; lighting, camera angle, and background vary. Ground truth is provided per (phenomenon, setting) with optional uncertainty (mean, std, min, max), but some parameters (e.g., damping) are harder to measure independently and may have larger relative error. The dataset does not yet include dense segmentation masks for every multi-body clip, which could help isolate object-level latents. Finally, IRIS does not cover all possible ODE families (e.g., no fluid or continuum mechanics); the evaluation is limited to the current ODE bank.
+
+\textbf{Pipeline limitations.} Our pipeline trains \emph{per clip} with no shared physics parameters across videos; this keeps the protocol simple and avoids cross-video leakage but does not exploit repeated settings for meta-learning or uncertainty quantification. The VLM achieves about 73\% equation-selection accuracy on Delfys75 (Table~\ref{tab:vlm_accuracy}); when it misclassifies, parameter estimates can degrade (e.g., pendulum length when the wrong dynamics is chosen). The unified model improves many parameters (pendulum length, sliding-block friction, Torricelli $k$, LED decay) but does not uniformly beat the baseline on every (phenomenon, setting, parameter)—e.g., gravity and pendulum damping remain challenging in some runs (Sec.~\ref{sec:exp_delfys}). Identifiability and extrapolation are only partially evaluated; gradient norms, variance of estimates across videos, and long-horizon rollout error are planned or placeholder (Sec.~\ref{sec:exp_identifiability_robustness}).
+
+\textbf{Planned extensions: more phenomena, larger scale.} We plan to extend IRIS along several axes: (i) \textbf{more phenomena}—e.g., rolling, bouncing with restitution, or simple fluid-like motion where an ODE approximation is meaningful; (ii) \textbf{larger scale}—more settings per phenomenon, more videos per setting, and optional multi-camera or multi-view data for consistency checks; (iii) \textbf{richer annotations}—per-frame or per-object masks for multi-body scenes, and finer-grained ground truth where measurable. Such extensions would strengthen the benchmark and allow more thorough ablations (e.g., effect of number of trials per setting on estimate variance).
+
+\textbf{Future directions for the evaluation protocol.} The protocol (Sec.~\ref{sec:eval_protocol}) defines parameter accuracy, equation-selection accuracy, identifiability, robustness, and extrapolation as evaluation axes. Future work can (i) \textbf{fully populate} identifiability and extrapolation metrics (gradient norms, ODE residual, rollout error beyond the training horizon); (ii) \textbf{standardize cross-dataset evaluation}—e.g., train on one benchmark (Delfys75 or IRIS) and evaluate on the other to measure generalization of both the VLM and the parameter estimator; (iii) \textbf{add synthetic-vs.-real comparisons} when synthetic renderings of the same phenomena are available, to quantify the domain gap; (iv) \textbf{incorporate downstream task metrics} (e.g., control performance or prediction quality when using estimated parameters) as a complement to parameter MAE. We will release updates to the protocol and dataset to support these directions.
+
+
+% =============================================================================
+% 8. CONCLUSION
+% =============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We addressed physics identification from monocular video: selecting the governing equation family and estimating its physical parameters from pixel sequences alone. Our contributions are fourfold.
+
+\textbf{(1) IRIS benchmark.} We introduced IRIS, a dataset of over 200 real-world videos covering single-body phenomena (dropping/falling ball, sliding cone, pendulum, rotation) and multi-body phenomena (hitting cones, two moving pendulums), with independently measured ground truth per (phenomenon, setting). IRIS is designed for evaluation on real video, avoiding the domain gap of synthetic-only benchmarks while retaining controlled conditions and repeatability.
+
+\textbf{(2) Standardized evaluation protocol.} We defined a protocol (Sec.~\ref{sec:eval_protocol}) with five axes: parameter accuracy (primary), governing-equation selection accuracy, identifiability, robustness, and extrapolation. The same train-per-clip setup, ground-truth sources, and metrics apply to baseline and proposed methods on both Delfys75 and IRIS, enabling fair and reproducible comparison.
+
+\textbf{(3) VLM-augmented pipeline and ODE bank.} We extended the latent-space physics baseline with a vision--language model that selects the equation family from video (temporal reasoning, $\sim$73\% accuracy on Delfys75), so that both equation form and parameters are identified from pixels without path or metadata. We maintain an ODE bank (second-order linear, decay, Torricelli, inclined plane, rotation) and a unified graph-structured physics block for single- and multi-object systems ($N=1$ and $N>1$).
+
+\textbf{(4) Multi-step loss.} We added a multi-step latent loss over several prediction horizons to improve long-horizon consistency and parameter identifiability, with gains on gravity and selected pendulum settings vs.\ the one-step baseline.
+
+We will publicly release the IRIS dataset, annotations (\texttt{parameters.json}), the evaluation protocol and comparison toolkit, and baselines (path-based and VLM-augmented) to support future work on physics identification from video.

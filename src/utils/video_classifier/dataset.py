@@ -18,7 +18,20 @@ DYNAMICS_CLASSES = [
     "torricelli",
 ]
 
+# IRIS 8-class set (order matches common evaluation)
+IRIS_DYNAMICS_CLASSES = [
+    "dropping_ball",
+    "falling_ball",
+    "sliding_cone",
+    "pendulum",
+    "rotation",
+    "hitting_cones",
+    "two_moving_pendulums",
+    "two_moving_pendulum_one_static",
+]
+
 CLASS_TO_IDX = {c: i for i, c in enumerate(DYNAMICS_CLASSES)}
+IRIS_CLASS_TO_IDX = {c: i for i, c in enumerate(IRIS_DYNAMICS_CLASSES)}
 
 
 def get_gt_dynamics_from_path(path: str) -> str | None:
@@ -31,6 +44,25 @@ def get_gt_dynamics_from_path(path: str) -> str | None:
     for kw in keywords:
         if kw in normalized:
             return "dropped_ball" if kw == "bouncing_ball" else kw
+    return None
+
+
+def get_gt_dynamics_from_path_iris(path: str) -> str | None:
+    """Extract IRIS dynamics from folder path (longer / more specific first)."""
+    normalized = path.replace(" ", "").lower().replace("\\", "/")
+    keywords = [
+        "two_moving_pendulum_one_static",
+        "two_moving_pendulums",
+        "dropping_ball",
+        "falling_ball",
+        "sliding_cone",
+        "hitting_cones",
+        "rotation",
+        "pendulum",
+    ]
+    for kw in keywords:
+        if kw in normalized:
+            return kw
     return None
 
 
@@ -57,13 +89,21 @@ def _load_frames_from_npy(npy_path: str, num_frames: int = 5, resize_hw: tuple[i
     frames = np.expand_dims(frames, axis=1)
     # Resize to (T, 1, resize_hw[0], resize_hw[1])
     if (frames.shape[2], frames.shape[3]) != resize_hw:
-        import cv2
-        out = []
-        for t in range(frames.shape[0]):
-            img = (frames[t, 0] * 255).astype(np.uint8)
-            img = cv2.resize(img, (resize_hw[1], resize_hw[0]), interpolation=cv2.INTER_LINEAR)
-            out.append(img.astype(np.float32) / 255.0)
-        frames = np.stack(out, axis=0)[:, np.newaxis, :, :]
+        try:
+            import cv2
+            out = []
+            for t in range(frames.shape[0]):
+                img = (frames[t, 0] * 255).astype(np.uint8)
+                img = cv2.resize(img, (resize_hw[1], resize_hw[0]), interpolation=cv2.INTER_LINEAR)
+                out.append(img.astype(np.float32) / 255.0)
+            frames = np.stack(out, axis=0)[:, np.newaxis, :, :]
+        except ImportError:
+            # Fallback: torch resize (no cv2)
+            import torch
+            from torch.nn.functional import interpolate
+            x = torch.from_numpy(frames).float()  # (T, 1, H, W)
+            x = interpolate(x, size=(resize_hw[0], resize_hw[1]), mode="bilinear", align_corners=False)
+            frames = x.numpy()
     return frames
 
 
@@ -76,21 +116,26 @@ class DynamicsDataset(Dataset):
         num_frames: int = 5,
         resize_hw: tuple[int, int] = (224, 224),
         transform=None,
+        use_iris: bool = False,
     ):
         self.root_dir = root_dir
         self.num_frames = num_frames
         self.resize_hw = resize_hw
         self.transform = transform
+        self.use_iris = use_iris
+        self.classes = IRIS_DYNAMICS_CLASSES if use_iris else DYNAMICS_CLASSES
+        self.class_to_idx = IRIS_CLASS_TO_IDX if use_iris else CLASS_TO_IDX
+        get_gt = get_gt_dynamics_from_path_iris if use_iris else get_gt_dynamics_from_path
         self.samples = []  # list of (npy_path, label_idx)
         for root, _, files in os.walk(root_dir):
             for f in files:
                 if not f.endswith(".npy"):
                     continue
                 path = os.path.join(root, f)
-                gt = get_gt_dynamics_from_path(path)
+                gt = get_gt(path)
                 if gt is None:
                     continue
-                idx = CLASS_TO_IDX.get(gt)
+                idx = self.class_to_idx.get(gt)
                 if idx is None:
                     continue
                 self.samples.append((path, idx))

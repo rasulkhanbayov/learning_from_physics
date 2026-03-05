@@ -1,0 +1,180 @@
+================================================================================
+PAPER IMPROVEMENTS BASED ON SUPERVISOR FEEDBACK
+================================================================================
+Address each weakness below with concrete text changes or new experiments.
+================================================================================
+
+--------------------------------------------------------------------------------
+1. TECHNICAL LIMITATIONS OR CONCERNS
+--------------------------------------------------------------------------------
+
+1.1 Governing equations mismatched to phenomena
+    Problem: e.g. "dropping ball" described by z'' + βz' + αz = 0 with α ≈ g;
+    free-fall is not a linear oscillator in z; raises concerns about ODE bank
+    fidelity, latent-to-SI calibration validity, and identifiability.
+
+    Improvements:
+    - Add a short subsection or paragraph that explicitly states which
+      phenomena use which equation form (e.g. free-fall as z'' = -g vs
+      damped-oscillator form) and justify or acknowledge the choice.
+    - If free-fall is actually modeled as z'' = -g (or z'' + βz' = -g with
+      small β), say so clearly and correct any place that suggests αz with α≈g.
+    - If the ODE bank deliberately uses a unified linear form for all for
+      method consistency, state this as a design choice and add a limitation:
+      "We use a unified ODE bank for comparability; free-fall is physically
+      z'' = -g; our parameterization [describe] approximates this by [...]."
+    - Consider adding a small table: Phenomenon | Physical ODE | Our ODE form |
+      Parameters, so readers see the mapping and any mismatch is explicit.
+
+1.2 Multi-body interaction modeling oversimplification
+    Problem: Simple coupling κij during contact is likely an oversimplification
+    of impact mechanics; may confound identifiability and training stability
+    conclusions for interacting systems.
+
+    Improvements:
+    - In the multi-body / contact section, add one or two sentences
+      acknowledging that impact is simplified (e.g. "We model contact via
+      a simple coupling κij; real impacts involve restitution, friction,
+      and short-duration forces not represented here.").
+    - Add to limitations/future work: "Identifiability and stability
+      results for multi-body systems should be interpreted in light of
+      this simplified contact model; extending to richer impact laws
+      is future work."
+    - If any results focus on interacting systems, add a caveat in the
+      results or discussion that conclusions are conditional on this
+      modeling choice.
+
+1.3 Latent-to-SI calibration heuristics
+    Problem: Phenomenon-specific normalization heuristics can bias
+    comparisons and limit generalization.
+
+    Improvements:
+    - In the calibration section, list the actual normalization choices
+      per phenomenon (or per parameter type) in a compact form (bullet
+      list or small table).
+    - Add a short "Limitations" sentence: "Calibration uses
+      phenomenon-specific normalization; this may bias cross-phenomenon
+      comparison and limits generalization to unseen dynamics."
+    - If possible, report one ablation (e.g. one phenomenon) with and
+      without a given heuristic to show sensitivity; otherwise state
+      that calibration sensitivity is not evaluated and is future work.
+
+--------------------------------------------------------------------------------
+2. EXPERIMENTAL GAPS OR METHODOLOGICAL ISSUES
+--------------------------------------------------------------------------------
+
+2.1 Missing quantitative results for identifiability and extrapolation
+    Problem: Identifiability, robustness, and extrapolation are defined
+    as evaluation axes but results focus on MAE and classification;
+    identifiability metrics (gradient norms, ODE residuals) and
+    extrapolation (E_k) are largely missing.
+
+    Improvements:
+    - Add a subsection or paragraph "Identifiability" with concrete
+      numbers: e.g. gradient norms (or Hessian condition numbers) for
+      key parameters, or ODE residuals (model vs simulated) before/after
+      fitting. Use the same train/val split as the rest of the paper.
+    - Add a subsection or paragraph "Extrapolation" with E_k (or your
+      defined extrapolation metric) for at least one setting (e.g.
+      time horizon or initial condition shift), with a clear definition
+      of E_k in the method section.
+    - If these experiments are too costly, add a short "Preliminary
+      identifiability / extrapolation" with available numbers and state
+      that full evaluation is future work; still define the metrics in
+      the main text so the gap is explicit.
+
+2.2 CNN not retrained on IRIS
+    Problem: Supervised in-distribution performance is only on Delfys;
+    unclear how much of the VLM-vs-CNN reversal on IRIS is distribution
+    shift vs scenario complexity.
+
+    Improvements:
+    - In the equation-selection / VLM vs CNN discussion, state clearly:
+      "The CNN is trained and evaluated on Delfys75 only; on IRIS we
+      report VLM-only (and describe-then-classify) because an 8-class
+      CNN for IRIS was not trained. Thus we cannot separate distribution
+      shift from scenario complexity for IRIS."
+    - Add to future work: "Training and evaluating a CNN on IRIS would
+      allow a direct VLM-vs-CNN comparison on the same distribution and
+      clarify whether the relative performance is due to shift or
+      complexity."
+    - If you later train an IRIS CNN, add the number to the table and
+      add a sentence comparing VLM vs CNN on IRIS.
+
+2.3 Suspicious or inconsistent table entries
+    Problem: e.g. MAE equal to 9.81 for g in both original and corrected
+    runs; malformed "Real/Multi-body" columns; undermines confidence.
+
+    Improvements:
+    - Audit all tables against the raw results (CSV or scripts): ensure
+      every MAE and accuracy value is traceable to a single definition
+      and one run (or state "mean over N runs" with N and std if needed).
+    - Fix the specific g = 9.81 case: if both baseline and corrected
+      truly give 9.81, add a one-line explanation (e.g. "g fixed at 9.81
+      in both" or "no correction applied for g"); if it is an extraction
+      error, correct the table and mention the correction in a footnote
+      or erratum.
+    - Fix malformed columns: ensure "Real/Multi-body" (or similar) has
+      consistent headers and units; if a column is not applicable for
+      some rows, use "—" or "n/a" consistently.
+    - Add a short "Data and reproducibility" sentence (or supplement)
+      stating how numbers were produced (scripts, seeds, which CSV) so
+      reviewers can verify.
+
+--------------------------------------------------------------------------------
+3. CLARITY OR PRESENTATION ISSUES
+--------------------------------------------------------------------------------
+
+3.1 Dropping ball vs falling ball: derivations and units
+    Problem: Formulations and parameter definitions (r0, f, h0) need
+    clearer, physically grounded derivations and units.
+
+    Improvements:
+    - Add one paragraph (or appendix) "Dropping/falling ball model" that:
+      (a) Writes the physical ODE (e.g. z'' = -g or z'' + βz' = -g) with
+          z in metres and t in seconds.
+      (b) Defines every symbol: z, g, β, r0, f, h0, etc., with units.
+      (c) States how r0, f, h0 relate to the ODE (e.g. initial height,
+          drag coefficient, etc.) and how they are set from data or
+          ground truth.
+    - Use the same notation in the main text and in tables (e.g. "r0 (m)"
+      in table headers if applicable).
+    - If "dropping" and "falling" are used for two different setups,
+      define both and state the difference (e.g. initial conditions or
+      equation form).
+
+3.2 Damping and friction: measurement and uncertainty
+    Problem: How damping and friction ground truths were measured, and
+    the uncertainty quantification procedure, are too brief given the
+    importance of those parameters.
+
+    Improvements:
+    - Add a dedicated short subsection "Ground truth for damping and
+      friction" (or expand the existing one) that describes:
+      (a) Measurement setup (e.g. from real trajectories, from known
+          simulator parameters, or from fits to real data).
+      (b) Which parameters are damping/friction (e.g. β, μ) and in which
+          equations they appear.
+      (c) Uncertainty quantification: how uncertainties were obtained
+          (e.g. bootstrap, propagation from trajectory noise, or
+          stated as "not quantified") and one sentence on how they
+          are used (e.g. in error bars or in identifiability discussion).
+    - If uncertainty is not available, say so explicitly and add to
+      limitations: "Ground-truth damping and friction were taken from
+      [source]; we did not quantify their uncertainty."
+
+--------------------------------------------------------------------------------
+SUMMARY CHECKLIST
+--------------------------------------------------------------------------------
+[ ] 1.1  Clarify/correct free-fall vs linear-oscillator; add phenomenon–ODE table if needed
+[ ] 1.2  Acknowledge multi-body/impact simplification; add caveat and future work
+[ ] 1.3  Document calibration heuristics; add limitation on bias and generalization
+[ ] 2.1  Add identifiability metrics (gradients, ODE residuals) and extrapolation (E_k)
+[ ] 2.2  State CNN-only-on-Delfys and add future work for IRIS CNN
+[ ] 2.3  Audit tables; fix g=9.81 and malformed columns; add reproducibility note
+[ ] 3.1  Add dropping/falling ball derivation with units and symbol definitions
+[ ] 3.2  Expand damping/friction ground truth and uncertainty quantification
+
+================================================================================
+End of improvement list. Address items in main.tex (and supplement if used).
+================================================================================

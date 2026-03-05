@@ -1,0 +1,23 @@
+% Delfys75 equation-selection (dynamics classification) comparison.
+% 90 videos, 6 classes. Sources: vlm_temporal_reasoning, vlm_describe_then_classify,
+% video_classifier_eval (CNN 98.4%), vlm_finetune_eval / vlm_classifier_eval.
+
+\begin{table}[t]
+  \centering
+  \caption{Equation-selection accuracy on Delfys75 (90 videos, 6 classes). \textbf{Temporal reasoning:} one VLM call, first-vs-last frame. \textbf{Describe-then-classify:} two VLM calls. \textbf{CNN:} ResNet18 + temporal mean, trained on Delfys75. \textbf{VLM finetune:} LoRA or frozen VLM + classifier head (collapses to one class).}
+  \label{tab:delfys75_equation_selection}
+  \small
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    \textbf{Method} & \textbf{Accuracy (\%)} \\
+    \midrule
+    CNN (video classifier)     & \cellcolor{bestcolor}\textbf{98.40} \\
+    VLM (temporal reasoning)    & 73.33 \\
+    Describe-then-classify      & 61.11 \\
+    VLM finetune (adapter)      & 16.67 \\
+    VLM finetune (classifier)   & 16.67 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

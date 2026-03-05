@@ -1,0 +1,254 @@
+% =============================================================================
+% PAPER IMPROVEMENTS — Edits to apply to the main IRIS ECCV 2026 submission
+% =============================================================================
+% This file contains replacement text and insertions. Search the main .tex
+% for the indicated "OLD" or "LOCATION" and replace/insert as described.
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+% 1. DELFYS75 INADEQUACIES (Introduction + Related Work / Video Benchmarks)
+% -----------------------------------------------------------------------------
+% LOCATION: In Sec. 1 (Introduction), after the sentence on Delfys75
+%   "While representing a meaningful advance, Delfys75 remains limited in scope..."
+%
+% INSERT the following paragraph (or merge into the existing Delfys75 sentence):
+
+\newcommand{\insertDelfysInadequacies}{%
+Beyond its single-body restriction, Delfys75 suffers from several data-quality limitations that hinder both human annotation and automated analysis. In the pendulum sequences, for example, only the bob is clearly visible while the string is a thin white rope against a white or light background, making it difficult even for humans to track the full system; in other clips, the motion is confined to 1--2 seconds, providing too few cycles or too short a trajectory to reliably infer dynamics or to support multi-step loss rollouts. These inadequacies limit the utility of Delfys75 as a benchmark for equation identification and parameter estimation, and motivate a benchmark designed from the outset for high temporal resolution, sufficient clip length, and clear visibility of all relevant physical elements.
+}
+
+% Alternative shorter version to merge into one sentence:
+% "Delfys75 also exhibits data-quality limitations: in pendulum clips the string is a white rope on a white background with only the bob visible, and many videos are only 1--2 seconds long, making motion detection and multi-step evaluation difficult."
+
+% -----------------------------------------------------------------------------
+% 2. ADDITIONAL CITATIONS (Introduction and Related Work)
+% -----------------------------------------------------------------------------
+% Add the following \cite{} keys to your references.bib and then insert
+% them at the suggested locations in the main paper.
+%
+% INTRODUCTION (Sec. 1):
+%   - After "inverse problem in computational science": already have
+%     brunton2016discovering, hofherr2023neural, jaques2019physics, schmidt2009distilling.
+%   - Add: \cite{battaglia2016interaction} for multi-body / interaction (when you first mention multi-body).
+%   - Add: \cite{chen2018neural} for Neural ODEs when mentioning learned dynamics.
+%   - Add: \cite{greydanus2019hamiltonian} or \cite{cranmer2020lagrangian} for physics-informed learning.
+%
+% RELATED WORK – Physical parameter estimation:
+%   - Add: \cite{kandukuri2020learning, zhong2020unsupervised} if not already present (VAE + physics).
+%   - Add: \cite{pfaff2021learning} for mesh-based / continuous simulators.
+%
+% RELATED WORK – Video benchmarks:
+%   - Add: \cite{wu2016physics} for Physics101 (already mentioned in text; ensure cited).
+%   - Add: \cite{motamed2026generative} for Physics-IQ if discussing generative/physical reasoning benchmarks.
+%
+% RELATED WORK – VLM / equation discovery:
+%   - Add: \cite{wei2023cot} for chain-of-thought (you mention it in VLM routing).
+%   - Add: \cite{li2025mllmbaseddiscoveryintrinsiccoordinates} or similar for equation discovery from video if applicable.
+%
+% Example snippet to insert in Related Work (Video Benchmarks), after first sentence:
+\newcommand{\insertBenchmarkCitations}{%
+See also~\cite{wu2016physics} for early real-world physics video data, and~\cite{bansal2024videophy, bansal2025videophy, motamed2026generative} for benchmarks targeting physical plausibility in generation rather than parameter estimation.
+}
+
+% -----------------------------------------------------------------------------
+% 3. REMOVE BASIC FORMULA (Parameter error) — replace equation with words
+% -----------------------------------------------------------------------------
+% LOCATION: Sec. 4.3 (Metrics), Parameter Accuracy. Currently you have
+%   \varepsilon_{\gamma} = |\bar{\gamma}_{\mathrm{est}} - \gamma_{\mathrm{GT}}|
+%   (equation label eq:param_error).
+%
+% REPLACE: Remove the displayed equation (eq:param_error) and the sentence
+% that introduces it. Use the following text instead:
+
+\newcommand{\replaceParamErrorFormula}{%
+For each (phenomenon, setting, parameter) triple, we report the mean absolute error between the mean estimated value over trials and the independently measured ground truth, along with the standard deviation of estimates across trials when multiple videos per setting are available.
+}
+
+% So in the main .tex you would:
+% - Delete the line "\begin{equation} ... \varepsilon_{\gamma} = ... \end{equation}"
+% - Delete the label \label{eq:param_error}
+% - Replace the surrounding sentence with \replaceParamErrorFormula above.
+% - In the rest of the paper, replace any reference to Eq.~\eqref{eq:param_error} with "parameter MAE" or "mean absolute error against ground truth".
+
+% -----------------------------------------------------------------------------
+% 4. VLM PERFORMANCE AND DATASET QUALITY (Delfys75 vs IRIS)
+% -----------------------------------------------------------------------------
+% LOCATION: Sec. 5 (Experiments), Governing Equation Identification
+%   (Sec. 5.4), after "Error analysis" or after the confusion matrix paragraph.
+%
+% INSERT the following paragraph:
+
+\newcommand{\insertVLMDataQuality}{%
+The relatively modest equation-selection accuracy of the VLM on Delfys75 ($73\%$) is partly attributable to the dataset's limitations: short clip lengths and low contrast (e.g., white string on white background in pendulum videos) provide insufficient temporal and visual signal for the model to disambiguate dynamics or to produce reliable captions or equation hypotheses. In contrast, IRIS is designed with longer clips, higher temporal resolution (60\,fps), and controlled capture conditions that keep all relevant elements (strings, objects, supports) visible and distinguishable. We therefore expect VLM-based equation identification and downstream parameter estimation to benefit from the improved data quality on IRIS, making the benchmark not only broader in scope (multi-body, rotation) but also better suited for evaluating vision-based physics pipelines.
+}
+
+% -----------------------------------------------------------------------------
+% 5. FUTURE WORK — three additional motions
+% -----------------------------------------------------------------------------
+% LOCATION: Sec. 7 (Limitations and Future Work), in "Planned extensions" or
+%   "Future directions".
+%
+% ADD (or append to the list of planned phenomena):
+
+\newcommand{\insertFutureMotions}{%
+Planned extensions to the IRIS benchmark include three additional motion types: (i)~\textbf{Torricelli-style drainage} (fluid level dynamics), (ii)~\textbf{two-ball collision} (momentum transfer between two moving objects), and (iii)~\textbf{LED intensity decay} experiments, aligning with phenomena present in Delfys75 for cross-benchmark comparison while providing higher-quality capture and ground truth.
+}
+
+% -----------------------------------------------------------------------------
+% 6. WHY IRIS IS BETTER — repeated emphasis (snippets to place in the paper)
+% -----------------------------------------------------------------------------
+%
+% (A) INTRODUCTION — after the contribution list, before the closing sentence.
+%     Add one short paragraph:
+
+\newcommand{\insertWhyIRISIntro}{%
+IRIS is designed to be the benchmark of choice for unsupervised physical parameter estimation from video for three reasons: it is the only real-world benchmark to include multi-body interaction dynamics with ground truth; it provides higher temporal resolution (60\,fps) and longer clips than existing real-world data, avoiding the short and low-contrast sequences that limit VLM and parameter estimation on Delfys75; and it is accompanied by a standardized evaluation protocol and reproducible baselines, enabling direct and fair comparison across methods.
+}
+
+% (B) RELATED WORK (Video Benchmarks) — end of the subsection, before IRIS.
+%     Add:
+
+\newcommand{\insertWhyIRISRelated}{%
+None of these benchmarks provides multi-body interaction with ground-truth parameters, high frame-rate real capture with clearly visible elements, and a standardized protocol for both equation identification and parameter accuracy. IRIS is designed to fill this gap.
+}
+
+% (C) DATASET SECTION (Sec. 3.2) — in "Why Real Data?" or after "Design Principles".
+%     Add one sentence to the end of the first paragraph of 3.2.1 (Design Principles):
+
+\newcommand{\insertWhyIRISDataset}{%
+Together, these choices distinguish IRIS from prior real-world benchmarks: sufficient clip length and frame rate for multi-step and temporal reasoning, clear visibility of all physical elements (e.g., strings, supports) to support both VLMs and parameter estimators, and multi-body scenarios with independent ground truth to evaluate interaction dynamics.
+}
+
+% (D) EVALUATION PROTOCOL — at the end of Sec. 4.1 (Datasets and Splits),
+%     after describing IRIS:
+
+\newcommand{\insertWhyIRISEval}{%
+The use of IRIS under the same train-per-clip protocol as Delfys75 allows the community to compare methods on a benchmark that is both broader (multi-body, rotation) and of higher data quality (longer clips, 60\,fps, controlled visibility), establishing it as the preferred testbed for physics identification from video.
+}
+
+% (E) DISCUSSION — at the start of Sec. 6 (Discussion), before "Broader impact":
+
+\newcommand{\insertWhyIRISDiscussion}{%
+IRIS advances the field by providing a real-world benchmark that is both broader and of higher data quality than the sole existing option (Delfys75): it includes multi-body and rotation phenomena, avoids very short or low-contrast clips that hinder VLM and parameter estimation, and pairs each phenomenon with independently measured ground truth and a standardized protocol. We argue that this benchmark should be adopted for evaluating and comparing unsupervised physics-from-video methods.
+}
+
+% =============================================================================
+% SUMMARY OF EDITS
+% =============================================================================
+%
+% 1. Introduction + Related Work: Insert \insertDelfysInadequacies (or the
+%    shorter sentence) describing pendulum (white rope, only bob visible),
+%    and 1--2 second clips.
+% 2. Introduction + Related Work: Add \cite{} for battaglia2016interaction,
+%    chen2018neural, greydanus2019hamiltonian/cranmer2020lagrangian,
+%    wu2016physics, wei2023cot, and others as listed above; ensure Physics101,
+%    VideoPhy, Physics-IQ are cited where mentioned.
+% 3. Sec. 4.3 Metrics: Remove equation (eq:param_error); replace with
+%    \replaceParamErrorFormula (parameter MAE in words).
+% 4. Sec. 5.4 Governing Equation Identification: Insert \insertVLMDataQuality
+%    (VLM limited by Delfys75 quality; IRIS designed for better VLM/parameter results).
+% 5. Sec. 7 Limitations and Future Work: Add \insertFutureMotions (Torricelli,
+%    2-ball collision, LED experiment).
+% 6. Throughout: Insert \insertWhyIRISIntro, \insertWhyIRISRelated,
+%    \insertWhyIRISDataset, \insertWhyIRISEval, \insertWhyIRISDiscussion
+%    at the indicated locations so that "why IRIS is better" and "why use
+%    this benchmark" are stated several times.
+%
+% To apply: in your main .tex you can \input{paper_drafts/PAPER_IMPROVEMENTS}
+% and then use \insertDelfysInadequacies etc. where needed, OR copy the
+% body of each \newcommand into the corresponding place in the main document.
+%
+% -----------------------------------------------------------------------------
+% READY-TO-PASTE PARAGRAPHS (no commands — copy into main .tex as-is)
+% -----------------------------------------------------------------------------
+%
+% --- 1. Delfys75 inadequacies (paste after first mention of Delfys75 limits) ---
+%
+% Beyond its single-body restriction, Delfys75 suffers from data-quality
+% limitations that hinder both human annotation and automated analysis.
+% In the pendulum sequences, only the bob is clearly visible while the
+% string is a thin white rope against a white or light background, making
+% it difficult to track the full system; in other clips, the motion is
+% confined to 1--2 seconds, providing too few cycles to reliably infer
+% dynamics or to support multi-step rollouts. These inadequacies motivate
+% a benchmark designed for high temporal resolution, sufficient clip
+% length, and clear visibility of all relevant physical elements.
+%
+% --- 4. VLM and dataset quality (paste in Sec. 5.4 after confusion matrix) ---
+%
+% The relatively modest equation-selection accuracy of the VLM on Delfys75
+% (73\%) is partly attributable to the dataset's limitations: short clip
+% lengths and low contrast (e.g., white string on white background in
+% pendulum videos) provide insufficient temporal and visual signal for the
+% model to disambiguate dynamics or to produce reliable captions or
+% equation hypotheses. In contrast, IRIS is designed with longer clips,
+% higher temporal resolution (60\,fps), and controlled capture conditions
+% that keep all relevant elements visible and distinguishable. We therefore
+% expect VLM-based equation identification and downstream parameter
+% estimation to benefit from the improved data quality on IRIS, making the
+% benchmark not only broader in scope (multi-body, rotation) but also
+% better suited for evaluating vision-based physics pipelines.
+%
+% --- 5. Future work — three motions (paste in Sec. 7 planned extensions) ---
+%
+% Planned extensions to the IRIS benchmark include three additional motion
+% types: (i) Torricelli-style drainage (fluid level dynamics), (ii) two-ball
+% collision (momentum transfer between two moving objects), and (iii) LED
+% intensity decay experiments, aligning with phenomena in Delfys75 for
+% cross-benchmark comparison while providing higher-quality capture and
+% ground truth.
+%
+% --- 6A. Why IRIS (paste at end of Introduction, before closing) ---
+%
+% IRIS is designed to be the benchmark of choice for unsupervised physical
+% parameter estimation from video for three reasons: it is the only
+% real-world benchmark to include multi-body interaction dynamics with
+% ground truth; it provides higher temporal resolution (60\,fps) and
+% longer clips than existing real-world data, avoiding the short and
+% low-contrast sequences that limit VLM and parameter estimation on
+% Delfys75; and it is accompanied by a standardized evaluation protocol
+% and reproducible baselines, enabling direct and fair comparison.
+%
+% --- 6B. Why IRIS (paste at end of Related Work / Video Benchmarks) ---
+%
+% None of these benchmarks provides multi-body interaction with
+% ground-truth parameters, high frame-rate real capture with clearly
+% visible elements, and a standardized protocol for both equation
+% identification and parameter accuracy. IRIS is designed to fill this gap.
+%
+% --- 6C. Why IRIS (paste in Sec. 3.2 Design Principles, end of 1st para) ---
+%
+% Together, these choices distinguish IRIS from prior real-world benchmarks:
+% sufficient clip length and frame rate for multi-step and temporal
+% reasoning, clear visibility of all physical elements (e.g., strings,
+% supports) to support both VLMs and parameter estimators, and multi-body
+% scenarios with independent ground truth to evaluate interaction dynamics.
+%
+% --- 6D. Why IRIS (paste in Sec. 4.1 after IRIS description) ---
+%
+% The use of IRIS under the same train-per-clip protocol as Delfys75
+% allows the community to compare methods on a benchmark that is both
+% broader (multi-body, rotation) and of higher data quality (longer clips,
+% 60\,fps, controlled visibility), establishing it as the preferred
+% testbed for physics identification from video.
+%
+% --- 6E. Why IRIS (paste at start of Sec. 6 Discussion) ---
+%
+% IRIS advances the field by providing a real-world benchmark that is both
+% broader and of higher data quality than the sole existing option
+% (Delfys75): it includes multi-body and rotation phenomena, avoids very
+% short or low-contrast clips that hinder VLM and parameter estimation, and
+% pairs each phenomenon with independently measured ground truth and a
+% standardized protocol. We argue that this benchmark should be adopted
+% for evaluating and comparing unsupervised physics-from-video methods.
+%
+% --- 3. Parameter error (replace Eq. 23 with this sentence) ---
+%
+% For each (phenomenon, setting, parameter) triple, we report the mean
+% absolute error between the mean estimated value over trials and the
+% independently measured ground truth, along with the standard deviation
+% of estimates across trials when multiple videos per setting are available.
+% (Then delete the displayed equation and \label{eq:param_error}; elsewhere
+% replace references to Eq.~\eqref{eq:param_error} by ``parameter MAE''.)
+%
+% =============================================================================

@@ -1,0 +1,107 @@
+% =============================================================================
+% ECCV — Evaluation Protocol
+% =============================================================================
+
+\section{Evaluation Protocol}
+\label{sec:eval_protocol}
+
+We evaluate the pipeline along five axes: parameter accuracy (primary), governing-equation selection accuracy, identifiability, robustness, and extrapolation. All experiments use independently measured ground-truth parameters and a fixed protocol so that baseline and proposed methods are directly comparable.
+
+% -----------------------------------------------------------------------------
+\subsection{Datasets and Splits}
+\label{sec:eval_datasets}
+
+\textbf{Delfys75.} We use the public Delfys75 benchmark: six single-body phenomena (dropped ball, free fall, LED decay, pendulum, sliding block, Torricelli drain) with multiple settings per phenomenon and several videos per setting. Ground truth is taken from the provided \texttt{parameters.json} and from standard values ($g = 9.80665$ for gravity). Results are reported per (phenomenon, setting, parameter).
+
+\textbf{IRIS.} The IRIS dataset includes single-body phenomena (dropping ball, falling ball, sliding cone, pendulum, rotation) and multi-body phenomena (hitting cones, two moving pendulums, one static and one moving pendulum). Each setting has repeated recordings (10 videos per variant). Ground truth is stored in \texttt{IRIS/parameters.json} with mean, std, min, and max per parameter. The same train-per-clip protocol as on Delfys75 is used.
+
+\textbf{Protocol.} For each video clip we (i) determine the equation family (path-based or VLM-based), (ii) train the encoder and physics parameters on that clip, (iii) record the estimated parameters ($\alpha$, $\beta$, or their physical equivalents). No physics parameters are shared across clips; the VLM or video classifier may be shared. The random seed is fixed. Mean and standard deviation over videos within each (phenomenon, setting) are reported.
+
+% -----------------------------------------------------------------------------
+\subsection{Evaluation Axes}
+\label{sec:eval_axes}
+
+\textbf{Parameter accuracy.} Primary axis: closeness of estimated physical parameters to ground truth. Evaluated for every (phenomenon, setting, parameter) with available ground truth ($g$, length, damping, decay rate, friction, angular stiffness, angular damping, drain coefficient, etc.).
+
+\textbf{Governing-equation selection accuracy.} When the equation family is chosen by a VLM or classifier, we measure how often the selected dynamics matches the ground-truth phenomenon. Reported as classification accuracy over videos, per-class accuracy, and confusion matrix. Compared across: single-call VLM with temporal reasoning, describe-then-classify VLM, and a lightweight video classifier.
+
+\textbf{Identifiability.} Whether the learned parameters are uniquely constrained by the data and loss. We report gradient norms of the physics parameters during training and the standard deviation of estimates across videos in the same setting as a proxy for stability. ODE residual (mean squared residual of the discrete ODE driven by encoder latents) is reported where computed.
+
+\textbf{Robustness.} Sensitivity to the choice of loss (one-step vs.\ multi-step), model (single-body vs.\ unified multi-object), and equation selection (path vs.\ VLM). Robustness is assessed as consistency of parameter accuracy across these ablations.
+
+\textbf{Extrapolation.} Generalization of the estimated parameters when the physics model is rolled out beyond the training horizon. For clips of length $T$, training uses frames $1, \ldots, T_{\mathrm{train}}$; prediction error is evaluated at steps $T_{\mathrm{train}}+1, \ldots, T$. Reported when the dataset and setup support it.
+
+% -----------------------------------------------------------------------------
+\subsection{Metrics}
+\label{sec:metrics}
+
+\subsubsection{Parameter accuracy}
+\label{sec:metrics_param}
+
+For a single (phenomenon, setting, parameter) with ground-truth value $\theta^*$ and estimates $\{\hat{\theta}_i\}_{i=1}^n$ (one per video):
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Mean absolute error (MAE):}
+  \begin{equation}
+    \mathrm{MAE} = \frac{1}{n} \sum_{i=1}^{n} \bigl| \hat{\theta}_i - \theta^* \bigr|.
+  \end{equation}
+  \item \textbf{Bias (mean signed error):}
+  $\displaystyle \mathrm{Bias} = \frac{1}{n} \sum_{i=1}^{n} (\hat{\theta}_i - \theta^*)$.
+  \item \textbf{Standard deviation of estimates:}
+  $\displaystyle \sigma_{\hat{\theta}} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (\hat{\theta}_i - \bar{\hat{\theta}})^2}$, with $\bar{\hat{\theta}} = \frac{1}{n}\sum_i \hat{\theta}_i$.
+  \item \textbf{Relative error} (when $\theta^* \neq 0$):
+  $\displaystyle \mathrm{RE} = \frac{\mathrm{MAE}}{|\theta^*|}$.
+\end{itemize}
+
+MAE is reported per (phenomenon, setting, parameter). For method comparison we use the difference of MAE: $\Delta\mathrm{MAE} = \mathrm{MAE}_A - \mathrm{MAE}_B$. Negative $\Delta\mathrm{MAE}$ indicates method $B$ has lower error than method $A$. Aggregation over parameters or settings is stated explicitly when used.
+
+\subsubsection{Governing-equation selection}
+\label{sec:metrics_eq}
+
+For equation-family selection (VLM or classifier):
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Accuracy:}
+  $\displaystyle \mathrm{Acc} = \frac{1}{N} \sum_{i=1}^{N} \mathbb{1}[\hat{y}_i = y_i^*]$, where $\hat{y}_i$ is the predicted phenomenon, $y_i^*$ is the ground-truth phenomenon, and $N$ is the number of videos.
+  \item \textbf{Per-class accuracy:} accuracy restricted to videos of each class.
+  \item \textbf{Confusion matrix:} rows = ground truth, columns = predicted.
+\end{itemize}
+
+Accuracy is reported for the primary VLM (temporal reasoning) and for alternatives (describe-then-classify, video classifier). When the equation is given by path (baseline), selection accuracy is not applicable; parameter accuracy is still reported so that the effect of VLM errors is visible in the parameter tables.
+
+\subsubsection{Identifiability and stability}
+\label{sec:metrics_id}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Gradient norm:} $\bigl\| \nabla_{\theta} \mathcal{L} \bigr\|$ for the physics parameters $\theta$ during training.
+  \item \textbf{Std of estimates:} $\sigma_{\hat{\theta}}$ over videos in the same (phenomenon, setting).
+  \item \textbf{ODE residual:} mean squared residual of the discrete ODE when driven by the encoder latents, for the estimated $\theta$.
+\end{itemize}
+
+\subsubsection{Robustness and ablations}
+\label{sec:metrics_robust}
+
+Parameter accuracy (MAE) is reported under the following configurations:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Baseline:} path-based equation selection, one-step loss, single-body physics.
+  \item \textbf{+ Multi-step loss:} same as baseline with multi-step loss (Sec.~\ref{sec:multistep_loss}); same equation selection and single-body model.
+  \item \textbf{+ VLM selection:} equation family from VLM; same loss and single-body model as baseline.
+  \item \textbf{+ Unified model:} path-based selection, one-step loss, unified physics block (single architecture for $N=1$ and $N>1$).
+  \item \textbf{Full pipeline:} VLM selection, unified model, multi-step loss; multi-object ($N=2$) for hitting cones and two-pendulum phenomena on IRIS.
+\end{itemize}
+
+For each (phenomenon, setting, parameter) we report which configuration achieves the lowest MAE and the $\Delta\mathrm{MAE}$ between configurations.
+
+\subsubsection{Extrapolation}
+\label{sec:metrics_extra}
+
+For a clip of length $T$, training uses frames $1, \ldots, T_{\mathrm{train}}$. The metric is the mean squared error (MSE) or MAE of predicted vs.\ encoder latent over steps $T_{\mathrm{train}}+1, \ldots, T$ (or over fixed horizons $k$). Reported when the dataset and setup support extrapolation evaluation.
+
+% -----------------------------------------------------------------------------
+\subsection{Baselines and Reporting}
+\label{sec:eval_baselines}
+
+\textbf{Baselines.} The primary baseline is path-based equation selection, one-step loss, and single-body physics (original pipeline). Ablations add one component at a time: multi-step loss, VLM selection, unified model, then the full pipeline. Comparison is limited to methods that use the same input (video clips), output (physical parameters), and ground-truth sources.
+
+\textbf{Reporting.} Tables have rows (phenomenon, setting, parameter), columns (baseline, +multi-step, +VLM, +unified, full), and cells (MAE; optionally mean estimate $\bar{\hat{\theta}}$). A column for ground truth $\theta^*$ is included. A separate table reports equation-selection accuracy (VLM and video classifier). The same train-per-clip protocol and the same ground-truth files (Delfys75 and IRIS \texttt{parameters.json}) are used for all methods. The random seed and the number of videos per setting are stated for reproducibility.

@@ -1,0 +1,82 @@
+% =============================================================================
+% FIGURES — Include in main document. Ensure graphicspath or path includes
+%   paper_drafts/figures/ (or copy .png files next to main.tex).
+% =============================================================================
+% Fig 1: Teaser — overview of IRIS dataset and task
+% Fig 2: Pipeline — full method diagram (VLM routing + ODE bank + extraction)
+% Fig 3: Multi-step loss — illustration of temporal supervision scheme
+% Fig 4: Dataset overview — sample frames, phenomena, annotations
+% Fig 5: Governing equations — visual summary of ODE bank
+% Fig 6: Loss landscape / convergence — training dynamics
+% Fig S1 (optional): Synthetic vs real comparison
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+% Fig 1: Teaser
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/fig1_teaser.png}
+  \caption{Teaser. IRIS: from real-world video to governing equation and physical parameters. We identify both the equation family (e.g., damped oscillator) and its parameters ($\alpha$, $\beta$, $g$, $L$, etc.) from monocular clips.}
+  \label{fig:teaser}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig 2: Pipeline
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_pipeline.png}
+  \caption{Pipeline. (1) Video frames are fed to a VLM for equation-family selection and to an encoder for latent states. (2) The selected ODE from the bank is instantiated as the physics block. (3) Encoder latents and physics rollout are matched by the loss; parameters $\theta = (\alpha, \beta, \ldots)$ are estimated.}
+  \label{fig:pipeline}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig 3: Multi-step loss
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/fig3_multistep.png}
+  \caption{Multi-step loss. Supervision at horizons $k = 1, \ldots, K$ (e.g., $K=5$) with weights $w_k$. Encoder outputs $\hat{\mathbf{z}}_{t+k}$ are compared to physics rollouts $\tilde{\mathbf{z}}_{t+k}$ from $t$; earlier steps are weighted more (e.g., $[1, 1, 0.5, 0.5, 0.25]$).}
+  \label{fig:multistep}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig 4: Dataset overview
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig4_dataset.png}
+  \caption{IRIS dataset overview. Single-body: dropping/falling ball, sliding cone, pendulum, rotation. Multi-body: hitting cones, two pendulums. Each setting has repeated recordings with ground-truth parameters in \texttt{parameters.json}.}
+  \label{fig:dataset}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig 5: ODE bank
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/fig5_ode_bank.png}
+  \caption{Governing equations (ODE bank). Second-order linear $z'' + \beta z' + \alpha z = 0$ (pendulum, free fall, rotation); first-order decay (LED); Torricelli $z' = -k\sqrt{z}$; inclined plane (sliding block); graph-structured multi-object ($N \geq 2$).}
+  \label{fig:ode_bank}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig 6: Loss / convergence
+% -----------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/fig6_loss_landscape.png}
+  \caption{Training dynamics (conceptual). Loss decreases over epochs; multi-step and gradient-correct physics block improve convergence. Replace with actual training curves from \texttt{Results/} when reporting.}
+  \label{fig:loss_landscape}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% Fig S1 (supplement): Synthetic vs real
+% -----------------------------------------------------------------------------
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=0.85\linewidth]{figures/figS1_synthetic_real.png}
+%   \caption[Synthetic vs.\ real.]{Synthetic vs.\ real video for physics extraction. Left: synthetic rendering. Right: real IRIS/Delfys75 clip. Domain gap motivates evaluation on real data with independent ground truth.}
+%   \label{fig:synthetic_real}
+% \end{figure}

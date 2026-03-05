@@ -4,7 +4,7 @@ Load trained video classifier and predict dynamics from .npy path (same interfac
 
 import os
 import torch
-from .dataset import DYNAMICS_CLASSES, _load_frames_from_npy
+from .dataset import DYNAMICS_CLASSES, IRIS_DYNAMICS_CLASSES, _load_frames_from_npy
 from .model import VideoDynamicsClassifier
 
 
@@ -35,17 +35,21 @@ def predict_dynamics_from_npy(
     checkpoint_path: str | None = None,
     device: str | torch.device | None = None,
     num_frames: int = 5,
+    num_classes: int = 6,
+    classes: list[str] | None = None,
 ) -> str | None:
     """
-    Predict dynamics class for one video. Returns one of DYNAMICS_CLASSES or None if load fails.
+    Predict dynamics class for one video. Returns class name or None if load fails.
     Either pass a loaded model or checkpoint_path to load from file.
+    For IRIS 8-class, pass num_classes=8 and classes=IRIS_DYNAMICS_CLASSES.
     """
     if model is None and checkpoint_path is None:
         return None
     if model is None:
-        model = load_classifier(checkpoint_path, device=device)
+        model = load_classifier(checkpoint_path, device=device, num_classes=num_classes)
     if device is None:
         device = next(model.parameters()).device
+    class_list = classes if classes is not None else DYNAMICS_CLASSES
     try:
         frames = _load_frames_from_npy(npy_path, num_frames=num_frames, resize_hw=(224, 224))
     except Exception:
@@ -57,4 +61,6 @@ def predict_dynamics_from_npy(
     with torch.no_grad():
         logits = model(x)
     pred_idx = logits.argmax(dim=1).item()
-    return DYNAMICS_CLASSES[pred_idx]
+    if pred_idx >= len(class_list):
+        return None
+    return class_list[pred_idx]

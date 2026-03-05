@@ -176,18 +176,26 @@ def write_errors_csv(results: list, path: str):
         w.writerows(results)
 
 
-def write_comparison(baseline_results: list, unified_results: list, path: str):
+def write_comparison(baseline_results: list, unified_results: list, path: str, multistep_results: list | None = None):
     by_key = {}
     for r in baseline_results:
         key = (r["dynamics"], r["setting"], r["param"])
-        by_key[key] = {"gt": r["gt_mean"], "baseline_est": r["est_mean"], "baseline_err": r["abs_err_mean"], "unified_est": None, "unified_err": None}
+        by_key[key] = {"gt": r["gt_mean"], "baseline_est": r["est_mean"], "baseline_err": r["abs_err_mean"], "unified_est": None, "unified_err": None, "multistep_est": None, "multistep_err": None}
     for r in unified_results:
         key = (r["dynamics"], r["setting"], r["param"])
         if key not in by_key:
-            by_key[key] = {"gt": r["gt_mean"], "baseline_est": None, "baseline_err": None, "unified_est": r["est_mean"], "unified_err": r["abs_err_mean"]}
+            by_key[key] = {"gt": r["gt_mean"], "baseline_est": None, "baseline_err": None, "unified_est": r["est_mean"], "unified_err": r["abs_err_mean"], "multistep_est": None, "multistep_err": None}
         else:
             by_key[key]["unified_est"] = r["est_mean"]
             by_key[key]["unified_err"] = r["abs_err_mean"]
+    if multistep_results:
+        for r in multistep_results:
+            key = (r["dynamics"], r["setting"], r["param"])
+            if key not in by_key:
+                by_key[key] = {"gt": r["gt_mean"], "baseline_est": None, "baseline_err": None, "unified_est": None, "unified_err": None, "multistep_est": r["est_mean"], "multistep_err": r["abs_err_mean"]}
+            else:
+                by_key[key]["multistep_est"] = r["est_mean"]
+                by_key[key]["multistep_err"] = r["abs_err_mean"]
     lines = [
         "Comparison: Baseline (main.py) vs Unified (run_unified_delfys75.py)",
         "Negative diff_err = unified has lower error (better).",
@@ -210,12 +218,42 @@ def write_comparison(baseline_results: list, unified_results: list, path: str):
     with open(path, "w") as f:
         f.write("\n".join(lines))
 
+    if multistep_results:
+        out_dir = os.path.dirname(path)
+        path_3way = os.path.join(out_dir, "parameter_errors_comparison_3way.txt")
+        lines_3way = [
+            "Comparison: Baseline vs Unified (1-step) vs Unified (multi-step)",
+            "Diff_Base_Multi = multistep_err - baseline_err (negative = multistep better).",
+            "Diff_Unif_Multi = multistep_err - unif_err (negative = multistep better than 1-step).",
+            "=" * 100,
+            f"{'Dynamics':<14} {'Setting':<12} {'Param':<10} {'GT':<8} {'Base_|E|':<8} {'Unif_|E|':<8} {'Multi_|E|':<8} {'Diff_B-M':<8} {'Diff_U-M':<8}",
+            "-" * 100,
+        ]
+        for key in sorted(by_key.keys()):
+            d, s, p = key
+            v = by_key[key]
+            gt = v["gt"]
+            b_err = v["baseline_err"] if v["baseline_err"] is not None else float("nan")
+            u_err = v["unified_err"] if v["unified_err"] is not None else float("nan")
+            m_err = v["multistep_err"] if v["multistep_err"] is not None else float("nan")
+            diff_bm = float("nan")
+            if v["baseline_err"] is not None and v["multistep_err"] is not None:
+                diff_bm = v["multistep_err"] - v["baseline_err"]
+            diff_um = float("nan")
+            if v["unified_err"] is not None and v["multistep_err"] is not None:
+                diff_um = v["multistep_err"] - v["unified_err"]
+            lines_3way.append(f"{d:<14} {s:<12} {p:<10} {gt:<8.4f} {b_err:<8.4f} {u_err:<8.4f} {m_err:<8.4f} {diff_bm:<8.4f} {diff_um:<8.4f}")
+        with open(path_3way, "w") as f:
+            f.write("\n".join(lines_3way))
+        print(f"Wrote {path_3way}")
+
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--baseline", type=str, required=True, help="Baseline CSV (e.g. Results/delfys75/delfys75.csv)")
-    ap.add_argument("--unified", type=str, required=True, help="Unified CSV (e.g. Results/delfys75_unified/delfys75_unified.csv)")
-    ap.add_argument("--params", type=str, default=None, help="parameters.json path (default: Delfys75/parameters.json)")
+    ap.add_argument("--baseline", type=str, required=True, help="Baseline CSV (e.g. Results/iris_baseline/iris_baseline.csv)")
+    ap.add_argument("--unified", type=str, required=True, help="Unified CSV (1-step)")
+    ap.add_argument("--unified_multistep", type=str, default=None, help="Unified CSV with multi-step loss (optional; enables 3-way comparison)")
+    ap.add_argument("--params", type=str, default=None, help="parameters.json path (e.g. IRIS/parameters.json)")
     ap.add_argument("--out", type=str, default="Results/delfys75", help="Output directory for error CSVs and comparison")
     args = ap.parse_args()
 
@@ -224,14 +262,20 @@ def main():
 
     baseline_rows = load_csv(args.baseline)
     unified_rows = load_csv(args.unified)
-
     baseline_results = compute_errors(baseline_rows, params_json)
     unified_results = compute_errors(unified_rows, params_json)
+
+    multistep_results = None
+    if args.unified_multistep and os.path.isfile(args.unified_multistep):
+        multistep_rows = load_csv(args.unified_multistep)
+        multistep_results = compute_errors(multistep_rows, params_json)
+        write_errors_csv(multistep_results, os.path.join(args.out, "parameter_errors_unified_multistep.csv"))
+        print(f"Wrote {args.out}/parameter_errors_unified_multistep.csv")
 
     os.makedirs(args.out, exist_ok=True)
     write_errors_csv(baseline_results, os.path.join(args.out, "parameter_errors_baseline.csv"))
     write_errors_csv(unified_results, os.path.join(args.out, "parameter_errors_unified.csv"))
-    write_comparison(baseline_results, unified_results, os.path.join(args.out, "parameter_errors_comparison.txt"))
+    write_comparison(baseline_results, unified_results, os.path.join(args.out, "parameter_errors_comparison.txt"), multistep_results=multistep_results)
 
     print(f"Wrote {args.out}/parameter_errors_baseline.csv")
     print(f"Wrote {args.out}/parameter_errors_unified.csv")
