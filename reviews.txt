@@ -1,0 +1,150 @@
+Clearly written with sufficient novelty. Clarity can be improved; some ablations would be nice.
+Official Reviewby Reviewer MCJw21 Apr 2026, 18:05 (modified: 03 May 2026, 01:55)Program Chairs, Senior Area Chairs, Area Chairs, Reviewers, AuthorsRevisions
+Choose The Contribution Type You Are Using For Your Review: Datasets/Benchmarks
+Justify The Above Choice:
+It's a new dataset with new benchmarks.
+
+Paper Summary:
+Note: I used no AI tools anywhere in my review; not as a writing help; nor as an analysis tool.
+
+The paper proposes a new dataset for estimating physics-equations and their parameters, clearly extending existing work. It has novel benchmark settings, new benchmarks (such as a VLM), a new loss, and explicit diagnostics. See also my detailed comments per line number, below.
+
+Paper Strengths:
+High quality dataset for Physical Dynamic Systems estimation
+
+Novel benchmark settings not existing in the literature through multi-body collisions; offering evaluation of momentum transfer, contact forces, and coupled dynamics.
+
+Several relevant benchmarks, that are missing from existing work (eg VLMs)
+
+A new multi-step physics loss
+
+Includes explicit diagnostic systematic failure modes, guiding future research
+
+Major Weaknesses:
+Clarity can be improved. Symbols in equations are not explained. Captions have no conclusions.
+
+Some details can be improved; ie: the motivation why the high-res? What quantifyable benefit do the extra videos bring?
+
+Minor Weaknesses:
+Detailed comments (per line number):
+
+012: the mentioned properties: "single-body systems" and "no established protocol" could use a bit more explanation of why these are problems. Ie: what is the underlying problem for these properties? (answering the "so what?" question).
+
+014: "high-fidelity" great! but I do wonder here, what problem this addresses? What underlying issue does this address; and it would be great to have experimental evidence of this.
+
+021: "including a multi-step physics loss formulation" is this a new approach? Would be good to clarify if this is a contribution of this ECCV paper.
+
+093, 138: "gradient-flow bug". It would be interesting to know what has been done with this bug; did the authors of this ECCV submission re-implement [7]? Or file a bug report? Did the authors of [7] reply? The paper would benefit if it can describe if this bug was a mistake in the implentation (a software bug) or a mistake in the conceptualization (a methodological bug).
+
+195: Related work is well written; it clearly identifies how this submission is related to other work, and how and why it differs from existing work. Nicely done.
+
+206: Clarify what is N, and how it is set (a-priori? or estimated?)
+
+245-259: Many terms in the equations are assumed to be known. Please do not make this assumption and explain each term used, then the reader doesn't have to guess. Eg: f, g, \alpha, \mu, etc..
+
+306: Please explain all terms. Explain what is N; what is N_f, and how these terms relate to V = I_1, .. I_T at line 202.
+
+325: Why the difference in resolution? Is this important? Can the paper experimentally give evidence that this high resolution brings a benefit? And at what costs? (I'm not looking for an explanation, that I can do myself, I am looking for experimental evidence of the cost/benefit)
+
+325: Why more videos? Can this benefit be quantified somehow? Ie: will adding 100x more videos yield more improvement? Is an experimental answer possible?
+
+337: For the evaluation: State how much is taken from [7]; what differences there are; and why they differ.
+
+450: Please add a conclusion to the caption of Table 4. Ie: Answer the "So What?" question. Write in the caption what the reader is supposed to notice.
+
+464: Please add a conclusion to the caption of Table 5. Ie: Answer the "So What?" question. Write in the caption what the reader is supposed to notice.
+
+496: Please add a conclusion to the caption of Table 6. Ie: Answer the "So What?" question. Write in the caption what the reader is supposed to notice. The results are difficult to compare because of the choice of notation.
+
+515: Please add a conclusion to the caption of Table 7. Ie: Answer the "So What?" question. Write in the caption what the reader is supposed to notice.
+
+540: Please add a conclusion to the caption of Table 8. Ie: Answer the "So What?" question. Write in the caption what the reader is supposed to notice.
+
+Preliminary Recommendation: 5: Weak Accept
+Justification Of Preliminary Recommendation:
+The paper is clear, well written, has clear contributions over existing work. The negative points would be great to address in the rebuttal if possible.
+
+Suggestions For Rebuttal:
+The ablations on the resolution; and the nr of videos would be nice.
+
+Also, the clarity remarks would be nice to address.
+
+Ethics Review Flag: No
+Confidence Level: 4: High Confidence - The reviewer has strong expertise in the area. They are highly familiar with the relevant literature and can critically evaluate the paper.
+Review
+Official Reviewby Reviewer PXn618 Apr 2026, 07:09 (modified: 03 May 2026, 01:55)Program Chairs, Senior Area Chairs, Area Chairs, Reviewers, AuthorsRevisions
+Choose The Contribution Type You Are Using For Your Review: Datasets/Benchmarks
+Justify The Above Choice:
+Benchmark as suggested in the title.
+
+Paper Summary:
+This paper introduces IRIS, a real-world benchmark for inverse recovery and identification of physical dynamical systems from monocular video. The dataset contains 220 videos at 4K/60fps, spans 8 phenomena including multi-body dynamics, and is accompanied by a standardized evaluation protocol covering parameter accuracy, identifiability, extrapolation, robustness, and equation selection.
+
+Paper Strengths:
+The benchmark direction is meaningful and timely. In particular, IRIS extends prior real-world datasets beyond single-body settings, adds multi-body interaction scenarios, and provides a cleaner benchmarking protocol than earlier work. The paper is also useful diagnostically: it exposes a gradient-flow bug in the prior latent-space pipeline and shows that multi-step training becomes unstable on multi-body settings.
+
+Major Weaknesses:
+While this benchmark is meaningful and the paper successfully exposes several important failure modes in current approaches, I would have expected the paper to deliver a truly convincing and generalizable solution for equation routing. As a result, I personally place more weight on the paper not only introducing a benchmark, but also proposing a new, strong method that substantially solves the problem, rather than being stronger mainly as a contribution in benchmark construction and problem formulation.
+
+The evaluation protocol in this paper follows a train-per-clip setting, in which each video is trained independently from scratch without parameter sharing. As such, it is better suited to assessing whether a given video can be successfully fit, rather than whether the model has learned transferable physical inductive biases. It also does not adequately reflect the kind of generalization required in practical settings, such as transfer across videos, experimental conditions, or physical phenomena. Strictly speaking, this setup is therefore more aligned with per-instance fitting than with the broader notion of generalizable video-based physical learning emphasized by the authors.
+I would have liked to see the benchmark not only introduce a new problem setting, but also be accompanied by a viable methodological solution. The authors’ own summary of the failure modes is quite explicit: VLM-based routing achieves only 65–73% accuracy on IRIS, with no strategy demonstrating stable generalization across benchmarks; although the CNN reaches near-99% accuracy, it requires retraining for each distribution. In other words, the paper succeeds in revealing the problem, but does not yet provide a truly convincing and generalizable solution for equation routing. Overall, the work is stronger in benchmark construction and problem formulation than in proposing a new, strong method that substantially addresses the problem.
+Minor Weaknesses:
+The ground-truth values for the damping and friction coefficients are obtained by fitting video trajectories, and the uncertainty introduced by tracking noise is not propagated into the final ground-truth estimates. As a result, part of the benchmark’s “ground truth” is in fact dependent on the fitting procedure itself rather than being entirely exogenous physical quantities, which weakens the absolute objectivity of the evaluation.
+The multi-body contact modeling is overly simplified, which in turn weakens the physical interpretability of the benchmark. As described in the paper, contact interactions are not modeled using rigorous impact mechanics, but are instead approximated by a continuously active coupling coefficient. This means that key aspects of collision dynamics—such as restitution, instantaneous contact, and tangential friction—are not properly represented. Consequently, what is learned in the multi-body setting is better understood as an effective interaction strength rather than a parameter with clear physical meaning. This substantially weakens the claim of physical parameter estimation, particularly in collision-driven scenarios.
+The hitting-cones scenario is excluded from the quantitative table because its coupling coefficient does not have an independently measured ground-truth value; rather, it is fundamentally a byproduct of the spring-like simplification and not a directly observable physical quantity. This means that, although the paper introduces this scenario as part of the benchmark, its most critical parameter cannot be evaluated in the same rigorous quantitative manner as in the other tasks.
+Preliminary Recommendation: 3: Borderline Reject
+Justification Of Preliminary Recommendation:
+This is a potentially impactful benchmark paper, and I do think the dataset itself may become useful. However, I think a benchmark accompanied only by baseline evaluation and diagnostic analysis is not sufficient: several target quantities are only effective or fitted surrogates, the multi-body contact model is knowingly non-physical, and the evaluation setting emphasizes per-clip fitting rather than stronger forms of generalization. In addition, the methodological component is not yet strong enough to offset these issues. I would have liked to see the authors propose a method that is more tightly coupled to IRIS and specifically designed to address the challenges introduced by the benchmark.
+
+Suggestions For Rebuttal:
+see above
+
+Ethics Review Flag: No
+Confidence Level: 4: High Confidence - The reviewer has strong expertise in the area. They are highly familiar with the relevant literature and can critically evaluate the paper.
+Timely dataset
+Official Reviewby Reviewer bRfX08 Apr 2026, 16:50 (modified: 03 May 2026, 01:55)Program Chairs, Senior Area Chairs, Area Chairs, Reviewers, AuthorsRevisions
+Choose The Contribution Type You Are Using For Your Review: Datasets/Benchmarks
+Justify The Above Choice:
+I agree.
+
+Paper Summary:
+The authors present the novel IRIS dataset. It proposes a much needed benchmark for physical parameter estimation from videos. It is aimed at the gap of 1. high resolution, 2. multi-object interaction videos. The dataset is collected in a well-controlled setting, paired with rigorously measured ground truth parameters, and the governing equations for each scenario. Taken together, this provides a useful benchmark with a standardized evaluation framework. The paper provides a comparison of different methods on their dataset, for equation identification and physical parameter estimation, which was previously not possible due to the lack of such as a baseline.
+
+Paper Strengths:
+I rank IRIS quite highly in terms of significance and timeliness. Physical dynamics estimation is an important problem in many fields of science and engineering, yet many models attempting this task are evaluated on completely different datasets, due to the lack of an established benchmark. Often, the models are only evaluated on physics estimation by proxy: e.g. on future frame prediction, since datasets with ground truth physical parameters are scarce. Currently, this makes it difficult to compare models, and a good benchmark can be very impactful. I find the recording setup and experimental design excellent. The annotations (and their uncertainty estimates) seem to follow sufficient rigor. The recording conditions of the parameters are well documented. The evaluation framework (including e.g. the standardized governing equations) is well described, especially compared to previous methods. The high resolution and addition of multi-body dynamics are indeed novel and important. Benchmark setup seems potentially user-friendly (and with publicly available code, I assume it would be reproducible), but not all methods or baseline model settings are always clear to me (see weaknesses). Baseline results provide insights about IRIS, e.g. which tasks are possible, with what accuracy, etc.
+
+Major Weaknesses:
+The biggest weakness for me is the baseline evaluation (or lack thereof) of IRIS for the "primary" task of parameter estimation.
+
+Arguably the most important results (also marked as "primary" results in lines 344 and 421), for "the parameter estimation evaluation in IRIS" is almost completely missing? Section 6.3 discusses these results surprisingly shortly but there is no results table or systematic evaluation. This makes it seem like the presented results are cherry-picked or at least not all evaluations are performed for all scenarios: e.g. "both configurations" are mentioned for the sliding cone scenario, but no comparison of loss functions; whereas the effect of the "multi-step loss" is discussed for the rotation but it is unclear on what baseline model. Why are these results not reported comprehensively?
+
+Other weaknesses: Baseline accuracy: In Section 6.3, MAE=0 for the sliding cone is a bit concerning for a benchmark (i.e. models can hardly improve further). It is hard to judge the challenges of the dataset without comprehensive results in this section.
+
+Baseline descriptions: I also have concerns about the CNN achieving 99% accuracy, however, the setup of the CNN experiments is very unclear to me (what exactly is the task? what is the CNN classifying? what is meant by in-distribution, how was the train/test split obtained?). Because the descriptions of the baseline methods and their experimental settings are lacking, I have a hard time interpreting these results.
+
+Dataset size: 8 dynamical systems with 10 trials each still provides a relatively small dataset. Arguably, for precise benchmarking and/or training models with higher capacity without overfitting or latent space collapse, larger datasets might be necessary. Larger datasets might also involve increasing the range of the parameter values, to increase the challenges presented by the dataset.
+
+Dataset complexity: While it is understandable to keep the experimental settings simple, in order to perform the recordings in these extremely controlled settings, with precisely measured ground truths, there is little improvement in terms of dataset complexity compared to existing synthetic datasets.
+
+Novelty over existing datasets: While one of the main improvements is the inclusion of multi-body dynamics (and collisions/interaction), only 3 of the 8 tasks are dedicated to this novel setting. The single body scenarios seem similar to those in Delfys75, but with better resolution.
+
+Minor Weaknesses:
+The relevance of Table 4 and Table 5 to the paper is a bit unclear, since the baseline is not evaluated on IRIS. Perhaps the relevance, and/or the details of the baseline model and the applied correction can be explained or motivated a bit better?
+
+It would help readability to define "equation routing" as a term and motivate it better for the baseline experiments.
+
+Preliminary Recommendation: 3: Borderline Reject
+Justification Of Preliminary Recommendation:
+I think the dataset is a timely contribution which fills a gap in existing benchmarks. However, the baseline evaluations, especially for the primary task of physical parameter estimation, are almost completely missing.
+
+A systematic comparison of baseline methods (e.g. corrected/uncorrected, with and without multi-step loss etc.) on all IRIS scenarios is necessary to have a meaningful understanding of the complexity of the dataset (especially compared to the existing Delfys75). Similarly, the description of the methods used for equation identification need to be significantly improved (e.g. see my questions about the CNN setup in weaknesses), otherwise it is very difficult to interpret the results.
+
+Suggestions For Rebuttal:
+A systematic comparison of baseline methods (e.g. corrected/uncorrected, with and without multi-step loss etc.) on all IRIS scenarios, reported on a comprehensive table instead of short descriptions in Section 6.3.
+
+Improved description of the methods used for equation identification (e.g. see my questions about the CNN setup in weaknesses).
+
+Perhaps some comments about the size and complexity of the current dataset under limitations (e.g. what tasks/evaluations are not possible due to the limited size/controlled setting).
+
+Ethics Review Flag: No
+Confidence Level: 4: High Confidence - The reviewer has strong expertise in the area. They are highly familiar with the relevant literature and can critically evaluate the paper.

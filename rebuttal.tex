@@ -1,0 +1,116 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[rebuttal]{cvpr}
+\usepackage{eccvabbrv}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[accsupp]{axessibility}
+
+\definecolor{eccvblue}{rgb}{0.12,0.49,0.85}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=eccvblue]{hyperref}
+
+\def\paperID{*****}
+\def\confName{ECCV}
+\def\confYear{2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\appendix
+
+% ---------------------------------------------------------------
+\section{Response to All Reviewers}
+
+We thank all reviewers for their detailed and constructive feedback. We address the major concerns below, grouped by reviewer, and commit to all editorial fixes in the revision.
+
+% ---------------------------------------------------------------
+\section{R2 (PXn6, Borderline Reject)}
+
+\paragraph{Benchmark scope and absence of a new SOTA method.}
+IRIS is submitted as a \emph{dataset/benchmark} paper, as all three reviewers confirm in their contribution-type selection. Foundational benchmarks (ImageNet, KITTI, ScanNet) preceded and enabled the methods they powered; the ECCV call for papers explicitly includes benchmark contributions on this basis. We provide baselines precisely to characterize what is and is not solvable today---the honest conclusion that VLM routing achieves 65--73\% and the CNN reaches 99\% in-distribution is a \emph{diagnostic finding}, not a deficiency. R2 acknowledges ``the dataset itself may become useful.''
+
+\paragraph{Per-clip fitting and generalization — new experiment.}
+We ran a multi-clip experiment directly in response to this concern. For each phenomenon we split clips 80/20 by sorted index, trained one shared encoder+physics model on the 80\% training clips, and evaluated parameter MAE on the held-out 20\% test clips — directly comparable to per-clip fitting on the same clips. Results are in Table~\ref{tab:multi_clip_iris}.
+
+\begin{table}[h]
+  \centering
+  \caption{Multi-clip vs.\ per-clip on IRIS (held-out 20\% test clips; lower MAE better; $\Delta{=}$multi$-$per-clip).}
+  \label{tab:multi_clip_iris}
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lllrrrr@{}}
+    \toprule
+    Phenomenon & Param & GT & Per-clip & Multi-clip & $\Delta$ \\
+    \midrule
+    Dropping\_ball & $g$ & 9.81 & 0.207 & \textbf{0.046} & $-$0.161 \\
+    Falling\_ball  & $g$ & 9.81 & 0.246 & \textbf{0.166} & $-$0.080 \\
+    Pendulum       & rope\_len & 0.50 & \textbf{0.507} & 22.06 & $+$21.55 \\
+    Rotation       & ang.\ damp. & 0.03 & \textbf{0.657} & 0.851 & $+$0.194 \\
+    Rotation       & ang.\ stiff. & 0.10 & 1.037 & \textbf{0.577} & $-$0.459 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Multi-clip training \emph{outperforms} per-clip for gravity (both ball phenomena) and angular stiffness, demonstrating transferable physical inductive bias across clips. For the pendulum, multi-clip fails (MAE 22 vs.\ 0.5): the non-linear dynamics and small per-setting clip count make the shared latent space underdetermined. This is precisely the diagnostic finding a benchmark should reveal. The per-clip protocol is the standard in physics estimation benchmarks (Delfys75 follows the same convention) and is the appropriate baseline; our new multi-clip column shows where pooling helps and where it does not.
+
+\paragraph{Simplified contact model.}
+The spring-like coupling approximation is disclosed as a known limitation in the paper. We agree it does not represent rigorous impact mechanics; it is an \emph{effective interaction parameter} that is still useful for identifiability evaluation. Future benchmark versions can incorporate more rigorous contact models. The hitting-cones scenario is excluded from the quantitative table precisely for the reason R2 states, which is already acknowledged.
+
+\paragraph{Fitted ground truth for damping/friction.}
+Ground-truth parameters obtained by trajectory fitting are standard in experimental physics when exogenous measurement is impractical (e.g., pendulum damping). We propagate measurement uncertainty into \texttt{parameters.json} as mean~$\pm$~std across multiple measurements. We will make this procedure more explicit in \S\ref{sec:dataset}.
+
+% ---------------------------------------------------------------
+\section{R3 (bRfX0, Borderline Reject)}
+
+\paragraph{Missing comprehensive parameter estimation results (Section 6.3).}
+This is our most important revision. Section 6.3 was condensed due to space; we commit to adding a full comparison table. Table~\ref{tab:iris_results} shows baseline vs.\ unified model results on IRIS (MAE per phenomenon, setting, parameter). The results reveal a clear finding: the unified model strongly improves rotation damping (0.88 $\to$ 0.09) and coupled-pendulum rope length (1.38 $\to$ 0.48), while the baseline remains better for gravity---the same pattern as on Delfys75. The multi-step loss is unstable on multi-body settings (column omitted here; full table in revision).
+
+\begin{table}[h]
+\centering
+\caption{Baseline vs.\ unified on IRIS (MAE; lower is better). $\Delta < 0$: unified better.}
+\label{tab:iris_results}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllrrr@{}}
+\toprule
+Phenomenon & Setting & Param & Base & Unif & $\Delta$ \\
+\midrule
+Dropping ball & drop\_50  & $g$            & 1.04 & 6.48 & +5.44 \\
+Pendulum      & pend\_20  & rope\_len       & 0.56 & 0.84 & +0.28 \\
+Rotation      & fast      & ang.\ damp.     & 0.88 & \textbf{0.09} & \textbf{$-$0.78} \\
+Rotation      & slow      & ang.\ stiff.    & 1.59 & 6.74 & +5.14 \\
+Sliding cone  & cone\_45  & angle (deg)     & 0.00 & 0.00 & 0.00 \\
+2-pend.\ (1 static) & pend\_45 & rope\_len & 0.77 & \textbf{0.48} & \textbf{$-$0.29} \\
+2-pend.\ (moving) & pend\_90 & rope\_len   & 3.01 & 2.16 & \textbf{$-$0.85} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{MAE = 0 for sliding cone.}
+This is correct \emph{by construction}: the cone angle (45°, 60°, 80°) is a setup parameter defined geometrically and read directly from the configuration---it is not estimated from video. The metric confirms setup integrity. The friction/coupling coefficient for this scenario has no independently measured GT (acknowledged in the paper and noted by R2) and is excluded from the table.
+
+\paragraph{CNN setup clarification.}
+The CNN is a lightweight video classifier (ResNet backbone) trained to classify the physical phenomenon from video frames. The 99\% accuracy is on a held-out 25\% split of the \emph{same distribution} (Delfys75 or IRIS). A separate classifier is trained for each dataset; this is what ``requires retraining per distribution'' means---it is not a zero-shot approach like the VLM. We will add this detail explicitly to \S6.2.
+
+\paragraph{Dataset size and complexity.}
+We agree 220 videos is a moderate size; we will add a limitations paragraph discussing what evaluations (e.g., deep neural-ODE baselines, large-scale transfer) are not yet supported. Increasing parameter range and video count is planned for future releases.
+
+% ---------------------------------------------------------------
+\section{R1 (MCJw, Weak Accept)}
+
+We will address all line-number comments in the revision:
+
+\textbf{Notation (lines 206, 245--259, 306).} We will add a notation table defining $N$, $N_f$, $f$, $g$, $\alpha$, $\mu$, and their relationship to $V = I_1,\ldots,I_T$.
+
+\textbf{Table captions (lines 450, 464, 496, 515, 540).} Each caption will conclude with an explicit ``So what?'' sentence (e.g., ``The unified model improves pendulum length by up to 91\% but not gravity, indicating gravity estimation requires a separate fix.'').
+
+\textbf{Gradient-flow bug (lines 093, 138).} This is a \emph{software implementation bug}: the discrete Euler step was \smash{$z_{\text{next}} = z + \mathrm{d}t \cdot \dot{z}$}, which has no dependence on $\ddot{z}$; physics parameters therefore received zero gradient. Our fix restores $z_{\text{next}} = z + \mathrm{d}t\cdot\dot{z} + \mathrm{d}t^2\cdot\ddot{z}$. We re-implemented the pipeline from scratch; we did not file an external bug report. We will clarify this.
+
+\textbf{Multi-step loss novelty (line 021).} Yes, the multi-step physics loss is a contribution of this paper; we will state this explicitly.
+
+\textbf{High resolution and video count benefit (lines 014, 325).} 4K/60\,fps reduces temporal aliasing in period estimation (e.g., pendulum period at 60\,fps vs.\ 25\,fps); we will add a quantitative comparison. For video count, we will report how parameter MAE standard deviation decreases as more clips are averaged---the ablation is feasible from existing runs and will be added to the supplement.
+
+\textbf{Evaluation overlap with [7] (line 337).} We will state explicitly which metrics are adopted from [7], which are modified, and why.
+
+\end{document}

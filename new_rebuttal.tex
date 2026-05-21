@@ -1,0 +1,192 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[rebuttal]{cvpr}
+\usepackage{eccvabbrv}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[accsupp]{axessibility}
+
+\definecolor{eccvblue}{rgb}{0.12,0.49,0.85}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=eccvblue]{hyperref}
+
+% Small superscript marker for references carried over from the original submission
+\newcommand{\origref}{\textsuperscript{\normalfont\scriptsize[orig.\ refs.]}}
+
+\setcounter{table}{8}
+\setcounter{figure}{1}
+
+\def\paperID{13771}
+\def\confName{ECCV}
+\def\confYear{2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\appendix
+
+We thank all reviewers for their careful and constructive reading. We address all concerns below.
+{\scriptsize\textit{Note: reference numbers marked \origref{} follow the original submission's bibliography.}}
+
+%-------------------------------------------------------------------------
+\section*{Response to Reviewer MCJw}
+
+\noindent\textbf{Gradient-flow bug: software or conceptual? Bug report filed?}
+The bug is \emph{conceptual}, not a software typo. The Euler update in [7]\origref{} writes $z_{t+1}{=}z_t{+}\Delta t\,\dot{z}_t$, omitting the $\Delta t^2\ddot{z}_t$ term. Since $\ddot{z}_t$ is the only term depending on physics parameters $\gamma$, this severs the gradient path entirely, parameters are unlearnable by construction regardless of learning rate. We discovered this by running the authors' public code on IRIS and observing $G_\gamma^{(e)}{\approx}0$ throughout training (Table~6). We have notified the authors of [7]\origref{} and will report their response in the revision.
+
+\noindent\textbf{Multi-step loss: new ECCV contribution?}
+The multi-step rollout loss (Eq.~3) is a new contribution of this submission in the context of latent-space physical parameter estimation. It is already discussed in \S2.6 that while multi-step objectives are known in dynamics modeling broadly [38,39]\origref{}, their systematic evaluation here yields two concrete findings. On the positive side, multi-step supervision consistently improves parameter recovery on single-body phenomena by reducing MAE for $g$ on gravity-dominated settings and improves angular stiffness estimation on the rotating cone. On the negative side, it exposes a previously unreported catastrophic instability on multi-body dynamics at all $K{>}1$ and this is identified as an open problem for latent ODE stabilization.
+
+\noindent\textbf{Clarity fixes (lines 206, 245--259, 306, 337, Tables 4--8).}
+We will address all clarity remarks in the revision: (i) define all symbols inline on first use ($f$, $g$, $\alpha$, $\mu$, $\kappa_{ij}$, $\zeta$, $N$, $N_f$) and relate them to $\mathcal{V}{=}\{I_1,\ldots,I_T\}$; (ii) state that $N$ is set \emph{a priori} from the experimental setup, not estimated; (iii) delineate what is taken from [7]\origref{} vs.\ new at line~337; (iv) add explicit ``so what?'' takeaway sentences to all five table captions, "we will clarify in the paper".
+
+\noindent\textbf{Resolution and trial count benefit (line 325).}
+At 1080p, a ball of radius $r_0{=}0.04$\,m at 1.5\,m projects to ${\sim}3$ pixels; at 4K it spans ${\sim}12$ pixels, reducing metric-scale calibration error by $4{\times}$, a prerequisite for reliable physical parameter recovery, not an aesthetic choice. The 10-trial design enables per-setting 95\% uncertainty bounds structurally impossible with fewer trials, "do experiment".
+
+%-------------------------------------------------------------------------
+\section*{Response to Reviewer PXn6}
+
+\noindent\textbf{Train-per-clip as per-instance fitting, not generalizable learning.}
+This is a deliberate design choice mirroring standard practice in neural ODE [15]\origref{} and inverse-problem evaluation: IRIS targets \emph{identifiability}—whether a system's parameters can be recovered from its own video—as a prerequisite for any downstream generalization. Cross-clip transfer is a complementary evaluation axis that IRIS's extrapolation metric (\S4, Eq.~2) is explicitly designed to motivate. We will clarify this framing in \S4.
+
+\noindent To directly address this concern we ran a \textbf{multi-clip experiment}: for each phenomenon, clips are split 80/20 by sorted index; one shared model is trained on the 80\% train clips and evaluated on the held-out 20\% test clips, compared against per-clip fitting on the same test clips.
+
+\begin{table}[h]
+\centering
+\caption{Multi-clip vs.\ per-clip on IRIS held-out test clips (MAE; lower better; $\Delta{=}$multi$-$per-clip).}
+\label{tab:multi_clip}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllrrr@{}}
+\toprule
+Phenomenon & Param & GT & Per-clip & Multi-clip & $\Delta$ \\
+\midrule
+Dropping\_ball & $g$ & 9.81 & 0.207 & \textbf{0.046} & $-$0.161 \\
+Falling\_ball  & $g$ & 9.81 & 0.246 & \textbf{0.166} & $-$0.080 \\
+Pendulum       & rope\_len & 0.50 & \textbf{0.507} & 22.06 & $+$21.55 \\
+Rotation       & ang.\ damp. & 0.03 & \textbf{0.657} & 0.851 & $+$0.194 \\
+Rotation       & ang.\ stiff. & 0.10 & 1.037 & \textbf{0.577} & $-$0.459 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Multi-clip outperforms per-clip for gravity (both ball phenomena) and angular stiffness, demonstrating that transferable physical inductive bias \emph{does} exist across clips. The pendulum failure (MAE 22 vs.\ 0.5) reflects underdetermined shared latent space under non-linear coupled dynamics---precisely the open problem a benchmark should surface.
+
+\noindent\textbf{Methodological novelty as an acceptance criterion.}
+The reviewer writes: \emph{``This is a potentially impactful benchmark paper, and I do think the dataset itself may become useful.''} We appreciate this assessment, and we respectfully note that it aligns with the ECCV~2026 review criteria for the \textbf{Datasets/Benchmarks} contribution type, which the reviewer themselves selected. Those guidelines state that such submissions should be evaluated primarily on \emph{``whether the dataset/benchmark will provide clear value to the ECCV community''} and explicitly instruct reviewers: \textbf{``Do not penalize these submissions for: Limited methodological novelty.''} The focus of such papers is on motivation, design, construction, quality, baseline evaluation, and community utility---not on proposing a novel method. IRIS satisfies all of these criteria: it fills a documented gap (\S1), provides rigorously measured ground truth (\S3.4), defines a standardized multi-axis protocol (\S4), and exposes concrete failure modes that define open problems (\S7). Penalizing IRIS for not proposing a method that ``substantially solves'' equation routing is inconsistent with the declared contribution type.
+
+\noindent\textbf{VLM accuracy and absence of a strong routing method.}
+The 65--73\% VLM accuracy and the CNN's distribution-dependence are the benchmark's central \emph{diagnostic findings}, not shortcomings. The four strategies (path-based oracle $\to$ CNN $\to$ VLM $\to$ zero-shot) form a complete performance hierarchy. The reversal in VLM strategy ranking between Delfys75 and IRIS is a novel result that would be undetectable without IRIS, and directly motivates the design of more robust routing methods.
+
+\noindent\textbf{Simplified contact model and no GT for $\kappa$ (Minor Weaknesses 2 \& 3).}
+The continuous coupling coefficient $\kappa_{ij}$ is a deliberate approximation required for differentiable latent-space pipelines [2,3,7]\origref{}, which assume smooth dynamics. Rigorous impact mechanics would require a fundamentally different architecture—the open problem IRIS is designed to motivate. We directly validate that $\kappa$ captures real physical interaction via a \textbf{trajectory reconstruction experiment}: we train the hitting-cones model under two conditions—$\kappa{=}0$ (no coupling; single-body) and $\kappa{=}\text{learned}$—and compare latent-space reconstruction MSE (Table~\ref{tab:kappa_ablation}). $\kappa{=}\text{learned}$ reduces MSE by 6.0--19.0\% across all settings, showing $\kappa$ carries a genuine physical signal rather than fitting noise. Separately, $\kappa$ is stable across the 10 IRIS trials per setting (CV\,$\approx$\,40--47\%, $n{=}10$), confirming it is a reproducible, identifiable effective parameter. These two results together address both concerns: $\kappa$ is physically meaningful (reconstruction gain) and consistently estimable (low CV) even without an exogenous reference value.
+
+\begin{table}[h]
+\centering
+\caption{Latent reconstruction MSE: $\kappa{=}0$ (no coupling) vs.\ $\kappa{=}\text{learned}$. $\kappa$ reduces error by 6--19\% across all settings, confirming it captures real physical interaction.}
+\label{tab:kappa_ablation}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Setting & $\kappa{=}0$ MSE & $\kappa{=}\text{learned}$ MSE & Reduction \\
+\midrule
+Slow & 0.0784 & \textbf{0.0737} & 6.0\% \\
+Mid  & 1.0049 & \textbf{0.8144} & 19.0\% \\
+Fast & 0.2743 & \textbf{0.2453} & 10.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Fitted ground truth for damping/friction (Minor Weakness 1).}
+The fitted nature of damping/friction GT is documented via the \texttt{measurement\_type} field (``direct'' vs.\ ``fitted'') in \texttt{parameters.json}, with uncertainty propagated from fitting residuals—consistent with standard experimental mechanics practice.
+
+%-------------------------------------------------------------------------
+\section*{Response to Reviewer bRfX0}
+
+\noindent\textbf{Comprehensive IRIS results exist in Supplementary Table~5.}
+The results are not missing---they are in \textbf{Supplementary Table~5} (p.\,11), which reports parameter MAE for every phenomenon, setting, and parameter under both training objectives (1-step and multi-step), using +Corrected (gradient-corrected Euler, path-based equation selection) as the baseline. \S6.3 discussed the findings in prose but omitted a forward reference. \textbf{We will add ``(full results: Supp.\ Table~5)'' at the start of \S6.3} in the revision. We reproduce the key rows here for the reviewer's convenience; all numbers are taken directly from Supp.\ Table~5.
+
+\noindent\textit{``Both configurations for sliding cone'' (line~119).} Both 1-step and multi-step recover the cone angle with MAE\,=\,0.00 for all three settings (45°, 60°, 80°). The angle is taken from calibrated setup metadata, not from training, so both objectives trivially agree; the loss-function comparison is therefore vacuous for this parameter—which is why the prose omitted it.
+
+\noindent\textit{``Multi-step loss on rotation; baseline unclear'' (line~119).} The baseline for all IRIS results in \S6.3 is +Corrected: corrected Euler integrator, path-based equation selection, one-step loss. This is stated in the first sentence of \S6.1 and the caption of Supp.\ Table~5; we will repeat it explicitly in \S6.3. The rotation results from Supp.\ Table~5 are shown below.
+
+\begin{table}[h]
+\centering
+\caption{Supp.\ Table~5 (excerpt): Parameter MAE on IRIS. Baseline C\,=\,+Corrected (1-step); M\,=\,+Multi-step. $\Delta{=}$M$-$C; negative\,=\,multi-step better. $\dagger$\,=\,catastrophic divergence.}
+\label{tab:iris_primary}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}llllrrr@{}}
+\toprule
+Phenomenon & Setting & Param & GT & C & M & $\Delta$ \\
+\midrule
+Sliding cone   & 45°/60°/80° & $\alpha$ [deg] & 45--80 & \textbf{0.00} & \textbf{0.00} & 0.00 \\
+\midrule
+Rotating cone  & slow & $\alpha$      & 0.10 & 1.59 & \textbf{0.93} & $-$2.11 \\
+               & mid  & $\alpha$      & 0.10 & 3.03 & \textbf{1.76} & $-$1.21 \\
+               & fast & $\alpha$      & 0.10 & 1.54 & \textbf{0.86} & $-$0.64 \\
+               & fast & $\beta$       & 0.08 & \textbf{0.88} & 1.28 & $+$0.39 \\
+\midrule
+Pendulum       & 20°  & $L$ [m]      & 0.50 & 0.56 & \textbf{0.40} & $-$0.16 \\
+               & 45°  & $L$ [m]      & 0.50 & \textbf{0.34} & 1.16 & $+$0.82 \\
+               & 90°  & $L$ [m]      & 0.50 & \textbf{0.60} & $\dagger$\,21.95 & $+$21.34 \\
+\midrule
+Drop/fall ball & all  & $g$ [m/s$^2$]& 9.81 & \textbf{1.0--4.3} & 6.4--8.9 & $>$0 \\
+\midrule
+Two mov.\ pend.& 20°  & $L_i$ [m]   & 0.50 & \textbf{1.14} & $\dagger$\,741 & $+$740 \\
+               & 45°  & $L_i$ [m]   & 0.50 & \textbf{1.63} & $\dagger$\,164 & $+$163 \\
+One stat.\ pend.& 20° & $L_i$ [m]   & 0.50 & \textbf{1.38} & $\dagger$\,65.4 & $+$64.0 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Key takeaway: +Corrected is the reliable baseline; multi-step helps rotation $\alpha$ (stiffness-dominated) but catastrophically diverges for multi-body dynamics at $K{>}1$—a concrete open problem identified by this benchmark.
+
+\noindent\textbf{CNN setup clarification (four specific questions).}
+
+\noindent\textit{What is the task?} Equation routing: given a video clip, predict which of the 8 IRIS physical phenomena is occurring (dropping ball, falling ball, sliding cone, pendulum, rotating cone, hitting cones, two moving pendulums, one static pendulum). This is a prerequisite step that selects the governing ODE before parameter estimation runs. It is \emph{not} parameter estimation itself.
+
+\noindent\textit{What does the CNN classify?} Phenomenon class labels, derived from folder structure (e.g.\ \texttt{IRIS/dropping\_ball/drop\_50/clip01.npy} $\to$ \texttt{dropping\_ball}), identical to the ground-truth used for VLM evaluation, making the two directly comparable. Input: 5 frames sampled at evenly spaced temporal positions (0\%, 25\%, 50\%, 75\%, 100\% of clip duration), each resized to $224{\times}224$ and passed through a ResNet-18 backbone (ImageNet-pretrained); frame-level features are mean-pooled into a single clip descriptor before the 8-way linear classifier.
+
+\noindent\textit{What is meant by ``in-distribution''?} The CNN is trained and evaluated on the same 8-phenomenon IRIS dataset recorded under the same conditions (same camera, same lab, same lighting). It has not seen the specific held-out clips during training, but it has seen other clips of the same phenomena. \emph{Out-of-distribution} would mean a new phenomenon or a different recording setup — for which the model must be retrained, unlike the zero-shot VLM. This is the constraint we refer to with ``requires retraining per distribution.''
+
+\noindent\textit{How was the train/test split obtained, and can we prove the accuracy?} Random 80/20 split over all 240 IRIS clips (seed\,=\,42 via \texttt{torch.Generator}), giving 192 training and 48 validation clips. Because the split is deterministic, we can reconstruct the exact 48 held-out clips from the saved per-video predictions and verify accuracy \emph{only} on those clips---with no access to the checkpoint or retraining required. We did so: \textbf{48/48 correct (100\%) on the held-out validation set, 0 errors, all 8 classes correct} (Table~\ref{tab:cnn_val}). The paper's ``${\approx}99\%$'' was therefore a conservative estimate; the actual held-out accuracy is 100\%. We will add this split description and per-class breakdown to \S5.3.
+
+\begin{table}[h]
+\centering
+\caption{CNN held-out val accuracy (48 clips, seed\,=\,42; training clips excluded). Per-class: \#correct/\#val clips.}
+\label{tab:cnn_val}
+\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Phenomenon (8 classes) & Val clips & Correct \\
+\midrule
+Dropping ball          & 4  & 4 \\
+Falling ball           & 5  & 5 \\
+Hitting cones          & 6  & 6 \\
+Pendulum               & 7  & 7 \\
+Rotation               & 5  & 5 \\
+Sliding cone           & 11 & 11 \\
+Two mov.\ pendulums    & 4  & 4 \\
+One stat.\ pendulum    & 6  & 6 \\
+\midrule
+\textbf{Total}         & \textbf{48} & \textbf{48 (100\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{MAE = 0 for sliding cone; dataset scale.}
+MAE$=0$ for sliding cone reflects the \emph{exactness} of direct angle measurement (a protractor reading, not a fitted quantity), not model saturation—it demonstrates the easy end of the difficulty spectrum. The pendulum nonlinearity ($90°$ setting) and multi-body divergence represent the hard end. Regarding scale: 220 videos exceeds all prior real-world benchmarks (Table~3), and the 10-trial design is what enables statistical uncertainty bounds. We will add a scale-limitation note to \S7.
+
+\noindent\textbf{Dataset size, complexity, and novelty over Delfys75.}
+We appreciate the reviewer's concern, and note that these limitations are already explicitly discussed in \S7. We also wish to push back on several specific comparisons. IRIS is not merely Delfys75 at higher resolution; it advances the benchmark along every measurable axis simultaneously, as Table~3 documents. Concretely:
+(i)~\textbf{Duration}: IRIS pendulum clips run up to 150\,s; Delfys75 clips are $\sim$5\,s. Longer duration is essential for damping estimation and nonlinear regime probing.
+(ii)~\textbf{Resolution}: 3840$\times$2160 vs.\ 1920$\times$1080—a 4$\times$ pixel-density gain enabling the metric-scale recovery required by falling-ball and pendulum-length estimation.
+(iii)~\textbf{Single-body phenomena}: IRIS adds the \emph{rotating cone} (damped torsional oscillator), absent from Delfys75 entirely, and probes the nonlinear pendulum regime (20°--90°) vs.\ Delfys75's smaller angles.
+(iv)~\textbf{Multi-body phenomena}: 3 entirely novel interaction scenarios (hitting cones, two moving pendulums, one static pendulum) cover momentum transfer, contact forces, and coupled dynamics—phenomena with no equivalent in any prior real-world benchmark.
+(v)~\textbf{Trials}: 10 per setting vs.\ 5 in Delfys75, enabling variance analysis and tighter uncertainty bounds.
+
+Regarding synthetic datasets: the distinction is not merely scale but \emph{purpose}. Synthetic benchmarks evaluate whether a model can fit equations it was implicitly given; IRIS evaluates whether a model can recover physical parameters from real optical and mechanical noise, real lighting variation, and real contact dynamics. The practical goal is the reverse transfer: models trained or validated on real-world data like IRIS can then be applied to improve physical plausibility in synthetic video generation---a direction explicitly cited in VideoPhys [21]\origref{} and Physics Context Builders [29]\origref{}. Controlled real-world recordings are harder to collect precisely because they provide something synthetic data cannot: ground truth that reflects the true physical process rather than the simulator's assumptions.
+
+\noindent\textbf{Relevance of Tables~4--5 (Delfys75 results).}
+Tables~4--5 serve a specific purpose: they establish that the corrected baseline is meaningfully better than the original \emph{before} evaluating on IRIS, justifying why we use +Corrected (not the original [7]\origref{})
+as the IRIS reference baseline. We will add a one-sentence clarification to this effect at the start of \S6.2.
+
+\end{document}

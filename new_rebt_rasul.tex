@@ -1,0 +1,199 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% ---------------------------------------------------------------
+% Include basic CVPR package in rebuttal mode
+\usepackage[rebuttal]{cvpr}
+
+% ---------------------------------------------------------------
+% Other packages
+\usepackage{eccvabbrv}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage[accsupp]{axessibility}
+
+% ---------------------------------------------------------------
+% Hyperref
+\definecolor{eccvblue}{rgb}{0.12,0.49,0.85}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=eccvblue]{hyperref}
+
+% ---------------------------------------------------------------
+% Palette
+\definecolor{colSync}{HTML}{D1ECF1}
+\definecolor{colYellow}{HTML}{FFF2A8}
+\definecolor{cgreen}{HTML}{CDEAC0}
+\definecolor{cred}{HTML}{F5B7B1}
+
+% Inline highlights: \hl = blue (short phrase), \hly = yellow (ECCV quote pieces)
+\newcommand{\hl}[1]{{\setlength{\fboxsep}{1.7pt}\colorbox{colSync}{\textbf{ #1 }}}}
+\newcommand{\hly}[1]{{\setlength{\fboxsep}{1.7pt}\colorbox{colYellow}{\textbf{ #1 }}}}
+\newcommand{\cgr}{\cellcolor{cgreen}}
+\newcommand{\crd}{\cellcolor{cred}}
+
+% 4DSF-style helpers
+\newcommand{\R}[1]{{\color{eccvblue}\textbf{#1}}}
+\newcommand{\Rev}[1]
+{\noindent{\color{eccvblue}\textbf{Reviewer~#1:}}}
+\newcommand{\topic}[1]{\noindent{\color{eccvblue}\textbf{#1}}}
+\newcommand{\sub}[1]{\textbf{#1:}}
+
+\newcommand{\method}{IRIS}
+
+% Compact bibliography that does not force a column/page break
+\makeatletter
+\renewcommand{\@biblabel}[1]{[#1]}
+\renewenvironment{thebibliography}[1]
+  {\par\nopagebreak\scriptsize\setlength{\parindent}{0pt}\setlength{\parskip}{2pt}%
+   \setcounter{enumiv}{0}}
+  {\par}
+\renewcommand{\bibitem}[1]{\stepcounter{enumiv}%
+  \protected@write\@auxout{}{\string\bibcite{#1}{\arabic{enumiv}}}%
+  \par\noindent\hangindent=12pt\hangafter=1[\arabic{enumiv}]\hspace{4pt}\ignorespaces}
+\makeatother
+
+% Avoid clashing with main paper numbering
+\setcounter{table}{0}
+\setcounter{figure}{1}
+
+% ---------------------------------------------------------------
+\def\paperID{13771}
+\def\confName{ECCV}
+\def\confYear{2026}
+
+\begin{document}
+\thispagestyle{empty}
+\appendix
+
+% ============================================================
+% OPENING
+% ============================================================
+We sincerely thank the reviewers for the detailed suggestions and positive feedback. All acknowledge \method{}'s value as a real-world physics benchmark. \R{MCJw} acknowledges our ``high quality dataset'', ``novel benchmark settings ... through multi-body collisions'', ``new multi-step physics loss'', and ``explicit diagnostic systematic failure modes''. \R{PXn6} finds the direction ``meaningful and timely'' and that \method{} ``extends prior real-world datasets ... and provides a cleaner benchmarking protocol''. \R{bRfX0} ranks \method{} ``quite highly in significance and timeliness'' with ``recording setup and experimental design excellent''. \method{} is the \hl{first real-world benchmark with multi-body dynamics}. 
+% A well documented \textbf{dataset / evaluation code / per-trial measurement records} will be publicly released.
+
+% ============================================================
+% SHARED CONCERNS (technical lead; contribution-type framing later)
+% ============================================================
+\topic{Primary \method{} results and multi-step findings (\R{bRfX0}, \R{MCJw}):}
+Tab.~\ref{tab:iris_primary} (Numbers from Supp Tab.~5) consolidates the prose results of \S6.3 (per \R{bRfX0}'s ask) and answers \R{MCJw}'s l.21 question on multi-step novelty: rollouts are known in dynamics modeling [38,39], but their systematic evaluation for \emph{latent-space physical parameter} estimation is new, with both findings (single-body gain, multi-body divergence at $K{>}1$) exposed for the first time on real video.
+
+\topic{Dataset scope, novelty over Delfys75 (\R{bRfX0}, \R{PXn6}):}
+\method{} does \emph{not} merely rescale Delfys75; main Tab.~3 documents advances on every axis: (i)~\emph{Duration} up to $150$\,s vs.\ ${\sim}5$\,s; (ii)~\emph{Resolution} $4{\times}$ pixel density; (iii)~adds rotating cone and nonlinear pendulum to $90^\circ$; (iv)~3 entirely novel multi-body scenarios absent from any prior real-world benchmark; (v)~10 vs.\ 5 trials. The 65--73\% VLM accuracy and CNN distribution-dependence are central \emph{diagnostic findings}, not shortcomings.
+
+\topic{Datasets/Benchmarks evaluation rubric (\R{PXn6}):}
+\R{PXn6} selected contribution type \textbf{Datasets/Benchmarks} (\emph{``Benchmark as suggested in the title''}) and explicitly recognises \method{}'s value: the direction is \emph{``meaningful and timely''}; \method{} \emph{``extends prior real-world datasets beyond single-body settings ... and provides a cleaner benchmarking protocol''}; the paper \emph{``successfully exposes several important failure modes''}; and \emph{``the dataset itself may become useful''}. \textbf{Yet} \R{PXn6}'s stated grounds for Borderline Reject are precisely \emph{``the methodological component is not yet strong enough''} and the absence of \emph{``a new, strong method that substantially solves the problem''}. The ECCV~2026 Reviewer Guidelines~\cite{eccv26_rev} for this contribution type state explicitly: \hly{Do not penalize these submissions for:} \hly{Limited methodological novelty}; methods \emph{``should be judged only as a baseline, not the main contribution''}; acceptance is \emph{``based primarily on: Whether the dataset/benchmark will provide clear value to the ECCV community''}. The criterion driving \R{PXn6}'s BR is the single criterion the rubric explicitly forbids penalizing.
+
+% ============================================================
+% PRIMARY TABLE
+% ============================================================
+\begin{table}[t]
+\vspace{-7pt}
+\centering
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.9}
+% \scalebox{0.45}
+\scriptsize
+\caption{\scriptsize Parameter MAE on \method{} for +Corrected (C) vs.\ +Multi-step (M). $\Delta{=}$M$-$C; \textbf{bold}=lower MAE. \colorbox{cgreen}{Green}: M better. \colorbox{cred}{Red}: M worse or diverges ($\dagger$). \textbf{Takeaway:} +C is the reliable baseline; +M helps single-body stiffness-dominated phenomena but fails on multi-body, an open problem [38,39] \method{} exposes for the first time on real video.}
+\label{tab:iris_primary}
+\begin{tabular}{llllll}
+\toprule
+Phenomenon & Setting & Param & C & M & $\Delta$ \\
+\midrule
+Sliding cone   & all     & $\alpha$ [deg] & \textbf{0.00} & \textbf{0.00} & 0.00 \\
+Rotating cone  & slow/mid/fast & $\alpha$ & C & \cgr \textbf{better} & \cgr $-$0.64/$-$1.21/$-$2.11 \\
+               & fast    & $\beta$        & \textbf{C} & \crd worse        & \crd $+$0.39 \\
+Pendulum       & 20$^\circ$ & $L$ [m]     & C     & \cgr \textbf{better} & \cgr $-$0.44 \\
+               & 90$^\circ$ & $L$ [m]     & \textbf{C} & \crd $\dagger$    & \crd $+$20.49 \\
+Drop/fall ball & all     & $g$ [m/s$^2$]  & \textbf{C} & \crd worse        & \crd $>$0    \\
+Two mov.\ pend.& 20$^\circ$ & $L_i$ [m]   & \textbf{1.1--3.0} & \crd $\dagger$ & \crd $+$741.1 \\
+\bottomrule
+\end{tabular}
+\vspace{-10pt}
+\end{table}
+
+% ============================================================
+% PER REVIEWER
+% ============================================================
+\Rev{MCJw}\\
+\sub{Bug nature (l.93,138)} \emph{Conceptual}, not a software typo. The Euler step in [7] writes $z_{t+1}{=}z_t{+}\Delta t\,\dot z_t$, omitting the $\Delta t^2\,\ddot z_t$ term. Since $\ddot z_t$ is the only term depending on physics parameters $\gamma$, the gradient path is severed and parameters are unlearnable regardless of learning rate. We discovered this by running [7]'s public code on \method{} and observing $G_\gamma^{(e)}{\approx}0$ throughout training (main Tab.~6); the authors of [7] have been notified.
+\sub{Clarity (l.206, 245--259, 306, 337, Tabs.~4--8)} We will (i)~define every symbol inline on first use ($f, g, \alpha, \mu, \kappa_{ij}, \zeta, N, N_f$); (ii)~delineate at l.337 what is from [7] vs.\ new; (iii)~add ``so what?'' takeaways to Tabs.~4--8 (see Tab.~\ref{tab:iris_primary}). \textbf{High-fidelity/Resolution/trials (l.325)}: 4K's $4{\times}$ pixel density reduces position quantization error by $4{\times}$, enabling metric-scale parameter recovery that 1080p cannot reliably achieve; 10 trials enable per-setting $95\%$ uncertainty bounds. Table~\ref{tab:resolution} confirms this experimentally across all IRIS (native 4K vs.\ downsampled 1080p).
+
+% : 4K wins on every scenario, with MAE gain correlating with trajectory size ($r{=}0.79$).
+\begin{table}[h]
+\vspace{-6pt}
+\centering
+\setlength{\tabcolsep}{1pt}
+\renewcommand{\arraystretch}{0.2}
+\scriptsize
+% \begin{minipage}[t]{0.3\linewidth}
+\scalebox{0.75}
+{\small
+\begin{tabular}{lllll}
+\toprule
+Scenario & Disp.\ @1080p & MAE$_{\text{4K}}$ & MAE$_{\text{1080p}}$ & $\Delta$ \\
+\midrule
+Dropping\_ball        & 2.2\,px/f & \textbf{4.22} & 4.45 & \cgr$+$5.2\% \\
+Falling\_ball         & 7.5\,px/f & \textbf{7.14} & 7.23 & \cgr$+$1.3\% \\
+Pendulum               & 21.6\,px/f & \textbf{4.16} & 4.73 & \cgr$+$12.1\% \\
+Two\_Moving\_Pend(1S) & 9.8\,px/f & \textbf{4.40} & 4.73 & \cgr$+$7.1\% \\
+Two\_Moving\_Pend.    & 7.3\,px/f & \textbf{4.84} & 4.96 & \cgr$+$2.5\% \\
+\bottomrule
+\end{tabular}}
+% \end{minipage}
+\caption{Median per-frame object displacement at 1080p, MAE, and resolution gain across all 5 IRIS scenarios with scalar GT.}
+\label{tab:resolution}
+\vspace{-10pt}
+\end{table}
+
+\Rev{PXn6}\\
+\sub{Train-per-clip is per-instance fitting} Per-clip is deliberate identifiability evaluation [15], not a limitation. To test cross-clip generalization we ran a \textbf{multi-clip experiment} (80/20 split per phenomenon): multi-clip outperforms per-clip for linear phenomena but fails on the nonlinear pendulum, exactly the open problem \method{} surfaces (Tab.~\ref{tab:pxn6_new}, left).
+\sub{Fitted GT and simplified contact} Fitted GT is documented via \texttt{measurement\_type} in \texttt{parameters.json} with uncertainty. Continuous $\kappa_{ij}$ is an acknowledged approximation (\S3.3, \S7); to confirm it is not fitting noise we compared $\kappa{=}\text{learned}$ vs.\ $\kappa{=}0$: learned $\kappa$ reduces reconstruction MSE by \textbf{6--19\%} (Tab.~\ref{tab:pxn6_new}, right).
+
+\begin{table}[h]
+\centering
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.9}
+\scriptsize
+\vspace{-4pt}
+\begin{minipage}[t]{0.60\linewidth}
+\centering
+\textbf{Multi-clip vs.\ per-clip MAE (80/20)}\par\vspace{1pt}
+\scalebox{0.80}{
+\begin{tabular}{llrrr}
+\toprule
+Phenomenon & Param & Per & Multi & $\Delta$ \\
+\midrule
+Dropping ball & $g$ & 0.207 & \cgr\textbf{0.046} & \cgr$-$0.161 \\
+Falling ball  & $g$ & 0.246 & \cgr\textbf{0.166} & \cgr$-$0.080 \\
+Rotation      & stiff. & 1.037 & \cgr\textbf{0.577} & \cgr$-$0.459 \\
+Rotation      & damp. & \textbf{0.657} & \crd 0.851 & \crd$+$0.194 \\
+Pendulum      & $L$ & \textbf{0.507} & \crd 22.06 & \crd$+$21.55 \\
+\bottomrule
+\end{tabular}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\linewidth}
+\centering
+\textbf{Hit.-cones MSE ($\kappa$)}\par\vspace{1pt}
+\begin{tabular}{lrrr}
+\toprule
+Set. & $\kappa{=}0$ & $\kappa{=}$lrn & $\Delta\%$ \\
+\midrule
+Slow & 0.0784 & \textbf{0.0737} & \cgr$-$6.0 \\
+Mid  & 1.0049 & \textbf{0.8144} & \cgr$-$19.0 \\
+Fast & 0.2743 & \textbf{0.2453} & \cgr$-$10.5 \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\caption{\scriptsize \textbf{Left:} multi-clip outperforms per-clip on linear phenomena but fails on the nonlinear pendulum. \textbf{Right:} learned $\kappa$ reduces hitting-cones reconstruction MSE 6--19\%, confirming physical signal.}
+\label{tab:pxn6_new}
+\vspace{-10pt}
+\end{table}
+
+\Rev{bRfX0}\sub{CNN setup} ResNet-18 (ImageNet-pretrained), 5 sampled frames $\to$ mean pool $\to$ 8-way softmax; random 80/20 split (192/48 clips). ``In-distribution'' = same 8 phenomena.
+
+\bibliographystyle{splncs04}
+\bibliography{main}
+
+\end{document}

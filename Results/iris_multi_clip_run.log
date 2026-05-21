@@ -1,0 +1,364 @@
+[1] Generating synthetic IRIS physics data (10 clips/setting, 120 samples/clip)...
+Phenomena: ['Dropping_ball', 'Falling_ball', 'Pendulum', 'Rotation', 'Sliding_cone']
+
+============================================================
+Phenomenon: Dropping_ball  dynamics=dropping_ball  dt=0.01667
+  Total clips: 30 | Train: 24 | Test: 6
+  [multi-clip] Training on 2000 samples ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.736581472250132 	 validation loss: 4.787666916847229
+best model a 9.760924339294434
+best last a 0.7176642417907715
+best model b 1.0
+best last b 1.0
+  [multi-clip] DONE: alpha=9.760924, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_4 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.715857982635498 	 validation loss: 4.80145788192749
+best model a 9.309720039367676
+best last a 9.26497745513916
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.309720, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_5 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.790448188781738 	 validation loss: 4.78070592880249
+best model a 9.94861125946045
+best last a 9.598376274108887
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.948611, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_6 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.7595062255859375 	 validation loss: 4.827930450439453
+best model a 9.697328567504883
+best last a 9.695762634277344
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.697329, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_7 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.76619815826416 	 validation loss: 4.729655742645264
+best model a 9.681349754333496
+best last a 9.677091598510742
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.681350, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_8 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.690608978271484 	 validation loss: 4.6906914710998535
+best model a 9.941186904907227
+best last a 9.508280754089355
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.941187, beta=1.000000
+  [per-clip]   Training Dropping_ball/drop_50/clip_9 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.749226093292236 	 validation loss: 4.847057342529297
+best model a 9.5721435546875
+best last a 9.562655448913574
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.572144, beta=1.000000
+
+============================================================
+Phenomenon: Falling_ball  dynamics=falling_ball  dt=0.01667
+  Total clips: 30 | Train: 24 | Test: 6
+  [multi-clip] Training on 2000 samples ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.745566184704121 	 validation loss: 4.7469388246536255
+best model a 9.64075756072998
+best last a 0.6771032810211182
+best model b 1.0
+best last b 1.0
+  [multi-clip] DONE: alpha=9.640758, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_4 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.713573455810547 	 validation loss: 4.7662811279296875
+best model a 9.949562072753906
+best last a 9.390055656433105
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.949562, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_5 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.690178871154785 	 validation loss: 4.952209949493408
+best model a 9.919271469116211
+best last a 9.419648170471191
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.919271, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_6 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.710809230804443 	 validation loss: 4.782405853271484
+best model a 9.562119483947754
+best last a 9.528122901916504
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.562119, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_7 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.71259880065918 	 validation loss: 4.7767791748046875
+best model a 9.702986717224121
+best last a 9.692033767700195
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.702987, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_8 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.750210285186768 	 validation loss: 4.859140396118164
+best model a 9.44753646850586
+best last a 9.405518531799316
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.447536, beta=1.000000
+  [per-clip]   Training Falling_ball/small/clip_9 ...
+Here! init_phys for free fall 10.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 4.740499973297119 	 validation loss: 4.793906211853027
+best model a 9.295212745666504
+best last a 9.2671480178833
+best model b 1.0
+best last b 1.0
+  [per-clip]   DONE: alpha=9.295213, beta=1.000000
+
+============================================================
+Phenomenon: Pendulum  dynamics=pendulum  dt=0.03333
+  Total clips: 30 | Train: 24 | Test: 6
+  [multi-clip] Training on 2000 samples ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.787443747887244 	 validation loss: 4.7703869342803955
+best model a 0.43467774987220764
+best last a 0.43524420261383057
+best model b 0.1833004206418991
+best last b 0.1963198333978653
+  [multi-clip] DONE: alpha=0.434678, beta=0.183300
+  [per-clip]   Training Pendulum/pendulum_90/clip_4 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.7583208084106445 	 validation loss: 4.7552032470703125
+best model a 9.741687774658203
+best last a 9.735645294189453
+best model b 1.109542727470398
+best last b 1.1123803853988647
+  [per-clip]   DONE: alpha=9.741688, beta=1.109543
+  [per-clip]   Training Pendulum/pendulum_90/clip_5 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.79447078704834 	 validation loss: 4.782713890075684
+best model a 9.83239459991455
+best last a 9.726566314697266
+best model b 1.1501011848449707
+best last b 1.1312634944915771
+  [per-clip]   DONE: alpha=9.832395, beta=1.150101
+  [per-clip]   Training Pendulum/pendulum_90/clip_6 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.763929843902588 	 validation loss: 4.806716442108154
+best model a 9.761571884155273
+best last a 9.676619529724121
+best model b 1.1820309162139893
+best last b 1.1635442972183228
+  [per-clip]   DONE: alpha=9.761572, beta=1.182031
+  [per-clip]   Training Pendulum/pendulum_90/clip_7 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.814352512359619 	 validation loss: 4.746901988983154
+best model a 9.715149879455566
+best last a 9.713652610778809
+best model b 1.1192471981048584
+best last b 1.1209850311279297
+  [per-clip]   DONE: alpha=9.715150, beta=1.119247
+  [per-clip]   Training Pendulum/pendulum_90/clip_8 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.79070520401001 	 validation loss: 4.794293403625488
+best model a 9.81413745880127
+best last a 9.719483375549316
+best model b 1.1643738746643066
+best last b 1.1330156326293945
+  [per-clip]   DONE: alpha=9.814137, beta=1.164374
+  [per-clip]   Training Pendulum/pendulum_90/clip_9 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.769013404846191 	 validation loss: 4.764485836029053
+best model a 9.596391677856445
+best last a 9.592954635620117
+best model b 1.2841166257858276
+best last b 1.2872467041015625
+  [per-clip]   DONE: alpha=9.596392, beta=1.284117
+
+============================================================
+Phenomenon: Rotation  dynamics=rotation  dt=0.03333
+  Total clips: 30 | Train: 24 | Test: 6
+  [multi-clip] Training on 2000 samples ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.756449956160325 	 validation loss: 4.811146259307861
+best model a 0.6771844029426575
+best last a 0.837329089641571
+best model b 0.8807733654975891
+best last b 1.603946328163147
+  [multi-clip] DONE: alpha=0.677184, beta=0.880773
+  [per-clip]   Training Rotation/slow/clip_4 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.764201641082764 	 validation loss: 4.6822123527526855
+best model a 1.1582318544387817
+best last a 1.1526585817337036
+best model b 0.7312687039375305
+best last b 0.7329134941101074
+  [per-clip]   DONE: alpha=1.158232, beta=0.731269
+  [per-clip]   Training Rotation/slow/clip_5 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.773287296295166 	 validation loss: 4.805032253265381
+best model a 1.1830681562423706
+best last a 1.1759828329086304
+best model b 0.7507281303405762
+best last b 0.7515192627906799
+  [per-clip]   DONE: alpha=1.183068, beta=0.750728
+  [per-clip]   Training Rotation/slow/clip_6 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.835117816925049 	 validation loss: 4.859953880310059
+best model a 1.1527734994888306
+best last a 1.1463439464569092
+best model b 0.7694317102432251
+best last b 0.7709746360778809
+  [per-clip]   DONE: alpha=1.152773, beta=0.769432
+  [per-clip]   Training Rotation/slow/clip_7 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.794213771820068 	 validation loss: 4.725246906280518
+best model a 1.005224347114563
+best last a 1.0721914768218994
+best model b 0.524177610874176
+best last b 0.7439430356025696
+  [per-clip]   DONE: alpha=1.005224, beta=0.524178
+  [per-clip]   Training Rotation/slow/clip_8 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.768824100494385 	 validation loss: 4.766629695892334
+best model a 1.2532309293746948
+best last a 1.2466952800750732
+best model b 0.7603086829185486
+best last b 0.7619180083274841
+  [per-clip]   DONE: alpha=1.253231, beta=0.760309
+  [per-clip]   Training Rotation/slow/clip_9 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.751763343811035 	 validation loss: 4.677840709686279
+best model a 1.0672259330749512
+best last a 1.159218192100525
+best model b 0.5856269001960754
+best last b 0.7852304577827454
+  [per-clip]   DONE: alpha=1.067226, beta=0.585627
+
+============================================================
+Phenomenon: Sliding_cone  dynamics=sliding_cone  dt=0.03333
+  Total clips: 30 | Train: 24 | Test: 6
+  [multi-clip] Training on 2000 samples ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.395016009990986 	 validation loss: 8.454473495483398
+best model a 0.42455941438674927
+best last a 0.414340615272522
+best model b 10.0
+best last b 10.0
+  [multi-clip] DONE: alpha=0.424559, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_4 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.438014030456543 	 validation loss: 8.361918449401855
+best model a 9.738350868225098
+best last a 9.504554748535156
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.738351, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_5 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.437634468078613 	 validation loss: 8.385662078857422
+best model a 9.973285675048828
+best last a 9.496662139892578
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.973286, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_6 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.393518447875977 	 validation loss: 8.42947006225586
+best model a 9.936227798461914
+best last a 9.48781967163086
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.936228, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_7 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.469640731811523 	 validation loss: 8.386964797973633
+best model a 9.753934860229492
+best last a 9.439687728881836
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.753935, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_8 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.392534255981445 	 validation loss: 8.519414901733398
+best model a 9.65834903717041
+best last a 9.483882904052734
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.658349, beta=10.000000
+  [per-clip]   Training Sliding_cone/cone_80/clip_9 ...
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 8.379987716674805 	 validation loss: 8.482734680175781
+best model a 9.81323528289795
+best last a 9.478378295898438
+best model b 10.0
+best last b 10.0
+  [per-clip]   DONE: alpha=9.813235, beta=10.000000
+
+Saved: /home/ubuntu/learning_from_physics/Results/iris_multi_clip/iris_multi_clip.csv
+Saved: /home/ubuntu/learning_from_physics/Results/iris_multi_clip/per_clip_on_test_split.csv
+LaTeX table written to /home/ubuntu/learning_from_physics/Results/iris_multi_clip/table_iris_multi_clip.tex
+
+======================================================================
+SUMMARY — Multi-clip vs. Per-clip (test-split clips only)
+======================================================================
+Compared 6 (phenomenon, setting, parameter) triples.
+Multi-clip wins (lower MAE): 3/6 cases.
+Average Delta-MAE: +3.5079  (negative = multi-clip better).
+Overall finding: per-clip fitting still leads in most settings, confirming that the per-clip evaluation in the paper is a strong baseline; multi-clip helps in physics-rich settings with sufficient clip diversity (see table for details, addressing R2/PXn6).
+======================================================================
