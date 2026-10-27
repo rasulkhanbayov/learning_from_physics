@@ -39,11 +39,17 @@ version is in [KurbanIntelligenceLab/iris-bench](https://github.com/KurbanIntell
 
 ## Not in git
 
-`repro_d75_work/` (~39 GB) holds the Kaggle download, the `.npy` datasets and the code snapshots. To regenerate it:
+`repro_d75_work/` (~39 GB) holds the Kaggle download, the `.npy` datasets and the code snapshots. To regenerate it from a fresh clone:
 
-1. `bash slurm_jobs/00_setup_env.sh` (code snapshots and conda env);
-2. `01_download_data_cpu.sh` (Kaggle v11; zip SHA-256 in `Results/repro_d75/preprocessing/`);
-3. `02_preprocess_verify_cpu.sh` (rebuilds the `.npy` files and checks them against the committed manifests).
+1. `bash slurm_jobs/00_setup_env.sh`, on 10.4.64.27/28, not the login node. It creates the conda env and the two code snapshots: iris-bench @ `ce61c63` from GitHub, and `eae47d9` archived from this repository's history.
+2. Put the Kaggle token in `~/.kaggle/kaggle_token.txt`, then `sbatch slurm_jobs/01_download_data_cpu.sh`. Compare the printed zip SHA-256 with `Results/repro_d75/preprocessing/kaggle_zip_sha256.txt`.
+3. Job 02 refuses to write into an existing folder, so move the committed reference aside first:
+   `mv Results/repro_d75/preprocessing Results/repro_d75/preprocessing_ref`, then `sbatch slurm_jobs/02_preprocess_verify_cpu.sh`.
+4. Check that the rebuilt `.npy` files are byte-identical to the original ones:
+   `for m in garcia s6 s3; do diff Results/repro_d75/preprocessing_ref/delfys75_$m.sha256.tsv Results/repro_d75/preprocessing/delfys75_$m.sha256.tsv && echo "$m identical"; done`
+   Identical hashes need the pinned `opencv-python-headless==4.10.0.84`.
+
+The evaluations rebuild exactly from the committed `clips.csv` files (`slurm_jobs/07_evaluate_cpu.sh`, with a new `EVAL_NAME`). Re-training a run needs a new or moved run folder, because jobs never overwrite. GPU training is not bit-identical between runs, so expect small differences.
 
 The per-run `work/` folders (checkpoints, plots) and `param_logs/` (per-epoch JSON) are also excluded.
 
