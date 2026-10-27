@@ -1,0 +1,33 @@
+=== dropped_ball/large/01
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8235294
+Here! init_phys for free fall 10.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.590368270874023 	 validation loss: 6.4296441078186035
+best model a 8.980900764465332
+best last a 11.656707763671875
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=8.980900764465332 beta=1.0 (26.2 s) 
+=== torricelli/small/02
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1979).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 6.3388152599334715 	 validation loss: 6.335960229237874
+best model a 5.010730266571045
+best last a 4.587204456329346
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.010730266571045 beta=0.0 (384.3 s) 
+Done: 2 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_baseline/clips.csv; 0 not ok.

@@ -1,0 +1,20 @@
+Comparison: Baseline (main.py) vs Unified (run_unified_delfys75.py)
+Negative diff_err = unified has lower error (better).
+================================================================================
+Dynamics         Setting        Param        GT         Unif_est   Unif_|Err| Base_est   Base_|Err| Diff_err  
+--------------------------------------------------------------------------------
+free_fall        mousepad       g            9.8066     34.8338    25.3067    nan        nan        nan       
+free_fall        table          g            9.8066     22.0263    16.7908    nan        nan        nan       
+free_fall        tennis         g            9.8066     28.4274    19.4673    nan        nan        nan       
+led              led_10s        decay        0.4600     1.7603     1.3003     0.0000     0.4600     0.8403    
+led              led_2s         decay        2.3000     2.7864     0.8358     0.0000     2.3000     -1.4642   
+led              led_5s         decay        0.9200     2.0774     1.1574     0.0000     0.9200     0.2374    
+pendulum         pendulum_150   damping      -0.0592    -3.6379    3.5786     -0.1997    0.1404     3.4382    
+pendulum         pendulum_150   length_m     1.5000     40.1287    38.6287    31.1490    29.6490    8.9797    
+pendulum         pendulum_45    damping      -0.0592    -3.8877    3.8285     -0.5569    0.4977     3.3308    
+pendulum         pendulum_45    length_m     0.4500     16.4821    16.3921    95.9935    95.5435    -79.1514  
+pendulum         pendulum_90    damping      -0.0592    -2.3784    2.3192     -0.3693    0.3101     2.0091    
+pendulum         pendulum_90    length_m     0.9000     31.0011    30.4611    51.7690    50.8690    -20.4079  
+torricelli       large          k            0.0162     0.0000     0.0162     9.7954     9.7792     -9.7630   
+torricelli       medium         k            0.0128     0.1703     0.1729     10.0766    10.0638    -9.8909   
+torricelli       small          k            0.0096     0.0105     0.0163     7.5396     7.5300     -7.5137   

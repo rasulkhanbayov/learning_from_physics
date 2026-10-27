@@ -1,0 +1,73 @@
+GPU 0: NVIDIA A100 80GB PCIe (UUID: GPU-1be6d723-d6ee-78fd-7312-39cc8b675207)
+NVIDIA A100 80GB PCIe
+Smoke clips: --only torricelli/small/02 --only dropped_ball/large/01
+=== smoke_426985_baseline -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_baseline
+=== dropped_ball/large/01
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8235294
+Here! init_phys for free fall 10.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.590368270874023 	 validation loss: 6.4296441078186035
+best model a 8.980900764465332
+best last a 11.656707763671875
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=8.980900764465332 beta=1.0 (26.2 s) 
+=== torricelli/small/02
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1979).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 6.3388152599334715 	 validation loss: 6.335960229237874
+best model a 5.010730266571045
+best last a 4.587204456329346
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.010730266571045 beta=0.0 (384.3 s) 
+Done: 2 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_baseline/clips.csv; 0 not ok.
+[smoke_426985_baseline] finished: all clips ok -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_baseline/clips.csv
+=== smoke_426985_unified -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_unified
+=== dropped_ball/large/01
+/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/losses/loss.py:35: UserWarning: var(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at ../aten/src/ATen/native/ReduceOps.cpp:1823.)
+  var_z = z_flat.var(dim=0) + 1e-8
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (3.6 s) 
+=== torricelli/small/02
+  Epoch 50: loss=5.260262
+  Epoch 100: loss=3.172980
+  Epoch 150: loss=2.480602
+  Epoch 200: loss=2.013009
+  Epoch 250: loss=1.643228
+  Epoch 300: loss=1.331757
+  Epoch 350: loss=1.065902
+  Epoch 400: loss=0.837154
+  Epoch 450: loss=0.641611
+  Epoch 500: loss=0.477375
+    status=ok gamma0=-0.17316414415836334 gamma1=0.4071698486804962 (11.0 s) 
+Done: 2 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_unified/clips.csv; 1 not ok.
+dropped_ball/large/01: status=ok 26.2 s 
+torricelli/small/02: status=ok 384.3 s 
+dropped_ball/large/01: status=nonfinite 3.6 s 
+torricelli/small/02: status=ok 11.0 s 
+Rough estimate per job on this GPU: baseline (public) 11.4 h, legacy eae47d9 12.1 h, unified 0.28 h
+Walltime requested in 05*/06*: 2 days (baseline), 12 h (unified). Raise -t if the estimate is close.
+Smoke test done. If both statuses are ok, submit 05a-05d and 06a-06d.

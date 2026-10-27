@@ -20,3 +20,13 @@ runs/
 *.pth
 *.mp4
 .DS_Store
+# --- Delfys75 reproduction (see delfys75_audit/README.md) ---
+# Regenerable data and code copies (~39 GB): Kaggle v11 + checksums in Results/repro_d75/preprocessing/
+repro_d75_work/
+# Per-run checkpoints, plots and config copies written by main.py inside each run folder
+Results/repro_d75/*/work/
+# Keep the small result JSONs (per-epoch param_logs/*.json stay ignored)
+!Results/repro_d75/preprocessing/*.json
+!Results/repro_d75/validation_old_csvs/*.json
+# Keep the paper PDFs
+!paper/pdf/*.pdf

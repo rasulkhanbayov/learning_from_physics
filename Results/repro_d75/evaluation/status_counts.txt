@@ -1,0 +1,9 @@
+  g_base_1step                              {'ok': 90}
+  g_base_multi                              {'ok': 89, 'nan_during_training': 1}
+  g_unified_1step                           {'nonfinite': 15, 'ok': 75}
+  g_unified_multi                           {'nonfinite': 15, 'ok': 75}
+  g_base_1step_init5                        {'ok': 89, 'nan_during_training': 1}
+  g_base_1step_init20                       {'ok': 90}
+  s6_legacy_eae47d9_base_1step_dt0.05       {'ok': 44, 'failed': 1}
+  s3_base_1step                             {'failed': 5, 'ok': 64}
+  s3_unified_1step                          {'ok': 69}

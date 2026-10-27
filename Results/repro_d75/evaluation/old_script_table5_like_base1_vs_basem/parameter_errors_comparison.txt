@@ -1,0 +1,23 @@
+Comparison: Baseline (main.py) vs Unified (run_unified_delfys75.py)
+Negative diff_err = unified has lower error (better).
+================================================================================
+Dynamics         Setting        Param        GT         Unif_est   Unif_|Err| Base_est   Base_|Err| Diff_err  
+--------------------------------------------------------------------------------
+dropped_ball     large          g            9.8066     10.0524    0.2515     9.3564     0.9068     -0.6553   
+dropped_ball     medium         g            9.8066     9.4744     0.4384     9.3117     0.6006     -0.1622   
+dropped_ball     small          g            9.8066     8.8501     1.0532     9.1963     0.6968     0.3565    
+free_fall        mousepad       g            9.8066     10.8925    1.1480     10.1045    2.2242     -1.0763   
+free_fall        table          g            9.8066     9.2068     0.6295     8.8106     0.9961     -0.3666   
+free_fall        tennis         g            9.8066     9.6830     0.2747     9.7658     0.4119     -0.1372   
+led              led_10s        decay        0.4600     0.0000     0.4600     0.0000     0.4600     0.0000    
+led              led_2s         decay        2.3000     0.0000     2.3000     0.0000     2.3000     0.0000    
+led              led_5s         decay        0.9200     0.0000     0.9200     0.0000     0.9200     0.0000    
+pendulum         pendulum_150   damping      -0.0592    -0.0864    0.0272     -0.1210    0.0618     -0.0346   
+pendulum         pendulum_150   length_m     1.5000     7.6267     6.1267     7.5463     6.0463     0.0803    
+pendulum         pendulum_45    damping      -0.0592    -0.1342    0.0749     -0.1394    0.0802     -0.0052   
+pendulum         pendulum_45    length_m     0.4500     23.5394    23.0894    23.4360    22.9860    0.1034    
+pendulum         pendulum_90    damping      -0.0592    -0.1321    0.0729     -0.1710    0.1118     -0.0389   
+pendulum         pendulum_90    length_m     0.9000     12.5395    11.6395    12.3315    11.4315    0.2080    
+torricelli       large          k            0.0162     7.2604     7.2442     6.5266     6.5104     0.7338    
+torricelli       medium         k            0.0128     7.2070     7.1942     4.8628     4.8500     2.3443    
+torricelli       small          k            0.0096     5.3882     5.3786     5.0937     5.0841     0.2945    

@@ -1,0 +1,365 @@
+% IRIS — ECCV 2026 Presentation Slides
+\documentclass[aspectratio=169,12pt]{beamer}
+
+% ---- Theme & Colors ----
+\usetheme{default}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+\definecolor{irisblue}{RGB}{31,73,125}
+\definecolor{irisgray}{RGB}{90,90,90}
+\definecolor{irisgreen}{RGB}{0,128,96}
+\definecolor{irisred}{RGB}{192,0,0}
+\definecolor{irislightblue}{RGB}{220,235,248}
+
+\setbeamercolor{frametitle}{fg=white, bg=irisblue}
+\setbeamercolor{title}{fg=irisblue}
+\setbeamercolor{subtitle}{fg=irisgray}
+\setbeamercolor{author}{fg=irisgray}
+\setbeamercolor{date}{fg=irisgray}
+\setbeamercolor{block title}{fg=white, bg=irisblue}
+\setbeamercolor{block body}{bg=irislightblue}
+\setbeamercolor{alerted text}{fg=irisred}
+\setbeamercolor{structure}{fg=irisblue}
+
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize}
+
+% ---- Packages ----
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{animate}      % animated GIFs in Acrobat/Evince
+
+\graphicspath{{gifs/}}
+
+% ---- Helpers ----
+\newcommand{\highlight}[1]{\textcolor{irisblue}{\textbf{#1}}}
+\newcommand{\bad}[1]{\textcolor{irisred}{\textbf{#1}}}
+\newcommand{\good}[1]{\textcolor{irisgreen}{\textbf{#1}}}
+
+% ================================================================
+\begin{document}
+% ================================================================
+
+% ----------------------------------------------------------------
+% SLIDE 1 — Title
+% ----------------------------------------------------------------
+\begin{frame}[plain]
+  \vspace{1.2cm}
+  \begin{center}
+    {\color{irisblue}\LARGE\bfseries IRIS}\\[0.3em]
+    {\color{irisblue}\large\bfseries A Real-World Benchmark for Inverse Recovery\\
+    and Identification of Physical Dynamic Systems\\
+    from Monocular Video}\\[1.0em]
+    {\color{irisgray}\normalsize ECCV 2026 — Anonymous Submission \#13771}\\[1.5em]
+    \includegraphics[height=2.0cm]{gifs/Dropping_ball.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Falling_ball.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Sliding_cone.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Rotation.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Hitting_cones.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Two_Moving_Pendulums.gif}\hspace{4pt}
+    \includegraphics[height=2.0cm]{gifs/Two_Moving_Pendulum_One_Static.gif}
+  \end{center}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 2 — Motivation
+% ----------------------------------------------------------------
+\begin{frame}{Motivation: What's Missing?}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+      \textbf{The goal:} estimate physical parameters\\
+      ($g$, $L$, $\mu$, $\zeta$, \ldots) directly from video\\[0.8em]
+
+      \textbf{Existing methods suffer from:}
+      \begin{itemize}\setlength\itemsep{0.4em}
+        \item Evaluated on \bad{synthetic} data only (black backgrounds, cartoon objects)
+        \item Only \bad{single-body} real-world data available
+        \item \bad{No multi-body} or interaction scenarios
+        \item \bad{No standardised} evaluation protocol
+        \item Equation family must be \bad{given manually} at test time
+      \end{itemize}
+
+    \column{0.44\textwidth}
+      \begin{block}{Delfys75 — State of the Art}
+        \begin{tabular}{ll}
+          Videos & 75 \\
+          Resolution & 1080p / 25\,fps \\
+          Phenomena & 5 (single-body only) \\
+          Multi-body & \bad{None} \\
+          Trials/setting & 5 \\
+        \end{tabular}
+      \end{block}
+      \vspace{0.4em}
+      \begin{block}{\highlight{IRIS — This Work}}
+        \begin{tabular}{ll}
+          Videos & \good{220} \\
+          Resolution & \good{4K / 60\,fps} \\
+          Phenomena & \good{8 (incl.\ multi-body)} \\
+          Multi-body & \good{3 novel scenarios} \\
+          Trials/setting & \good{10} \\
+        \end{tabular}
+      \end{block}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 3 — The IRIS Dataset
+% ----------------------------------------------------------------
+\begin{frame}{The IRIS Dataset — 8 Phenomena, 220 Videos}
+  \begin{center}
+    \small
+    \begin{tabular}{ccccc}
+      \includegraphics[height=2.3cm]{gifs/Dropping_ball.gif} &
+      \includegraphics[height=2.3cm]{gifs/Falling_ball.gif} &
+      \includegraphics[height=2.3cm]{gifs/Sliding_cone.gif} &
+      \includegraphics[height=2.3cm]{gifs/Rotation.gif} &
+      \includegraphics[height=2.3cm]{gifs/Hitting_cones.gif} \\
+      Dropping ball & Falling ball & Sliding cone & Rotating cone & Hitting cones \\
+      $g,\beta$ & $g, r_0$ & $\mu, \alpha$ & $\alpha,\beta$ & $\kappa,\zeta$ \\
+    \end{tabular}
+
+    \vspace{0.6em}
+
+    \begin{tabular}{cc}
+      \includegraphics[height=2.3cm]{gifs/Two_Moving_Pendulums.gif} &
+      \includegraphics[height=2.3cm]{gifs/Two_Moving_Pendulum_One_Static.gif} \\
+      Two moving pendulums & One static pendulum \\
+      $L_i, \zeta_i, \kappa_{ij}$ & $L_i, \zeta_i, \kappa_{ij}$ \\
+    \end{tabular}
+
+    \vspace{0.4em}
+    \colorbox{irislightblue}{\parbox{0.9\textwidth}{\centering
+      \textbf{4K / 60\,fps} $\cdot$ 10 trials per setting $\cdot$ independently measured ground truth $\cdot$ uncertainty estimates
+    }}
+  \end{center}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 4 — Evaluation Protocol
+% ----------------------------------------------------------------
+\begin{frame}{Standardised Evaluation Protocol}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+      \textbf{Train-per-clip protocol}
+      \begin{itemize}\setlength\itemsep{0.3em}
+        \item Each clip trained from scratch independently
+        \item No cross-clip parameter sharing
+        \item Fixed random seed (42)
+        \item Equation family selected automatically
+      \end{itemize}
+      \vspace{0.6em}
+      \textbf{Five evaluation axes:}
+      \begin{enumerate}\setlength\itemsep{0.3em}
+        \item \highlight{Parameter accuracy} — MAE vs.\ GT
+        \item \highlight{Equation selection} — classification accuracy
+        \item \highlight{Identifiability} — gradient norms, ODE residual
+        \item \highlight{Robustness} — consistency across design choices
+        \item \highlight{Extrapolation} — prediction beyond training horizon
+      \end{enumerate}
+
+    \column{0.48\textwidth}
+      \begin{block}{ODE Bank (5 families)}
+        \begin{tabular}{ll}
+          \toprule
+          \textbf{Phenomenon} & \textbf{ODE form} \\
+          \midrule
+          Drop / Fall & $\ddot{z}+\beta\dot{z}+\alpha z=0$ \\
+          Pendulum & $\ddot{\theta}+\zeta\dot{\theta}+\frac{g}{L}\sin\theta=0$ \\
+          Rotation & $\ddot{\varphi}+\beta\dot{\varphi}+\alpha\varphi=0$ \\
+          Sliding & constant accel.\ block \\
+          Multi-body & graph ODE + $\kappa_{ij}$ \\
+          \bottomrule
+        \end{tabular}
+      \end{block}
+      \vspace{0.4em}
+      \textit{First benchmark to cover all five axes simultaneously.}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 5 — Critical Bug Discovery
+% ----------------------------------------------------------------
+\begin{frame}{Key Finding: Critical Gradient-Flow Bug in Baseline}
+  \begin{columns}[T]
+    \column{0.50\textwidth}
+      \textbf{Original Euler step (Garcia et al.):}
+      \begin{align*}
+        \dot{z}_{t+1} &= \dot{z}_t + \Delta t\,\ddot{z}_t \\
+        z_{t+1}       &= z_t + \Delta t\,\dot{z}_t \quad \bad{\leftarrow \text{bug!}}
+      \end{align*}
+
+      \vspace{0.4em}
+      \bad{Missing $\Delta t^2 \ddot{z}_t$ term} $\Rightarrow$\\
+      $\partial z_{t+1}/\partial\boldsymbol{\gamma} = 0$\\
+      Physics parameters receive \bad{zero gradient}.
+
+      \vspace{0.7em}
+      \textbf{Corrected Euler-Cromer step:}
+      \begin{align*}
+        \dot{z}_{t+1} &= \dot{z}_t + \Delta t\,\ddot{z}_t \\
+        z_{t+1}       &= z_t + \Delta t\,\dot{z}_t \good{+ \Delta t^2\,\ddot{z}_t}
+      \end{align*}
+
+    \column{0.46\textwidth}
+      \begin{block}{Impact on Delfys75 (MAE)}
+        \footnotesize
+        \begin{tabular}{lrrr}
+          \toprule
+          \textbf{Setting} & \textbf{Orig.} & \textbf{Fixed} & $\bm{\Delta}$ \\
+          \midrule
+          pend.\_45 $L$\,[m]  & 95.07 & \good{3.80}  & $-91.3$ \\
+          pend.\_90 $L$\,[m]  & 50.15 & \good{2.93}  & $-47.2$ \\
+          pend.\_150 $L$\,[m] & 29.83 & \good{0.71}  & $-29.1$ \\
+          LED $\gamma$        & 2.30  & \good{0.40}  & $-1.90$ \\
+          Torr.\ large $k$    & 6.07  & \good{2.91}  & $-3.16$ \\
+          \bottomrule
+        \end{tabular}
+      \end{block}
+      \vspace{0.3em}
+      \small\textit{IRIS benchmark revealed this bug during baseline evaluation — demonstrating the diagnostic value of rigorous benchmarking.}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 6 — Equation Identification
+% ----------------------------------------------------------------
+\begin{frame}{Equation Identification: VLM vs.\ CNN vs.\ Path-Based}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+      \textbf{Why automatic identification matters:}
+      \begin{itemize}\setlength\itemsep{0.3em}
+        \item State-of-the-art (Garcia et al.) uses \bad{path-based} oracle — requires manual labelling per clip
+        \item IRIS benchmarks four automatic routing strategies
+        \item Goal: remove human-in-the-loop for equation selection
+      \end{itemize}
+      \vspace{0.7em}
+      \begin{tabular}{lcc}
+        \toprule
+        \textbf{Method} & \textbf{Delfys75} & \textbf{IRIS} \\
+        \midrule
+        CNN (in-distribution)    & \good{98.4\%} & \good{99.3\%} \\
+        VLM temporal reasoning   & 73.3\%        & 65.0\% \\
+        VLM describe-then-classify & 61.1\%      & \good{72.9\%} \\
+        \midrule
+        Path-based (oracle)      & 100\%         & 100\% \\
+        \bottomrule
+      \end{tabular}
+
+    \column{0.44\textwidth}
+      \begin{block}{Key Insight}
+        VLM ranking \highlight{reverses} across benchmarks:\\[0.4em]
+        \textit{Temporal reasoning} wins on Delfys75 (familiar phenomena)\\[0.3em]
+        \textit{Describe-then-classify} wins on IRIS (diverse, multi-body)
+      \end{block}
+      \vspace{0.5em}
+      \begin{block}{CNN Limitation}
+        Near-perfect \textit{in-distribution} but \bad{cannot generalise} to unseen phenomena without retraining.\\
+        VLMs operate \good{zero-shot}.
+      \end{block}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 7 — IRIS Results
+% ----------------------------------------------------------------
+\begin{frame}{Results on IRIS: Multi-Step Loss}
+  \begin{columns}[T]
+    \column{0.52\textwidth}
+      \small
+      \begin{tabular}{llrrr}
+        \toprule
+        \textbf{Dynamics} & \textbf{Param} & \textbf{1-step} & \textbf{Multi} & $\bm{\Delta}$ \\
+        \midrule
+        \multicolumn{5}{l}{\textit{Single-body}} \\
+        Drop\_50      & $g$ & \good{1.04} & 6.88 & $+5.84$ \\
+        Pend.\_20     & $L$ & 0.56 & \good{0.40} & $-0.16$ \\
+        Pend.\_90     & $L$ & \good{0.60} & \bad{21.95} & $+21.3$ \\
+        Sliding cone  & $\alpha$ & \good{0.00} & \good{0.00} & $0.00$ \\
+        \midrule
+        \multicolumn{5}{l}{\textit{Multi-body}} \\
+        2-pend.\ 20° & $L$ & \good{1.14} & \bad{741.1} & $+740$ \\
+        2-pend.\ 45° & $L$ & \good{1.63} & \bad{164.1} & $+163$ \\
+        1-stat.\ 20° & $L$ & \good{1.38} & \bad{65.4}  & $+64$ \\
+        \bottomrule
+      \end{tabular}
+
+    \column{0.44\textwidth}
+      \textbf{Findings:}
+      \begin{itemize}\setlength\itemsep{0.5em}
+        \item \good{Multi-step helps} on rotation and small-angle pendulum
+        \item \bad{Multi-step catastrophically fails} on large-angle pendulum and all multi-body scenarios
+        \item Coupling errors $\kappa_{ij}$ compound exponentially over $K{=}5$ horizons
+        \item Sliding cone angle: \good{perfect recovery} (metadata-based)
+      \end{itemize}
+      \vspace{0.4em}
+      \textit{Failure mode invisible on single-body benchmarks — only exposed by IRIS.}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 8 — Summary & Contributions
+% ----------------------------------------------------------------
+\begin{frame}{Summary}
+  \begin{columns}[T]
+    \column{0.54\textwidth}
+      \textbf{Contributions:}
+      \begin{enumerate}\setlength\itemsep{0.5em}
+        \item \highlight{IRIS benchmark}: 220 real-world 4K/60\,fps videos, 8 dynamical systems, 3 novel multi-body scenarios, independently measured GT with uncertainty
+
+        \item \highlight{Standardised protocol}: 5 evaluation axes, train-per-clip, fixed seeds, traceable results
+
+        \item \highlight{Equation-ID benchmark}: first systematic comparison of 4 routing strategies — VLM ranking reverses across benchmarks
+
+        \item \highlight{Diagnostic findings}: gradient-flow bug in SOTA pipeline; multi-step training catastrophically unstable on multi-body dynamics
+      \end{enumerate}
+
+    \column{0.42\textwidth}
+      \begin{block}{Open Challenges Exposed}
+        \begin{itemize}\setlength\itemsep{0.35em}
+          \item VLM routing: 65--73\% — still far from oracle
+          \item Damping poorly identifiable across all methods
+          \item Multi-body multi-step training unstable
+          \item Latent-to-SI calibration is phenomenon-specific
+        \end{itemize}
+      \end{block}
+      \vspace{0.5em}
+      \begin{block}{Release}
+        Dataset $\cdot$ annotations $\cdot$ evaluation toolkit $\cdot$ all baselines\\
+        \texttt{CC BY 4.0} upon acceptance
+      \end{block}
+  \end{columns}
+\end{frame}
+
+% ----------------------------------------------------------------
+% SLIDE 9 — Thank You (optional closing slide)
+% ----------------------------------------------------------------
+\begin{frame}[plain]
+  \vspace{1.0cm}
+  \begin{center}
+    {\color{irisblue}\LARGE\bfseries Thank You}\\[1.2em]
+
+    \includegraphics[height=2.2cm]{gifs/Dropping_ball.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Falling_ball.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Sliding_cone.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Rotation.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Hitting_cones.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Two_Moving_Pendulums.gif}\hspace{6pt}
+    \includegraphics[height=2.2cm]{gifs/Two_Moving_Pendulum_One_Static.gif}\\[1.2em]
+
+    {\color{irisgray}\large IRIS: 220 videos $\cdot$ 8 phenomena $\cdot$ 4K/60fps $\cdot$ open benchmark}\\[0.5em]
+    {\color{irisgray}\normalsize ECCV 2026 Submission \#13771}
+  \end{center}
+\end{frame}
+
+\end{document}

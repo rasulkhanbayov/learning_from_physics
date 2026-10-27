@@ -1,0 +1,33 @@
+description: evaluation of: --run base1=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_base_1step/clips.csv:baseline --run basem=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_base_multi/clips.csv:baseline --run unif1=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_unified_1step/clips.csv:unified --run unifm=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_unified_multi/clips.csv:unified --run base1_init5=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_base_1step_init5/clips.csv:baseline --run base1_init20=/export/home/rakh90100/learning_from_physics/Results/repro_d75/g_base_1step_init20/clips.csv:baseline --run legacy_dt005=/export/home/rakh90100/learning_from_physics/Results/repro_d75/s6_legacy_eae47d9_base_1step_dt0.05/clips.csv:baseline --run s3_base1=/export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_base_1step/clips.csv:baseline --run s3_unif1=/export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_unified_1step/clips.csv:unified
+date: 2026-10-19T12:25:29+03:00
+host: crimv3srv025  slurm_job: 428979  partition: cpu-all
+repo_commit: 1f96b0600602c55be23127184a2379951b7007df  uncommitted_files: 213
+code_snapshot iris-bench_ce61c63: ce61c635db1ac90d770421cc97ba02f8626b6d16
+code_snapshot dev_eae47d9: eae47d9d15953cd15a6f84fc57f52f3e3b92396e
+gpu: 
+python 3.12.15 | torch 2.5.1+cu121 | cuda 12.1 | cudnn 90100 | numpy 1.26.4 | cv2 4.10.0 | cuda_available False
+data_manifest delfys75_garcia.sha256.tsv: sha256 dc786f9d746387f0
+data_manifest delfys75_s6.sha256.tsv: sha256 a6c7d5837442da0c
+data_manifest delfys75_s3.sha256.tsv: sha256 f6e60136f15060ab
+tool_hashes:
+3cf9f12f25fe9b4f0a5cb69752a9887c1a1ca2eb3373fe4aa4b0d0fbd102090b  repro_d75/run_baseline.py
+858a527918404d30e16996030a55769af30eb4dc3b85d086b2391dbcf16f6a1e  repro_d75/run_unified.py
+7fad55b3c9d08492cd363f3e9f00cd64365d5fff2236b751a0c5524ef4167a86  repro_d75/stride_evidence.py
+83a249b733be46bf15a0a1ecf6932f08cdb8699327588b0be69b2c23d61feb93  repro_d75/verify_npy.py
+fa401a26d93956b112f0394833caac6f2a2407af9a431ec0b0730a69350b2fea  repro_d75/video2npy_fixed.py
+24d4f0d461f06e0aa8d184673341bd498d9e5fea7185f6a21fa9423b7c232d74  scripts/evaluate_delfys75.py
+9cc58b0f3e531ef7fc7f9f56f1cc8472277b10937191cae54d9ff4c0ba01cd65  slurm_jobs/00_setup_env.sh
+02197340c5ccadbfea2b6d5d75093267d23a42c642bc8c58f69e83dfbc0e60aa  slurm_jobs/01_download_data_cpu.sh
+9c3d0ceb02e5ec9a099cec390265f9ac679fdccb14a65756a6cf2d72a4014068  slurm_jobs/02_preprocess_verify_cpu.sh
+851fe9cb71db33e1c02d1ff29f49706c629bbba6e66df18cbcfeb9a636412a1e  slurm_jobs/03_validate_eval_cpu.sh
+84d3b93cadb4160f2bc9eff69f9848a59201182809b51b31f60d529433815888  slurm_jobs/04_smoke_a100.sh
+5200e41617fedbfee367abb6d249fa6b60e82f5f93972e03f80ec0661f1e62c4  slurm_jobs/05a_garcia_base_1step_a100.sh
+ea5072ba25641e20c46111326c6ae083bff7456e60124ef416b86debe7db9098  slurm_jobs/05b_garcia_base_multi_a100.sh
+fec21071c8b5da9eba963e7be12b8fceb04e07c3d72f4a9c375b2ecbc5920bda  slurm_jobs/05c_garcia_unified_1step_a100.sh
+c04e1c2b428325e58a529dc9964b7662453d1518f313ea5ead6fca8ccab82969  slurm_jobs/05d_garcia_unified_multi_a100.sh
+c1027701ecc047bba353f10bbca2ffb6f4306c19dd7f29fd8ec7f896b778d803  slurm_jobs/06a_garcia_base_init5_h200.sh
+ca4b9bfd08269d6dd275b345602febc23b6b3ca0101cb808191d5c2cabd973e6  slurm_jobs/06b_garcia_base_init20_h200.sh
+c039575601650b6b6706d4dd90b5a6c84474e114d363bfa16ef165790b3bd777  slurm_jobs/06c_s6_legacy_eae47d9_dt005_h200.sh
+793ea7d6278ef5687283a50d1fc122e7ae12d5934a8dabc6cc85254f37dcadf0  slurm_jobs/06d_s3_base_and_unified_h200.sh
+997434c95041f5ceb382b41393613a0d4a63c89ba8aa7325aa3b60ee262a8df8  slurm_jobs/07_evaluate_cpu.sh
+fe93e952e7272f5d1c130d2b4556bd7e5c7274e53302afd89e8424558d1303a9  slurm_jobs/common.sh

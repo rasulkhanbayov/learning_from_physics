@@ -33,7 +33,7 @@ else
 fi
 
 echo ""
-echo "Done. Update paper_drafts/table_iris_equation_selection.tex with accuracies from:"
+echo "Done. Update paper/drafts/table_iris_equation_selection.tex with accuracies from:"
 echo "  Results/vlm_eval_iris/vlm_iris_summary.txt"
 echo "  Results/vlm_eval_iris_describe_then/vlm_iris_summary.txt"
 echo "  Results/video_classifier_eval_iris/video_classifier_eval_summary.txt (if CNN was run)"

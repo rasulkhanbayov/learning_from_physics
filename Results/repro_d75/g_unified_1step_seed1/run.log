@@ -1,0 +1,1083 @@
+=== dropped_ball/large/01
+/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/losses/loss.py:35: UserWarning: var(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at ../aten/src/ATen/native/ReduceOps.cpp:1823.)
+  var_z = z_flat.var(dim=0) + 1e-8
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (3.3 s) 
+=== dropped_ball/large/02
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/large/03
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/large/04
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.9 s) 
+=== dropped_ball/large/05
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/medium/01
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/medium/02
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/medium/03
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/medium/04
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/medium/05
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/small/01
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/small/02
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/small/03
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/small/04
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== dropped_ball/small/05
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (1.8 s) 
+=== free_fall/mousepad/01
+  Epoch 50: loss=3.463457
+  Epoch 100: loss=1.253986
+  Epoch 150: loss=0.559535
+  Epoch 200: loss=0.444930
+  Epoch 250: loss=0.353222
+  Epoch 300: loss=0.246529
+  Epoch 350: loss=0.893170
+  Epoch 400: loss=0.307153
+  Epoch 450: loss=0.244361
+  Epoch 500: loss=0.195013
+    status=ok gamma0=41.862762451171875 gamma1=5.461699485778809 (4.8 s) 
+=== free_fall/mousepad/02
+  Epoch 50: loss=1.099069
+  Epoch 100: loss=0.517933
+  Epoch 150: loss=0.488235
+  Epoch 200: loss=0.458273
+  Epoch 250: loss=0.426852
+  Epoch 300: loss=0.436092
+  Epoch 350: loss=0.393732
+  Epoch 400: loss=0.366959
+  Epoch 450: loss=1.661736
+  Epoch 500: loss=0.345977
+    status=ok gamma0=54.8953742980957 gamma1=5.143314838409424 (4.8 s) 
+=== free_fall/mousepad/03
+  Epoch 50: loss=5.048234
+  Epoch 100: loss=2.027178
+  Epoch 150: loss=1.062184
+  Epoch 200: loss=0.618570
+  Epoch 250: loss=0.544096
+  Epoch 300: loss=0.507499
+  Epoch 350: loss=0.468843
+  Epoch 400: loss=0.427884
+  Epoch 450: loss=0.385567
+  Epoch 500: loss=0.344303
+    status=ok gamma0=51.41495895385742 gamma1=6.980367660522461 (4.8 s) 
+=== free_fall/mousepad/04
+  Epoch 50: loss=2.131168
+  Epoch 100: loss=1.286548
+  Epoch 150: loss=0.843349
+  Epoch 200: loss=0.628358
+  Epoch 250: loss=0.544479
+  Epoch 300: loss=0.513901
+  Epoch 350: loss=0.497606
+  Epoch 400: loss=0.484279
+  Epoch 450: loss=0.471766
+  Epoch 500: loss=0.459726
+    status=ok gamma0=63.484619140625 gamma1=7.937480449676514 (4.8 s) 
+=== free_fall/mousepad/05
+  Epoch 50: loss=1.857254
+  Epoch 100: loss=0.922255
+  Epoch 150: loss=0.690968
+  Epoch 200: loss=0.619327
+  Epoch 250: loss=2.087971
+  Epoch 300: loss=0.528376
+  Epoch 350: loss=0.472805
+  Epoch 400: loss=0.430996
+  Epoch 450: loss=0.393472
+  Epoch 500: loss=0.360942
+    status=ok gamma0=44.97400665283203 gamma1=6.372863292694092 (4.8 s) 
+=== free_fall/table/01
+  Epoch 50: loss=1.943695
+  Epoch 100: loss=0.831846
+  Epoch 150: loss=0.733859
+  Epoch 200: loss=0.583831
+  Epoch 250: loss=0.546270
+  Epoch 300: loss=1.723218
+  Epoch 350: loss=0.537087
+  Epoch 400: loss=0.493039
+  Epoch 450: loss=0.471622
+  Epoch 500: loss=0.448659
+    status=ok gamma0=50.10202407836914 gamma1=7.031750202178955 (4.8 s) 
+=== free_fall/table/02
+  Epoch 50: loss=6.259904
+  Epoch 100: loss=3.010092
+  Epoch 150: loss=1.900392
+  Epoch 200: loss=1.186636
+  Epoch 250: loss=0.743263
+  Epoch 300: loss=0.517952
+  Epoch 350: loss=0.415769
+  Epoch 400: loss=0.356950
+  Epoch 450: loss=0.312386
+  Epoch 500: loss=0.276469
+    status=ok gamma0=31.504411697387695 gamma1=6.569916725158691 (4.8 s) 
+=== free_fall/table/03
+  Epoch 50: loss=2.347158
+  Epoch 100: loss=1.369099
+  Epoch 150: loss=0.803438
+  Epoch 200: loss=0.482821
+  Epoch 250: loss=0.330287
+  Epoch 300: loss=0.254964
+  Epoch 350: loss=0.206514
+  Epoch 400: loss=0.173412
+  Epoch 450: loss=0.152423
+  Epoch 500: loss=0.139367
+    status=ok gamma0=4.574014186859131 gamma1=4.890951156616211 (4.8 s) 
+=== free_fall/table/04
+  Epoch 50: loss=1.173035
+  Epoch 100: loss=0.469012
+  Epoch 150: loss=0.386256
+  Epoch 200: loss=0.360750
+  Epoch 250: loss=0.276077
+  Epoch 300: loss=0.343296
+  Epoch 350: loss=0.230130
+  Epoch 400: loss=0.203024
+  Epoch 450: loss=0.503793
+  Epoch 500: loss=0.208464
+    status=ok gamma0=8.687496185302734 gamma1=5.0262627601623535 (4.8 s) 
+=== free_fall/table/05
+  Epoch 50: loss=2.921827
+  Epoch 100: loss=1.792474
+  Epoch 150: loss=1.162437
+  Epoch 200: loss=0.761879
+  Epoch 250: loss=0.531512
+  Epoch 300: loss=0.421463
+  Epoch 350: loss=0.375932
+  Epoch 400: loss=0.354839
+  Epoch 450: loss=0.340410
+  Epoch 500: loss=0.327563
+    status=ok gamma0=14.001245498657227 gamma1=7.766620635986328 (4.8 s) 
+=== free_fall/tennis/01
+  Epoch 50: loss=2.382077
+  Epoch 100: loss=63.348446
+  Epoch 150: loss=8.710371
+  Epoch 200: loss=8.710355
+  Epoch 250: loss=8.710347
+  Epoch 300: loss=8.710343
+  Epoch 350: loss=8.710342
+  Epoch 400: loss=8.710341
+  Epoch 450: loss=8.710340
+  Epoch 500: loss=8.710340
+    status=ok gamma0=1.509709119796753 gamma1=0.8870108723640442 (4.8 s) 
+=== free_fall/tennis/02
+  Epoch 50: loss=2.225138
+  Epoch 100: loss=0.868650
+  Epoch 150: loss=0.483854
+  Epoch 200: loss=0.403729
+  Epoch 250: loss=0.378432
+  Epoch 300: loss=0.353845
+  Epoch 350: loss=0.328848
+  Epoch 400: loss=0.303729
+  Epoch 450: loss=0.279063
+  Epoch 500: loss=0.255734
+    status=ok gamma0=23.593168258666992 gamma1=6.3973469734191895 (4.8 s) 
+=== free_fall/tennis/03
+  Epoch 50: loss=4.045665
+  Epoch 100: loss=1.364807
+  Epoch 150: loss=0.831221
+  Epoch 200: loss=0.506955
+  Epoch 250: loss=0.333016
+  Epoch 300: loss=0.256585
+  Epoch 350: loss=0.226675
+  Epoch 400: loss=0.212928
+  Epoch 450: loss=0.204029
+  Epoch 500: loss=0.196986
+    status=ok gamma0=48.87446212768555 gamma1=7.10749626159668 (4.8 s) 
+=== free_fall/tennis/04
+  Epoch 50: loss=3.082886
+  Epoch 100: loss=1.623565
+  Epoch 150: loss=1.069542
+  Epoch 200: loss=0.713735
+  Epoch 250: loss=0.495153
+  Epoch 300: loss=0.377422
+  Epoch 350: loss=0.319578
+  Epoch 400: loss=0.288812
+  Epoch 450: loss=0.267949
+  Epoch 500: loss=0.250789
+    status=ok gamma0=32.41437911987305 gamma1=7.579660415649414 (4.8 s) 
+=== free_fall/tennis/05
+  Epoch 50: loss=2.216995
+  Epoch 100: loss=1.696571
+  Epoch 150: loss=0.475221
+  Epoch 200: loss=0.551404
+  Epoch 250: loss=0.244555
+  Epoch 300: loss=0.695826
+  Epoch 350: loss=0.232521
+  Epoch 400: loss=0.173835
+  Epoch 450: loss=0.152311
+  Epoch 500: loss=0.139690
+    status=ok gamma0=58.781131744384766 gamma1=6.477571487426758 (4.8 s) 
+=== led/led_10s/01
+  Epoch 50: loss=0.065008
+  Epoch 100: loss=0.006262
+  Epoch 150: loss=0.003907
+  Epoch 200: loss=0.003057
+  Epoch 250: loss=0.008879
+  Epoch 300: loss=0.003312
+  Epoch 350: loss=0.002066
+  Epoch 400: loss=0.001870
+  Epoch 450: loss=0.001709
+  Epoch 500: loss=0.001569
+    status=ok gamma0=46.252925872802734 gamma1=1.4473110437393188 (10.8 s) 
+=== led/led_10s/02
+  Epoch 50: loss=0.016923
+  Epoch 100: loss=0.105987
+  Epoch 150: loss=0.001540
+  Epoch 200: loss=0.075309
+  Epoch 250: loss=0.000894
+  Epoch 300: loss=0.000687
+  Epoch 350: loss=0.000591
+  Epoch 400: loss=0.000526
+  Epoch 450: loss=0.013839
+  Epoch 500: loss=0.000547
+    status=ok gamma0=23.81013298034668 gamma1=1.3617920875549316 (10.7 s) 
+=== led/led_10s/03
+  Epoch 50: loss=0.014263
+  Epoch 100: loss=0.004874
+  Epoch 150: loss=0.003155
+  Epoch 200: loss=0.002196
+  Epoch 250: loss=0.001638
+  Epoch 300: loss=0.001271
+  Epoch 350: loss=0.001034
+  Epoch 400: loss=0.000854
+  Epoch 450: loss=0.000676
+  Epoch 500: loss=0.001478
+    status=ok gamma0=40.62814712524414 gamma1=1.3850818872451782 (10.8 s) 
+=== led/led_10s/04
+  Epoch 50: loss=0.008524
+  Epoch 100: loss=0.005172
+  Epoch 150: loss=0.011185
+  Epoch 200: loss=0.004384
+  Epoch 250: loss=0.004082
+  Epoch 300: loss=0.003858
+  Epoch 350: loss=0.003680
+  Epoch 400: loss=0.009288
+  Epoch 450: loss=0.003732
+  Epoch 500: loss=0.003530
+    status=ok gamma0=37.56954574584961 gamma1=2.2821245193481445 (10.8 s) 
+=== led/led_10s/05
+  Epoch 50: loss=0.032374
+  Epoch 100: loss=0.003909
+  Epoch 150: loss=0.002536
+  Epoch 200: loss=0.001985
+  Epoch 250: loss=0.001637
+  Epoch 300: loss=0.001378
+  Epoch 350: loss=0.001169
+  Epoch 400: loss=0.000996
+  Epoch 450: loss=0.000859
+  Epoch 500: loss=0.000980
+    status=ok gamma0=-2.977858781814575 gamma1=1.779126524925232 (10.7 s) 
+=== led/led_2s/01
+  Epoch 50: loss=0.034789
+  Epoch 100: loss=0.015267
+  Epoch 150: loss=0.010235
+  Epoch 200: loss=0.007081
+  Epoch 250: loss=0.004868
+  Epoch 300: loss=0.003435
+  Epoch 350: loss=0.002556
+  Epoch 400: loss=0.002020
+  Epoch 450: loss=0.001683
+  Epoch 500: loss=0.001458
+    status=ok gamma0=9.226712226867676 gamma1=2.152329921722412 (10.6 s) 
+=== led/led_2s/02
+  Epoch 50: loss=0.027181
+  Epoch 100: loss=0.006795
+  Epoch 150: loss=0.004009
+  Epoch 200: loss=0.003042
+  Epoch 250: loss=0.002423
+  Epoch 300: loss=0.001989
+  Epoch 350: loss=0.001656
+  Epoch 400: loss=0.001401
+  Epoch 450: loss=0.001192
+  Epoch 500: loss=0.001015
+    status=ok gamma0=50.75619125366211 gamma1=1.5534275770187378 (10.7 s) 
+=== led/led_2s/03
+  Epoch 50: loss=0.019677
+  Epoch 100: loss=0.007168
+  Epoch 150: loss=0.005000
+  Epoch 200: loss=0.004130
+  Epoch 250: loss=0.003519
+  Epoch 300: loss=0.003097
+  Epoch 350: loss=0.002727
+  Epoch 400: loss=0.002390
+  Epoch 450: loss=0.002095
+  Epoch 500: loss=0.001823
+    status=ok gamma0=9.621017456054688 gamma1=4.44786262512207 (10.7 s) 
+=== led/led_2s/04
+  Epoch 50: loss=0.032708
+  Epoch 100: loss=0.019295
+  Epoch 150: loss=0.014919
+  Epoch 200: loss=0.012000
+  Epoch 250: loss=0.009950
+  Epoch 300: loss=0.008380
+  Epoch 350: loss=0.007104
+  Epoch 400: loss=0.005983
+  Epoch 450: loss=0.005012
+  Epoch 500: loss=0.004191
+    status=ok gamma0=31.997426986694336 gamma1=3.3710544109344482 (10.7 s) 
+=== led/led_2s/05
+  Epoch 50: loss=0.041715
+  Epoch 100: loss=0.021753
+  Epoch 150: loss=0.015741
+  Epoch 200: loss=0.012505
+  Epoch 250: loss=0.010193
+  Epoch 300: loss=0.008160
+  Epoch 350: loss=0.006172
+  Epoch 400: loss=0.004462
+  Epoch 450: loss=0.003011
+  Epoch 500: loss=0.002147
+    status=ok gamma0=41.59039306640625 gamma1=2.6324946880340576 (10.7 s) 
+=== led/led_5s/01
+  Epoch 50: loss=0.037067
+  Epoch 100: loss=0.005463
+  Epoch 150: loss=0.002344
+  Epoch 200: loss=0.001452
+  Epoch 250: loss=0.001186
+  Epoch 300: loss=0.001063
+  Epoch 350: loss=0.000971
+  Epoch 400: loss=0.000888
+  Epoch 450: loss=0.000813
+  Epoch 500: loss=0.000743
+    status=ok gamma0=41.90201950073242 gamma1=0.31058794260025024 (10.7 s) 
+=== led/led_5s/02
+  Epoch 50: loss=0.017245
+  Epoch 100: loss=0.008700
+  Epoch 150: loss=0.006255
+  Epoch 200: loss=0.004670
+  Epoch 250: loss=0.003465
+  Epoch 300: loss=0.002867
+  Epoch 350: loss=0.002211
+  Epoch 400: loss=0.008481
+  Epoch 450: loss=0.001676
+  Epoch 500: loss=0.001414
+    status=ok gamma0=43.90481948852539 gamma1=1.7988675832748413 (10.7 s) 
+=== led/led_5s/03
+  Epoch 50: loss=0.021620
+  Epoch 100: loss=0.008401
+  Epoch 150: loss=0.005747
+  Epoch 200: loss=0.004287
+  Epoch 250: loss=0.003262
+  Epoch 300: loss=0.002484
+  Epoch 350: loss=0.001882
+  Epoch 400: loss=0.001417
+  Epoch 450: loss=0.004081
+  Epoch 500: loss=0.000864
+    status=ok gamma0=33.40998458862305 gamma1=2.039158582687378 (10.7 s) 
+=== led/led_5s/04
+  Epoch 50: loss=0.008975
+  Epoch 100: loss=0.001433
+  Epoch 150: loss=0.000944
+  Epoch 200: loss=0.000763
+  Epoch 250: loss=0.087588
+  Epoch 300: loss=0.001335
+  Epoch 350: loss=0.000540
+  Epoch 400: loss=0.000462
+  Epoch 450: loss=0.000405
+  Epoch 500: loss=0.000362
+    status=ok gamma0=40.10625076293945 gamma1=2.284576892852783 (10.7 s) 
+=== led/led_5s/05
+  Epoch 50: loss=0.029278
+  Epoch 100: loss=0.022376
+  Epoch 150: loss=0.018690
+  Epoch 200: loss=0.016499
+  Epoch 250: loss=0.014209
+  Epoch 300: loss=0.011655
+  Epoch 350: loss=0.027824
+  Epoch 400: loss=0.007339
+  Epoch 450: loss=0.005264
+  Epoch 500: loss=0.022278
+    status=ok gamma0=43.21854019165039 gamma1=2.8789591789245605 (10.7 s) 
+=== pendulum/pendulum_150/01
+  Epoch 50: loss=2.614200
+  Epoch 100: loss=0.936986
+  Epoch 150: loss=0.566388
+  Epoch 200: loss=0.388098
+  Epoch 250: loss=0.284596
+  Epoch 300: loss=0.215331
+  Epoch 350: loss=0.166073
+  Epoch 400: loss=0.129178
+  Epoch 450: loss=0.100377
+  Epoch 500: loss=0.077522
+    status=ok gamma0=1.4494655132293701 gamma1=3.2813475131988525 (10.7 s) 
+=== pendulum/pendulum_150/02
+  Epoch 50: loss=4.451786
+  Epoch 100: loss=2.538292
+  Epoch 150: loss=1.877501
+  Epoch 200: loss=1.404433
+  Epoch 250: loss=1.042625
+  Epoch 300: loss=0.764283
+  Epoch 350: loss=0.556313
+  Epoch 400: loss=0.408988
+  Epoch 450: loss=0.310401
+  Epoch 500: loss=0.245645
+    status=ok gamma0=0.28548309206962585 gamma1=4.810420513153076 (10.8 s) 
+=== pendulum/pendulum_150/03
+  Epoch 50: loss=3.221393
+  Epoch 100: loss=1.079359
+  Epoch 150: loss=0.584589
+  Epoch 200: loss=0.242992
+  Epoch 250: loss=0.106015
+  Epoch 300: loss=0.460470
+  Epoch 350: loss=0.136656
+  Epoch 400: loss=0.086437
+  Epoch 450: loss=0.065422
+  Epoch 500: loss=0.053331
+    status=ok gamma0=0.7967731952667236 gamma1=2.779906988143921 (15.0 s) 
+=== pendulum/pendulum_150/04
+  Epoch 50: loss=3.337369
+  Epoch 100: loss=1.573403
+  Epoch 150: loss=1.019873
+  Epoch 200: loss=0.697163
+  Epoch 250: loss=0.514518
+  Epoch 300: loss=0.410560
+  Epoch 350: loss=0.347493
+  Epoch 400: loss=0.304446
+  Epoch 450: loss=0.270471
+  Epoch 500: loss=0.240483
+    status=ok gamma0=1.2584638595581055 gamma1=4.9543914794921875 (10.8 s) 
+=== pendulum/pendulum_150/05
+  Epoch 50: loss=3.538177
+  Epoch 100: loss=0.620110
+  Epoch 150: loss=0.487441
+  Epoch 200: loss=0.226511
+  Epoch 250: loss=0.134125
+  Epoch 300: loss=0.082158
+  Epoch 350: loss=0.066079
+  Epoch 400: loss=0.129630
+  Epoch 450: loss=0.038326
+  Epoch 500: loss=0.031427
+    status=ok gamma0=1.8809868097305298 gamma1=1.823889970779419 (15.4 s) 
+=== pendulum/pendulum_45/01
+  Epoch 50: loss=1.923805
+  Epoch 100: loss=0.986034
+  Epoch 150: loss=0.372317
+  Epoch 200: loss=0.137690
+  Epoch 250: loss=0.215427
+  Epoch 300: loss=0.076868
+  Epoch 350: loss=0.066139
+  Epoch 400: loss=0.052973
+  Epoch 450: loss=0.039984
+  Epoch 500: loss=0.034148
+    status=ok gamma0=1.6508029699325562 gamma1=2.5730443000793457 (10.6 s) 
+=== pendulum/pendulum_45/02
+  Epoch 50: loss=3.936202
+  Epoch 100: loss=1.672313
+  Epoch 150: loss=1.148026
+  Epoch 200: loss=0.830162
+  Epoch 250: loss=0.589799
+  Epoch 300: loss=0.401365
+  Epoch 350: loss=0.263962
+  Epoch 400: loss=0.482809
+  Epoch 450: loss=0.313634
+  Epoch 500: loss=0.196151
+    status=ok gamma0=0.5298618674278259 gamma1=4.335002422332764 (10.7 s) 
+=== pendulum/pendulum_45/03
+  Epoch 50: loss=1.791528
+  Epoch 100: loss=0.440051
+  Epoch 150: loss=0.256727
+  Epoch 200: loss=0.114047
+  Epoch 250: loss=0.087513
+  Epoch 300: loss=0.047452
+  Epoch 350: loss=0.037669
+  Epoch 400: loss=0.132193
+  Epoch 450: loss=0.032721
+  Epoch 500: loss=0.036668
+    status=ok gamma0=0.9262116551399231 gamma1=1.8132201433181763 (10.8 s) 
+=== pendulum/pendulum_45/04
+  Epoch 50: loss=4.963021
+  Epoch 100: loss=2.070841
+  Epoch 150: loss=1.594087
+  Epoch 200: loss=1.271070
+  Epoch 250: loss=1.038478
+  Epoch 300: loss=0.864258
+  Epoch 350: loss=0.727176
+  Epoch 400: loss=0.616775
+  Epoch 450: loss=0.525636
+  Epoch 500: loss=0.450614
+    status=ok gamma0=0.6935746669769287 gamma1=5.635293483734131 (10.8 s) 
+=== pendulum/pendulum_45/05
+  Epoch 50: loss=5.184616
+  Epoch 100: loss=2.255792
+  Epoch 150: loss=1.785399
+  Epoch 200: loss=1.457170
+  Epoch 250: loss=1.221560
+  Epoch 300: loss=1.050111
+  Epoch 350: loss=0.920615
+  Epoch 400: loss=0.819281
+  Epoch 450: loss=0.738503
+  Epoch 500: loss=0.673559
+    status=ok gamma0=0.818257212638855 gamma1=5.780289649963379 (10.7 s) 
+=== pendulum/pendulum_90/01
+  Epoch 50: loss=1.591161
+  Epoch 100: loss=0.585667
+  Epoch 150: loss=2.218404
+  Epoch 200: loss=0.110500
+  Epoch 250: loss=0.036054
+  Epoch 300: loss=0.017647
+  Epoch 350: loss=0.011841
+  Epoch 400: loss=0.590093
+  Epoch 450: loss=0.018842
+  Epoch 500: loss=0.011216
+    status=ok gamma0=0.33801916241645813 gamma1=2.018557071685791 (10.8 s) 
+=== pendulum/pendulum_90/02
+  Epoch 50: loss=1.909534
+  Epoch 100: loss=1.052847
+  Epoch 150: loss=0.638079
+  Epoch 200: loss=0.354154
+  Epoch 250: loss=0.180551
+  Epoch 300: loss=0.099293
+  Epoch 350: loss=0.063921
+  Epoch 400: loss=0.047030
+  Epoch 450: loss=0.036963
+  Epoch 500: loss=0.030116
+    status=ok gamma0=0.7463660836219788 gamma1=2.925168991088867 (10.8 s) 
+=== pendulum/pendulum_90/03
+  Epoch 50: loss=1.775690
+  Epoch 100: loss=0.992083
+  Epoch 150: loss=0.562367
+  Epoch 200: loss=0.314271
+  Epoch 250: loss=0.185546
+  Epoch 300: loss=0.124420
+  Epoch 350: loss=0.089746
+  Epoch 400: loss=0.064552
+  Epoch 450: loss=0.045495
+  Epoch 500: loss=0.032054
+    status=ok gamma0=1.0616689920425415 gamma1=1.742038369178772 (10.8 s) 
+=== pendulum/pendulum_90/04
+  Epoch 50: loss=2.846950
+  Epoch 100: loss=0.386486
+  Epoch 150: loss=2.121491
+  Epoch 200: loss=1.120726
+  Epoch 250: loss=0.540136
+  Epoch 300: loss=0.263432
+  Epoch 350: loss=0.154598
+  Epoch 400: loss=0.110211
+  Epoch 450: loss=0.084675
+  Epoch 500: loss=0.066267
+    status=ok gamma0=1.8100340366363525 gamma1=2.6077189445495605 (10.9 s) 
+=== pendulum/pendulum_90/05
+  Epoch 50: loss=2.311452
+  Epoch 100: loss=1.225970
+  Epoch 150: loss=0.729094
+  Epoch 200: loss=0.401006
+  Epoch 250: loss=0.191415
+  Epoch 300: loss=0.102104
+  Epoch 350: loss=0.062698
+  Epoch 400: loss=0.040850
+  Epoch 450: loss=0.027967
+  Epoch 500: loss=0.020109
+    status=ok gamma0=0.6742835640907288 gamma1=2.8233044147491455 (10.7 s) 
+=== sliding_block/high/01
+  Epoch 50: loss=2.182519
+  Epoch 100: loss=0.826011
+  Epoch 150: loss=0.315091
+  Epoch 200: loss=0.179092
+  Epoch 250: loss=0.129649
+  Epoch 300: loss=0.092238
+  Epoch 350: loss=0.062909
+  Epoch 400: loss=0.042342
+  Epoch 450: loss=0.029807
+  Epoch 500: loss=0.023041
+    status=ok gamma0=3.4121556282043457 gamma1=3.7562150955200195 (4.7 s) 
+=== sliding_block/high/02
+  Epoch 50: loss=1.403680
+  Epoch 100: loss=0.221017
+  Epoch 150: loss=0.081777
+  Epoch 200: loss=0.035142
+  Epoch 250: loss=0.024264
+  Epoch 300: loss=0.340439
+  Epoch 350: loss=0.078410
+  Epoch 400: loss=0.030875
+  Epoch 450: loss=0.021588
+  Epoch 500: loss=0.017651
+    status=ok gamma0=3.3983185291290283 gamma1=-0.17749178409576416 (4.7 s) 
+=== sliding_block/high/03
+  Epoch 50: loss=1.005605
+  Epoch 100: loss=0.226189
+  Epoch 150: loss=0.092743
+  Epoch 200: loss=0.070599
+  Epoch 250: loss=0.057570
+  Epoch 300: loss=0.047458
+  Epoch 350: loss=0.039425
+  Epoch 400: loss=0.033048
+  Epoch 450: loss=0.027950
+  Epoch 500: loss=0.023798
+    status=ok gamma0=12.985032081604004 gamma1=-1.8739322423934937 (4.7 s) 
+=== sliding_block/high/04
+  Epoch 50: loss=0.980721
+  Epoch 100: loss=0.248116
+  Epoch 150: loss=0.140971
+  Epoch 200: loss=0.088494
+  Epoch 250: loss=0.061620
+  Epoch 300: loss=0.049374
+  Epoch 350: loss=0.041571
+  Epoch 400: loss=0.034918
+  Epoch 450: loss=0.029033
+  Epoch 500: loss=0.023931
+    status=ok gamma0=16.766740798950195 gamma1=-1.0119383335113525 (4.7 s) 
+=== sliding_block/high/05
+  Epoch 50: loss=2.257948
+  Epoch 100: loss=0.784187
+  Epoch 150: loss=0.341697
+  Epoch 200: loss=0.215792
+  Epoch 250: loss=0.181819
+  Epoch 300: loss=0.157446
+  Epoch 350: loss=0.135192
+  Epoch 400: loss=0.114859
+  Epoch 450: loss=0.096559
+  Epoch 500: loss=0.080599
+    status=ok gamma0=5.70357608795166 gamma1=5.657626628875732 (4.7 s) 
+=== sliding_block/low/01
+  Epoch 50: loss=2.713862
+  Epoch 100: loss=2.662359
+  Epoch 150: loss=1.050257
+  Epoch 200: loss=0.409463
+  Epoch 250: loss=0.106108
+  Epoch 300: loss=0.027336
+  Epoch 350: loss=0.015875
+  Epoch 400: loss=0.012515
+  Epoch 450: loss=0.010069
+  Epoch 500: loss=1.556918
+    status=ok gamma0=1.5603342056274414 gamma1=-6.899349212646484 (4.8 s) 
+=== sliding_block/low/02
+  Epoch 50: loss=1.702074
+  Epoch 100: loss=0.693530
+  Epoch 150: loss=0.323420
+  Epoch 200: loss=0.143820
+  Epoch 250: loss=0.083514
+  Epoch 300: loss=0.069155
+  Epoch 350: loss=0.065006
+  Epoch 400: loss=0.062359
+  Epoch 450: loss=0.059966
+  Epoch 500: loss=0.057659
+    status=ok gamma0=4.805654048919678 gamma1=4.999547958374023 (4.8 s) 
+=== sliding_block/low/03
+  Epoch 50: loss=0.772838
+  Epoch 100: loss=0.038424
+  Epoch 150: loss=0.122413
+  Epoch 200: loss=0.011116
+  Epoch 250: loss=0.114997
+  Epoch 300: loss=0.007647
+  Epoch 350: loss=0.577712
+  Epoch 400: loss=0.004089
+  Epoch 450: loss=0.178492
+  Epoch 500: loss=0.003800
+    status=ok gamma0=4.808788299560547 gamma1=-4.323153972625732 (4.7 s) 
+=== sliding_block/low/04
+  Epoch 50: loss=1.242010
+  Epoch 100: loss=0.265558
+  Epoch 150: loss=1.261721
+  Epoch 200: loss=0.077935
+  Epoch 250: loss=0.027136
+  Epoch 300: loss=0.019915
+  Epoch 350: loss=0.014893
+  Epoch 400: loss=0.011111
+  Epoch 450: loss=0.262354
+  Epoch 500: loss=0.059024
+    status=ok gamma0=17.03609848022461 gamma1=-5.054190635681152 (4.8 s) 
+=== sliding_block/low/05
+  Epoch 50: loss=3.483625
+  Epoch 100: loss=1.599824
+  Epoch 150: loss=0.871325
+  Epoch 200: loss=0.406185
+  Epoch 250: loss=0.164742
+  Epoch 300: loss=0.075751
+  Epoch 350: loss=0.049453
+  Epoch 400: loss=0.037925
+  Epoch 450: loss=0.029340
+  Epoch 500: loss=0.022303
+    status=ok gamma0=2.0654830932617188 gamma1=-6.665830135345459 (4.8 s) 
+=== sliding_block/mid/01
+  Epoch 50: loss=1.306450
+  Epoch 100: loss=0.206074
+  Epoch 150: loss=0.083250
+  Epoch 200: loss=0.064272
+  Epoch 250: loss=0.049987
+  Epoch 300: loss=0.038884
+  Epoch 350: loss=0.030434
+  Epoch 400: loss=0.024195
+  Epoch 450: loss=0.019637
+  Epoch 500: loss=0.016408
+    status=ok gamma0=5.844583988189697 gamma1=1.3092634677886963 (4.7 s) 
+=== sliding_block/mid/02
+  Epoch 50: loss=3.064896
+  Epoch 100: loss=0.870705
+  Epoch 150: loss=0.140519
+  Epoch 200: loss=0.046701
+  Epoch 250: loss=0.356636
+  Epoch 300: loss=0.032029
+  Epoch 350: loss=0.024824
+  Epoch 400: loss=0.020804
+  Epoch 450: loss=0.017750
+  Epoch 500: loss=8.712658
+    status=ok gamma0=1.4427332878112793 gamma1=-4.606407642364502 (4.8 s) 
+=== sliding_block/mid/03
+  Epoch 50: loss=0.375329
+  Epoch 100: loss=0.121192
+  Epoch 150: loss=0.067322
+  Epoch 200: loss=0.157323
+  Epoch 250: loss=0.036670
+  Epoch 300: loss=0.028933
+  Epoch 350: loss=0.024561
+  Epoch 400: loss=0.586376
+  Epoch 450: loss=0.050762
+  Epoch 500: loss=0.025729
+    status=ok gamma0=7.214226245880127 gamma1=1.5120525360107422 (4.8 s) 
+=== sliding_block/mid/04
+  Epoch 50: loss=1.275576
+  Epoch 100: loss=0.677119
+  Epoch 150: loss=0.307419
+  Epoch 200: loss=0.876385
+  Epoch 250: loss=0.376637
+  Epoch 300: loss=0.187436
+  Epoch 350: loss=0.109974
+  Epoch 400: loss=0.083227
+  Epoch 450: loss=0.072171
+  Epoch 500: loss=0.064906
+    status=ok gamma0=8.934195518493652 gamma1=5.254919528961182 (4.8 s) 
+=== sliding_block/mid/05
+  Epoch 50: loss=0.941196
+  Epoch 100: loss=0.080016
+  Epoch 150: loss=0.041788
+  Epoch 200: loss=0.053111
+  Epoch 250: loss=0.022529
+  Epoch 300: loss=0.016144
+  Epoch 350: loss=0.023922
+  Epoch 400: loss=0.012634
+  Epoch 450: loss=0.010200
+  Epoch 500: loss=0.008503
+    status=ok gamma0=2.565683126449585 gamma1=-2.6467182636260986 (4.9 s) 
+=== torricelli/large/01
+  Epoch 50: loss=2.892181
+  Epoch 100: loss=1.573842
+  Epoch 150: loss=0.931510
+  Epoch 200: loss=0.478804
+  Epoch 250: loss=1.962497
+  Epoch 300: loss=0.872935
+  Epoch 350: loss=0.489201
+  Epoch 400: loss=0.246901
+  Epoch 450: loss=0.110276
+  Epoch 500: loss=0.046780
+    status=ok gamma0=0.3266753852367401 gamma1=1.5277822017669678 (10.8 s) 
+=== torricelli/large/02
+  Epoch 50: loss=3.408451
+  Epoch 100: loss=1.924241
+  Epoch 150: loss=1.154060
+  Epoch 200: loss=0.963077
+  Epoch 250: loss=0.630153
+  Epoch 300: loss=0.116885
+  Epoch 350: loss=0.189563
+  Epoch 400: loss=0.250078
+  Epoch 450: loss=0.068795
+  Epoch 500: loss=0.022396
+    status=ok gamma0=0.08903108537197113 gamma1=1.6869351863861084 (10.8 s) 
+=== torricelli/large/03
+  Epoch 50: loss=3.039261
+  Epoch 100: loss=1.837123
+  Epoch 150: loss=1.088033
+  Epoch 200: loss=0.544487
+  Epoch 250: loss=1.507605
+  Epoch 300: loss=0.771056
+  Epoch 350: loss=0.393179
+  Epoch 400: loss=0.176841
+  Epoch 450: loss=0.071618
+  Epoch 500: loss=0.031240
+    status=ok gamma0=0.0836481899023056 gamma1=1.555645227432251 (10.8 s) 
+=== torricelli/large/04
+  Epoch 50: loss=2.233102
+  Epoch 100: loss=1.295855
+  Epoch 150: loss=0.740816
+  Epoch 200: loss=0.518801
+  Epoch 250: loss=0.257244
+  Epoch 300: loss=0.489537
+  Epoch 350: loss=0.241026
+  Epoch 400: loss=0.119614
+  Epoch 450: loss=0.068236
+  Epoch 500: loss=0.658060
+    status=ok gamma0=0.3412511944770813 gamma1=1.82688307762146 (10.8 s) 
+=== torricelli/large/05
+  Epoch 50: loss=3.883051
+  Epoch 100: loss=0.730036
+  Epoch 150: loss=1.777023
+  Epoch 200: loss=0.885695
+  Epoch 250: loss=0.380711
+  Epoch 300: loss=0.140341
+  Epoch 350: loss=0.057281
+  Epoch 400: loss=0.035147
+  Epoch 450: loss=0.027574
+  Epoch 500: loss=3.286181
+    status=ok gamma0=0.6197521686553955 gamma1=2.263981342315674 (10.8 s) 
+=== torricelli/medium/01
+  Epoch 50: loss=3.594352
+  Epoch 100: loss=8.712146
+  Epoch 150: loss=8.711225
+  Epoch 200: loss=8.711071
+  Epoch 250: loss=8.710860
+  Epoch 300: loss=8.710725
+  Epoch 350: loss=8.710570
+  Epoch 400: loss=8.710488
+  Epoch 450: loss=8.710441
+  Epoch 500: loss=8.710411
+    status=ok gamma0=-0.13974818587303162 gamma1=0.18681785464286804 (10.9 s) 
+=== torricelli/medium/02
+  Epoch 50: loss=3.353685
+  Epoch 100: loss=1.813349
+  Epoch 150: loss=1.288925
+  Epoch 200: loss=0.885525
+  Epoch 250: loss=0.568213
+  Epoch 300: loss=0.331298
+  Epoch 350: loss=1.250242
+  Epoch 400: loss=0.946958
+  Epoch 450: loss=0.549090
+  Epoch 500: loss=0.297212
+    status=ok gamma0=0.22102560102939606 gamma1=1.5902491807937622 (10.9 s) 
+=== torricelli/medium/03
+  Epoch 50: loss=2.734968
+  Epoch 100: loss=1.796382
+  Epoch 150: loss=1.164673
+  Epoch 200: loss=0.678526
+  Epoch 250: loss=0.331480
+  Epoch 300: loss=3.426687
+  Epoch 350: loss=0.804635
+  Epoch 400: loss=0.360235
+  Epoch 450: loss=0.139426
+  Epoch 500: loss=0.054540
+    status=ok gamma0=0.2751704156398773 gamma1=2.8126096725463867 (17.9 s) 
+=== torricelli/medium/04
+  Epoch 50: loss=3.263407
+  Epoch 100: loss=1.974453
+  Epoch 150: loss=1.207251
+  Epoch 200: loss=0.671503
+  Epoch 250: loss=7.763909
+  Epoch 300: loss=0.660714
+  Epoch 350: loss=0.314229
+  Epoch 400: loss=0.143095
+  Epoch 450: loss=0.061268
+  Epoch 500: loss=0.029384
+    status=ok gamma0=0.08411625772714615 gamma1=1.6572692394256592 (10.9 s) 
+=== torricelli/medium/05
+  Epoch 50: loss=5.676327
+  Epoch 100: loss=2.987469
+  Epoch 150: loss=2.229729
+  Epoch 200: loss=1.715483
+  Epoch 250: loss=1.290014
+  Epoch 300: loss=1.845493
+  Epoch 350: loss=1.397554
+  Epoch 400: loss=1.025208
+  Epoch 450: loss=0.728214
+  Epoch 500: loss=8.712169
+    status=ok gamma0=-0.1458173394203186 gamma1=0.26662078499794006 (10.9 s) 
+=== torricelli/small/01
+  Epoch 50: loss=3.063562
+  Epoch 100: loss=1.696018
+  Epoch 150: loss=0.667803
+  Epoch 200: loss=0.188735
+  Epoch 250: loss=0.270079
+  Epoch 300: loss=0.077136
+  Epoch 350: loss=0.309942
+  Epoch 400: loss=0.046827
+  Epoch 450: loss=0.016761
+  Epoch 500: loss=0.012044
+    status=ok gamma0=3.973581552505493 gamma1=1.6792362928390503 (11.0 s) 
+=== torricelli/small/02
+  Epoch 50: loss=4.216647
+  Epoch 100: loss=1.466628
+  Epoch 150: loss=0.415599
+  Epoch 200: loss=2.541532
+  Epoch 250: loss=0.619740
+  Epoch 300: loss=0.201427
+  Epoch 350: loss=0.051485
+  Epoch 400: loss=0.017533
+  Epoch 450: loss=2.189743
+  Epoch 500: loss=0.218082
+    status=ok gamma0=1.2398393154144287 gamma1=1.3802030086517334 (11.0 s) 
+=== torricelli/small/03
+  Epoch 50: loss=2.312429
+  Epoch 100: loss=6.080133
+  Epoch 150: loss=0.614175
+  Epoch 200: loss=31.182167
+  Epoch 250: loss=0.710883
+  Epoch 300: loss=0.271137
+  Epoch 350: loss=0.091031
+  Epoch 400: loss=0.028950
+  Epoch 450: loss=0.223830
+  Epoch 500: loss=0.060473
+    status=ok gamma0=0.4416486918926239 gamma1=1.4506440162658691 (11.0 s) 
+=== torricelli/small/04
+  Epoch 50: loss=1.088967
+  Epoch 100: loss=0.308565
+  Epoch 150: loss=0.328300
+  Epoch 200: loss=0.354622
+  Epoch 250: loss=0.062606
+  Epoch 300: loss=0.389074
+  Epoch 350: loss=0.114829
+  Epoch 400: loss=0.018615
+  Epoch 450: loss=1.024024
+  Epoch 500: loss=0.222098
+    status=ok gamma0=0.048027392476797104 gamma1=0.9395387768745422 (11.0 s) 
+=== torricelli/small/05
+  Epoch 50: loss=3.350980
+  Epoch 100: loss=1.793512
+  Epoch 150: loss=1.173698
+  Epoch 200: loss=0.724946
+  Epoch 250: loss=1.880449
+  Epoch 300: loss=0.987272
+  Epoch 350: loss=0.615349
+  Epoch 400: loss=0.360008
+  Epoch 450: loss=0.194247
+  Epoch 500: loss=0.098216
+    status=ok gamma0=0.4538704454898834 gamma1=2.004991054534912 (10.9 s) 
+Done: 90 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/g_unified_1step_seed1/clips.csv; 15 not ok.

@@ -1,0 +1,25 @@
+15c15
+< pendulum         pendulum_150   damping      -0.0592    -4.4448    4.3855     -0.1953    0.1361     4.2494    
+---
+> pendulum         pendulum_150   damping      -0.0592    -4.4448    4.3856     -0.1953    0.1361     4.2494    
+17c17
+< pendulum         pendulum_45    damping      -0.0592    -5.1794    5.1202     -0.5045    0.4452     4.6750    
+---
+> pendulum         pendulum_45    damping      -0.0592    -5.1794    5.1202     -0.5045    0.4453     4.6750    
+19c19
+< pendulum         pendulum_90    damping      -0.0592    -3.0957    3.0364     -0.3152    0.2559     2.7805    
+---
+> pendulum         pendulum_90    damping      -0.0592    -3.0957    3.0365     -0.3152    0.2560     2.7805    
+21,26d20
+< sliding_block    high           angle_deg    30.0000    30.0000    0.0000     30.0000    0.0000     0.0000    
+< sliding_block    high           friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+< sliding_block    low            angle_deg    20.0000    20.0000    0.0000     20.0000    0.0000     0.0000    
+< sliding_block    low            friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+< sliding_block    mid            angle_deg    25.0000    25.0000    0.0000     25.0000    0.0000     0.0000    
+< sliding_block    mid            friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+29c23
+< torricelli       small          k            0.0096     5.6908     5.6850     7.6804     7.6709     -1.9858   
+\ No newline at end of file
+---
+> torricelli       small          k            0.0096     5.6908     5.6850     7.6804     7.6708     -1.9858   
+\ No newline at end of file

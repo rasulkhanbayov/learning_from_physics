@@ -1,0 +1,21 @@
+Init sensitivity across runs ['base1_init5', 'base1', 'base1_init20'] (alpha per clip; failed clips excluded)
+dynamics      setting             mean_base1_init5            mean_base1     mean_base1_init20   mean_spread   n
+dropped_ball  large                         5.1534                9.3564               19.3354       14.1819   5
+dropped_ball  medium                        4.4077                9.3117               19.2635       14.8558   5
+dropped_ball  small                         4.3283                9.1963               18.5055       14.1773   5
+free_fall     mousepad                      5.2850               10.1045               19.7141       14.4292   5
+free_fall     table                         2.6956                8.8106               18.4625       15.7669   5
+free_fall     tennis                        4.5682                9.7658               20.0298       15.4616   5
+led           led_10s                       1.3068                0.4217               19.8193       19.4044   5
+led           led_2s                        4.7789                9.7713               19.7784       14.9995   5
+led           led_5s                        4.2905                9.8197               19.8196       15.5291   5
+pendulum      pendulum_150                  1.2839                1.3002                1.2899        0.0483   5
+pendulum      pendulum_45                   0.4182                0.4186                0.3953        0.0592   5
+pendulum      pendulum_90                   0.7795                0.7956                2.6410        1.8745   5
+sliding_block high                          4.6875                8.3581               19.2388       14.5514   5
+sliding_block low                           4.3587                8.4303               19.9804       15.6217   5
+sliding_block mid                           4.3339                8.1097               19.9830       15.6490   5
+torricelli    large                         1.8674                6.5266               10.0336        8.1905   5
+torricelli    medium                        4.2811                4.7996                8.0130        6.4585   4
+torricelli    small                         0.9623                5.0937                5.4056        4.4443   5
+If mean alpha moves with the init value, the parameter is not identified by the data.

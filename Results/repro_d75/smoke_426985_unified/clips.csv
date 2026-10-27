@@ -1,0 +1,3 @@
+dynamics,setting,run,npy,n_windows_in_file,frames_used,dt,status,error,alpha,beta,max_z,min_z,z0,z1,seconds
+dropped_ball,large,01,/export/home/rakh90100/learning_from_physics/repro_d75_work/data/delfys75_garcia/dropped_ball/large/01/01.npy,23,4,0.03333333333333333,nonfinite,,nan,nan,nan,nan,nan,nan,3.6
+torricelli,small,02,/export/home/rakh90100/learning_from_physics/repro_d75_work/data/delfys75_garcia/torricelli/small/02/02.npy,1979,20,0.1,ok,,-0.17316414415836334,0.4071698486804962,0.47166767716407776,-0.6583982110023499,-0.4176526963710785,0.24399319291114807,11.0

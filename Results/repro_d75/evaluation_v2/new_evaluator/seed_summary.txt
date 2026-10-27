@@ -1,0 +1,69 @@
+Seed group base1: ['base1', 'base1_s1', 'base1_s2']  (MAE mean +- std over seeds; n_ok = clips per seed)
+  dropped_ball  large         g                  0.906 +- 0.506  seeds=3  n_ok=5/5 5/5 5/5
+  dropped_ball  medium        g                  0.989 +- 0.436  seeds=3  n_ok=5/5 5/5 5/5
+  dropped_ball  small         g                  0.780 +- 0.219  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_10s       decay              0.100 +- 0.030  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_2s        decay              7.479 +- 0.008  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_5s        decay              8.895 +- 0.012  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_150  damping            0.047 +- 0.013  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_150  length             0.210 +- 0.009  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   damping            0.088 +- 0.008  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   length             0.033 +- 0.002  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_90   damping            0.100 +- 0.025  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_90   length             0.107 +- 0.009  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block high          acceleration      80.182 +- 0.653  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block low           acceleration      88.823 +- 7.411  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block mid           acceleration      82.551 +- 4.713  seeds=3  n_ok=5/5 5/5 5/5
+  torricelli    large         k                  7.501 +- 0.992  seeds=3  n_ok=5/5 4/5 5/5
+  torricelli    medium        k                  5.569 +- 0.908  seeds=3  n_ok=5/5 4/5 5/5
+  torricelli    small         k                  4.640 +- 0.650  seeds=3  n_ok=5/5 4/5 5/5
+  free_fall     mousepad      g                  1.677 +- 0.569  seeds=3  n_ok=5/5 5/5 5/5
+  free_fall     table         g                  0.965 +- 0.033  seeds=3  n_ok=5/5 5/5 5/5
+  free_fall     tennis        g                  1.163 +- 1.011  seeds=3  n_ok=5/5 5/5 5/5
+
+Seed group basem: ['basem', 'basem_s1', 'basem_s2']  (MAE mean +- std over seeds; n_ok = clips per seed)
+  dropped_ball  large         g                  0.444 +- 0.203  seeds=3  n_ok=5/5 5/5 5/5
+  dropped_ball  medium        g                  0.830 +- 0.426  seeds=3  n_ok=5/5 5/5 5/5
+  dropped_ball  small         g                  1.069 +- 0.308  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_10s       decay              0.096 +- 0.016  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_2s        decay              7.482 +- 0.008  seeds=3  n_ok=5/5 5/5 5/5
+  led           led_5s        decay              8.895 +- 0.012  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_150  damping            0.033 +- 0.005  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_150  length             0.217 +- 0.005  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   damping            0.076 +- 0.006  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   length             0.031 +- 0.003  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_90   damping            0.091 +- 0.030  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_90   length             0.107 +- 0.009  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block high          acceleration      79.482 +- 0.979  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block low           acceleration      92.135 +- 5.342  seeds=3  n_ok=5/5 5/5 5/5
+  sliding_block mid           acceleration      83.579 +- 9.796  seeds=3  n_ok=5/5 5/5 5/5
+  torricelli    large         k                  7.732 +- 0.553  seeds=3  n_ok=5/5 4/5 5/5
+  torricelli    medium        k                  6.784 +- 1.753  seeds=3  n_ok=5/5 5/5 4/5
+  torricelli    small         k                  4.596 +- 0.933  seeds=3  n_ok=4/5 5/5 5/5
+  free_fall     mousepad      g                  1.140 +- 0.217  seeds=3  n_ok=5/5 5/5 5/5
+  free_fall     table         g                  0.846 +- 0.374  seeds=3  n_ok=5/5 5/5 5/5
+  free_fall     tennis        g                  1.372 +- 0.970  seeds=3  n_ok=5/5 5/5 5/5
+
+Seed group unif1: ['unif1', 'unif1_s1', 'unif1_s2']  (MAE mean +- std over seeds; n_ok = clips per seed)
+  dropped_ball  large         g                             n/a  seeds=0  n_ok=
+  dropped_ball  medium        g                             n/a  seeds=0  n_ok=
+  dropped_ball  small         g                             n/a  seeds=0  n_ok=
+  led           led_10s       decay                         n/a  seeds=0  n_ok=
+  led           led_2s        decay                         n/a  seeds=0  n_ok=
+  led           led_5s        decay                         n/a  seeds=0  n_ok=
+  pendulum      pendulum_150  damping            3.937 +- 0.716  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_150  length           37.436 +- 25.074  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   damping            4.117 +- 0.385  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_45   length            21.707 +- 8.602  seeds=3  n_ok=3/5 5/5 5/5
+  pendulum      pendulum_90   damping            2.594 +- 0.437  seeds=3  n_ok=5/5 5/5 5/5
+  pendulum      pendulum_90   length           36.448 +- 22.410  seeds=3  n_ok=4/5 5/5 4/5
+  sliding_block high          acceleration                  n/a  seeds=0  n_ok=
+  sliding_block low           acceleration                  n/a  seeds=0  n_ok=
+  sliding_block mid           acceleration                  n/a  seeds=0  n_ok=
+  torricelli    large         k                             n/a  seeds=0  n_ok=
+  torricelli    medium        k                             n/a  seeds=0  n_ok=
+  torricelli    small         k                             n/a  seeds=0  n_ok=
+  free_fall     mousepad      g                             n/a  seeds=0  n_ok=
+  free_fall     table         g                             n/a  seeds=0  n_ok=
+  free_fall     tennis        g                             n/a  seeds=0  n_ok=
+

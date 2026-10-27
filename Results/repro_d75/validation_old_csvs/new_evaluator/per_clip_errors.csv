@@ -1,0 +1,421 @@
+run_name,model,dynamics,setting,clip,param,status,error_msg,alpha,beta,estimate,gt,abs_err,mapping
+t4_base,baseline,dropped_ball,large,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,large,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,large,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,large,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,large,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,medium,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,medium,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,medium,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,medium,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,medium,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,small,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,small,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,small,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,small,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,dropped_ball,small,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,mousepad,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,mousepad,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,mousepad,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,mousepad,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,mousepad,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,table,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,table,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,table,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,table,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,table,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,tennis,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,tennis,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,tennis,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,tennis,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,free_fall,tennis,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_base,baseline,led,led_10s,02,decay,ok,,2.5412099361419678,0.0,2.5412099361419678,0.46,2.081209936141968,decay=alpha
+t4_base,baseline,led,led_10s,03,decay,ok,,2.624235153198242,0.0,2.624235153198242,0.46,2.1642351531982422,decay=alpha
+t4_base,baseline,led,led_10s,04,decay,ok,,2.4691381454467773,0.0,2.4691381454467773,0.46,2.0091381454467774,decay=alpha
+t4_base,baseline,led,led_10s,05,decay,ok,,2.6426260471343994,0.0,2.6426260471343994,0.46,2.1826260471343994,decay=alpha
+t4_base,baseline,led,led_10s,01,decay,ok,,2.478785753250122,0.0,2.478785753250122,0.46,2.018785753250122,decay=alpha
+t4_base,baseline,led,led_2s,01,decay,ok,,9.749665260314941,0.0,9.749665260314941,2.3,7.449665260314942,decay=alpha
+t4_base,baseline,led,led_2s,02,decay,ok,,9.748640060424805,0.0,9.748640060424805,2.3,7.448640060424805,decay=alpha
+t4_base,baseline,led,led_2s,03,decay,ok,,9.735221862792969,0.0,9.735221862792969,2.3,7.435221862792969,decay=alpha
+t4_base,baseline,led,led_2s,04,decay,ok,,9.74965763092041,0.0,9.74965763092041,2.3,7.44965763092041,decay=alpha
+t4_base,baseline,led,led_2s,05,decay,ok,,9.761661529541016,0.0,9.761661529541016,2.3,7.461661529541016,decay=alpha
+t4_base,baseline,led,led_5s,01,decay,ok,,9.356310844421387,0.0,9.356310844421387,0.92,8.436310844421387,decay=alpha
+t4_base,baseline,led,led_5s,02,decay,ok,,9.42380142211914,0.0,9.42380142211914,0.92,8.50380142211914,decay=alpha
+t4_base,baseline,led,led_5s,03,decay,ok,,9.310283660888672,0.0,9.310283660888672,0.92,8.390283660888672,decay=alpha
+t4_base,baseline,led,led_5s,04,decay,failed,all-zero row (exception written as zeros),0.0,0.0,,0.92,,run failed
+t4_base,baseline,led,led_5s,05,decay,ok,,9.230545043945312,0.0,9.230545043945312,0.92,8.310545043945313,decay=alpha
+t4_base,baseline,pendulum,pendulum_150,01,length,ok,,0.31094640493392944,0.19534800946712494,0.31094640493392944,1.5,1.1890535950660706,L=|alpha|
+t4_base,baseline,pendulum,pendulum_150,01,damping,ok,,0.31094640493392944,0.19534800946712494,-0.19534800946712494,-0.0592,0.13614800946712494,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_150,02,length,ok,,0.30898767709732056,0.1695067286491394,0.30898767709732056,1.5,1.1910123229026794,L=|alpha|
+t4_base,baseline,pendulum,pendulum_150,02,damping,ok,,0.30898767709732056,0.1695067286491394,-0.1695067286491394,-0.0592,0.1103067286491394,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_150,03,length,ok,,0.3161020278930664,0.2635546624660492,0.3161020278930664,1.5,1.1838979721069336,L=|alpha|
+t4_base,baseline,pendulum,pendulum_150,03,damping,ok,,0.3161020278930664,0.2635546624660492,-0.2635546624660492,-0.0592,0.2043546624660492,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_150,04,length,ok,,0.3244931101799011,0.17210721969604492,0.3244931101799011,1.5,1.1755068898200989,L=|alpha|
+t4_base,baseline,pendulum,pendulum_150,04,damping,ok,,0.3244931101799011,0.17210721969604492,-0.17210721969604492,-0.0592,0.11290721969604492,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_150,05,length,ok,,0.30520203709602356,0.17612935602664948,0.30520203709602356,1.5,1.1947979629039764,L=|alpha|
+t4_base,baseline,pendulum,pendulum_150,05,damping,ok,,0.30520203709602356,0.17612935602664948,-0.17612935602664948,-0.0592,0.11692935602664947,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_45,01,length,ok,,0.10593796521425247,0.4655228853225708,0.10593796521425247,0.45,0.34406203478574754,L=|alpha|
+t4_base,baseline,pendulum,pendulum_45,01,damping,ok,,0.10593796521425247,0.4655228853225708,-0.4655228853225708,-0.0592,0.40632288532257077,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_45,02,length,ok,,0.10078801214694977,0.5182096362113953,0.10078801214694977,0.45,0.34921198785305024,L=|alpha|
+t4_base,baseline,pendulum,pendulum_45,02,damping,ok,,0.10078801214694977,0.5182096362113953,-0.5182096362113953,-0.0592,0.45900963621139523,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_45,03,length,ok,,0.09969516098499298,0.4165225327014923,0.09969516098499298,0.45,0.35030483901500703,L=|alpha|
+t4_base,baseline,pendulum,pendulum_45,03,damping,ok,,0.09969516098499298,0.4165225327014923,-0.4165225327014923,-0.0592,0.3573225327014923,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_45,04,length,ok,,0.10279140621423721,0.34870466589927673,0.10279140621423721,0.45,0.3472085937857628,L=|alpha|
+t4_base,baseline,pendulum,pendulum_45,04,damping,ok,,0.10279140621423721,0.34870466589927673,-0.34870466589927673,-0.0592,0.2895046658992767,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_45,05,length,ok,,0.10438412427902222,0.7733942270278931,0.10438412427902222,0.45,0.3456158757209778,L=|alpha|
+t4_base,baseline,pendulum,pendulum_45,05,damping,ok,,0.10438412427902222,0.7733942270278931,-0.7733942270278931,-0.0592,0.714194227027893,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_90,01,length,ok,,0.19381769001483917,0.3459877073764801,0.19381769001483917,0.9,0.7061823099851608,L=|alpha|
+t4_base,baseline,pendulum,pendulum_90,01,damping,ok,,0.19381769001483917,0.3459877073764801,-0.3459877073764801,-0.0592,0.28678770737648007,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_90,02,length,ok,,0.1911502629518509,0.2872551381587982,0.1911502629518509,0.9,0.7088497370481491,L=|alpha|
+t4_base,baseline,pendulum,pendulum_90,02,damping,ok,,0.1911502629518509,0.2872551381587982,-0.2872551381587982,-0.0592,0.22805513815879822,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_90,03,length,ok,,0.1923275738954544,0.3421339988708496,0.1923275738954544,0.9,0.7076724261045456,L=|alpha|
+t4_base,baseline,pendulum,pendulum_90,03,damping,ok,,0.1923275738954544,0.3421339988708496,-0.3421339988708496,-0.0592,0.2829339988708496,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_90,04,length,ok,,0.19280172884464264,0.3181668817996979,0.19280172884464264,0.9,0.7071982711553574,L=|alpha|
+t4_base,baseline,pendulum,pendulum_90,04,damping,ok,,0.19280172884464264,0.3181668817996979,-0.3181668817996979,-0.0592,0.25896688179969785,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,pendulum,pendulum_90,05,length,ok,,0.1904718577861786,0.2822592258453369,0.1904718577861786,0.9,0.7095281422138214,L=|alpha|
+t4_base,baseline,pendulum,pendulum_90,05,damping,ok,,0.1904718577861786,0.2822592258453369,-0.2822592258453369,-0.0592,0.2230592258453369,"damping=-beta (sign convention unverified, see notes)"
+t4_base,baseline,sliding_block,high,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_base,baseline,sliding_block,high,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_base,baseline,sliding_block,high,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_base,baseline,sliding_block,high,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_base,baseline,sliding_block,high,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_base,baseline,sliding_block,low,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_base,baseline,sliding_block,low,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_base,baseline,sliding_block,low,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_base,baseline,sliding_block,low,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_base,baseline,sliding_block,low,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_base,baseline,sliding_block,mid,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_base,baseline,sliding_block,mid,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_base,baseline,sliding_block,mid,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_base,baseline,sliding_block,mid,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_base,baseline,sliding_block,mid,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_base,baseline,torricelli,large,01,k,ok,,0.9083631038665771,0.0,0.9083631038665771,0.0162,0.8921631038665772,k=alpha (latent units)
+t4_base,baseline,torricelli,large,02,k,ok,,9.863652229309082,0.0,9.863652229309082,0.0162,9.847452229309082,k=alpha (latent units)
+t4_base,baseline,torricelli,large,03,k,ok,,9.775075912475586,0.0,9.775075912475586,0.0162,9.758875912475586,k=alpha (latent units)
+t4_base,baseline,torricelli,large,04,k,failed,all-zero row (exception written as zeros),0.0,0.0,,0.0162,,run failed
+t4_base,baseline,torricelli,large,05,k,ok,,9.862692832946777,0.0,9.862692832946777,0.0162,9.846492832946778,k=alpha (latent units)
+t4_base,baseline,torricelli,medium,01,k,failed,all-zero row (exception written as zeros),0.0,0.0,,0.0128,,run failed
+t4_base,baseline,torricelli,medium,02,k,ok,,9.898476600646973,0.0,9.898476600646973,0.0128,9.885676600646972,k=alpha (latent units)
+t4_base,baseline,torricelli,medium,03,k,ok,,9.790624618530273,0.0,9.790624618530273,0.0128,9.777824618530273,k=alpha (latent units)
+t4_base,baseline,torricelli,medium,04,k,ok,,9.992317199707031,0.0,9.992317199707031,0.0128,9.97951719970703,k=alpha (latent units)
+t4_base,baseline,torricelli,medium,05,k,ok,,9.99767017364502,0.0,9.99767017364502,0.0128,9.98487017364502,k=alpha (latent units)
+t4_base,baseline,torricelli,small,01,k,ok,,9.964920997619629,0.0,9.964920997619629,0.0096,9.955320997619628,k=alpha (latent units)
+t4_base,baseline,torricelli,small,02,k,ok,,9.692827224731445,0.0,9.692827224731445,0.0096,9.683227224731445,k=alpha (latent units)
+t4_base,baseline,torricelli,small,03,k,ok,,9.622615814208984,0.0,9.622615814208984,0.0096,9.613015814208984,k=alpha (latent units)
+t4_base,baseline,torricelli,small,04,k,ok,,8.446239471435547,0.0,8.446239471435547,0.0096,8.436639471435546,k=alpha (latent units)
+t4_base,baseline,torricelli,small,05,k,ok,,0.675599992275238,0.0,0.675599992275238,0.0096,0.665999992275238,k=alpha (latent units)
+t4_corr,unified,dropped_ball,large,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,large,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,large,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,large,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,large,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,medium,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,medium,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,medium,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,medium,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,medium,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,small,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,small,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,small,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,small,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,dropped_ball,small,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,mousepad,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,mousepad,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,mousepad,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,mousepad,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,mousepad,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,table,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,table,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,table,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,table,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,table,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,tennis,01,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,tennis,02,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,tennis,04,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,tennis,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,free_fall,tennis,03,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t4_corr,unified,led,led_10s,02,decay,ok,,7.384255886077881,1.5511537790298462,,0.46,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_10s,03,decay,ok,,10.035146713256836,2.225695848464966,,0.46,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_10s,04,decay,ok,,3.541954517364502,-0.22263988852500916,,0.46,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_10s,05,decay,ok,,10.660879135131836,1.117435336112976,,0.46,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_10s,01,decay,ok,,12.424176216125488,2.699509382247925,,0.46,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_2s,01,decay,ok,,22.259305953979492,2.2210655212402344,,2.3,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_2s,02,decay,ok,,4.410116672515869,1.3913183212280273,,2.3,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_2s,03,decay,ok,,14.873851776123047,2.2519471645355225,,2.3,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_2s,04,decay,ok,,20.131343841552734,2.508544921875,,2.3,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_2s,05,decay,ok,,4.966668605804443,1.5221118927001953,,2.3,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_5s,01,decay,ok,,7.796179294586182,2.079922676086426,,0.92,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_5s,02,decay,ok,,14.393674850463867,2.4794816970825195,,0.92,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_5s,03,decay,ok,,7.806540012359619,1.5161662101745605,,0.92,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_5s,04,decay,ok,,-1.2169700860977173,1.5389987230300903,,0.92,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,led,led_5s,05,decay,ok,,6.628726959228516,1.6000663042068481,,0.92,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,pendulum,pendulum_150,01,length,ok,,8.845748901367188,4.097057819366455,1.1086285750756837,1.5,0.3913714249243163,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_150,01,damping,ok,,8.845748901367188,4.097057819366455,-4.097057819366455,-0.0592,4.037857819366455,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_150,02,length,ok,,4.985162258148193,5.077669143676758,1.967167665199089,1.5,0.46716766519908903,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_150,02,damping,ok,,4.985162258148193,5.077669143676758,-5.077669143676758,-0.0592,5.018469143676758,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_150,03,length,ok,,3.133094549179077,3.9483208656311035,3.1300204465803643,1.5,1.6300204465803643,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_150,03,damping,ok,,3.133094549179077,3.9483208656311035,-3.9483208656311035,-0.0592,3.8891208656311034,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_150,04,length,ok,,20.478487014770508,3.816343069076538,0.4788757095642252,1.5,1.021124290435775,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_150,04,damping,ok,,20.478487014770508,3.816343069076538,-3.816343069076538,-0.0592,3.757143069076538,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_150,05,length,ok,,6.741702079772949,5.284471035003662,1.4546252391399463,1.5,0.04537476086005365,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_150,05,damping,ok,,6.741702079772949,5.284471035003662,-5.284471035003662,-0.0592,5.225271035003662,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_45,01,length,ok,,1.2478702068328857,5.3645243644714355,7.858709941388401,0.45,7.408709941388401,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_45,01,damping,ok,,1.2478702068328857,5.3645243644714355,-5.3645243644714355,-0.0592,5.305324364471436,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_45,02,length,ok,,1.7633872032165527,6.013164043426514,5.561257324603424,0.45,5.111257324603423,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_45,02,damping,ok,,1.7633872032165527,6.013164043426514,-6.013164043426514,-0.0592,5.953964043426514,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_45,03,length,ok,,1.6058412790298462,5.401879787445068,6.1068613243798255,0.45,5.656861324379825,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_45,03,damping,ok,,1.6058412790298462,5.401879787445068,-5.401879787445068,-0.0592,5.342679787445069,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_45,04,length,ok,,12.532356262207031,5.159351825714111,0.7825064812092234,0.45,0.3325064812092234,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_45,04,damping,ok,,12.532356262207031,5.159351825714111,-5.159351825714111,-0.0592,5.100151825714112,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_45,05,length,ok,,10.361167907714844,3.9582831859588623,0.9464811387428675,0.45,0.49648113874286753,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_45,05,damping,ok,,10.361167907714844,3.9582831859588623,-3.9582831859588623,-0.0592,3.899083185958862,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_90,01,length,ok,,1.4468601942062378,0.5120328664779663,6.777883612576699,0.9,5.8778836125766984,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_90,01,damping,ok,,1.4468601942062378,0.5120328664779663,-0.5120328664779663,-0.0592,0.4528328664779663,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_90,02,length,ok,,1.3613343238830566,1.440656304359436,7.203704356786956,0.9,6.303704356786955,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_90,02,damping,ok,,1.3613343238830566,1.440656304359436,-1.440656304359436,-0.0592,1.3814563043594361,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_90,03,length,ok,,5.203324794769287,2.800191640853882,1.8846891913912942,0.9,0.9846891913912942,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_90,03,damping,ok,,5.203324794769287,2.800191640853882,-2.800191640853882,-0.0592,2.7409916408538817,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_90,04,length,ok,,6.2370500564575195,6.282408237457275,1.5723218366424205,0.9,0.6723218366424205,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_90,04,damping,ok,,6.2370500564575195,6.282408237457275,-6.282408237457275,-0.0592,6.223208237457276,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,pendulum,pendulum_90,05,length,ok,,5.765504837036133,4.443167209625244,1.7009178341165514,0.9,0.8009178341165514,L=g/gamma0 (small-angle; None if gamma0<=0)
+t4_corr,unified,pendulum,pendulum_90,05,damping,ok,,5.765504837036133,4.443167209625244,-4.443167209625244,-0.0592,4.383967209625244,"damping=-gamma1 (sign convention unverified, see notes)"
+t4_corr,unified,sliding_block,high,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_corr,unified,sliding_block,high,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_corr,unified,sliding_block,high,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_corr,unified,sliding_block,high,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_corr,unified,sliding_block,high,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,3.1402180537976943,,run failed
+t4_corr,unified,sliding_block,low,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_corr,unified,sliding_block,low,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_corr,unified,sliding_block,low,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_corr,unified,sliding_block,low,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_corr,unified,sliding_block,low,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,1.4409887121574543,,run failed
+t4_corr,unified,sliding_block,mid,01,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_corr,unified,sliding_block,mid,02,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_corr,unified,sliding_block,mid,03,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_corr,unified,sliding_block,mid,04,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_corr,unified,sliding_block,mid,05,acceleration,failed,all-zero row (exception written as zeros),0.0,0.0,,2.299353115776791,,run failed
+t4_corr,unified,torricelli,large,01,k,ok,,1.3554530143737793,4.1383957862854,,0.0162,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,large,02,k,ok,,8.236001014709473,3.258481740951538,,0.0162,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,large,03,k,ok,,1.015311598777771,5.227651596069336,,0.0162,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,large,04,k,ok,,2.4366888999938965,2.0570335388183594,,0.0162,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,large,05,k,ok,,1.6120301485061646,5.886393070220947,,0.0162,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,medium,01,k,ok,,16.766252517700195,5.454131126403809,,0.0128,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,medium,02,k,ok,,-0.07119011878967285,0.5285547971725464,,0.0128,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,medium,03,k,ok,,28.093996047973633,2.0697062015533447,,0.0128,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,medium,04,k,ok,,3.0600616931915283,4.674760818481445,,0.0128,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,medium,05,k,ok,,-0.41834279894828796,4.714674472808838,,0.0128,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,small,01,k,ok,,0.5998440980911255,5.378945827484131,,0.0096,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,small,02,k,ok,,2.4724318981170654,3.9268710613250732,,0.0096,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,small,03,k,ok,,0.16568170487880707,0.7350723743438721,,0.0096,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,small,04,k,ok,,25.21593475341797,2.4869296550750732,,0.0096,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t4_corr,unified,torricelli,small,05,k,ok,,-0.10877139121294022,1.8834483623504639,,0.0096,,not physically meaningful: damped-oscillator fit to a non-oscillator system
+t5_1step,baseline,dropped_ball,large,01,g,ok,,10.85193920135498,1.0,10.85193920135498,9.80665,1.045289201354981,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,large,02,g,ok,,9.795007705688477,1.0,9.795007705688477,9.80665,0.01164229431152286,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,large,03,g,ok,,9.745046615600586,1.0,9.745046615600586,9.80665,0.061603384399413486,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,large,04,g,ok,,9.829946517944336,1.0,9.829946517944336,9.80665,0.023296517944336514,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,large,05,g,ok,,9.706367492675781,1.0,9.706367492675781,9.80665,0.10028250732421817,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,medium,01,g,ok,,9.59595775604248,1.0,9.59595775604248,9.80665,0.21069224395751895,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,medium,02,g,ok,,10.101987838745117,1.0,10.101987838745117,9.80665,0.29533783874511776,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,medium,03,g,ok,,9.538819313049316,1.0,9.538819313049316,9.80665,0.267830686950683,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,medium,04,g,ok,,11.447754859924316,1.0,11.447754859924316,9.80665,1.641104859924317,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,medium,05,g,ok,,9.8231782913208,1.0,9.8231782913208,9.80665,0.016528291320801358,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,small,01,g,ok,,9.751322746276855,1.0,9.751322746276855,9.80665,0.055327253723143954,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,small,02,g,ok,,9.80203914642334,1.0,9.80203914642334,9.80665,0.004610853576659579,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,small,03,g,ok,,10.175125122070312,1.0,10.175125122070312,9.80665,0.3684751220703131,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,small,04,g,ok,,7.710088729858398,1.0,7.710088729858398,9.80665,2.096561270141601,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,dropped_ball,small,05,g,ok,,9.662683486938477,1.0,9.662683486938477,9.80665,0.14396651306152286,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,mousepad,01,g,ok,,9.730223655700684,1.0,9.730223655700684,9.80665,0.07642634429931583,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,mousepad,02,g,ok,,12.138290405273438,1.0,12.138290405273438,9.80665,2.331640405273438,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,mousepad,03,g,ok,,13.204449653625488,1.0,13.204449653625488,9.80665,3.397799653625489,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,mousepad,04,g,ok,,12.47750186920166,1.0,12.47750186920166,9.80665,2.6708518692016607,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,mousepad,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t5_1step,baseline,free_fall,table,01,g,ok,,7.409244537353516,1.0,7.409244537353516,9.80665,2.397405462646484,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,table,02,g,ok,,7.490492343902588,1.0,7.490492343902588,9.80665,2.3161576560974115,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,table,03,g,ok,,9.709223747253418,1.0,9.709223747253418,9.80665,0.09742625274658145,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,table,04,g,ok,,9.621789932250977,1.0,9.621789932250977,9.80665,0.18486006774902286,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,table,05,g,ok,,9.527472496032715,1.0,9.527472496032715,9.80665,0.2791775039672846,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,tennis,01,g,ok,,7.877824306488037,1.0,7.877824306488037,9.80665,1.9288256935119623,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,tennis,02,g,ok,,7.418946743011475,1.0,7.418946743011475,9.80665,2.387703256988525,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,tennis,03,g,ok,,9.815614700317383,1.0,9.815614700317383,9.80665,0.00896470031738339,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,tennis,04,g,ok,,9.920424461364746,1.0,9.920424461364746,9.80665,0.11377446136474667,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,free_fall,tennis,05,g,ok,,10.65562915802002,1.0,10.65562915802002,9.80665,0.8489791580200201,g=alpha (latent units; scale set only by the KL prior)
+t5_1step,baseline,led,led_10s,01,decay,ok,,2.47758150100708,0.0,2.47758150100708,0.46,2.01758150100708,decay=alpha
+t5_1step,baseline,led,led_10s,02,decay,ok,,2.5422818660736084,0.0,2.5422818660736084,0.46,2.0822818660736084,decay=alpha
+t5_1step,baseline,led,led_10s,03,decay,ok,,2.629310369491577,0.0,2.629310369491577,0.46,2.169310369491577,decay=alpha
+t5_1step,baseline,led,led_10s,04,decay,ok,,2.4686357975006104,0.0,2.4686357975006104,0.46,2.0086357975006104,decay=alpha
+t5_1step,baseline,led,led_10s,05,decay,ok,,2.6400210857391357,0.0,2.6400210857391357,0.46,2.1800210857391358,decay=alpha
+t5_1step,baseline,led,led_2s,01,decay,ok,,9.749665260314941,0.0,9.749665260314941,2.3,7.449665260314942,decay=alpha
+t5_1step,baseline,led,led_2s,02,decay,ok,,9.748641014099121,0.0,9.748641014099121,2.3,7.448641014099121,decay=alpha
+t5_1step,baseline,led,led_2s,03,decay,ok,,9.735221862792969,0.0,9.735221862792969,2.3,7.435221862792969,decay=alpha
+t5_1step,baseline,led,led_2s,04,decay,ok,,9.74965763092041,0.0,9.74965763092041,2.3,7.44965763092041,decay=alpha
+t5_1step,baseline,led,led_2s,05,decay,ok,,9.761661529541016,0.0,9.761661529541016,2.3,7.461661529541016,decay=alpha
+t5_1step,baseline,led,led_5s,01,decay,ok,,9.356310844421387,0.0,9.356310844421387,0.92,8.436310844421387,decay=alpha
+t5_1step,baseline,led,led_5s,02,decay,ok,,9.42380142211914,0.0,9.42380142211914,0.92,8.50380142211914,decay=alpha
+t5_1step,baseline,led,led_5s,03,decay,ok,,9.310283660888672,0.0,9.310283660888672,0.92,8.390283660888672,decay=alpha
+t5_1step,baseline,led,led_5s,04,decay,ok,,9.458013534545898,0.0,9.458013534545898,0.92,8.538013534545899,decay=alpha
+t5_1step,baseline,led,led_5s,05,decay,ok,,9.230545043945312,0.0,9.230545043945312,0.92,8.310545043945313,decay=alpha
+t5_1step,baseline,pendulum,pendulum_150,01,length,ok,,0.3199760615825653,0.22266188263893127,0.3199760615825653,1.5,1.1800239384174347,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_150,01,damping,ok,,0.3199760615825653,0.22266188263893127,-0.22266188263893127,-0.0592,0.16346188263893127,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_150,02,length,ok,,0.3108532428741455,0.17034940421581268,0.3108532428741455,1.5,1.1891467571258545,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_150,02,damping,ok,,0.3108532428741455,0.17034940421581268,-0.17034940421581268,-0.0592,0.11114940421581268,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_150,03,length,ok,,0.31753361225128174,0.16130581498146057,0.31753361225128174,1.5,1.1824663877487183,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_150,03,damping,ok,,0.31753361225128174,0.16130581498146057,-0.16130581498146057,-0.0592,0.10210581498146057,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_150,04,length,ok,,0.31956642866134644,0.17067193984985352,0.31956642866134644,1.5,1.1804335713386536,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_150,04,damping,ok,,0.31956642866134644,0.17067193984985352,-0.17067193984985352,-0.0592,0.11147193984985351,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_150,05,length,ok,,0.3123072385787964,0.18608029186725616,0.3123072385787964,1.5,1.1876927614212036,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_150,05,damping,ok,,0.3123072385787964,0.18608029186725616,-0.18608029186725616,-0.0592,0.12688029186725616,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_45,01,length,ok,,0.10248017311096191,0.5786300301551819,0.10248017311096191,0.45,0.3475198268890381,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_45,01,damping,ok,,0.10248017311096191,0.5786300301551819,-0.5786300301551819,-0.0592,0.5194300301551819,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_45,02,length,ok,,0.10427673161029816,0.8192163705825806,0.10427673161029816,0.45,0.34572326838970185,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_45,02,damping,ok,,0.10427673161029816,0.8192163705825806,-0.8192163705825806,-0.0592,0.7600163705825805,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_45,03,length,ok,,0.10049764066934586,0.406624972820282,0.10049764066934586,0.45,0.34950235933065416,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_45,03,damping,ok,,0.10049764066934586,0.406624972820282,-0.406624972820282,-0.0592,0.34742497282028195,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_45,04,length,ok,,0.10278695076704025,0.45252400636672974,0.10278695076704025,0.45,0.34721304923295976,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_45,04,damping,ok,,0.10278695076704025,0.45252400636672974,-0.45252400636672974,-0.0592,0.3933240063667297,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_45,05,length,ok,,0.10511251538991928,0.9624931216239929,0.10511251538991928,0.45,0.34488748461008073,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_45,05,damping,ok,,0.10511251538991928,0.9624931216239929,-0.9624931216239929,-0.0592,0.9032931216239929,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_90,01,length,ok,,0.19426803290843964,0.37166470289230347,0.19426803290843964,0.9,0.7057319670915604,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_90,01,damping,ok,,0.19426803290843964,0.37166470289230347,-0.37166470289230347,-0.0592,0.31246470289230344,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_90,02,length,ok,,0.18915106356143951,0.4107207953929901,0.18915106356143951,0.9,0.7108489364385605,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_90,02,damping,ok,,0.18915106356143951,0.4107207953929901,-0.4107207953929901,-0.0592,0.3515207953929901,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_90,03,length,ok,,0.19289298355579376,0.3313424289226532,0.19289298355579376,0.9,0.7071070164442063,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_90,03,damping,ok,,0.19289298355579376,0.3313424289226532,-0.3313424289226532,-0.0592,0.27214242892265317,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_90,04,length,ok,,0.1871805191040039,0.2736036777496338,0.1871805191040039,0.9,0.7128194808959961,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_90,04,damping,ok,,0.1871805191040039,0.2736036777496338,-0.2736036777496338,-0.0592,0.2144036777496338,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,pendulum,pendulum_90,05,length,ok,,0.1931675374507904,0.35047438740730286,0.1931675374507904,0.9,0.7068324625492096,L=|alpha|
+t5_1step,baseline,pendulum,pendulum_90,05,damping,ok,,0.1931675374507904,0.35047438740730286,-0.35047438740730286,-0.0592,0.2912743874073028,"damping=-beta (sign convention unverified, see notes)"
+t5_1step,baseline,sliding_block,high,01,acceleration,ok,,8.413519859313965,10.0,84.13519859313965,3.1402180537976943,80.99498053934195,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,high,02,acceleration,ok,,8.399057388305664,10.0,83.99057388305664,3.1402180537976943,80.85035582925894,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,high,03,acceleration,ok,,8.575870513916016,10.0,85.75870513916016,3.1402180537976943,82.61848708536246,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,high,04,acceleration,ok,,8.33765697479248,10.0,83.3765697479248,3.1402180537976943,80.23635169412711,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,high,05,acceleration,ok,,8.367687225341797,10.0,83.67687225341797,3.1402180537976943,80.53665419962027,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,low,01,acceleration,ok,,9.980000495910645,10.0,99.80000495910645,1.4409887121574543,98.359016246949,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,low,02,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,low,03,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,low,04,acceleration,ok,,9.980000495910645,10.0,99.80000495910645,1.4409887121574543,98.359016246949,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,low,05,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,mid,01,acceleration,ok,,7.965112686157227,10.0,79.65112686157227,2.299353115776791,77.35177374579547,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,mid,02,acceleration,ok,,9.980001449584961,10.0,99.80001449584961,2.299353115776791,97.50066138007281,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,mid,03,acceleration,ok,,7.781450271606445,10.0,77.81450271606445,2.299353115776791,75.51514960028766,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,mid,04,acceleration,ok,,8.340410232543945,10.0,83.40410232543945,2.299353115776791,81.10474920966266,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,sliding_block,mid,05,acceleration,ok,,8.511738777160645,10.0,85.11738777160645,2.299353115776791,82.81803465582965,a=10|alpha| (latent units; mu not estimable)
+t5_1step,baseline,torricelli,large,01,k,ok,,0.9763785004615784,0.0,0.9763785004615784,0.0162,0.9601785004615784,k=alpha (latent units)
+t5_1step,baseline,torricelli,large,02,k,ok,,9.701409339904785,0.0,9.701409339904785,0.0162,9.685209339904786,k=alpha (latent units)
+t5_1step,baseline,torricelli,large,03,k,ok,,9.949213027954102,0.0,9.949213027954102,0.0162,9.933013027954102,k=alpha (latent units)
+t5_1step,baseline,torricelli,large,04,k,ok,,1.0059796571731567,0.0,1.0059796571731567,0.0162,0.9897796571731567,k=alpha (latent units)
+t5_1step,baseline,torricelli,large,05,k,ok,,9.79304313659668,0.0,9.79304313659668,0.0162,9.77684313659668,k=alpha (latent units)
+t5_1step,baseline,torricelli,medium,01,k,ok,,10.035568237304688,0.0,10.035568237304688,0.0128,10.022768237304687,k=alpha (latent units)
+t5_1step,baseline,torricelli,medium,02,k,ok,,9.96324348449707,0.0,9.96324348449707,0.0128,9.95044348449707,k=alpha (latent units)
+t5_1step,baseline,torricelli,medium,03,k,ok,,10.032567977905273,0.0,10.032567977905273,0.0128,10.019767977905273,k=alpha (latent units)
+t5_1step,baseline,torricelli,medium,04,k,ok,,9.680871963500977,0.0,9.680871963500977,0.0128,9.668071963500976,k=alpha (latent units)
+t5_1step,baseline,torricelli,medium,05,k,ok,,9.973123550415039,0.0,9.973123550415039,0.0128,9.960323550415039,k=alpha (latent units)
+t5_1step,baseline,torricelli,small,01,k,ok,,9.337907791137695,0.0,9.337907791137695,0.0096,9.328307791137695,k=alpha (latent units)
+t5_1step,baseline,torricelli,small,02,k,ok,,9.200067520141602,0.0,9.200067520141602,0.0096,9.1904675201416,k=alpha (latent units)
+t5_1step,baseline,torricelli,small,03,k,failed,all-zero row (exception written as zeros),0.0,0.0,,0.0096,,run failed
+t5_1step,baseline,torricelli,small,04,k,ok,,7.300397872924805,0.0,7.300397872924805,0.0096,7.290797872924805,k=alpha (latent units)
+t5_1step,baseline,torricelli,small,05,k,ok,,9.983834266662598,0.0,9.983834266662598,0.0096,9.974234266662597,k=alpha (latent units)
+t5_multi,baseline,dropped_ball,large,01,g,ok,,10.433401107788086,1.0,10.433401107788086,9.80665,0.6267511077880865,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,large,02,g,ok,,9.873991966247559,1.0,9.873991966247559,9.80665,0.06734196624755917,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,large,03,g,ok,,9.761412620544434,1.0,9.761412620544434,9.80665,0.04523737945556583,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,large,04,g,ok,,9.848445892333984,1.0,9.848445892333984,9.80665,0.04179589233398495,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,large,05,g,ok,,9.705646514892578,1.0,9.705646514892578,9.80665,0.1010034851074213,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,medium,01,g,ok,,9.60400676727295,1.0,9.60400676727295,9.80665,0.2026432327270502,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,medium,02,g,ok,,10.029862403869629,1.0,10.029862403869629,9.80665,0.22321240386962948,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,medium,03,g,ok,,9.512864112854004,1.0,9.512864112854004,9.80665,0.2937858871459955,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,medium,04,g,ok,,11.340785026550293,1.0,11.340785026550293,9.80665,1.5341350265502935,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,medium,05,g,ok,,9.798662185668945,1.0,9.798662185668945,9.80665,0.00798781433105411,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,small,01,g,ok,,9.784187316894531,1.0,9.784187316894531,9.80665,0.022462683105468173,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,small,02,g,ok,,9.772526741027832,1.0,9.772526741027832,9.80665,0.03412325897216739,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,small,03,g,ok,,10.096871376037598,1.0,10.096871376037598,9.80665,0.29022137603759823,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,small,04,g,ok,,7.905872344970703,1.0,7.905872344970703,9.80665,1.9007776550292963,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,dropped_ball,small,05,g,ok,,9.691557884216309,1.0,9.691557884216309,9.80665,0.11509211578369083,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,mousepad,01,g,ok,,8.537484169006348,-2.3015213012695312,8.537484169006348,9.80665,1.2691658309936518,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,mousepad,02,g,ok,,8.4151611328125,10.0,8.4151611328125,9.80665,1.3914888671874994,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,mousepad,03,g,ok,,13.048513412475586,1.0,13.048513412475586,9.80665,3.2418634124755865,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,mousepad,04,g,ok,,9.100563049316406,1.3958011865615845,9.100563049316406,9.80665,0.7060869506835932,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,mousepad,05,g,failed,all-zero row (exception written as zeros),0.0,0.0,,9.80665,,run failed
+t5_multi,baseline,free_fall,table,01,g,ok,,9.464210510253906,-0.34731000661849976,9.464210510253906,9.80665,0.3424394897460932,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,table,02,g,ok,,10.01125431060791,1.1376045942306519,10.01125431060791,9.80665,0.20460431060791073,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,table,03,g,ok,,9.742433547973633,1.0,9.742433547973633,9.80665,0.06421645202636661,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,table,04,g,ok,,9.743128776550293,1.7337442636489868,9.743128776550293,9.80665,0.06352122344970645,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,table,05,g,ok,,9.892312049865723,1.4676114320755005,9.892312049865723,9.80665,0.08566204986572323,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,tennis,01,g,ok,,8.72994327545166,0.8374648690223694,8.72994327545166,9.80665,1.0767067245483393,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,tennis,02,g,ok,,9.647007942199707,1.4794074296951294,9.647007942199707,9.80665,0.1596420578002924,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,tennis,03,g,ok,,8.744224548339844,10.0,8.744224548339844,9.80665,1.0624254516601557,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,tennis,04,g,ok,,10.029312133789062,1.093663215637207,10.029312133789062,9.80665,0.22266213378906308,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,free_fall,tennis,05,g,ok,,9.926733016967773,0.5449012517929077,9.926733016967773,9.80665,0.12008301696777401,g=alpha (latent units; scale set only by the KL prior)
+t5_multi,baseline,led,led_10s,01,decay,ok,,9.21706485748291,0.0,9.21706485748291,0.46,8.75706485748291,decay=alpha
+t5_multi,baseline,led,led_10s,02,decay,ok,,9.207096099853516,0.0,9.207096099853516,0.46,8.747096099853515,decay=alpha
+t5_multi,baseline,led,led_10s,03,decay,ok,,9.237947463989258,0.0,9.237947463989258,0.46,8.777947463989257,decay=alpha
+t5_multi,baseline,led,led_10s,04,decay,ok,,2.7151246070861816,0.0,2.7151246070861816,0.46,2.2551246070861817,decay=alpha
+t5_multi,baseline,led,led_10s,05,decay,ok,,9.230910301208496,0.0,9.230910301208496,0.46,8.770910301208495,decay=alpha
+t5_multi,baseline,led,led_2s,01,decay,ok,,9.749369621276855,0.0,9.749369621276855,2.3,7.449369621276856,decay=alpha
+t5_multi,baseline,led,led_2s,02,decay,ok,,9.74827766418457,0.0,9.74827766418457,2.3,7.4482776641845705,decay=alpha
+t5_multi,baseline,led,led_2s,03,decay,ok,,10.34881591796875,1.0,10.34881591796875,2.3,8.04881591796875,decay=alpha
+t5_multi,baseline,led,led_2s,04,decay,ok,,9.74939250946045,0.0,9.74939250946045,2.3,7.449392509460449,decay=alpha
+t5_multi,baseline,led,led_2s,05,decay,ok,,9.773180961608887,0.0,9.773180961608887,2.3,7.473180961608887,decay=alpha
+t5_multi,baseline,led,led_5s,01,decay,ok,,9.356072425842285,0.0,9.356072425842285,0.92,8.436072425842285,decay=alpha
+t5_multi,baseline,led,led_5s,02,decay,ok,,9.449614524841309,0.0,9.449614524841309,0.92,8.529614524841309,decay=alpha
+t5_multi,baseline,led,led_5s,03,decay,ok,,9.337327003479004,0.0,9.337327003479004,0.92,8.417327003479004,decay=alpha
+t5_multi,baseline,led,led_5s,04,decay,ok,,9.432188034057617,0.0,9.432188034057617,0.92,8.512188034057617,decay=alpha
+t5_multi,baseline,led,led_5s,05,decay,ok,,9.231130599975586,0.0,9.231130599975586,0.92,8.311130599975586,decay=alpha
+t5_multi,baseline,pendulum,pendulum_150,01,length,ok,,0.6325576901435852,1.0,0.6325576901435852,1.5,0.8674423098564148,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_150,01,damping,ok,,0.6325576901435852,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_150,02,length,ok,,0.31175893545150757,0.15929824113845825,0.31175893545150757,1.5,1.1882410645484924,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_150,02,damping,ok,,0.31175893545150757,0.15929824113845825,-0.15929824113845825,-0.0592,0.10009824113845825,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_150,03,length,ok,,0.31063124537467957,1.0,0.31063124537467957,1.5,1.1893687546253204,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_150,03,damping,ok,,0.31063124537467957,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_150,04,length,ok,,-0.8639494180679321,1.0,0.8639494180679321,1.5,0.6360505819320679,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_150,04,damping,ok,,-0.8639494180679321,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_150,05,length,ok,,3.52085018157959,1.0,3.52085018157959,1.5,2.02085018157959,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_150,05,damping,ok,,3.52085018157959,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_45,01,length,ok,,1.422773003578186,1.0,1.422773003578186,0.45,0.9727730035781861,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_45,01,damping,ok,,1.422773003578186,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_45,02,length,ok,,0.10073215514421463,0.5715102553367615,0.10073215514421463,0.45,0.3492678448557854,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_45,02,damping,ok,,0.10073215514421463,0.5715102553367615,-0.5715102553367615,-0.0592,0.5123102553367614,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_45,03,length,ok,,0.9395174980163574,1.0,0.9395174980163574,0.45,0.4895174980163574,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_45,03,damping,ok,,0.9395174980163574,1.0,-1.0,-0.0592,0.9408,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_45,04,length,ok,,0.10417710989713669,0.5392242074012756,0.10417710989713669,0.45,0.3458228901028633,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_45,04,damping,ok,,0.10417710989713669,0.5392242074012756,-0.5392242074012756,-0.0592,0.4800242074012756,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_45,05,length,ok,,0.1027279868721962,0.8173898458480835,0.1027279868721962,0.45,0.3472720131278038,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_45,05,damping,ok,,0.1027279868721962,0.8173898458480835,-0.8173898458480835,-0.0592,0.7581898458480835,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_90,01,length,ok,,0.19238974153995514,0.3054514527320862,0.19238974153995514,0.9,0.7076102584600449,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_90,01,damping,ok,,0.19238974153995514,0.3054514527320862,-0.3054514527320862,-0.0592,0.24625145273208618,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_90,02,length,ok,,0.1925830841064453,0.28129085898399353,0.1925830841064453,0.9,0.7074169158935547,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_90,02,damping,ok,,0.1925830841064453,0.28129085898399353,-0.28129085898399353,-0.0592,0.22209085898399353,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_90,03,length,ok,,0.1903059035539627,0.32248762249946594,0.1903059035539627,0.9,0.7096940964460373,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_90,03,damping,ok,,0.1903059035539627,0.32248762249946594,-0.32248762249946594,-0.0592,0.2632876224994659,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_90,04,length,ok,,0.19783475995063782,0.3484598398208618,0.19783475995063782,0.9,0.7021652400493622,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_90,04,damping,ok,,0.19783475995063782,0.3484598398208618,-0.3484598398208618,-0.0592,0.2892598398208618,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,pendulum,pendulum_90,05,length,ok,,0.1928391009569168,0.2712323069572449,0.1928391009569168,0.9,0.7071608990430832,L=|alpha|
+t5_multi,baseline,pendulum,pendulum_90,05,damping,ok,,0.1928391009569168,0.2712323069572449,-0.2712323069572449,-0.0592,0.21203230695724487,"damping=-beta (sign convention unverified, see notes)"
+t5_multi,baseline,sliding_block,high,01,acceleration,ok,,8.539655685424805,10.0,85.39655685424805,3.1402180537976943,82.25633880045035,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,high,02,acceleration,ok,,8.51065444946289,10.0,85.1065444946289,3.1402180537976943,81.96632644083121,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,high,03,acceleration,ok,,8.609552383422852,10.0,86.09552383422852,3.1402180537976943,82.95530578043082,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,high,04,acceleration,ok,,8.457328796386719,10.0,84.57328796386719,3.1402180537976943,81.43306991006949,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,high,05,acceleration,ok,,8.308107376098633,10.0,83.08107376098633,3.1402180537976943,79.94085570718863,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,low,01,acceleration,ok,,9.970002174377441,10.0,99.70002174377441,1.4409887121574543,98.25903303161697,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,low,02,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,low,03,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,low,04,acceleration,ok,,9.989999771118164,10.0,99.89999771118164,1.4409887121574543,98.45900899902419,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,low,05,acceleration,ok,,9.980000495910645,10.0,99.80000495910645,1.4409887121574543,98.359016246949,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,mid,01,acceleration,ok,,8.221339225769043,10.0,82.21339225769043,2.299353115776791,79.91403914191363,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,mid,02,acceleration,ok,,9.980001449584961,10.0,99.80001449584961,2.299353115776791,97.50066138007281,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,mid,03,acceleration,ok,,8.142513275146484,10.0,81.42513275146484,2.299353115776791,79.12577963568805,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,mid,04,acceleration,ok,,8.414183616638184,10.0,84.14183616638184,2.299353115776791,81.84248305060504,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,sliding_block,mid,05,acceleration,ok,,8.411779403686523,10.0,84.11779403686523,2.299353115776791,81.81844092108844,a=10|alpha| (latent units; mu not estimable)
+t5_multi,baseline,torricelli,large,01,k,ok,,2.4248900413513184,0.0,2.4248900413513184,0.0162,2.4086900413513184,k=alpha (latent units)
+t5_multi,baseline,torricelli,large,02,k,ok,,9.750980377197266,0.0,9.750980377197266,0.0162,9.734780377197266,k=alpha (latent units)
+t5_multi,baseline,torricelli,large,03,k,ok,,9.971734046936035,0.0,9.971734046936035,0.0162,9.955534046936036,k=alpha (latent units)
+t5_multi,baseline,torricelli,large,04,k,ok,,0.8661136627197266,0.0,0.8661136627197266,0.0162,0.8499136627197266,k=alpha (latent units)
+t5_multi,baseline,torricelli,large,05,k,ok,,9.747099876403809,0.0,9.747099876403809,0.0162,9.730899876403809,k=alpha (latent units)
+t5_multi,baseline,torricelli,medium,01,k,ok,,10.947202682495117,0.0,10.947202682495117,0.0128,10.934402682495117,k=alpha (latent units)
+t5_multi,baseline,torricelli,medium,02,k,ok,,10.025106430053711,0.0,10.025106430053711,0.0128,10.01230643005371,k=alpha (latent units)
+t5_multi,baseline,torricelli,medium,03,k,ok,,8.763541221618652,0.0,8.763541221618652,0.0128,8.750741221618652,k=alpha (latent units)
+t5_multi,baseline,torricelli,medium,04,k,ok,,10.010883331298828,0.0,10.010883331298828,0.0128,9.998083331298828,k=alpha (latent units)
+t5_multi,baseline,torricelli,medium,05,k,ok,,9.951214790344238,0.0,9.951214790344238,0.0128,9.938414790344238,k=alpha (latent units)
+t5_multi,baseline,torricelli,small,01,k,failed,all-zero row (exception written as zeros),0.0,0.0,,0.0096,,run failed
+t5_multi,baseline,torricelli,small,02,k,ok,,9.62690258026123,0.0,9.62690258026123,0.0096,9.61730258026123,k=alpha (latent units)
+t5_multi,baseline,torricelli,small,03,k,ok,,9.591007232666016,0.0,9.591007232666016,0.0096,9.581407232666015,k=alpha (latent units)
+t5_multi,baseline,torricelli,small,04,k,ok,,9.687853813171387,0.0,9.687853813171387,0.0096,9.678253813171386,k=alpha (latent units)
+t5_multi,baseline,torricelli,small,05,k,ok,,9.931861877441406,0.0,9.931861877441406,0.0096,9.922261877441406,k=alpha (latent units)

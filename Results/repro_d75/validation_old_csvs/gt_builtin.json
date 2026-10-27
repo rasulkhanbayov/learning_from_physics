@@ -1,0 +1,113 @@
+{
+ "dropped_ball": {
+  "large": {
+   "g": {
+    "mean": 9.80665
+   }
+  },
+  "medium": {
+   "g": {
+    "mean": 9.80665
+   }
+  },
+  "small": {
+   "g": {
+    "mean": 9.80665
+   }
+  }
+ },
+ "free_fall": {
+  "mousepad": {
+   "g": {
+    "mean": 9.80665
+   }
+  },
+  "table": {
+   "g": {
+    "mean": 9.80665
+   }
+  },
+  "tennis": {
+   "g": {
+    "mean": 9.80665
+   }
+  }
+ },
+ "led": {
+  "led_2s": {
+   "decay": {
+    "mean": 2.3
+   }
+  },
+  "led_5s": {
+   "decay": {
+    "mean": 0.92
+   }
+  },
+  "led_10s": {
+   "decay": {
+    "mean": 0.46
+   }
+  }
+ },
+ "pendulum": {
+  "pendulum_45": {
+   "length": {
+    "mean": 0.45
+   },
+   "damping": {
+    "mean": -0.0592
+   }
+  },
+  "pendulum_90": {
+   "length": {
+    "mean": 0.9
+   },
+   "damping": {
+    "mean": -0.0592
+   }
+  },
+  "pendulum_150": {
+   "length": {
+    "mean": 1.5
+   },
+   "damping": {
+    "mean": -0.0592
+   }
+  }
+ },
+ "torricelli": {
+  "large": {
+   "k": {
+    "mean": 0.0162
+   }
+  },
+  "medium": {
+   "k": {
+    "mean": 0.0128
+   }
+  },
+  "small": {
+   "k": {
+    "mean": 0.0096
+   }
+  }
+ },
+ "sliding_block": {
+  "low": {
+   "acceleration": {
+    "mean": 1.4409887121574543
+   }
+  },
+  "mid": {
+   "acceleration": {
+    "mean": 2.299353115776791
+   }
+  },
+  "high": {
+   "acceleration": {
+    "mean": 3.1402180537976943
+   }
+  }
+ }
+}

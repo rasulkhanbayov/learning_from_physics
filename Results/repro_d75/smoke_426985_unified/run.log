@@ -1,0 +1,27 @@
+=== dropped_ball/large/01
+/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/losses/loss.py:35: UserWarning: var(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at ../aten/src/ATen/native/ReduceOps.cpp:1823.)
+  var_z = z_flat.var(dim=0) + 1e-8
+  Epoch 50: loss=nan
+  Epoch 100: loss=nan
+  Epoch 150: loss=nan
+  Epoch 200: loss=nan
+  Epoch 250: loss=nan
+  Epoch 300: loss=nan
+  Epoch 350: loss=nan
+  Epoch 400: loss=nan
+  Epoch 450: loss=nan
+  Epoch 500: loss=nan
+    status=nonfinite gamma0=nan gamma1=nan (3.6 s) 
+=== torricelli/small/02
+  Epoch 50: loss=5.260262
+  Epoch 100: loss=3.172980
+  Epoch 150: loss=2.480602
+  Epoch 200: loss=2.013009
+  Epoch 250: loss=1.643228
+  Epoch 300: loss=1.331757
+  Epoch 350: loss=1.065902
+  Epoch 400: loss=0.837154
+  Epoch 450: loss=0.641611
+  Epoch 500: loss=0.477375
+    status=ok gamma0=-0.17316414415836334 gamma1=0.4071698486804962 (11.0 s) 
+Done: 2 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/smoke_426985_unified/clips.csv; 1 not ok.

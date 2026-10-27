@@ -1,0 +1,64 @@
+group,subset,dynamics,setting,param,mae_mean,mae_std_over_seeds,n_seeds,n_ok_per_seed
+base1,delfys75,dropped_ball,large,g,0.9060900898234049,0.5061304116291623,3,5/5 5/5 5/5
+base1,delfys75,dropped_ball,medium,g,0.9888844382222493,0.4361848858247644,3,5/5 5/5 5/5
+base1,delfys75,dropped_ball,small,g,0.7797291318766273,0.2188110366743338,3,5/5 5/5 5/5
+base1,delfys75,led,led_10s,decay,0.0995831250747045,0.029751764268641186,3,5/5 5/5 5/5
+base1,delfys75,led,led_2s,decay,7.479384803771973,0.008007326196287138,3,5/5 5/5 5/5
+base1,delfys75,led,led_5s,decay,8.895168126424153,0.012275852455655493,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_150,damping,0.04721386152332661,0.012923555215518264,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_150,length,0.2099108139673869,0.008945137818799851,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_45,damping,0.08816162683442966,0.008294239043095706,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_45,length,0.03285255233446758,0.002415274204828823,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_90,damping,0.10017618127540484,0.025275788246902672,3,5/5 5/5 5/5
+base1,delfys75,pendulum,pendulum_90,length,0.10721843242645265,0.009298971839653994,3,5/5 5/5 5/5
+base1,delfys75,sliding_block,high,acceleration,80.18184327880097,0.6526423572028601,3,5/5 5/5 5/5
+base1,delfys75,sliding_block,low,acceleration,88.82280487135381,7.41054285944607,3,5/5 5/5 5/5
+base1,delfys75,sliding_block,mid,acceleration,82.55135012176079,4.712915325137713,3,5/5 5/5 5/5
+base1,delfys75,torricelli,large,k,7.500946524254411,0.9923242898409802,3,5/5 4/5 5/5
+base1,delfys75,torricelli,medium,k,5.568910951619731,0.9084774189428281,3,5/5 4/5 5/5
+base1,delfys75,torricelli,small,k,4.639506590766188,0.6495602762235396,3,5/5 4/5 5/5
+base1,extra,free_fall,mousepad,g,1.6769740746053061,0.5692412185401207,3,5/5 5/5 5/5
+base1,extra,free_fall,table,g,0.9648597393798827,0.03279897350734576,3,5/5 5/5 5/5
+base1,extra,free_fall,tennis,g,1.1630051834106447,1.0109922645831615,3,5/5 5/5 5/5
+basem,delfys75,dropped_ball,large,g,0.44369435933431006,0.20262832048904586,3,5/5 5/5 5/5
+basem,delfys75,dropped_ball,medium,g,0.829542351328532,0.4258623922610583,3,5/5 5/5 5/5
+basem,delfys75,dropped_ball,small,g,1.0693868733723955,0.30750707904167357,3,5/5 5/5 5/5
+basem,delfys75,led,led_10s,decay,0.09558261442184449,0.015974791609253698,3,5/5 5/5 5/5
+basem,delfys75,led,led_2s,decay,7.4824249903361,0.008135703266719804,3,5/5 5/5 5/5
+basem,delfys75,led,led_5s,decay,8.895033594767252,0.012255516667742552,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_150,damping,0.032887883860625175,0.00521519586300574,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_150,length,0.21719702084859213,0.004655472974042214,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_45,damping,0.07586381721373137,0.006430486155735836,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_45,length,0.03132903575897218,0.0025166779727377442,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_90,damping,0.09136254527048007,0.02953262773229917,3,5/5 5/5 5/5
+basem,delfys75,pendulum,pendulum_90,length,0.10739824374516807,0.009062834296916034,3,5/5 5/5 5/5
+basem,delfys75,sliding_block,high,acceleration,79.48153702218883,0.9790202035733397,3,5/5 5/5 5/5
+basem,delfys75,sliding_block,low,acceleration,92.1352056892249,5.342399255262031,3,5/5 5/5 5/5
+basem,delfys75,sliding_block,mid,acceleration,83.57906739420137,9.795782742959878,3,5/5 5/5 5/5
+basem,delfys75,torricelli,large,k,7.731608278067837,0.5526825121724739,3,5/5 4/5 5/5
+basem,delfys75,torricelli,medium,k,6.7842891168647865,1.753079549293928,3,5/5 5/5 4/5
+basem,delfys75,torricelli,small,k,4.595919827026602,0.9329682331558008,3,4/5 5/5 5/5
+basem,extra,free_fall,mousepad,g,1.140376377665202,0.21717774358293565,3,5/5 5/5 5/5
+basem,extra,free_fall,table,g,0.8457736861165364,0.37438432142089173,3,5/5 5/5 5/5
+basem,extra,free_fall,tennis,g,1.3720191427612305,0.9699367908549883,3,5/5 5/5 5/5
+unif1,delfys75,dropped_ball,large,g,,,0,
+unif1,delfys75,dropped_ball,medium,g,,,0,
+unif1,delfys75,dropped_ball,small,g,,,0,
+unif1,delfys75,led,led_10s,decay,,,0,
+unif1,delfys75,led,led_2s,decay,,,0,
+unif1,delfys75,led,led_5s,decay,,,0,
+unif1,delfys75,pendulum,pendulum_150,damping,3.9366808741080335,0.7156174494702211,3,5/5 5/5 5/5
+unif1,delfys75,pendulum,pendulum_150,length,37.43556887059525,25.074120541274315,3,5/5 5/5 5/5
+unif1,delfys75,pendulum,pendulum_45,damping,4.116851910828309,0.384905755551251,3,5/5 5/5 5/5
+unif1,delfys75,pendulum,pendulum_45,length,21.706780734823816,8.602197951745575,3,3/5 5/5 5/5
+unif1,delfys75,pendulum,pendulum_90,damping,2.593859355527915,0.43740911863451215,3,5/5 5/5 5/5
+unif1,delfys75,pendulum,pendulum_90,length,36.44836688212971,22.409807279053247,3,4/5 5/5 4/5
+unif1,delfys75,sliding_block,high,acceleration,,,0,
+unif1,delfys75,sliding_block,low,acceleration,,,0,
+unif1,delfys75,sliding_block,mid,acceleration,,,0,
+unif1,delfys75,torricelli,large,k,,,0,
+unif1,delfys75,torricelli,medium,k,,,0,
+unif1,delfys75,torricelli,small,k,,,0,
+unif1,extra,free_fall,mousepad,g,,,0,
+unif1,extra,free_fall,table,g,,,0,
+unif1,extra,free_fall,tennis,g,,,0,

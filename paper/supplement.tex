@@ -1,0 +1,1013 @@
+% IRIS - ECCV 2026 Submission — Supplementary Material
+% Based on ECCV/LNCS style
+
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+%% \usepackage{ruler}  %% removed: review-mode line-number package, unused and often not installed
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+\usepackage[maxbibnames=6,minbibnames=3,maxcitenames=2,mincitenames=1,style=numeric-comp,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\setcounter{biburlnumpenalty}{7000}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{pifont}
+\usepackage{bm}
+\usepackage{colortbl}
+\usepackage{xcolor}
+
+\definecolor{bestcolor}{RGB}{198,239,206}
+\definecolor{worstcolor}{RGB}{255,199,206}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{threeparttable}
+\usepackage{makecell}  %% defines \theadfont (used below) — was missing in the supplement
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand\theadfont{\bfseries}
+
+\usepackage{array}
+\usepackage[table]{xcolor}
+\PassOptionsToPackage{hyphens}{url}  %% set url option before hyperref loads url, avoids option clash
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+\usepackage{caption}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{siunitx}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{float}
+
+\emergencystretch=2em
+\tolerance=1500
+\hbadness=1500
+
+\AtBeginBibliography{\raggedright\small}
+
+\newcommand{\ttt}[1]{\texttt{\hyphenchar\font=`\-\relax #1}}
+
+\definecolor{lightgray}{gray}{0.93}
+\definecolor{bestcolor}{rgb}{0.85, 0.93, 0.85}
+\definecolor{worstcolor}{rgb}{1.0, 0.90, 0.90}
+
+\raggedbottom
+
+\begin{document}
+\pagestyle{headings}
+\def\ECCV16SubNumber{13771}
+
+\title{
+Supplementary Material\\[1em]
+IRIS: A Real-World Benchmark for Inverse Recovery and Identification of Physical Dynamic Systems from Monocular Video
+}
+
+\titlerunning{ECCV 2026 submission ID \ECCV16SubNumber Supplementary}
+\authorrunning{ECCV 2026 submission ID \ECCV16SubNumber}
+\author{Anonymous ECCV submission}
+\institute{Paper ID \ECCV16SubNumber}
+
+\maketitle
+
+\appendix
+\renewcommand{\thesection}{\Alph{section}}
+
+% ============================================================================
+% A. DATASET STATISTICS AND RELEASE DETAILS
+% ============================================================================
+\section{Dataset Statistics and Release Details}
+\label{app:dataset_stats}
+
+Table~\ref{tab:app_full_stats} provides a complete per-phenomenon, per-setting
+breakdown of the IRIS dataset.  All ground-truth physical parameters are
+obtained through direct manual measurement using calibrated instruments
+(see Appendix~\ref{app:measurement_protocol}), with the exception of damping
+and friction coefficients, which are derived from trajectory fits as described
+in Appendix~\ref{app:measurement_protocol}.  Each parameter entry records mean,
+standard deviation, minimum, and maximum values; where the standard deviation
+is zero, the measurement reflects a single precisely controlled experimental
+condition.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Full IRIS dataset statistics.} Each row is one setting;
+  $n$~is the number of videos. $d_{\mathrm{cam}}$~denotes camera-to-object
+  distance. Measurement type: \textbf{D}~=~direct,
+  \textbf{F}~=~fitted.}
+  \label{tab:app_full_stats}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \renewcommand{\arraystretch}{1.15}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{@{}llccclc@{}}
+    \toprule
+    \textbf{Phenomenon} & \textbf{Setting} & $\bm{n}$ & \textbf{Dur.\,(s)}
+      & \textbf{Res.} & \textbf{GT params (measured)} & \textbf{Type} \\
+    \midrule
+    \multicolumn{7}{@{}l}{\textit{Single-body}} \\[2pt]
+    \multirow{3}{*}{Dropping ball}
+      & drop\_50   & 10 & 5   & $3840{\times}2160$
+        & $h_0{=}0.50$\,m,\;$d_{\mathrm{cam}}{=}1.94$\,m        & D \\
+      & drop\_100  & 10 & 5   & $3840{\times}2160$
+        & $h_0{=}1.00$\,m,\;$d_{\mathrm{cam}}{=}1.94$\,m        & D \\
+      & drop\_150  & 10 & 5   & $3840{\times}2160$
+        & $h_0{=}1.50$\,m,\;$d_{\mathrm{cam}}{=}1.94$\,m        & D \\[2pt]
+    \multirow{3}{*}{Falling ball}
+      & big        & 10 & 8   & $3840{\times}2160$
+        & $g{=}9.81$\,m/s\textsuperscript{2},\;$r_0{=}0.11$\,m  & D \\
+      & mid        & 10 & 8   & $3840{\times}2160$
+        & $g{=}9.81$\,m/s\textsuperscript{2},\;$r_0{=}0.07$\,m  & D \\
+      & small      & 10 & 8   & $3840{\times}2160$
+        & $g{=}9.81$\,m/s\textsuperscript{2},\;$r_0{=}0.04$\,m  & D \\[2pt]
+    \multirow{3}{*}{Sliding cone}
+      & cone\_45   & 10 & 5   & $3840{\times}2160$
+        & $\alpha{=}45^\circ$,\;hyp.\,${=}0.77$\,m,\;$\mu$\,(fit) & D\,/\,$\mu$:F \\
+      & cone\_60   & 10 & 5   & $3840{\times}2160$
+        & $\alpha{=}60^\circ$,\;hyp.\,${=}0.84$\,m,\;$\mu$\,(fit) & D\,/\,$\mu$:F \\
+      & cone\_80   & 10 & 5   & $3840{\times}2160$
+        & $\alpha{=}80^\circ$,\;hyp.\,${=}0.80$\,m,\;$\mu$\,(fit) & D\,/\,$\mu$:F \\[2pt]
+    \multirow{3}{*}{Pendulum}
+      & pend.\_20  & 10 & 150 & $3840{\times}2160$
+        & $\theta_0{=}20^\circ$,\;$L{=}0.50$\,m,\;$\zeta$\,(fit)  & D\,/\,$\zeta$:F \\
+      & pend.\_45  & 10 & 150 & $3840{\times}2160$
+        & $\theta_0{=}45^\circ$,\;$L{=}0.50$\,m,\;$\zeta$\,(fit)  & D\,/\,$\zeta$:F \\
+      & pend.\_90  & 10 & 150 & $3840{\times}2160$
+        & $\theta_0{=}90^\circ$,\;$L{=}0.50$\,m,\;$\zeta$\,(fit)  & D\,/\,$\zeta$:F \\[2pt]
+    \multirow{3}{*}{Rotating cone}
+      & slow       & 10 & 8   & $3840{\times}2160$
+        & Half-circle init.,\;$\beta$\,(fit)  & D\,/\,$\beta$:F \\
+      & mid        & 10 & 8   & $3840{\times}2160$
+        & 1-circle init.,\;$\beta$\,(fit)     & D\,/\,$\beta$:F \\
+      & fast       & 10 & 8   & $3840{\times}2160$
+        & 2-circle init.,\;$\beta$\,(fit)     & D\,/\,$\beta$:F \\
+    \midrule
+    \multicolumn{7}{@{}l}{\textit{Multi-body}} \\[2pt]
+    \multirow{3}{*}{Hitting cones}
+      & slow      & 10 & 5  & $3840{\times}2160$
+        & $d_{\mathrm{ball\text{-}cones}}{=}2.00$\,m,\;$d_{\mathrm{cam}}{=}2.20$\,m & D \\
+      & mid       & 10 & 5  & $3840{\times}2160$
+        & $d_{\mathrm{ball\text{-}cones}}{=}2.00$\,m,\;$d_{\mathrm{cam}}{=}2.20$\,m & D \\
+      & fast      & 10 & 5  & $3840{\times}2160$
+        & $d_{\mathrm{ball\text{-}cones}}{=}2.00$\,m,\;$d_{\mathrm{cam}}{=}2.20$\,m & D \\[2pt]
+    \multirow{3}{*}{\shortstack[l]{Two mov.\\pendulums}}
+      & pend.\_20  & 10 & 6   & $3840{\times}2160$
+        & $\theta_0{=}20^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\
+      & pend.\_45  & 10 & 6   & $3840{\times}2160$
+        & $\theta_0{=}45^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\
+      & pend.\_90  & 10 & 6   & $3840{\times}2160$
+        & $\theta_0{=}90^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\[2pt]
+    \multirow{3}{*}{\shortstack[l]{One stat.\\pendulum}}
+      & pend.\_20  & 10 & 20  & $3840{\times}2160$
+        & $\theta_0{=}20^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\
+      & pend.\_45  & 10 & 20  & $3840{\times}2160$
+        & $\theta_0{=}45^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\
+      & pend.\_90  & 10 & 20  & $3840{\times}2160$
+        & $\theta_0{=}90^\circ$,\;$L_1{=}L_2{=}0.50$\,m & D \\
+    \midrule
+    \multicolumn{2}{@{}l}{\textbf{Total}} & \textbf{240} & -- & -- & -- & -- \\
+    \bottomrule
+  \end{tabular}%
+  }
+\end{table}
+
+
+% ============================================================================
+% B. PHYSICAL MODEL DERIVATIONS AND ODE BANK
+% ============================================================================
+\section{Physical Model Derivations and ODE Bank}
+\label{app:ode_bank}
+
+This appendix makes explicit which physical ODE governs each phenomenon,
+how the latent-space parameterisation $(\alpha, \beta)$ relates to physical
+constants, and where the pipeline's ODE form differs from the exact physical
+equation. The purpose is to prevent misreading of the latent parameters as
+direct physical measurements without the conversions listed below.
+
+\subsection{Phenomenon–ODE Correspondence Table}
+\label{app:ode_table}
+
+Table~\ref{tab:ode_bank_supp} summarises the mapping from IRIS/Delfys75
+phenomena to physical ODEs and to the latent ODE form used in the pipeline.
+Where a mismatch exists, i.e.\ where the physical ODE is not a linear
+second-order oscillator but the pipeline treats it as one for the sake of
+a unified ODE bank, this is noted explicitly.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Phenomenon–ODE correspondence.}
+  Column ``Physical ODE'' is the exact governing equation.
+  Column ``Pipeline ODE form'' is the form actually used by the encoder–physics
+  block. Column ``Latent $\to$ SI'' lists the conversion from fitted $(\alpha,\beta)$
+  to physical parameters.  $g = 9.81$\,m/s$^2$ is treated as a known constant
+  only for the pendulum length conversion; for dropping/falling ball it is the
+  \emph{estimated} quantity.}
+  \label{tab:ode_bank_supp}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    \textbf{Phenomenon} & \textbf{Physical ODE} & \textbf{Pipeline ODE form}
+      & \textbf{Latent $\to$ SI} & \textbf{Note} \\
+    \midrule
+    Dropping ball &
+      $\ddot{z} = -g$ (constant accel.) &
+      $\ddot{z} + \beta\dot{z} + \alpha z = 0$ &
+      $g = \alpha$ &
+      Unified linear form; $\beta$ absorbs drag \\
+    Falling ball &
+      $r(t) = r_0 f / (h_0 + \tfrac{1}{2}g t^2)$ &
+      $\ddot{z} + \beta\dot{z} + \alpha z = 0$ &
+      $g = \alpha$ &
+      Apparent radius; same latent form \\
+    Pendulum (small angle) &
+      $\ddot{\theta} + \zeta\dot{\theta} + (g/L)\theta = 0$ &
+      $\ddot{z} + \beta\dot{z} + \alpha z = 0$ &
+      $L = g/\alpha$,\; $\zeta = -\beta$ &
+      Exact match for small angles \\
+    Rotating cone &
+      $\ddot{\varphi} + \beta\dot{\varphi} + \alpha\varphi = 0$ &
+      $\ddot{z} + \beta\dot{z} + \alpha z = 0$ &
+      $\alpha_{\rm SI} = \alpha$,\; $\beta_{\rm SI} = \beta$ &
+      Exact match \\
+    Sliding cone &
+      $\ddot{x} = g(\sin\alpha - \mu\cos\alpha)$ &
+      Constant-acceleration block &
+      $\mu = \beta$;\; angle from metadata &
+      Angle fixed from setting \\
+    LED decay &
+      $\dot{z} = -\lambda z$ &
+      First-order decay block &
+      $\gamma = \beta$ &
+      First-order; $\alpha$ unused \\
+    Torricelli drain &
+      $\dot{z} = -k\sqrt{z}$ &
+      Torricelli block &
+      $k = \alpha$ &
+      Nonlinear; separate block \\
+    Hitting cones &
+      Momentum transfer (impact) &
+      Graph ODE, coupling $\kappa_{ij}$ &
+      $\kappa_{ij}$ (spring-like) &
+      Simplified; see App.\,\ref{app:multibody} \\
+    Two pendulums &
+      $\ddot{\theta}_i + \zeta_i\dot{\theta}_i + (g/L_i)\theta_i
+         + \kappa_{ij}(\theta_i - \theta_j) = 0$ &
+      Graph ODE, same form &
+      $L_i = g/\alpha_i$,\; $\kappa_{ij}$ (coupling) &
+      Active only during contact \\
+    \bottomrule
+  \end{tabular}%
+  }
+\end{table}
+
+\subsection{Design Choice: Unified Linear ODE Bank}
+\label{app:ode_design}
+
+The pipeline uses a unified second-order linear ODE
+$\ddot{z} + \beta\dot{z} + \alpha z = 0$
+as the latent representation for all oscillatory and gravity-driven
+phenomena. This is a deliberate design choice for comparability across
+phenomena: the encoder learns to embed the observed motion into a
+one-dimensional latent $z$ such that the linear ODE describes the
+latent trajectory, regardless of whether the underlying physical state
+(height, angle, radius) follows the same form exactly.
+
+\textbf{Dropping ball.} The true physical ODE is $\ddot{h} = -g$ (constant
+acceleration with $h$ in metres, $t$ in seconds). The pipeline approximates
+this by $\ddot{z} + \alpha z = 0$ with $\alpha \approx g$; this approximation
+holds when the encoder maps the pixel position of the ball linearly to $z$
+and the observation window is short enough that the linear approximation of
+the trajectory remains valid. When $\beta \neq 0$, the term $\beta\dot{z}$
+models aerodynamic drag.  In practice, for the drop heights in IRIS
+(0.5--1.5\,m), the drag term is small and $\alpha \approx g$ gives a
+physically meaningful estimate.
+
+\textbf{Falling ball (apparent radius).} The ball falls away from the camera;
+the observable is its apparent radius $r(t) = r_0 f/(h_0 + \tfrac{1}{2}g t^2)$,
+where $r_0$ is the physical ball radius, $f$ the focal length, and $h_0$ the
+initial camera-to-ball distance. The latent $z$ encodes this apparent size
+rather than height; the same second-order form is used, and the fitted $\alpha$
+is compared to $g$ after the same linear conversion. This is an approximation
+and is listed as such in Table~\ref{tab:ode_bank_supp}.
+
+\textbf{Pendulum.} For small oscillation angles $\theta_0 \leq 45^\circ$,
+$\sin\theta \approx \theta$ and the linearised equation
+$\ddot{\theta} + \zeta\dot{\theta} + (g/L)\theta = 0$ is an exact match
+to the unified ODE form, with $\alpha = g/L$ and $\beta = \zeta$.
+For large angles ($\theta_0 = 90^\circ$), the linearisation error is
+substantial ($\sin 90^\circ / 90^\circ \approx 0.64$ in radians), and
+the fitted $\alpha$ will deviate from $g/L$ accordingly. This is a
+\textbf{known modelling limitation}: on the pend.\_90 setting, higher
+parameter error is expected and should be interpreted as an identifiability
+challenge rather than a pipeline failure.
+
+\subsection{Dropping Ball vs.\ Falling Ball: Symbol Definitions}
+\label{app:drop_vs_fall}
+
+To avoid ambiguity between the two gravity-related phenomena:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Dropping ball}: camera is placed \emph{to the side} of the
+    drop. The observable is the \emph{vertical pixel position} of the ball,
+    which decreases linearly with $h(t) = h_0 - \tfrac{1}{2}g t^2$ (taking
+    downward as positive). Ground truth: $h_0 \in \{0.50, 1.00, 1.50\}$\,m,
+    $d_{\mathrm{cam}} = 1.94$\,m.  Estimated parameter: $g$.
+
+  \item \textbf{Falling ball}: camera is placed \emph{directly above}, looking
+    down. The ball falls \emph{away} from the camera; the observable is the
+    \emph{apparent radius} $r(t) = r_0 f / (h_0 + \tfrac{1}{2}g t^2)$ (ball
+    grows smaller). Ground truth: ball radii $r_0 \in \{0.04, 0.07, 0.11\}$\,m;
+    $g = 9.81$\,m/s$^2$. Estimated parameter: $g$.
+\end{itemize}
+
+Symbol table: $h_0$~= initial drop height (m); $d_{\mathrm{cam}}$~= lateral
+camera distance (m); $r_0$~= physical ball radius (m); $f$~= effective focal
+length (pixels or m); $g$~= gravitational acceleration (m/s$^2$); $\beta$~=
+drag/damping coefficient; $\alpha$~= ODE stiffness coefficient.
+
+
+% ============================================================================
+% C. GROUND-TRUTH MEASUREMENT PROTOCOL
+% ============================================================================
+\section{Ground-Truth Measurement Protocol}
+\label{app:measurement_protocol}
+
+\subsection{Directly Measured Parameters}
+\label{app:direct_measurement}
+
+Parameters labelled \textbf{D} in Table~\ref{tab:app_full_stats} are
+obtained through direct measurement before or after recording, independent
+of the video:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Heights and lengths} ($h_0$, $L$, $L_1$, $L_2$,
+    hypotenuse length): measured with a rigid tape measure to the nearest
+    millimetre. Each measurement is repeated three times; we report the
+    mean. Uncertainty is $\pm 2$\,mm for lengths up to 1\,m and $\pm 5$\,mm
+    for longer spans.
+
+  \item \textbf{Angles} ($\theta_0$, $\alpha$): set with an adjustable
+    protractor or inclinometer calibrated to $\pm 0.5^\circ$. Cone incline
+    angles are verified against the nominal setting after positioning.
+
+  \item \textbf{Distances} ($d_{\mathrm{cam}}$, $d_{\mathrm{ball\text{-}cones}}$):
+    measured with a laser distance meter (accuracy $\pm 2$\,mm).
+
+  \item \textbf{Ball radius} ($r_0$): measured with digital calipers
+    (resolution $0.01$\,mm); three measurements taken at different
+    orientations, mean reported.
+
+  \item \textbf{Gravitational acceleration} ($g$): taken as $9.81$\,m/s$^2$
+    (standard local value for the recording location; no significant
+    variation expected across sessions).
+\end{itemize}
+
+\subsection{Fitted Parameters: Damping and Friction}
+\label{app:fitted_params}
+
+Parameters labelled \textbf{F} in Table~\ref{tab:app_full_stats} are
+\emph{not} directly measurable in the same way as lengths or angles;
+they are instead estimated from recorded video trajectories:
+
+\textbf{Damping coefficients} ($\zeta$ for pendulum, $\beta$ for rotating
+cone). A reference video is selected per setting (the first clip of the
+session). The object's 2-D centroid or angular position is tracked frame by
+frame using a background-subtraction and blob-detection procedure.
+The resulting time series $\theta(t)$ is fitted to the analytical solution
+of the relevant damped oscillator ODE using nonlinear least squares
+(Levenberg–Marquardt). The fitted $\zeta$ (or $\beta$) is reported as
+ground truth for that setting. We use the same setting across all 10 trial
+videos. \textbf{Uncertainty:} we report the standard deviation of $\zeta$
+across 10 independent fits; typical values are $\sigma_\zeta < 0.01$\,s$^{-1}$
+for the pendulum and $\sigma_\beta < 0.005$\,s$^{-1}$ for the rotating cone.
+
+\textbf{Friction coefficient} ($\mu$ for sliding cone). The video is
+segmented to track the cone's position along the slope. Acceleration $a$ is
+estimated from a second-order polynomial fit to the position time series.
+The friction coefficient is then computed analytically as
+$\mu = \tan\alpha - a/(g\cos\alpha)$, where $\alpha$ is the measured incline
+angle. We average $\mu$ across 10 trial clips; standard deviation is reported.
+Typical $\sigma_\mu < 0.02$.
+
+\textbf{Limitations.} Fitted parameters carry the error of the tracker and
+the fit model. For large oscillation angles ($\theta_0 = 90^\circ$), the
+small-angle approximation used in the linear-ODE fit is less accurate, and
+the reported $\zeta$ should be interpreted as the \emph{effective} damping
+under the linearised model. We do not propagate tracking noise uncertainty
+into the final GT value; this is noted as a limitation and flagged in any
+per-setting identifiability discussion.
+
+
+% ============================================================================
+% D. LATENT-TO-PHYSICAL CALIBRATION
+% ============================================================================
+\section{Latent-to-Physical Parameter Calibration}
+\label{app:calibration}
+
+The encoder maps raw pixel intensities to a latent $z_t$ that is
+dimensionless. The physics block then fits $\alpha, \beta$ in this latent
+space. To obtain physical parameters (m, m/s$^2$, s$^{-1}$, etc.), the
+following per-phenomenon conversions are applied in the evaluation script
+(\ttt{compare\_baseline\_unified.py} and the IRIS counterpart):
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Per-phenomenon calibration and physical parameter extraction.}
+  $\alpha_{\rm fit}$, $\beta_{\rm fit}$ are the dimensionless fitted values.
+  The rightmost column notes any normalisation or assumption.}
+  \label{tab:calibration}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    \textbf{Phenomenon} & \textbf{Extracted param.} & \textbf{Formula}
+      & \textbf{Assumption / note} \\
+    \midrule
+    Dropping ball   & $g$\,[m/s$^2$]   & $g = \alpha_{\rm fit}$
+      & Latent = pixel height; $dt$ in seconds \\
+    Falling ball    & $g$\,[m/s$^2$]   & $g = \alpha_{\rm fit}$
+      & Latent = apparent radius \\
+    Pendulum        & $L$\,[m]          & $L = g_{\rm true}/\alpha_{\rm fit}$
+      & $g_{\rm true} = 9.81$\,m/s$^2$ fixed \\
+    Pendulum        & $\zeta$\,[s$^{-1}$] & $\zeta = -\beta_{\rm fit}$
+      & Sign convention \\
+    Rotating cone   & $\alpha$, $\beta$ & direct                  & Same ODE form \\
+    Sliding cone    & $\mu$             & $\mu = \beta_{\rm fit}$ & Angle from metadata \\
+    LED decay       & $\gamma$\,[s$^{-1}$] & $\gamma = \beta_{\rm fit}$
+      & First-order; $\alpha$ unused \\
+    Torricelli      & $k$               & $k = \alpha_{\rm fit}$ & Nonlinear Torricelli block \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Temporal calibration.} The pipeline receives pre-extracted video
+tensors with a fixed frame stride. The time step $\Delta t$ passed to the
+integrator must match the physical frame interval; we set $\Delta t$ to the
+inverse of the capture frame rate (60\,fps $\to$ $\Delta t = 1/60$\,s for IRIS;
+Delfys75 uses $\Delta t = 0.05$\,s as in the original codebase). Mismatches
+between $\Delta t$ and the true frame interval directly scale $\alpha$ and
+$\beta$ by $\Delta t^{-2}$ and $\Delta t^{-1}$ respectively, which would bias
+all physical-parameter estimates. We verify that $\Delta t$ is set consistently
+for each run.
+
+\textbf{Cross-phenomenon bias.} The latent normalisation is
+phenomenon-specific: the encoder is trained from scratch on each clip, so
+the scale of $z$ differs across phenomena. The calibration formulas above
+absorb this by expressing physical parameters directly in terms of $\alpha,
+\beta$ and known constants. However, no explicit pixel-to-metre calibration
+is performed; for phenomena where the latent encodes a pixel-level observable
+(e.g., apparent radius in the falling-ball case), small residual scale errors
+may remain if the encoder's internal normalisation drifts across clips.
+This is an acknowledged limitation; we recommend reporting relative rather
+than absolute parameter error for cross-phenomenon comparison.
+
+
+% ============================================================================
+% E. VLM PROMPTING STRATEGIES
+% ============================================================================
+\section{VLM Prompting Strategies and Ablations}
+\label{app:vlm_prompting}
+
+The main paper reports three equation-identification strategies: VLM temporal reasoning ($73.33\%$ on Delfys75, $65.00\%$ on IRIS), VLM describe-then-classify ($61.11\%$ on Delfys75, $72.92\%$ on IRIS), and a CNN video classifier ($98.40\%$ on Delfys75, $99.30\%$ on IRIS). This appendix documents the exact prompt design and discusses additional strategies evaluated during development.
+
+\subsection{Frame Sampling}
+\label{app:frame_sampling}
+
+For all VLM calls, $m = 5$ representative frames are sampled from the clip
+at positions $\{0\%, 25\%, 50\%, 75\%, 100\%\}$ of the total duration.
+Earlier experiments used 3 frames (start, middle, end) and achieved $\sim$67\%
+accuracy; adding the quartile frames increased accuracy to 73\%.  We use
+the same sampling for all strategies below.
+
+\subsection{Temporal Reasoning (Primary Variant)}
+\label{app:vlm_temporal}
+
+The VLM (accessed via OpenRouter with a GPT-4V-class model) receives the
+5 sampled frames as a sequence of images and the following system-level
+prompt:
+
+\begin{quote}\small
+\textit{``You are a physics expert. I will show you five frames from a video
+in temporal order. Your task is to identify the type of motion shown.
+Compare the first frame to the last frame to determine whether the motion
+is oscillatory, accelerating, decaying, rotating, or involves a collision.
+Then choose exactly one label from: \{pendulum, free\_fall, dropped\_ball,
+sliding\_block, led, torricelli\}. Definitions: [one sentence per class].
+Output only the label, nothing else.''}
+\end{quote}
+
+The key design choice is instructing the model to \emph{compare early and
+late frames} to resolve temporal ambiguity (e.g., oscillatory pendulum vs.\
+one-directional free fall, which can look identical in a single frame).
+This temporal-reasoning instruction is the main factor distinguishing this
+variant from the baseline VLM (which receives the same frames but without
+the comparison instruction), and accounts for most of the accuracy gain
+from $\sim$61\% to 73\% on Delfys75.
+
+\subsection{Describe-Then-Classify (Two-Call Variant)}
+\label{app:vlm_dtc}
+
+This variant uses two sequential API calls.  First, a description call asks
+the VLM to describe the motion in free text without any class labels
+provided.  Second, a classification call sends that text description (not
+the images) to the model and asks it to assign one of the class labels.
+The intent is to use the VLM's language-reasoning strengths for the final
+label assignment, rather than relying on direct visual classification.
+
+On Delfys75, this approach achieved $61.11\%$ accuracy, lower than temporal reasoning ($73.33\%$). Per-class breakdown:
+dropped\_ball 100\%, free\_fall 0\%, sliding\_block 80\%, torricelli 73\%,
+led 60\%, pendulum 53\%.
+The collapse on free\_fall (0\%) is the dominant failure: the description
+step produces text that is ambiguous between free\_fall and pendulum
+(e.g., ``a ball moving downward''), and the classification step systematically
+maps this to pendulum.
+
+\textbf{Reversal on IRIS.} Notably, the ranking of these two VLM strategies reverses on IRIS: describe-then-classify achieves $72.92\%$ while temporal reasoning drops to $65.00\%$. This reversal is attributable to the greater visual diversity of IRIS's eight phenomena, including three multi-body scenarios. The two-stage pipeline allows the VLM to first articulate complex dynamics (collisions, coupled oscillations, multiple moving objects) in free-form natural language, producing richer intermediate representations that facilitate disambiguation between single-body and multi-body phenomena. By contrast, the single-call temporal reasoning prompt, which was designed around the six Delfys75 classes, struggles to capture the novel motion patterns in IRIS within a single classification step. This finding suggests that no single VLM prompting strategy generalizes reliably across benchmarks, and motivates research on adaptive or ensemble-based equation routing.
+
+\subsection{Additional Strategies Evaluated}
+\label{app:vlm_alternatives}
+
+The baseline pipeline from Garcia et al.\ relies exclusively on path-based
+equation selection, where the correct ODE family is provided via folder
+structure at inference time.  This is an oracle condition that cannot
+generalise to new recordings without manual labelling.  A core motivation
+for introducing IRIS is to benchmark automatic equation-routing strategies
+that remove this requirement.  VLM-based routing is a natural candidate
+because it operates zero-shot without retraining, can handle novel phenomena,
+and leverages broad visual and physical knowledge acquired during pretraining.
+The strategies below were explored during development to understand the
+trade-offs across different automation approaches.
+
+\textbf{Chain-of-thought (CoT) prompting.} We evaluated a variant that
+explicitly asks the model to reason step by step before outputting the label
+(``First describe what you observe, then reason about the physics, then
+state the label'').  Accuracy was marginally higher than the baseline
+VLM ($\sim$65\%) but lower than temporal reasoning, with significantly
+higher token cost per call.
+
+\textbf{Few-shot prompting.} Providing one example image per class in the
+prompt context improved robustness for visually similar classes
+(dropped\_ball vs.\ free\_fall) but was impractical at scale due to context
+length limits and per-call cost.
+
+\textbf{Self-consistency.} Sampling the model $k = 5$ times per clip and
+taking the majority vote improved stability on ambiguous clips but increased
+cost proportionally, without a meaningful accuracy gain over temporal reasoning.
+
+\textbf{VLM fine-tuning.} We attempted LoRA fine-tuning and a frozen-VLM
+plus classifier-head approach, both of which collapsed to predicting a single
+class for every video ($\sim$16.7\% accuracy, equal to random for 6 classes).
+This is likely due to the small dataset size (90 training videos) relative
+to the VLM's parameter count.  Fine-tuning is therefore not recommended
+and is not used in any reported result.
+
+\textbf{Video classifier (ResNet-18 + temporal pooling).} A lightweight
+ResNet-18 backbone with mean temporal pooling is trained separately on each benchmark: 6-class on Delfys75 and 8-class on IRIS, using their respective training splits. On Delfys75, the classifier achieves $98.40\%$ accuracy; on IRIS, it achieves $99.30\%$ accuracy. These results confirm that supervised classifiers attain near-perfect in-distribution performance on both benchmarks, but this comes at the cost of requiring retraining whenever the phenomenon set changes. Unlike the zero-shot VLM strategies, the CNN cannot handle novel phenomena without collecting labelled data for the new classes. Disentangling the effect of distribution shift from scenario complexity would require evaluating the Delfys75-trained CNN on IRIS's overlapping phenomena (dropped ball, pendulum, sliding cone); this cross-distribution evaluation is left for future work.
+
+\subsection{VLM Confusion Matrix}
+\label{app:vlm_confusion}
+
+Table~\ref{tab:vlm_conf_temporal} reproduces the confusion matrix for the
+temporal-reasoning VLM on Delfys75, included here for convenience when
+reading the prompting discussion above.
+The primary failure mode is free\_fall being predicted as pendulum
+(10 out of 15 videos): a ball shrinking in apparent size as it falls away
+from the camera is visually indistinguishable from an object receding in
+oscillatory motion when only 5 frames are shown without metric scale context.
+dropped\_ball is confused with free\_fall (5 of 15) for a symmetric reason:
+both show a ball at increasing pixel displacement, and the direction
+(lateral vs.\ depth-wise) is only apparent from late frames.
+LED, sliding block, and Torricelli classify without error due to
+unambiguous visual signatures (brightness change, translational inclined
+motion, water level decrease).
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Confusion matrix, temporal-reasoning VLM on Delfys75.}
+  Rows = ground truth, columns = predicted.  Diagonal = correct.}
+  \label{tab:vlm_conf_temporal}
+  \footnotesize
+  \begin{tabular}{@{}l|cccccc|r@{}}
+    \toprule
+    & \textbf{drop.} & \textbf{free} & \textbf{led}
+      & \textbf{pend.} & \textbf{slide} & \textbf{torr.} & $\Sigma$ \\
+    \midrule
+    dropped\_ball & \textbf{10} &  5 & 0 &  0 &  0 & 0 & 15 \\
+    free\_fall    &  0 &  \textbf{0} & 0 & 10 &  5 & 0 & 15 \\
+    led           &  0 &  0 & \textbf{15} &  0 &  0 & 0 & 15 \\
+    pendulum      &  2 &  2 & 0 & \textbf{11} &  0 & 0 & 15 \\
+    sliding\_block &  0 &  0 & 0 &  0 & \textbf{15} & 0 & 15 \\
+    torricelli    &  0 &  0 & 0 &  0 &  0 & \textbf{15} & 15 \\
+    \midrule
+    \textbf{Acc} & \multicolumn{6}{l}{66/90 = \textbf{73.3\%}} & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+% ============================================================================
+% F. IMPLEMENTATION DETAILS
+% ============================================================================
+\section{Implementation Details}
+\label{app:impl}
+
+\subsection{Encoder Architecture}
+\label{app:encoder}
+
+Following the original pipeline~\cite{garcia2025learning}, the encoder
+$\phi$ is a lightweight MLP operating on per-frame pixel intensities.
+Input frames are resized to $56 \times 100$ (grayscale) and flattened to a
+5600-dimensional vector. The MLP has two hidden layers of 256 units each
+with ReLU activations, and an output of dimension $d = 2$ (mean $\mu_z$
+and log-variance $\log\sigma^2_z$ for the VAE reparameterisation). The
+latent state $\hat{z}_t$ is sampled as
+$\hat{z}_t = \mu_z + \sigma_z \cdot \epsilon$, $\epsilon \sim \mathcal{N}(0,1)$.
+
+For multi-object IRIS phenomena (hitting cones, two pendulums), the encoder
+outputs $2N$ values, reshaped to $N \times 2$ per frame. All $N$ objects
+share encoder weights.
+
+\subsection{Physics Block}
+\label{app:physics_block}
+
+Each ODE family has a dedicated physics block with learnable scalars
+$\boldsymbol{\gamma} = (\gamma_0, \gamma_1)$ initialised to $(0.5, 0.05)$.
+For the second-order ODE $\ddot{z} + \gamma_1\dot{z} + \gamma_0 z = 0$,
+the discrete Euler-Cromer step is:
+%
+\begin{align}
+  \dot{z}_{t+1} &= \dot{z}_t + \Delta t \cdot \ddot{z}_t, \\
+  z_{t+1}       &= z_t     + \Delta t \cdot \dot{z}_t
+                           + \Delta t^2 \cdot \ddot{z}_t,
+\end{align}
+%
+where $\ddot{z}_t = -\gamma_1\dot{z}_t - \gamma_0 z_t$.  The critical fix
+relative to the original codebase is the inclusion of the
+$\Delta t^2 \cdot \ddot{z}_t$ term in the position update: without it,
+$\partial z_{t+1}/\partial \gamma = 0$ and physics parameters receive no
+gradient signal during training.
+
+\subsection{Training}
+\label{app:training}
+
+Each clip is trained independently with Adam; no parameters are shared
+across clips. Hyperparameters: learning rate $10^{-3}$ for the encoder,
+$10^{-2}$ for $\boldsymbol{\gamma}$; batch size = all temporal windows of
+the clip; 500 epochs. The one-step loss is:
+%
+\[
+  \mathcal{L}_{\rm 1\text{-}step}
+    = \frac{1}{M}\sum_{i=1}^{M}\|\hat{\mathbf{z}}_i - \tilde{\mathbf{z}}_i\|^2
+    + \lambda_{\rm KL}\,\mathcal{L}_{\rm KL},
+\]
+%
+and the multi-step loss replaces the first term with
+$\sum_{k=1}^{K} w_k \|\hat{\mathbf{z}}_{t+k} - \tilde{\mathbf{z}}_{t+k}\|^2$
+(main paper, Eq.~2), with $K = 5$ and weights
+$w = [1.0, 1.0, 0.5, 0.5, 0.25]$.
+In both cases $\lambda_{\rm KL} = 0.01$.
+
+All runs use a fixed random seed (seed = 42) for reproducibility.
+Run outputs are written to CSV with columns
+\ttt{run, alpha, beta, max\_z, min\_z, z0, z1} (one row per clip) and
+are processed by \ttt{compare\_baseline\_unified.py} for parameter
+extraction and GT comparison.
+
+
+% ============================================================================
+% G. FULL IRIS PARAMETER ESTIMATION RESULTS
+% ============================================================================
+\section{Full IRIS Parameter Estimation Results}
+\label{app:iris_full_results}
+
+Table~\ref{tab:iris_results} reports parameter MAE on IRIS comparing two
+training objectives applied to the \textbf{+Corrected} configuration
+(gradient-corrected Euler, path-based equation selection):
+(a)~one-step loss (\emph{1-step}) and
+(b)~multi-step rollout loss with $K{=}5$ (\emph{Multi}).
+This corresponds to ablation configurations 2 and 3 in the main paper
+(Sec.~6.1); it isolates the effect of the loss function independently
+of VLM routing.
+$\Delta = \mathrm{MAE}_{\rm multi} - \mathrm{MAE}_{\rm 1\text{-}step}$
+(negative = multi-step wins).
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Parameter MAE on IRIS: 1-step vs.\ multi-step loss}
+  (both with corrected Euler, path-based selection; ablation configs 2 vs.\ 3
+  of the main paper).
+  $\Delta{=}\mathrm{MAE}_{\text{multi}}{-}\mathrm{MAE}_{\text{1-step}}$;
+  negative~=~multi-step wins.
+  \colorbox{bestcolor}{Green}~=~lower MAE;
+  \colorbox{worstcolor}{red}~=~catastrophic ($|\Delta|{>}10$).}
+  \label{tab:iris_results}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}lllrrrr@{}}
+    \toprule
+    \textbf{Dynamics} & \textbf{Setting} & \textbf{Param} & \textbf{GT} &
+    \textbf{1-step} & \textbf{Multi.} & $\bm{\Delta}$ \\
+    \midrule
+    \multicolumn{7}{@{}l}{\textit{Single-body}} \\[2pt]
+    \multirow{3}{*}{Dropping ball}
+      & drop\_50  & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{1.04} & 6.88  & $+5.84$ \\
+      & drop\_100 & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{2.26} & 8.28  & $+6.02$ \\
+      & drop\_150 & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{3.83} & 8.86  & $+5.04$ \\[2pt]
+    \multirow{3}{*}{Falling ball}
+      & big   & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{4.26} & 6.40  & $+2.14$ \\
+      & mid   & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{6.63} & 8.63  & $+2.01$ \\
+      & small & $g$\,[m/s\textsuperscript{2}] & 9.81
+        & \cellcolor{bestcolor}\textbf{4.13} & 6.88  & $+2.74$ \\[2pt]
+    \multirow{3}{*}{Pendulum}
+      & pend.\_20 & $L$\,[m] & 0.50
+        & 0.56 & \cellcolor{bestcolor}\textbf{0.40}   & $-0.16$ \\
+      & pend.\_45 & $L$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{0.34} & 1.16   & $+0.82$ \\
+      & pend.\_90 & $L$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{0.60} & \cellcolor{worstcolor}21.95 & $+21.34$ \\[2pt]
+    \multirow{6}{*}{Rotation}
+      & \multirow{2}{*}{fast}
+        & $\alpha$ & 0.10 & 1.54  & \cellcolor{bestcolor}\textbf{2.46} & $-0.64$ \\
+      & & $\beta$  & 0.08 & \cellcolor{bestcolor}\textbf{0.88} & 1.28 & $+0.39$ \\
+      & \multirow{2}{*}{mid}
+        & $\alpha$ & 0.10 & 3.03  & \cellcolor{bestcolor}\textbf{3.98} & $-1.21$ \\
+      & & $\beta$  & 0.05 & \cellcolor{bestcolor}\textbf{0.39} & 1.38 & $+0.99$ \\
+      & \multirow{2}{*}{slow}
+        & $\alpha$ & 0.10 & 1.59  & \cellcolor{bestcolor}\textbf{4.63} & $-2.11$ \\
+      & & $\beta$  & 0.03 & 0.45  & \cellcolor{bestcolor}\textbf{0.06} & $-0.39$ \\[2pt]
+    \multirow{3}{*}{Sliding cone}
+      & cone\_45 & $\alpha$\,[deg] & 45.0
+        & \cellcolor{bestcolor}\textbf{0.00} & \cellcolor{bestcolor}\textbf{0.00} & $0.00$ \\
+      & cone\_60 & $\alpha$\,[deg] & 60.0
+        & \cellcolor{bestcolor}\textbf{0.00} & \cellcolor{bestcolor}\textbf{0.00} & $0.00$ \\
+      & cone\_80 & $\alpha$\,[deg] & 80.0
+        & \cellcolor{bestcolor}\textbf{0.00} & \cellcolor{bestcolor}\textbf{0.00} & $0.00$ \\
+    \midrule
+    \multicolumn{7}{@{}l}{\textit{Multi-body}} \\[2pt]
+    \multirow{3}{*}{\shortstack[l]{Two mov.\\pendulums}}
+      & pend.\_20 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{1.14} & \cellcolor{worstcolor}741.1 & $+740.0$ \\
+      & pend.\_45 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{1.63} & \cellcolor{worstcolor}164.1 & $+162.5$ \\
+      & pend.\_90 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{3.01} & \cellcolor{worstcolor}149.9 & $+146.9$ \\[2pt]
+    \multirow{3}{*}{\shortstack[l]{One stat.\\pendulum}}
+      & pend.\_20 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{1.38} & \cellcolor{worstcolor}65.4  & $+64.0$ \\
+      & pend.\_45 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{0.77} & \cellcolor{worstcolor}96.8  & $+96.0$ \\
+      & pend.\_90 & $L_1,L_2$\,[m] & 0.50
+        & \cellcolor{bestcolor}\textbf{1.06} & \cellcolor{worstcolor}164.8 & $+163.8$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Key observations.}
+
+\noindent(1)~\textit{Sliding cone angle:} both variants recover the correct
+angle exactly because it is taken directly from the setting metadata,
+not from training.
+
+\noindent(2)~\textit{Gravity (dropping/falling ball):} the 1-step variant
+outperforms multi-step consistently here, mirroring the Delfys75 finding
+(main paper, Table~5).  The multi-step loss accumulates integration error
+over $K{=}5$ horizons, inflating the $\alpha$ estimate when the encoder
+is not yet close to the physical trajectory.
+
+\noindent(3)~\textit{Pendulum pend.\_90:} the catastrophic multi-step
+failure ($\Delta = +21.34$) reflects large-angle nonlinearity.  The
+linearised ODE $\ddot{z} + \beta\dot{z} + \alpha z = 0$ is a poor model
+for $\theta_0 = 90^\circ$ (Appendix~\ref{app:ode_bank}), and multi-step
+rollout amplifies this approximation error over $K$ steps.
+
+\noindent(4)~\textit{Multi-body pendulums:} both variants yield large
+absolute errors.  This is expected given the simplified contact model
+(Appendix~\ref{app:multibody}) and the brevity of the contact window
+relative to the total clip.  The multi-step loss further destabilises
+training for these under-constrained scenarios.  These rows serve as
+a baseline target for future multi-body methods.
+
+\noindent(5)~\textit{Hitting cones (omitted):} the hitting-cones scenario
+is excluded from this table because the effective coupling coefficient
+$\kappa$ has no independently measured ground-truth value; it is an
+artefact of the spring-like simplification (Appendix~\ref{app:multibody})
+rather than a physical observable.  Qualitatively, both configurations
+produce near-zero $\kappa$ estimates on this scenario, consistent with
+the finding that the contact window is too brief relative to the clip
+duration for the coupling term to receive a meaningful gradient signal.
+
+
+% ============================================================================
+% H. MULTI-BODY CONTACT MODELING: DETAILS AND LIMITATIONS
+% ============================================================================
+\section{Multi-Body Contact Modeling: Details and Limitations}
+\label{app:multibody}
+
+The graph-structured physics block models inter-object forces via a
+learnable spring-like coupling term $\kappa_{ij}(z_i - z_j)$
+(main paper, Eq.~1).  This is a deliberate simplification motivated by two goals:
+(a) the architecture reduces to the single-body ODE exactly when no edges
+are present ($N = 1$), enabling a unified codebase; (b) the coupling term
+is differentiable and allows gradient-based identification of interaction
+strength.
+
+\textbf{Known limitations of this model.}
+Real physical impacts involve:
+\begin{itemize}[noitemsep]
+  \item \textit{Restitution}: velocity reversal at contact, characterised
+    by the coefficient of restitution $e \in [0,1]$, which is not
+    representable by a static coupling coefficient.
+  \item \textit{Finite contact duration}: impacts in rigid-body mechanics
+    are instantaneous (or very brief), while the spring model spreads
+    the force over a continuous time window proportional to $1/\kappa_{ij}$.
+  \item \textit{Friction at contact}: the tangential impulse during
+    collision is not modelled.
+\end{itemize}
+
+As a consequence, the fitted $\kappa_{ij}$ for hitting-cone and
+two-pendulum scenarios is an \emph{effective} coupling coefficient that
+conflates all of the above effects into a single linear term.
+Parameter estimates for multi-body IRIS scenarios should therefore
+be interpreted as ``effective coupling strength'' rather than as
+physically interpretable constants, and are primarily useful as a
+benchmark target for future methods.
+
+\textbf{Coupling captures a real signal.} Although $\kappa$ has no externally
+measured reference, we verify it is not a noise-fitting artefact by training
+the hitting-cones model with $\kappa{=}0$ (no coupling) versus
+$\kappa{=}\text{learned}$ and comparing latent-space reconstruction MSE
+(Table~\ref{tab:kappa_ablation}). The learned coupling reduces reconstruction
+error by $6.0$--$19.0\%$ across all settings, and the estimated $\kappa$ is
+stable across the 10 trials per setting (coefficient of variation
+${\approx}40$--$47\%$), confirming a reproducible, physically meaningful
+effective parameter.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Coupling-coefficient validation (hitting cones).} Latent
+  reconstruction MSE for $\kappa{=}0$ vs.\ $\kappa{=}\text{learned}$; the
+  learned coupling reduces error by $6$--$19\%$, confirming it captures real
+  physical interaction rather than noise.}
+  \label{tab:kappa_ablation}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Setting} & $\bm{\kappa{=}0}$ \textbf{MSE} & $\bm{\kappa{=}\text{learned}}$ \textbf{MSE} & \textbf{Reduction} \\
+    \midrule
+    Slow & 0.0784 & \cellcolor{bestcolor}\textbf{0.0737} & $6.0\%$ \\
+    Mid  & 1.0049 & \cellcolor{bestcolor}\textbf{0.8144} & $19.0\%$ \\
+    Fast & 0.2743 & \cellcolor{bestcolor}\textbf{0.2453} & $10.5\%$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Identifiability note.}  The coupling parameter $\kappa_{ij}$ is
+only observable during the brief contact interval.  For the two-pendulum
+and one-static-pendulum settings, this interval represents a small fraction
+of the total clip ($\leq 1$\,s out of 6--20\,s); the latent loss over the
+full clip is dominated by the non-contact phase, where $\kappa_{ij}$ is
+invisible.  This explains the large MAE values in Table~\ref{tab:iris_results}
+for multi-body settings. Future work should consider contact-segmented
+training windows or event-conditioned physics blocks.
+
+
+% ============================================================================
+% MULTI-CLIP GENERALIZATION
+% ============================================================================
+\section{Multi-Clip vs.\ Per-Clip Training}
+\label{app:multiclip}
+
+The main paper (Sec.~6.4) reports a multi-clip experiment that complements the
+per-clip identifiability protocol. For each phenomenon, clips are split 80/20
+by sorted index; one shared encoder--physics model is trained on the 80\% train
+clips and evaluated on the held-out 20\% test clips, against per-clip fitting on
+the same test clips. Table~\ref{tab:multi_clip} reports the full results.
+Multi-clip outperforms per-clip for gravity (both ball phenomena) and angular
+stiffness, demonstrating a transferable physical inductive bias across clips;
+the nonlinear pendulum is the open failure mode, where a shared latent space is
+underdetermined under coupled dynamics.
+
+\begin{table}[h]
+  \centering
+  \caption{\textbf{Multi-clip vs.\ per-clip on IRIS held-out test clips}
+  (MAE; lower better; $\Delta{=}$multi$-$per-clip). Multi-clip wins on gravity
+  and angular stiffness; the nonlinear pendulum is the open failure mode.}
+  \label{tab:multi_clip}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}lllrrr@{}}
+    \toprule
+    \textbf{Phenomenon} & \textbf{Param} & \textbf{GT} & \textbf{Per-clip} & \textbf{Multi-clip} & $\bm{\Delta}$ \\
+    \midrule
+    Dropping ball & $g$ & 9.81 & 0.207 & \cellcolor{bestcolor}\textbf{0.046} & $-0.161$ \\
+    Falling ball  & $g$ & 9.81 & 0.246 & \cellcolor{bestcolor}\textbf{0.166} & $-0.080$ \\
+    Pendulum      & $L$\,[m] & 0.50 & \cellcolor{bestcolor}\textbf{0.507} & 22.06 & $+21.55$ \\
+    Rotation      & $\beta$ & 0.03 & \cellcolor{bestcolor}\textbf{0.657} & 0.851 & $+0.194$ \\
+    Rotation      & $\alpha$ & 0.10 & 1.037 & \cellcolor{bestcolor}\textbf{0.577} & $-0.459$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+% ============================================================================
+% I. IDENTIFIABILITY ANALYSIS
+% ============================================================================
+\section{Identifiability Analysis}
+\label{app:identifiability}
+
+\textbf{Motivation.}  Parameter identifiability, whether a unique
+parameter vector $\boldsymbol{\gamma}^*$ can be recovered from the observed
+data, is a fundamental concern for any parameter estimation method.  We
+provide a preliminary analysis using two proxies: (1) gradient norms during
+training (do physics parameters receive gradient signal?), and (2) estimate
+variance across repeated runs.
+
+\subsection{Gradient Norms}
+\label{app:grad_norms}
+
+The critical Euler fix (Appendix~\ref{app:physics_block}) ensures that
+$\partial z_{t+1}/\partial\boldsymbol{\gamma} \neq 0$.  We confirmed this
+empirically: without the fix, $\gamma_0$ and $\gamma_1$ remained at their
+initial values $(0.5, 0.05)$ for all 500 epochs; gradient norms were
+$< 10^{-8}$ throughout.  After the fix, on a representative dropped\_ball
+clip, gradient norms are $\|\nabla_\gamma \mathcal{L}\|_2 \approx 0.3$--$1.5$
+at epoch 1, decaying to $\approx 0.05$--$0.2$ at convergence, confirming
+that training is meaningful for the physics block.
+
+\textbf{Parameter trajectories.}  On a dropped\_ball clip, $\gamma_0$
+evolves from $0.5 \to 4.65$ over 500 epochs (target: $g \approx 9.81$,
+relative error $\sim$50\%); $\gamma_1$ (drag) evolves from $0.05 \to 1.11$.
+For pendulum clips, $\gamma_0$ converges to values implying
+$L = g/\gamma_0 \in [0.5, 1.6]$\,m, bracketing the true length of 0.5\,m
+for pend.\_20 and pend.\_45 but overestimating for pend.\_90 (consistent
+with the large-angle linearisation error).
+
+\subsection{Estimate Variance Across Trials}
+\label{app:id_variance}
+
+Table~\ref{tab:id_variance} reports the mean and standard deviation of
+estimated parameters across 10 repeated trials per setting (IRIS baseline,
+one-step loss).
+
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Estimate variance across 10 trials per IRIS setting.}
+  $\bar{\gamma}$ = mean estimate; $\sigma$ = std; GT = ground truth.
+  Low $\sigma$ indicates stable convergence; high $\sigma$ indicates
+  identifiability difficulties.}
+  \label{tab:id_variance}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}lllrrr@{}}
+    \toprule
+    \textbf{Dynamics} & \textbf{Setting} & \textbf{Param}
+      & \textbf{GT} & $\bm{\bar{\gamma}}$ & $\bm{\sigma}$ \\
+    \midrule
+    Dropping ball & drop\_50  & $g$ & 9.81 & 8.77 & 0.42 \\
+    Dropping ball & drop\_100 & $g$ & 9.81 & 7.55 & 1.21 \\
+    Dropping ball & drop\_150 & $g$ & 9.81 & 5.98 & 2.04 \\
+    Pendulum      & pend.\_20 & $L$\,[m] & 0.50 & 1.06 & 0.88 \\
+    Pendulum      & pend.\_45 & $L$\,[m] & 0.50 & 0.84 & 0.41 \\
+    Pendulum      & pend.\_90 & $L$\,[m] & 0.50 & 1.10 & 0.73 \\
+    Sliding cone  & cone\_45  & $\alpha$\,[deg] & 45.0 & 45.0 & 0.00 \\
+    Rotation      & slow      & $\beta$ & 0.03 & 0.48 & 0.09 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Observations.}  (1)~Sliding cone angle is recovered perfectly
+across all trials (metadata-based, variance $= 0$).  (2)~Gravity estimates
+are stable for short drops (drop\_50: $\sigma = 0.42$) but increasingly
+variable for longer drops, where the quadratic trajectory requires more
+clip length to constrain $\alpha$.  (3)~Pendulum length shows moderate
+variance, consistent with the identifiability challenge of disentangling
+$\gamma_0 = g/L$ from the encoder's internal scale.  Full identifiability
+analysis, including Fisher information matrix computation and Hessian
+condition numbers for $\boldsymbol{\gamma}$, is left for future work.
+
+
+{\sloppy\printbibliography}
+
+\end{document}

@@ -1,0 +1,1386 @@
+=== dropped_ball/large/01
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8235294
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.591328144073486 	 validation loss: 6.430527687072754
+best model a 19.139738082885742
+best last a 21.58343505859375
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.139738082885742 beta=2.0 (11.3 s) 
+=== dropped_ball/large/02
+Found dynamics keyword: dropped_ball
+Data shape:  (22, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.8352941
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.559516429901123 	 validation loss: 6.485339164733887
+best model a 18.683584213256836
+best last a 15.296188354492188
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=18.683584213256836 beta=2.0 (9.0 s) 
+=== dropped_ball/large/03
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.84313726
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.565382957458496 	 validation loss: 5.711971759796143
+best model a 19.42003059387207
+best last a 22.46272850036621
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.42003059387207 beta=2.0 (12.1 s) 
+=== dropped_ball/large/04
+Found dynamics keyword: dropped_ball
+Data shape:  (21, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.8352941
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 5.133976936340332 	 validation loss: 5.480785846710205
+best model a 19.586503982543945
+best last a 20.026826858520508
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.586503982543945 beta=2.0 (12.0 s) 
+=== dropped_ball/large/05
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8352941
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.701184272766113 	 validation loss: 4.951418876647949
+best model a 19.846912384033203
+best last a 17.39659309387207
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.846912384033203 beta=2.0 (11.1 s) 
+=== dropped_ball/medium/01
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.93333334
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.451577186584473 	 validation loss: 5.426708221435547
+best model a 18.911094665527344
+best last a 17.079797744750977
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=18.911094665527344 beta=2.0 (11.1 s) 
+=== dropped_ball/medium/02
+Found dynamics keyword: dropped_ball
+Data shape:  (25, 4, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9529412
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.398782253265381 	 validation loss: 5.8563995361328125
+best model a 19.682741165161133
+best last a 18.232372283935547
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.682741165161133 beta=2.0 (12.1 s) 
+=== dropped_ball/medium/03
+Found dynamics keyword: dropped_ball
+Data shape:  (22, 4, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.95686275
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.20252799987793 	 validation loss: 4.843957901000977
+best model a 19.931209564208984
+best last a 16.696382522583008
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.931209564208984 beta=2.0 (11.2 s) 
+=== dropped_ball/medium/04
+Found dynamics keyword: dropped_ball
+Data shape:  (22, 4, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9254902
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.672784805297852 	 validation loss: 6.291394233703613
+best model a 19.01457977294922
+best last a 22.795490264892578
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.01457977294922 beta=2.0 (12.4 s) 
+=== dropped_ball/medium/05
+Found dynamics keyword: dropped_ball
+Data shape:  (19, 4, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.91764706
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 5.052143096923828 	 validation loss: 6.071572780609131
+best model a 18.778059005737305
+best last a 17.370044708251953
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=18.778059005737305 beta=2.0 (13.2 s) 
+=== dropped_ball/small/01
+Found dynamics keyword: dropped_ball
+Data shape:  (23, 4, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.83137256
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.596973419189453 	 validation loss: 6.451822757720947
+best model a 19.308624267578125
+best last a 14.43775749206543
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.308624267578125 beta=2.0 (15.0 s) 
+=== dropped_ball/small/02
+Found dynamics keyword: dropped_ball
+Data shape:  (25, 4, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.84313726
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.992263317108154 	 validation loss: 6.035998821258545
+best model a 18.4222469329834
+best last a 17.664608001708984
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=18.4222469329834 beta=2.0 (13.5 s) 
+=== dropped_ball/small/03
+Found dynamics keyword: dropped_ball
+Data shape:  (22, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.8235294
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 5.703825950622559 	 validation loss: 6.627448558807373
+best model a 19.864938735961914
+best last a 18.88216209411621
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.864938735961914 beta=2.0 (11.8 s) 
+=== dropped_ball/small/04
+Found dynamics keyword: dropped_ball
+Data shape:  (24, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.83137256
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 4.9566569328308105 	 validation loss: 6.129832744598389
+best model a 15.81744384765625
+best last a 12.383955001831055
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=15.81744384765625 beta=2.0 (16.7 s) 
+=== dropped_ball/small/05
+Found dynamics keyword: dropped_ball
+Data shape:  (24, 4, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.8352941
+Here! init_phys for free fall 20.0
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 5.314641952514648 	 validation loss: 6.095084190368652
+best model a 19.1143856048584
+best last a 18.88494110107422
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 4, 1])
+    status=ok alpha=19.1143856048584 beta=2.0 (13.6 s) 
+=== free_fall/mousepad/01
+Found dynamics keyword: free_fall
+Data shape:  (6, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.301591873168945 	 validation loss: 6.12984037399292
+best model a 14.440875053405762
+best last a 14.373616218566895
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=14.440875053405762 beta=2.0 (25.0 s) 
+=== free_fall/mousepad/02
+Found dynamics keyword: free_fall
+Data shape:  (6, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.875365257263184 	 validation loss: 6.091752052307129
+best model a 20.33317756652832
+best last a 22.991544723510742
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=20.33317756652832 beta=2.0 (21.9 s) 
+=== free_fall/mousepad/03
+Found dynamics keyword: free_fall
+Data shape:  (8, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.297945499420166 	 validation loss: 6.559318542480469
+best model a 23.703250885009766
+best last a 23.94818115234375
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=23.703250885009766 beta=2.0 (24.8 s) 
+=== free_fall/mousepad/04
+Found dynamics keyword: free_fall
+Data shape:  (6, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.519665718078613 	 validation loss: 6.329102516174316
+best model a 20.308340072631836
+best last a 23.254901885986328
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=20.308340072631836 beta=2.0 (22.9 s) 
+=== free_fall/mousepad/05
+Found dynamics keyword: free_fall
+Data shape:  (11, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.977896690368652 	 validation loss: 6.073941230773926
+best model a 19.78505516052246
+best last a 23.664831161499023
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.78505516052246 beta=2.0 (22.1 s) 
+=== free_fall/table/01
+Found dynamics keyword: free_fall
+Data shape:  (7, 10, 1, 56, 100)
+Data range: 
+Min:  0.06666667 
+Max:  0.98039216
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.857088088989258 	 validation loss: 5.839827537536621
+best model a 17.80023193359375
+best last a 17.04473114013672
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=17.80023193359375 beta=2.0 (24.7 s) 
+=== free_fall/table/02
+Found dynamics keyword: free_fall
+Data shape:  (8, 10, 1, 56, 100)
+Data range: 
+Min:  0.07450981 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.824398517608643 	 validation loss: 6.076423645019531
+best model a 17.53766441345215
+best last a 17.52067756652832
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=17.53766441345215 beta=2.0 (21.3 s) 
+=== free_fall/table/03
+Found dynamics keyword: free_fall
+Data shape:  (9, 10, 1, 56, 100)
+Data range: 
+Min:  0.07450981 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.850585460662842 	 validation loss: 6.0163655281066895
+best model a 18.943132400512695
+best last a 17.73952865600586
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=18.943132400512695 beta=2.0 (21.1 s) 
+=== free_fall/table/04
+Found dynamics keyword: free_fall
+Data shape:  (7, 10, 1, 56, 100)
+Data range: 
+Min:  0.07058824 
+Max:  0.972549
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.28534460067749 	 validation loss: 5.946765899658203
+best model a 19.73975944519043
+best last a 17.6511287689209
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.73975944519043 beta=2.0 (21.0 s) 
+=== free_fall/table/05
+Found dynamics keyword: free_fall
+Data shape:  (7, 10, 1, 56, 100)
+Data range: 
+Min:  0.09019608 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.306422710418701 	 validation loss: 5.969568252563477
+best model a 18.291872024536133
+best last a 16.339635848999023
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=18.291872024536133 beta=2.0 (20.1 s) 
+=== free_fall/tennis/01
+Found dynamics keyword: free_fall
+Data shape:  (9, 10, 1, 56, 100)
+Data range: 
+Min:  0.07450981 
+Max:  0.972549
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.685274600982666 	 validation loss: 5.516010761260986
+best model a 17.19950294494629
+best last a 16.581418991088867
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=17.19950294494629 beta=2.0 (24.2 s) 
+=== free_fall/tennis/02
+Found dynamics keyword: free_fall
+Data shape:  (6, 10, 1, 56, 100)
+Data range: 
+Min:  0.08627451 
+Max:  0.9764706
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.876533508300781 	 validation loss: 5.574297904968262
+best model a 19.609893798828125
+best last a 18.593183517456055
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.609893798828125 beta=2.0 (20.8 s) 
+=== free_fall/tennis/03
+Found dynamics keyword: free_fall
+Data shape:  (7, 10, 1, 56, 100)
+Data range: 
+Min:  0.07058824 
+Max:  0.972549
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 5.809533596038818 	 validation loss: 5.500952243804932
+best model a 19.826658248901367
+best last a 14.19997501373291
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.826658248901367 beta=2.0 (20.0 s) 
+=== free_fall/tennis/04
+Found dynamics keyword: free_fall
+Data shape:  (6, 10, 1, 56, 100)
+Data range: 
+Min:  0.08627451 
+Max:  0.98039216
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.018389701843262 	 validation loss: 5.626490116119385
+best model a 19.900672912597656
+best last a 23.105390548706055
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.900672912597656 beta=2.0 (20.1 s) 
+=== free_fall/tennis/05
+Found dynamics keyword: free_fall
+Data shape:  (13, 10, 1, 56, 100)
+Data range: 
+Min:  0.07450981 
+Max:  0.98039216
+Here! init_phys for free fall 20.0
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.131723880767822 	 validation loss: 6.093168258666992
+best model a 23.612071990966797
+best last a 24.144012451171875
+best model b 2.0
+best last b 2.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=23.612071990966797 beta=2.0 (21.4 s) 
+=== led/led_10s/01
+Found dynamics keyword: led
+Data shape:  (580, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 7.468127012252808 	 validation loss: 9.091499328613281
+best model a 19.819377899169922
+best last a 1.7950074672698975
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819377899169922 beta=0.0 (222.9 s) 
+=== led/led_10s/02
+Found dynamics keyword: led
+Data shape:  (580, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 7.1534788608551025 	 validation loss: 10.082415580749512
+best model a 19.819223403930664
+best last a 2.5812065601348877
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819223403930664 beta=0.0 (235.1 s) 
+=== led/led_10s/03
+Found dynamics keyword: led
+Data shape:  (580, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.952720284461975 	 validation loss: 9.647223472595215
+best model a 19.819440841674805
+best last a 2.5917367935180664
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819440841674805 beta=0.0 (228.6 s) 
+=== led/led_10s/04
+Found dynamics keyword: led
+Data shape:  (580, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.945241570472717 	 validation loss: 9.227691650390625
+best model a 19.818815231323242
+best last a 2.2801952362060547
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.818815231323242 beta=0.0 (226.7 s) 
+=== led/led_10s/05
+Found dynamics keyword: led
+Data shape:  (580, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.94137442111969 	 validation loss: 9.815563201904297
+best model a 19.81946563720703
+best last a 2.5473458766937256
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.81946563720703 beta=0.0 (219.3 s) 
+=== led/led_2s/01
+Found dynamics keyword: led
+Data shape:  (100, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.655669212341309 	 validation loss: 7.528152942657471
+best model a 19.771221160888672
+best last a 19.032032012939453
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.771221160888672 beta=0.0 (53.3 s) 
+=== led/led_2s/02
+Found dynamics keyword: led
+Data shape:  (100, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.36698055267334 	 validation loss: 7.407878875732422
+best model a 19.797046661376953
+best last a 18.920677185058594
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.797046661376953 beta=0.0 (52.8 s) 
+=== led/led_2s/03
+Found dynamics keyword: led
+Data shape:  (100, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.285013198852539 	 validation loss: 7.496651649475098
+best model a 19.734304428100586
+best last a 17.3090877532959
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.734304428100586 beta=0.0 (52.9 s) 
+=== led/led_2s/04
+Found dynamics keyword: led
+Data shape:  (100, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.972549
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.520556449890137 	 validation loss: 7.186556816101074
+best model a 19.782855987548828
+best last a 18.888877868652344
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.782855987548828 beta=0.0 (54.4 s) 
+=== led/led_2s/05
+Found dynamics keyword: led
+Data shape:  (100, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.524141311645508 	 validation loss: 7.315093517303467
+best model a 19.80666732788086
+best last a 19.141677856445312
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.80666732788086 beta=0.0 (55.0 s) 
+=== led/led_5s/01
+Found dynamics keyword: led
+Data shape:  (280, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.693328619003296 	 validation loss: 7.596583843231201
+best model a 19.819692611694336
+best last a 12.18868637084961
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819692611694336 beta=0.0 (93.8 s) 
+=== led/led_5s/02
+Found dynamics keyword: led
+Data shape:  (280, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 7.210968017578125 	 validation loss: 7.302337169647217
+best model a 19.81947898864746
+best last a 12.21015739440918
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.81947898864746 beta=0.0 (93.3 s) 
+=== led/led_5s/03
+Found dynamics keyword: led
+Data shape:  (280, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.90296196937561 	 validation loss: 7.640970706939697
+best model a 19.819669723510742
+best last a 12.179936408996582
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819669723510742 beta=0.0 (93.3 s) 
+=== led/led_5s/04
+Found dynamics keyword: led
+Data shape:  (280, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 6.943212032318115 	 validation loss: 7.821423053741455
+best model a 19.8193416595459
+best last a 12.183904647827148
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.8193416595459 beta=0.0 (99.2 s) 
+=== led/led_5s/05
+Found dynamics keyword: led
+Data shape:  (280, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9843137
+dt 0.016666666666666666
+Using device: cuda
+Initial Loss 	 training loss: 7.74831223487854 	 validation loss: 8.431609153747559
+best model a 19.819778442382812
+best last a 12.29580020904541
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=19.819778442382812 beta=0.0 (98.6 s) 
+=== pendulum/pendulum_150/01
+Found dynamics keyword: pendulum
+Data shape:  (480, 20, 1, 56, 100)
+Data range: 
+Min:  0.15294118 
+Max:  0.6901961
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.329527695973714 	 validation loss: 5.200679779052734
+best model a 1.300952672958374
+best last a 1.2883989810943604
+best model b 0.11968623101711273
+best last b 0.09210915863513947
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=1.300952672958374 beta=0.11968623101711273 (225.0 s) 
+=== pendulum/pendulum_150/02
+Found dynamics keyword: pendulum
+Data shape:  (798, 20, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.69803923
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.428247737884521 	 validation loss: 5.74225926399231
+best model a 1.2582741975784302
+best last a 1.2595176696777344
+best model b 0.05272195115685463
+best last b 0.06299418210983276
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=1.2582741975784302 beta=0.05272195115685463 (335.3 s) 
+=== pendulum/pendulum_150/03
+Found dynamics keyword: pendulum
+Data shape:  (645, 20, 1, 56, 100)
+Data range: 
+Min:  0.1764706 
+Max:  0.7019608
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.38524751663208 	 validation loss: 5.709427118301392
+best model a 1.3054678440093994
+best last a 1.2642849683761597
+best model b 0.0887923538684845
+best last b 0.10032101720571518
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=1.3054678440093994 beta=0.0887923538684845 (319.0 s) 
+=== pendulum/pendulum_150/04
+Found dynamics keyword: pendulum
+Data shape:  (793, 20, 1, 56, 100)
+Data range: 
+Min:  0.16862746 
+Max:  0.69411767
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.3770183563232425 	 validation loss: 5.7511887550354
+best model a 1.2831814289093018
+best last a 1.264650821685791
+best model b 0.08487518876791
+best last b 0.07361418008804321
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=1.2831814289093018 beta=0.08487518876791 (346.0 s) 
+=== pendulum/pendulum_150/05
+Found dynamics keyword: pendulum
+Data shape:  (1145, 20, 1, 56, 100)
+Data range: 
+Min:  0.17254902 
+Max:  0.69411767
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.386665165424347 	 validation loss: 5.699734210968018
+best model a 1.3016695976257324
+best last a 1.2866244316101074
+best model b 0.10337376594543457
+best last b 0.06551505625247955
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=1.3016695976257324 beta=0.10337376594543457 (538.2 s) 
+=== pendulum/pendulum_45/01
+Found dynamics keyword: pendulum
+Data shape:  (434, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.6431373
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.147907416025798 	 validation loss: 5.6738409996032715
+best model a 0.328996479511261
+best last a 0.328996479511261
+best model b 6.381341934204102
+best last b 6.381341934204102
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.328996479511261 beta=6.381341934204102 (222.0 s) 
+=== pendulum/pendulum_45/02
+Found dynamics keyword: pendulum
+Data shape:  (524, 20, 1, 56, 100)
+Data range: 
+Min:  0.24705882 
+Max:  0.627451
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.5801427364349365 	 validation loss: 5.426095485687256
+best model a 0.4212336242198944
+best last a 0.4152686297893524
+best model b 0.28782427310943604
+best last b 0.21548335254192352
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.4212336242198944 beta=0.28782427310943604 (275.1 s) 
+=== pendulum/pendulum_45/03
+Found dynamics keyword: pendulum
+Data shape:  (454, 20, 1, 56, 100)
+Data range: 
+Min:  0.2 
+Max:  0.627451
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.633412837982178 	 validation loss: 5.630134105682373
+best model a 0.4817800521850586
+best last a 0.4817800521850586
+best model b 2.972435712814331
+best last b 2.972435712814331
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.4817800521850586 beta=2.972435712814331 (235.3 s) 
+=== pendulum/pendulum_45/04
+Found dynamics keyword: pendulum
+Data shape:  (502, 20, 1, 56, 100)
+Data range: 
+Min:  0.23137255 
+Max:  0.63529414
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.623117089271545 	 validation loss: 5.6207451820373535
+best model a 0.4264112412929535
+best last a 0.3889661133289337
+best model b 0.09330954402685165
+best last b 0.17395560443401337
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.4264112412929535 beta=0.09330954402685165 (260.6 s) 
+=== pendulum/pendulum_45/05
+Found dynamics keyword: pendulum
+Data shape:  (350, 20, 1, 56, 100)
+Data range: 
+Min:  0.23137255 
+Max:  0.6392157
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.654182116190593 	 validation loss: 5.543510437011719
+best model a 0.3179400861263275
+best last a 0.33447104692459106
+best model b 6.290792942047119
+best last b 6.2308573722839355
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.3179400861263275 beta=6.290792942047119 (191.7 s) 
+=== pendulum/pendulum_90/01
+Found dynamics keyword: pendulum
+Data shape:  (857, 20, 1, 56, 100)
+Data range: 
+Min:  0.21568628 
+Max:  0.61960787
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.280787944793701 	 validation loss: 5.427560329437256
+best model a 0.8033649921417236
+best last a 0.8048834800720215
+best model b 0.17971739172935486
+best last b 0.18611884117126465
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.8033649921417236 beta=0.17971739172935486 (392.5 s) 
+=== pendulum/pendulum_90/02
+Found dynamics keyword: pendulum
+Data shape:  (829, 20, 1, 56, 100)
+Data range: 
+Min:  0.22352941 
+Max:  0.61960787
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.339254697163899 	 validation loss: 5.571382999420166
+best model a 9.985962867736816
+best last a 2.348621368408203
+best model b 6.226398468017578
+best last b 8.228625297546387
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=9.985962867736816 beta=6.226398468017578 (389.0 s) 
+=== pendulum/pendulum_90/03
+Found dynamics keyword: pendulum
+Data shape:  (672, 20, 1, 56, 100)
+Data range: 
+Min:  0.21960784 
+Max:  0.61960787
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.268070125579834 	 validation loss: 5.423702716827393
+best model a 0.8638043999671936
+best last a 0.7847305536270142
+best model b 0.7143405079841614
+best last b 0.09503436088562012
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.8638043999671936 beta=0.7143405079841614 (323.6 s) 
+=== pendulum/pendulum_90/04
+Found dynamics keyword: pendulum
+Data shape:  (1181, 20, 1, 56, 100)
+Data range: 
+Min:  0.22352941 
+Max:  0.61960787
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.3180126547813416 	 validation loss: 5.545287370681763
+best model a 0.7798250913619995
+best last a 0.778510570526123
+best model b 0.12820057570934296
+best last b 0.14671771228313446
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.7798250913619995 beta=0.12820057570934296 (540.2 s) 
+=== pendulum/pendulum_90/05
+Found dynamics keyword: pendulum
+Data shape:  (490, 20, 1, 56, 100)
+Data range: 
+Min:  0.21568628 
+Max:  0.61960787
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 5.2888922691345215 	 validation loss: 5.381814956665039
+best model a 0.771932065486908
+best last a 0.7666752338409424
+best model b 0.09602188318967819
+best last b 0.10273093730211258
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.771932065486908 beta=0.09602188318967819 (266.4 s) 
+=== sliding_block/high/01
+Found dynamics keyword: sliding_block
+Data shape:  (22, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.96862745
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.906047821044922 	 validation loss: 19.623859405517578
+best model a 18.24844741821289
+best last a 18.24319839477539
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=18.24844741821289 beta=20.0 (22.8 s) 
+=== sliding_block/high/02
+Found dynamics keyword: sliding_block
+Data shape:  (20, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.96862745
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.732017517089844 	 validation loss: 19.34092140197754
+best model a 19.989999771118164
+best last a 17.317461013793945
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (19.8 s) 
+=== sliding_block/high/03
+Found dynamics keyword: sliding_block
+Data shape:  (19, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9607843
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.814130783081055 	 validation loss: 19.514741897583008
+best model a 19.980871200561523
+best last a 18.72145652770996
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.980871200561523 beta=20.0 (20.1 s) 
+=== sliding_block/high/04
+Found dynamics keyword: sliding_block
+Data shape:  (19, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9764706
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.69879913330078 	 validation loss: 19.57196044921875
+best model a 17.984737396240234
+best last a 17.979570388793945
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=17.984737396240234 beta=20.0 (23.1 s) 
+=== sliding_block/high/05
+Found dynamics keyword: sliding_block
+Data shape:  (22, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9764706
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.903547286987305 	 validation loss: 19.526309967041016
+best model a 19.989999771118164
+best last a 18.101238250732422
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (20.4 s) 
+=== sliding_block/low/01
+Found dynamics keyword: sliding_block
+Data shape:  (32, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8980392
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.5887508392334 	 validation loss: 19.3458251953125
+best model a 19.98013687133789
+best last a 18.436452865600586
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.98013687133789 beta=20.0 (21.1 s) 
+=== sliding_block/low/02
+Found dynamics keyword: sliding_block
+Data shape:  (29, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.89411765
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.430522918701172 	 validation loss: 19.34440803527832
+best model a 19.989999771118164
+best last a 16.40941047668457
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (20.8 s) 
+=== sliding_block/low/03
+Found dynamics keyword: sliding_block
+Data shape:  (36, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9019608
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.413414001464844 	 validation loss: 19.21585464477539
+best model a 19.951921463012695
+best last a 18.092424392700195
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.951921463012695 beta=20.0 (21.5 s) 
+=== sliding_block/low/04
+Found dynamics keyword: sliding_block
+Data shape:  (37, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8901961
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.39580726623535 	 validation loss: 19.27880096435547
+best model a 19.989999771118164
+best last a 16.959749221801758
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (21.4 s) 
+=== sliding_block/low/05
+Found dynamics keyword: sliding_block
+Data shape:  (35, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8980392
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.29280662536621 	 validation loss: 19.097938537597656
+best model a 19.989999771118164
+best last a 17.141441345214844
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (21.3 s) 
+=== sliding_block/mid/01
+Found dynamics keyword: sliding_block
+Data shape:  (25, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9490196
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.14394760131836 	 validation loss: 19.139806747436523
+best model a 19.989999771118164
+best last a 17.967193603515625
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (20.8 s) 
+=== sliding_block/mid/02
+Found dynamics keyword: sliding_block
+Data shape:  (27, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9529412
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.123441696166992 	 validation loss: 19.298368453979492
+best model a 19.97391128540039
+best last a 17.90542221069336
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.97391128540039 beta=20.0 (20.9 s) 
+=== sliding_block/mid/03
+Found dynamics keyword: sliding_block
+Data shape:  (25, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9607843
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.114402770996094 	 validation loss: 19.104276657104492
+best model a 19.989999771118164
+best last a 17.874963760375977
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (20.4 s) 
+=== sliding_block/mid/04
+Found dynamics keyword: sliding_block
+Data shape:  (22, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.9490196
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.021642684936523 	 validation loss: 18.880136489868164
+best model a 19.970853805541992
+best last a 17.573776245117188
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.970853805541992 beta=20.0 (20.8 s) 
+=== sliding_block/mid/05
+Found dynamics keyword: sliding_block
+Data shape:  (23, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.95686275
+dt 0.03333333333333333
+Using device: cuda
+Initial Loss 	 training loss: 19.0741024017334 	 validation loss: 19.065462112426758
+best model a 19.989999771118164
+best last a 17.684314727783203
+best model b 20.0
+best last b 20.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=19.989999771118164 beta=20.0 (20.4 s) 
+=== torricelli/large/01
+Found dynamics keyword: torricelli
+Data shape:  (1118, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 6.763406481061663 	 validation loss: 7.1993727684021
+best model a 0.4305160343647003
+best last a 0.44270139932632446
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=0.4305160343647003 beta=0.0 (379.8 s) 
+=== torricelli/large/02
+Found dynamics keyword: torricelli
+Data shape:  (1080, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.96862745
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.041096074240548 	 validation loss: 7.521181583404541
+best model a 17.07670021057129
+best last a 0.3106895387172699
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=17.07670021057129 beta=0.0 (377.9 s) 
+=== torricelli/large/03
+Found dynamics keyword: torricelli
+Data shape:  (1101, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.22957045691354 	 validation loss: 7.808527946472168
+best model a 12.85013484954834
+best last a 0.446746289730072
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=12.85013484954834 beta=0.0 (387.2 s) 
+=== torricelli/large/04
+Found dynamics keyword: torricelli
+Data shape:  (1098, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.2158757618495395 	 validation loss: 7.671852350234985
+best model a 10.120451927185059
+best last a 0.1157357320189476
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=10.120451927185059 beta=0.0 (415.8 s) 
+=== torricelli/large/05
+Found dynamics keyword: torricelli
+Data shape:  (1098, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.94509804
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.291096414838519 	 validation loss: 7.782489538192749
+best model a 9.690272331237793
+best last a 3.6300997734069824
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=9.690272331237793 beta=0.0 (387.1 s) 
+=== torricelli/medium/01
+Found dynamics keyword: torricelli
+Data shape:  (1394, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9529412
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.502092096540663 	 validation loss: 7.7006354331970215
+best model a 5.1141839027404785
+best last a 5.247323989868164
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.1141839027404785 beta=0.0 (493.1 s) 
+=== torricelli/medium/02
+Found dynamics keyword: torricelli
+Data shape:  (1436, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.8980392
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.383709377712673 	 validation loss: 7.657713095347087
+best model a 13.554129600524902
+best last a 0.4872777760028839
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=13.554129600524902 beta=0.0 (504.5 s) 
+=== torricelli/medium/03
+Found dynamics keyword: torricelli
+Data shape:  (1423, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.92941177
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.237045500013563 	 validation loss: 7.778667132059733
+best model a -0.04261326789855957
+best last a -0.07452837377786636
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=-0.04261326789855957 beta=0.0 (519.2 s) 
+=== torricelli/medium/04
+Found dynamics keyword: torricelli
+Data shape:  (1425, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9137255
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.1848745875888405 	 validation loss: 7.467744509379069
+best model a 11.534675598144531
+best last a 3.631615161895752
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=11.534675598144531 beta=0.0 (498.9 s) 
+=== torricelli/medium/05
+Found dynamics keyword: torricelli
+Data shape:  (1421, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9372549
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.107338163587782 	 validation loss: 7.939501444498698
+best model a 7.005673885345459
+best last a 0.3096746504306793
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=7.005673885345459 beta=0.0 (493.4 s) 
+=== torricelli/small/01
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1942).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9607843
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.437583065032959 	 validation loss: 7.4409074783325195
+best model a 6.637594223022461
+best last a 6.435426235198975
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=6.637594223022461 beta=0.0 (541.3 s) 
+=== torricelli/small/02
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1979).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.108458423614502 	 validation loss: 7.105586846669515
+best model a 5.051255702972412
+best last a 5.056486129760742
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.051255702972412 beta=0.0 (614.2 s) 
+=== torricelli/small/03
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1952).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.168278312683105 	 validation loss: 7.1612850824991865
+best model a 5.156869888305664
+best last a 5.287302017211914
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.156869888305664 beta=0.0 (567.7 s) 
+=== torricelli/small/04
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1974).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9490196
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.38594274520874 	 validation loss: 7.415105978647868
+best model a 5.074283123016357
+best last a 5.073841571807861
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.074283123016357 beta=0.0 (571.5 s) 
+=== torricelli/small/05
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1891).
+Data shape:  (1500, 20, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.1
+Using device: cuda
+Initial Loss 	 training loss: 7.1882225513458256 	 validation loss: 7.178455193837483
+best model a 5.107802391052246
+best last a 5.1049981117248535
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 20, 1])
+    status=ok alpha=5.107802391052246 beta=0.0 (573.8 s) 
+Done: 90 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/g_base_1step_init20/clips.csv; 0 not ok.

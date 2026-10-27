@@ -1,0 +1,78 @@
+Wrote /export/home/rakh90100/learning_from_physics/Results/repro_d75/validation_old_csvs/gt_builtin.json
+t4_base: /export/home/rakh90100/learning_from_physics/Results/delfys75_baseline/delfys75_baseline.csv (baseline) - 90 clips, 48 failed
+t4_corr: /export/home/rakh90100/learning_from_physics/Results/delfys75_improved/delfys75_improved.csv (unified) - 90 clips, 45 failed
+t5_1step: /export/home/rakh90100/learning_from_physics/Results/delfys75_original/delfys75.csv (baseline) - 90 clips, 2 failed
+t5_multi: /export/home/rakh90100/learning_from_physics/Results/delfys75/delfys75.csv (baseline) - 90 clips, 2 failed
+dynamics      setting       param          GT               t4_base               t4_corr              t5_1step              t5_multi
+dropped_ball  large         g          9.8066             n/a (0/5)             n/a (0/5)           0.248 (5/5)           0.176 (5/5)
+dropped_ball  medium        g          9.8066             n/a (0/5)             n/a (0/5)           0.486 (5/5)           0.452 (5/5)
+dropped_ball  small         g          9.8066             n/a (0/5)             n/a (0/5)           0.534 (5/5)           0.473 (5/5)
+led           led_10s       decay      0.4600           2.091 (5/5)             n/a (0/5)           2.092 (5/5)           7.462 (5/5)
+led           led_2s        decay      2.3000           7.449 (5/5)             n/a (0/5)           7.449 (5/5)           7.574 (5/5)
+led           led_5s        decay      0.9200           8.410 (4/5)             n/a (0/5)           8.436 (5/5)           8.441 (5/5)
+pendulum      pendulum_150  damping   -0.0592           0.136 (5/5)           4.386 (5/5)           0.123 (5/5)           0.773 (5/5)
+pendulum      pendulum_150  length     1.5000           1.187 (5/5)           0.711 (5/5)           1.184 (5/5)           1.180 (5/5)
+pendulum      pendulum_45   damping   -0.0592           0.445 (5/5)           5.120 (5/5)           0.585 (5/5)           0.726 (5/5)
+pendulum      pendulum_45   length     0.4500           0.347 (5/5)           3.801 (5/5)           0.347 (5/5)           0.501 (5/5)
+pendulum      pendulum_90   damping   -0.0592           0.256 (5/5)           3.036 (5/5)           0.288 (5/5)           0.247 (5/5)
+pendulum      pendulum_90   length     0.9000           0.708 (5/5)           2.928 (5/5)           0.709 (5/5)           0.707 (5/5)
+sliding_block high          acceleration  3.1402             n/a (0/5)             n/a (0/5)          81.047 (5/5)          81.710 (5/5)
+sliding_block low           acceleration  1.4410             n/a (0/5)             n/a (0/5)          98.419 (5/5)          98.399 (5/5)
+sliding_block mid           acceleration  2.2994             n/a (0/5)             n/a (0/5)          82.858 (5/5)          84.040 (5/5)
+torricelli    large         k          0.0162           7.586 (4/5)             n/a (0/5)           6.269 (5/5)           6.536 (5/5)
+torricelli    medium        k          0.0128           9.907 (4/5)             n/a (0/5)           9.924 (5/5)           9.927 (5/5)
+torricelli    small         k          0.0096           7.671 (5/5)             n/a (0/5)           8.946 (4/5)           9.700 (4/5)
+--- extra: bouncing-ball clips, not in Delfys75; g is not their GT (elasticity) ---
+free_fall     mousepad      g          9.8066             n/a (0/5)             n/a (0/5)           2.119 (4/5)           1.652 (4/5)
+free_fall     table         g          9.8066             n/a (0/5)             n/a (0/5)           1.055 (5/5)           0.152 (5/5)
+free_fall     tennis        g          9.8066             n/a (0/5)             n/a (0/5)           1.058 (5/5)           0.528 (5/5)
+
+Cells: MAE over successful clips (n_ok/n_total). n/a = all failed or no physical mapping.
+Mapping notes per row are in summary.csv. Pendulum damping sign convention is unverified.
+OK   t4_base  pendulum/pendulum_45/length: got 0.3473, expected 0.347
+OK   t4_base  pendulum/pendulum_90/length: got 0.7079, expected 0.708
+OK   t4_base  pendulum/pendulum_150/length: got 1.1869, expected 1.187
+OK   t4_base  led/led_2s/decay: got 7.4490, expected 7.449
+OK   t5_1step dropped_ball/large/g: got 0.2484, expected 0.25
+OK   t5_1step free_fall/mousepad/g: got 2.1192, expected 2.12
+OK   t5_1step free_fall/table/g: got 1.0550, expected 1.06
+OK   t5_1step free_fall/tennis/g: got 1.0576, expected 1.06
+OK   t5_1step led/led_10s/decay: got 2.0916, expected 2.09
+OK   t5_1step pendulum/pendulum_45/length: got 0.3470, expected 0.35
+OK   t5_1step torricelli/large/k: got 6.2690, expected 6.27
+OK   t5_multi dropped_ball/large/g: got 0.1764, expected 0.18
+OK   t5_multi free_fall/mousepad/g: got 1.6522, expected 1.65
+OK   t5_multi free_fall/table/g: got 0.1521, expected 0.15
+OK   t5_multi free_fall/tennis/g: got 0.5283, expected 0.53
+OK   t5_multi led/led_10s/decay: got 7.4616, expected 7.46
+OK   t5_multi pendulum/pendulum_45/length: got 0.5009, expected 0.5
+OK   t5_multi torricelli/large/k: got 6.5360, expected 6.54
+18/18 checks passed
+=== diff: committed Table 4 comparison vs regenerated (only 4th-decimal rounding expected)
+15c15
+< pendulum         pendulum_150   damping      -0.0592    -4.4448    4.3855     -0.1953    0.1361     4.2494    
+---
+> pendulum         pendulum_150   damping      -0.0592    -4.4448    4.3856     -0.1953    0.1361     4.2494    
+17c17
+< pendulum         pendulum_45    damping      -0.0592    -5.1794    5.1202     -0.5045    0.4452     4.6750    
+---
+> pendulum         pendulum_45    damping      -0.0592    -5.1794    5.1202     -0.5045    0.4453     4.6750    
+19c19
+< pendulum         pendulum_90    damping      -0.0592    -3.0957    3.0364     -0.3152    0.2559     2.7805    
+---
+> pendulum         pendulum_90    damping      -0.0592    -3.0957    3.0365     -0.3152    0.2560     2.7805    
+21,26d20
+< sliding_block    high           angle_deg    30.0000    30.0000    0.0000     30.0000    0.0000     0.0000    
+< sliding_block    high           friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+< sliding_block    low            angle_deg    20.0000    20.0000    0.0000     20.0000    0.0000     0.0000    
+< sliding_block    low            friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+< sliding_block    mid            angle_deg    25.0000    25.0000    0.0000     25.0000    0.0000     0.0000    
+< sliding_block    mid            friction     0.2076     0.0000     0.2076     0.0000     0.2076     0.0000    
+29c23
+< torricelli       small          k            0.0096     5.6908     5.6850     7.6804     7.6709     -1.9858   
+\ No newline at end of file
+---
+> torricelli       small          k            0.0096     5.6908     5.6850     7.6804     7.6708     -1.9858   
+\ No newline at end of file
+
+Validation done: /export/home/rakh90100/learning_from_physics/Results/repro_d75/validation_old_csvs/checks.txt must say all checks passed.

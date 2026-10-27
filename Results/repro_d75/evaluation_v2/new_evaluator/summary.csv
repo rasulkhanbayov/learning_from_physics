@@ -1,0 +1,313 @@
+run_name,model,subset,dynamics,setting,param,gt,gt_source,est_mean,mae,mae_std,n_ok,n_total,mapping
+base1_s1,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,9.055805015563966,1.4118757571411134,1.5466217570858332,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.027560806274414,1.460824998779297,1.39170611124065,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,8.778763389587402,1.027886610412597,0.8920294165990518,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,extra,free_fall,mousepad,g,9.80665,builtin,8.765560150146484,1.718639276733398,0.8519034081757545,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,extra,free_fall,table,g,9.80665,builtin,9.943243980407715,0.9677889193725587,0.8385632880776537,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,extra,free_fall,tennis,g,9.80665,builtin,9.396854972839355,0.7645849551391602,1.2187641789677663,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s1,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.44706793427467345,0.07480479311943054,0.05296603041526926,5,5,decay=alpha
+base1_s1,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.779511642456054,7.479511642456055,0.027673785764800708,5,5,decay=alpha
+base1_s1,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.801271057128906,8.881271057128906,0.023094184242303556,5,5,decay=alpha
+base1_s1,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.09964130148291588,0.042763291078065244,0.037233545354115674,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s1,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.286845064163208,0.213154935836792,0.025100797369526463,5,5,L=|alpha|
+base1_s1,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.1559678792953491,0.09672531374172107,0.028664720377461372,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s1,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.41850453019142153,0.0314954698085785,0.005486993466640545,5,5,L=|alpha|
+base1_s1,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.17680140286684037,0.1175588373132123,0.05772749197293207,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s1,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.8003204107284546,0.09967958927154544,0.02409228278175615,5,5,L=|alpha|
+base1_s1,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,82.57993602752686,79.43946949441784,9.878345299756486,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s1,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,98.5611457824707,97.11988745446335,0.6946997653316279,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s1,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,90.14002513885498,87.84041198597791,11.65028977316787,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s1,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,7.513575315475464,7.497373249641985,1.9266763065589785,4,5,k=alpha (latent units)
+base1_s1,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,5.279653549194336,5.266827117607382,0.06810363976514418,4,5,k=alpha (latent units)
+base1_s1,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,3.9036245197057724,3.894070802532113,2.4257997592817637,4,5,k=alpha (latent units)
+base1_s2,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,9.44863452911377,0.39961563690185536,0.4483002752582052,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.015490055084229,0.9052668247985839,1.1213477587535858,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,9.74306583404541,0.6145204867553712,0.23565180005239805,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,extra,free_fall,mousepad,g,9.80665,builtin,10.656808280944825,1.0880450265502932,1.3584256238200527,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,extra,free_fall,table,g,9.80665,builtin,9.409371757507325,0.9306944216918946,1.3999550995076782,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,extra,free_fall,tennis,g,9.80665,builtin,11.482234954833984,2.312505437622071,1.3516332245164018,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_s2,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.32741962373256683,0.1325803762674332,0.09422042755216338,5,5,decay=alpha
+base1_s2,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.78732795715332,7.487327957153321,0.03259468989930468,5,5,decay=alpha
+base1_s2,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.824535369873047,8.904535369873047,0.0004548086713088548,5,5,decay=alpha
+base1_s2,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.0963462918996811,0.03710372634605304,0.013411464624720237,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s2,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.283218765258789,0.21678123474121094,0.01214137020743846,5,5,L=|alpha|
+base1_s2,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.1468360871076584,0.08759352155403033,0.027392540967374052,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s2,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.4143588602542877,0.03564113974571229,0.005986522597693723,5,5,L=|alpha|
+base1_s2,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.13042352944612504,0.07118096389249698,0.019652800725819805,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_s2,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7823905706405639,0.11760942935943605,0.007105895720689133,5,5,L=|alpha|
+base1_s2,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,83.80575942993164,80.66529289682262,1.9985055082221472,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s2,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,87.92796802520752,86.48670969720017,16.267465953003274,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s2,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,83.31590938568115,81.01629623280408,8.961447003188042,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_s2,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,8.511254692077637,8.495052626244158,1.4350789305118847,5,5,k=alpha (latent units)
+base1_s2,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,6.602773690223694,6.589947258636739,3.6574999016842207,5,5,k=alpha (latent units)
+base1_s2,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,4.949856948852539,4.94030323167888,0.21565450846736092,5,5,k=alpha (latent units)
+basem_s1,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,10.230871963500977,0.42422196350097713,0.5177278138123665,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,11.089838981628418,1.2831889816284185,1.6116843140872386,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,9.141042518615723,1.3846520407104488,0.5671582317890508,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,extra,free_fall,mousepad,g,9.80665,builtin,8.518364524841308,1.3536511404418943,0.8008551174518392,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,extra,free_fall,table,g,9.80665,builtin,9.519994354248047,0.6297431622314452,0.5361264403815206,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,extra,free_fall,tennis,g,9.80665,builtin,8.683852005004884,1.7262934667968746,0.8665128756837673,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s1,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.48890756368637084,0.09348176288604736,0.08007759436965832,5,5,decay=alpha
+basem_s1,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.784033012390136,7.484033012390137,0.028127741984941244,5,5,decay=alpha
+basem_s1,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.801169395446777,8.881169395446777,0.02295916649760396,5,5,decay=alpha
+basem_s1,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.09332245886325836,0.03407989330963031,0.022540787866242997,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s1,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.2774685144424438,0.22253148555755614,0.015168733000358073,5,5,L=|alpha|
+basem_s1,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.1291820526123047,0.06993948705867663,0.019148346899657154,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s1,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.4179013311862946,0.032098668813705454,0.002092326816976558,5,5,L=|alpha|
+basem_s1,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.1350005179643631,0.07575795241073505,0.03662493659017362,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s1,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7964858412742615,0.10351415872573855,0.030268276356983953,5,5,L=|alpha|
+basem_s1,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,81.75484371185303,78.61437717874401,9.66858669388834,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s1,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,98.44088172912598,96.99962340111863,0.7091468653084158,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s1,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,97.1789493560791,94.87933620320203,2.3621787865413997,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s1,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,7.634708523750305,7.618506457916825,1.4671920613503933,4,5,k=alpha (latent units)
+basem_s1,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,4.875392723083496,4.862566291496542,0.2606414775246888,5,5,k=alpha (latent units)
+basem_s1,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,3.573051744699478,3.5634980275258186,1.974848969624273,5,5,k=alpha (latent units)
+basem_s2,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,9.202252769470215,0.655355928649902,0.44414120500110216,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.13332109451294,0.7670733128356932,1.3108255126476203,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,10.341671180725097,0.7702745761108399,0.4963253416578026,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,extra,free_fall,mousepad,g,9.80665,builtin,10.508292388916015,0.9194954888916019,0.6096164586929516,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,extra,free_fall,table,g,9.80665,builtin,9.492579650878906,1.2780754412841797,1.7504084220010687,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,extra,free_fall,tennis,g,9.80665,builtin,11.466630363464356,2.115014936218262,1.7407872795322845,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem_s2,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.37923780679702757,0.08076219320297243,0.0792621192146369,5,5,decay=alpha
+basem_s2,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.789636611938477,7.489636611938477,0.02702139573686977,5,5,decay=alpha
+basem_s2,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.824422454833984,8.904422454833984,0.000419063420100579,5,5,decay=alpha
+basem_s2,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.09664645045995712,0.037403884906329066,0.026913532305222088,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s2,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.284894847869873,0.21510515213012696,0.018266674055575218,5,5,L=|alpha|
+basem_s2,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.14194512963294983,0.08270256407932178,0.03516620276915845,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s2,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.4214825928211212,0.028517407178878795,0.012609596220640446,5,5,L=|alpha|
+basem_s2,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.18466666489839553,0.12542409934476748,0.078639080490054,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem_s2,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7990751981735229,0.10092480182647708,0.02336834214335567,5,5,L=|alpha|
+basem_s2,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,83.6836805343628,80.54321400125377,7.482272316244699,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s2,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,94.42972469329834,92.98846636529099,11.883722868192816,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s2,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,80.65901470184326,78.35940154896619,10.741144906980308,5,5,a=10|alpha| (latent units; mu not estimable)
+basem_s2,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,8.34829502105713,8.332092955223649,1.1130854776863626,5,5,k=alpha (latent units)
+basem_s2,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,8.30890703201294,8.296080600425984,2.2132337753569846,4,5,k=alpha (latent units)
+basem_s2,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,4.8552099704742435,4.845656253300584,1.0644208005223954,5,5,k=alpha (latent units)
+unif1_s1,unified,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s1,unified,delfys75,dropped_ball,medium,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s1,unified,delfys75,dropped_ball,small,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s1,unified,extra,free_fall,mousepad,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,extra,free_fall,table,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,extra,free_fall,tennis,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-3.529991292953491,3.470748727399863,1.34198051349571,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s1,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,13.286170233712578,11.786170233712578,12.068038369218403,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s1,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-4.027369999885559,3.968127434331931,1.7867782294772625,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s1,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,12.232094242709572,11.782094242709572,4.6198430038029,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s1,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-2.4233575582504274,2.3641149926967993,0.5181265758067561,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s1,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,14.270012949088633,13.370012949088633,8.977382085308376,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s1,unified,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s1,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s2,unified,delfys75,dropped_ball,medium,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s2,unified,delfys75,dropped_ball,small,g,9.80665,builtin,,,,0,5,all runs failed
+unif1_s2,unified,extra,free_fall,mousepad,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,extra,free_fall,table,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,extra,free_fall,tennis,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-4.819896078109741,4.760653512556113,1.4685494310524334,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s2,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,63.391810782049156,61.891810782049156,75.03688143441045,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s2,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-4.613173151016236,4.5539305854626075,1.9287631332170763,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s2,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,26.76804261431539,26.31804261431539,6.738831300994164,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s2,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-3.157512140274048,3.09826957472042,1.4602037868550066,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1_s2,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,59.02369928798095,58.123699287980955,38.318222038612944,4,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1_s2,unified,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1_s2,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-5.434404373168945,5.375161807615317,0.9351826054349108,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,3.1933759959704053,1.7394393677945372,1.0695141618065698,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-3.1239383280277253,3.064695762474097,1.8616202630203114,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,19.017558791577933,18.567558791577934,37.386770029841024,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-4.509040021896363,4.4497974563427345,1.424573352170776,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+legacy_unif_dt005,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,10.497188905582586,9.597188905582586,15.696580587215728,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+legacy_unif_dt005,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+legacy_unif_dt005,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+base1,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,9.35637264251709,0.906778875427246,1.055581853737912,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.311697006225586,0.600561491088867,0.6509720460916346,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,9.196330642700195,0.6967802984619137,0.3430862418255363,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,extra,free_fall,mousepad,g,9.80665,builtin,10.104471969604493,2.224237920532227,1.8913319174421794,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,extra,free_fall,table,g,9.80665,builtin,8.810554122924804,0.9960958770751948,0.8140839041233691,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,extra,free_fall,tennis,g,9.80665,builtin,9.765817642211914,0.41192515747070324,0.4412747761174899,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.4217275261878967,0.09136420583724977,0.03678750545728198,5,5,decay=alpha
+base1,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.771314811706542,7.471314811706543,0.02893646810660934,5,5,decay=alpha
+base1,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.819697952270507,8.899697952270508,0.00027134137667094474,5,5,decay=alpha
+base1,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.12101713269948959,0.061774567145861534,0.052003894868343496,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.3002037286758423,0.19979627132415773,0.03287197338665606,5,5,L=|alpha|
+base1,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.13940861076116562,0.08016604520753756,0.030815282321104982,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.41857895255088806,0.03142104744911195,0.008430547879245931,5,5,L=|alpha|
+base1,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.1710313081741333,0.11178874262050524,0.0649763099944249,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7956337213516236,0.10436627864837648,0.01954743927037513,5,5,L=|alpha|
+base1,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,83.58123397827148,80.44076744516246,5.658741480155431,5,5,a=10|alpha| (latent units; mu not estimable)
+base1,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,84.30307579040527,82.86181746239792,15.438633178400881,5,5,a=10|alpha| (latent units; mu not estimable)
+base1,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,81.09695529937744,78.79734214650037,4.842212932977069,5,5,a=10|alpha| (latent units; mu not estimable)
+base1,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,6.526615762710572,6.510413696877092,3.563548817023382,5,5,k=alpha (latent units)
+base1,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,4.862784910202026,4.849958478615072,1.3557717150257935,5,5,k=alpha (latent units)
+base1,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,5.0936994552612305,5.084145738087571,0.07266601356262549,5,5,k=alpha (latent units)
+basem,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,10.052391624450683,0.2515051858520511,0.3071985642886565,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.474428939819337,0.43836475952148424,0.44325042122260994,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,8.850117492675782,1.053234003295898,0.6012491163979137,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,extra,free_fall,mousepad,g,9.80665,builtin,10.892548751831054,1.1479825036621096,1.2312828717627533,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,extra,free_fall,table,g,9.80665,builtin,9.206783294677734,0.6295024548339843,0.7553064271004365,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,extra,free_fall,tennis,g,9.80665,builtin,9.683000183105468,0.2747490252685548,0.3765461680779722,5,5,g=alpha (latent units; scale set only by the KL prior)
+basem,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.4142476558685303,0.11250388717651369,0.0681407565107688,5,5,decay=alpha
+basem,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.773605346679688,7.473605346679688,0.02368153813128868,5,5,decay=alpha
+basem,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.819508934020996,8.899508934020997,0.00025118648210941584,5,5,decay=alpha
+basem,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.08642243891954422,0.027179873365916162,0.01656658867961831,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.2860455751419066,0.21395442485809327,0.018240490221067027,5,5,L=|alpha|
+basem,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.13419196605682374,0.07494940050319568,0.025646554739192074,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.41662896871566774,0.03337103128433229,0.0034787970347699903,5,5,L=|alpha|
+basem,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.13214814960956572,0.07290558405593768,0.02177391366888536,5,5,"damping=-beta (sign convention unverified, see notes)"
+basem,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7822442293167114,0.1177557706832886,0.01348788110062716,5,5,L=|alpha|
+basem,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,82.42748641967773,79.28701988656871,5.467641158786033,5,5,a=10|alpha| (latent units; mu not estimable)
+basem,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,87.85878562927246,86.41752730126511,11.10296971841266,5,5,a=10|alpha| (latent units; mu not estimable)
+basem,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,79.79807758331299,77.49846443043592,4.241005636845833,5,5,a=10|alpha| (latent units; mu not estimable)
+basem,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,7.260427486896515,7.244225421063036,3.8089843403440224,5,5,k=alpha (latent units)
+basem,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,7.207046890258789,7.194220458671834,1.6390186009094163,5,5,k=alpha (latent units)
+basem,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,5.388158917427063,5.3786052002534035,0.5852831871402424,4,5,k=alpha (latent units)
+unif1,unified,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,5,all runs failed
+unif1,unified,delfys75,dropped_ball,medium,g,9.80665,builtin,,,,0,5,all runs failed
+unif1,unified,delfys75,dropped_ball,small,g,9.80665,builtin,,,,0,5,all runs failed
+unif1,unified,extra,free_fall,mousepad,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,extra,free_fall,table,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,extra,free_fall,tennis,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-3.637882947921753,3.5786403823681248,1.2502196346732075,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,40.128725596024005,38.628725596024005,24.068338110337123,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-3.8877402782440185,3.8284977126903903,1.9442641695864045,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,27.470205347446488,27.02020534744649,19.777869711860284,3,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-2.378436064720154,2.3191934991665257,1.030407824254668,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unif1,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,38.75138840931954,37.85138840931954,44.90472729512881,4,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unif1,unified,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unif1,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,5,all runs failed
+unifm,unified,delfys75,dropped_ball,medium,g,9.80665,builtin,,,,0,5,all runs failed
+unifm,unified,delfys75,dropped_ball,small,g,9.80665,builtin,,,,0,5,all runs failed
+unifm,unified,extra,free_fall,mousepad,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,extra,free_fall,table,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,extra,free_fall,tennis,g,9.80665,builtin,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-3.920173454284668,3.8609308887310396,1.1923354351603952,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unifm,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,42.84077913072045,41.34077913072045,29.220422836429034,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unifm,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-3.714793437719345,3.655550872165717,2.127007864497262,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unifm,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,28.62363565017048,28.173635650170482,24.271415939398626,3,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unifm,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-2.872546887397766,2.813304321844138,1.3245342756448455,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+unifm,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,125.53168509155353,124.63168509155354,136.6361116846243,4,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+unifm,unified,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+unifm,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+base1_init5,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,5.153413963317871,4.653236036682128,0.3746737532092272,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,4.407740592956543,5.3989094070434565,0.7922295822984898,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,4.328273630142212,5.478376369857788,0.5119340595190356,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,extra,free_fall,mousepad,g,9.80665,builtin,5.284972286224365,4.678272245635986,3.886875364376535,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,extra,free_fall,table,g,9.80665,builtin,2.6956111669540403,7.111038833045959,1.6499586009265963,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,extra,free_fall,tennis,g,9.80665,builtin,4.568189024925232,5.2384609750747675,2.2310913699777877,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init5,baseline,delfys75,led,led_10s,decay,0.46,params_json,1.3068258106708526,0.9048527734279632,1.9093254040773486,5,5,decay=alpha
+base1_init5,baseline,delfys75,led,led_2s,decay,2.3,params_json,4.778900909423828,2.478900909423828,0.021396699977521146,5,5,decay=alpha
+base1_init5,baseline,delfys75,led,led_5s,decay,0.92,params_json,4.290535974502563,3.3705359745025634,1.1354543849730476,5,5,decay=alpha
+base1_init5,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.10124778598546982,0.044986929523204176,0.03846707983700906,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init5,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.2839486122131347,0.21605138778686522,0.022756001472672052,5,5,L=|alpha|
+base1_init5,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.1405107259750366,0.08126816042140857,0.02438715626394169,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init5,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.4181693494319916,0.031830650568008434,0.006372210857818817,5,5,L=|alpha|
+base1_init5,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.13082989901304246,0.0715873334594144,0.02633248169702763,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init5,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.7794592380523682,0.12054076194763186,0.007333558972747975,5,5,L=|alpha|
+base1_init5,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,46.874552726745605,43.734086193636585,3.8595469310756827,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init5,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,43.58680534362793,42.14554701562058,4.318801914250349,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init5,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,43.33949136734009,41.039878214463016,6.195441200716386,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init5,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,1.8674340426921845,1.8512319768587049,2.1262931265330742,5,5,k=alpha (latent units)
+base1_init5,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,4.281067669391632,4.268241237804678,0.40656449516061044,4,5,k=alpha (latent units)
+base1_init5,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,0.9622805319726467,1.080057914762213,2.23728639910987,5,5,k=alpha (latent units)
+base1_init20,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,19.33535385131836,9.52870385131836,0.44581606675170227,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,19.263536834716795,9.456886834716798,0.5107354912350388,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,18.505527877807616,8.698877877807618,1.5887417106979111,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,extra,free_fall,mousepad,g,9.80665,builtin,19.71413974761963,9.90748974761963,3.3339780685002833,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,extra,free_fall,table,g,9.80665,builtin,18.46253204345703,8.655882043457032,0.8923890616702062,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,extra,free_fall,tennis,g,9.80665,builtin,20.02975997924805,10.223109979248047,2.2955127761910656,5,5,g=alpha (latent units; scale set only by the KL prior)
+base1_init20,baseline,delfys75,led,led_10s,decay,0.46,params_json,19.819264602661132,19.35926460266113,0.00026830165495122436,5,5,decay=alpha
+base1_init20,baseline,delfys75,led,led_2s,decay,2.3,params_json,19.77841911315918,17.47841911315918,0.02811827251372556,5,5,decay=alpha
+base1_init20,baseline,delfys75,led,led_5s,decay,0.92,params_json,19.81959228515625,18.89959228515625,0.0001777399233853301,5,5,decay=alpha
+base1_init20,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.08988989815115929,0.0332555783562406,0.020273577989915366,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init20,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.2899091482162475,0.21009085178375245,0.01967468508488158,5,5,L=|alpha|
+base1_init20,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-3.205140881240368,3.1458983156867397,3.076438034804281,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init20,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.395272296667099,0.06743972420692444,0.05416409430426877,5,5,L=|alpha|
+base1_init20,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-1.468935765326023,1.409693199772395,2.6714889463163827,5,5,"damping=-beta (sign convention unverified, see notes)"
+base1_init20,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,2.640977883338928,1.8934072637557984,4.020922088041443,5,5,L=|alpha|
+base1_init20,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,192.38811111450195,189.24764458139293,10.286815722980775,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init20,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,199.80411529541016,198.36285696740282,0.16489105930446435,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init20,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,199.82952880859375,197.52991565571668,0.09709712391954221,5,5,a=10|alpha| (latent units; mu not estimable)
+base1_init20,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,10.033615070581437,10.017413004747958,6.1213308996118085,5,5,k=alpha (latent units)
+base1_init20,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,7.433209943771362,7.442559391978613,5.340605895744808,5,5,k=alpha (latent units)
+base1_init20,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,5.405561065673828,5.396007348500168,0.689871472839317,5,5,k=alpha (latent units)
+legacy_dt005,baseline,delfys75,led,led_10s,decay,0.46,params_json,2.5513259887695314,2.0913259887695315,0.07962202466704049,5,5,decay=alpha
+legacy_dt005,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.748969459533692,7.448969459533692,0.009369507086881943,5,5,decay=alpha
+legacy_dt005,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.355790901184083,8.435790901184083,0.0905988434598241,5,5,decay=alpha
+legacy_dt005,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.1996765285730362,0.14043396301940814,0.032924297192384835,5,5,"damping=-beta (sign convention unverified, see notes)"
+legacy_dt005,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,0.3148641109466553,1.1851358890533448,0.0036430571447432897,5,5,L=|alpha|
+legacy_dt005,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.5568941235542297,0.4976515580006017,0.23446057321477026,5,5,"damping=-beta (sign convention unverified, see notes)"
+legacy_dt005,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.10218685269355773,0.34781314730644225,0.0018716911276195022,5,5,L=|alpha|
+legacy_dt005,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.3693378269672394,0.3100952614136113,0.06772210849625218,5,5,"damping=-beta (sign convention unverified, see notes)"
+legacy_dt005,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.1894460290670395,0.7105539709329606,0.0019014928239647598,5,5,L=|alpha|
+legacy_dt005,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,9.7953857421875,9.779183676354021,0.14640488612327754,5,5,k=alpha (latent units)
+legacy_dt005,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,10.076597785949707,10.063771354362752,0.4605260848882899,5,5,k=alpha (latent units)
+legacy_dt005,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,7.539560541510582,7.5300068243369225,4.57967647040163,4,5,k=alpha (latent units)
+s3_base1,baseline,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,3,all runs failed
+s3_base1,baseline,delfys75,dropped_ball,medium,g,9.80665,builtin,9.857439041137695,0.05078904113769589,0.0,1,2,g=alpha (latent units; scale set only by the KL prior)
+s3_base1,baseline,delfys75,dropped_ball,small,g,9.80665,builtin,9.901420911153158,0.09477091115315812,0.08014668431253195,3,4,g=alpha (latent units; scale set only by the KL prior)
+s3_base1,baseline,delfys75,led,led_10s,decay,0.46,params_json,0.43310434818267823,0.04914827775955201,0.06944645773860936,5,5,decay=alpha
+s3_base1,baseline,delfys75,led,led_2s,decay,2.3,params_json,9.781307601928711,7.4813076019287115,0.026476464630819315,5,5,decay=alpha
+s3_base1,baseline,delfys75,led,led_5s,decay,0.92,params_json,9.819713401794434,8.899713401794434,0.0003242782972467896,5,5,decay=alpha
+s3_base1,baseline,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-0.26514404714107515,0.2059014815874471,0.11260510351418382,5,5,"damping=-beta (sign convention unverified, see notes)"
+s3_base1,baseline,delfys75,pendulum,pendulum_150,length,1.5,params_json,1.272196650505066,0.22780334949493408,0.024688508229426653,5,5,L=|alpha|
+s3_base1,baseline,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-0.2157750368118286,0.15653247125820055,0.03433558217237624,5,5,"damping=-beta (sign convention unverified, see notes)"
+s3_base1,baseline,delfys75,pendulum,pendulum_45,length,0.45,params_json,0.3984988331794739,0.051501166820526134,0.013099550435973084,5,5,L=|alpha|
+s3_base1,baseline,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-0.16648274958133696,0.10724018402770892,0.031523810269130134,5,5,"damping=-beta (sign convention unverified, see notes)"
+s3_base1,baseline,delfys75,pendulum,pendulum_90,length,0.9,params_json,0.756019675731659,0.1439803242683411,0.01250536667839874,5,5,L=|alpha|
+s3_base1,baseline,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,87.80883979797363,84.66837326486461,3.7495360228874413,5,5,a=10|alpha| (latent units; mu not estimable)
+s3_base1,baseline,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,83.34053707122803,81.89927874322068,6.8362924978224,5,5,a=10|alpha| (latent units; mu not estimable)
+s3_base1,baseline,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,84.10826015472412,81.80864700184705,6.188756750254233,5,5,a=10|alpha| (latent units; mu not estimable)
+s3_base1,baseline,delfys75,torricelli,large,k,0.016202065833479495,params_json,6.129124963283539,6.112922897450059,4.452856517182674,5,5,k=alpha (latent units)
+s3_base1,baseline,delfys75,torricelli,medium,k,0.0128264315869546,params_json,0.5052467584609985,0.4924203268740439,0.2236700392851884,5,5,k=alpha (latent units)
+s3_base1,baseline,delfys75,torricelli,small,k,0.009553717173659406,params_json,0.0647832665592432,0.05522954938558379,0.025108206527785126,5,5,k=alpha (latent units)
+s3_unif1,unified,delfys75,dropped_ball,large,g,9.80665,builtin,,,,0,3,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,dropped_ball,medium,g,9.80665,builtin,,,,0,2,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,dropped_ball,small,g,9.80665,builtin,,,,0,4,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,led,led_10s,decay,0.46,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,led,led_2s,decay,2.3,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,led,led_5s,decay,0.92,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,pendulum,pendulum_150,damping,-0.05924256555362806,params_json,-4.221107625961304,4.161865060407676,1.4636230052662953,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+s3_unif1,unified,delfys75,pendulum,pendulum_150,length,1.5,params_json,3.2328723576704403,1.7328723576704403,0.9601424751049191,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+s3_unif1,unified,delfys75,pendulum,pendulum_45,damping,-0.05924256555362806,params_json,-5.093250703811646,5.0340081382580175,1.1120782975773753,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+s3_unif1,unified,delfys75,pendulum,pendulum_45,length,0.45,params_json,8.139185241066876,7.689185241066877,8.302221528780414,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+s3_unif1,unified,delfys75,pendulum,pendulum_90,damping,-0.05924256555362806,params_json,-5.438386535644531,5.379143970090903,0.6013008857102514,5,5,"damping=-gamma1 (sign convention unverified, see notes)"
+s3_unif1,unified,delfys75,pendulum,pendulum_90,length,0.9,params_json,2.0703125532703592,1.2892318197231885,0.7975653398137009,5,5,L=g/gamma0 (small-angle; None if gamma0<=0)
+s3_unif1,unified,delfys75,sliding_block,high,acceleration,3.140466533109019,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,sliding_block,low,acceleration,1.4412583280073479,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,sliding_block,mid,acceleration,2.2996131528770745,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,torricelli,large,k,0.016202065833479495,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,torricelli,medium,k,0.0128264315869546,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system
+s3_unif1,unified,delfys75,torricelli,small,k,0.009553717173659406,params_json,,,,0,5,not physically meaningful: damped-oscillator fit to a non-oscillator system

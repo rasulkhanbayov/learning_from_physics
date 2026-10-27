@@ -1,0 +1,1937 @@
+NVIDIA H200
+=== s3_base_1step -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_base_1step
+=== dropped_ball/large/01
+Found dynamics keyword: dropped_ball
+Data shape:  (1, 10, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8235294
+Traceback (most recent call last):
+  File "/export/home/rakh90100/learning_from_physics/repro_d75/run_baseline.py", line 141, in main
+    _, vals = M.execute_experiment(path, dynamics, args.experiment, row["dt"], loss_name=args.loss)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/main.py", line 201, in execute_experiment
+    train_dataloader, test_dataloader, train_x, val_x  = loader.getLoader_folder(data_train, split=True, batch_size = batch_size)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/loader.py", line 37, in getLoader_folder
+    train_x, val_x = train_test_split(X, test_size=0.2, shuffle=False)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2785, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2415, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+    status=failed alpha= beta= (1.0 s) ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+=== dropped_ball/large/03
+Found dynamics keyword: dropped_ball
+Data shape:  (1, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.84313726
+Traceback (most recent call last):
+  File "/export/home/rakh90100/learning_from_physics/repro_d75/run_baseline.py", line 141, in main
+    _, vals = M.execute_experiment(path, dynamics, args.experiment, row["dt"], loss_name=args.loss)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/main.py", line 201, in execute_experiment
+    train_dataloader, test_dataloader, train_x, val_x  = loader.getLoader_folder(data_train, split=True, batch_size = batch_size)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/loader.py", line 37, in getLoader_folder
+    train_x, val_x = train_test_split(X, test_size=0.2, shuffle=False)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2785, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2415, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+    status=failed alpha= beta= (0.8 s) ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+=== dropped_ball/large/05
+Found dynamics keyword: dropped_ball
+Data shape:  (1, 10, 1, 56, 100)
+Data range: 
+Min:  0.011764706 
+Max:  0.8352941
+Traceback (most recent call last):
+  File "/export/home/rakh90100/learning_from_physics/repro_d75/run_baseline.py", line 141, in main
+    _, vals = M.execute_experiment(path, dynamics, args.experiment, row["dt"], loss_name=args.loss)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/main.py", line 201, in execute_experiment
+    train_dataloader, test_dataloader, train_x, val_x  = loader.getLoader_folder(data_train, split=True, batch_size = batch_size)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/loader.py", line 37, in getLoader_folder
+    train_x, val_x = train_test_split(X, test_size=0.2, shuffle=False)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2785, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2415, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+    status=failed alpha= beta= (0.8 s) ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+=== dropped_ball/medium/01
+Found dynamics keyword: dropped_ball
+Data shape:  (1, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.93333334
+Traceback (most recent call last):
+  File "/export/home/rakh90100/learning_from_physics/repro_d75/run_baseline.py", line 141, in main
+    _, vals = M.execute_experiment(path, dynamics, args.experiment, row["dt"], loss_name=args.loss)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/main.py", line 201, in execute_experiment
+    train_dataloader, test_dataloader, train_x, val_x  = loader.getLoader_folder(data_train, split=True, batch_size = batch_size)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/loader.py", line 37, in getLoader_folder
+    train_x, val_x = train_test_split(X, test_size=0.2, shuffle=False)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2785, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2415, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+    status=failed alpha= beta= (0.8 s) ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+=== dropped_ball/medium/02
+Found dynamics keyword: dropped_ball
+Data shape:  (3, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9529412
+Here! init_phys for free fall 10.0
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 4.6686601638793945 	 validation loss: 4.561779499053955
+best model a 9.857439041137695
+best last a 9.74120044708252
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.857439041137695 beta=1.0 (21.1 s) 
+=== dropped_ball/small/01
+Found dynamics keyword: dropped_ball
+Data shape:  (1, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.83137256
+Traceback (most recent call last):
+  File "/export/home/rakh90100/learning_from_physics/repro_d75/run_baseline.py", line 141, in main
+    _, vals = M.execute_experiment(path, dynamics, args.experiment, row["dt"], loss_name=args.loss)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/main.py", line 201, in execute_experiment
+    train_dataloader, test_dataloader, train_x, val_x  = loader.getLoader_folder(data_train, split=True, batch_size = batch_size)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/learning_from_physics/repro_d75_work/code/iris-bench_ce61c63/src/loader.py", line 37, in getLoader_folder
+    train_x, val_x = train_test_split(X, test_size=0.2, shuffle=False)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/utils/_param_validation.py", line 213, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2785, in train_test_split
+    n_train, n_test = _validate_shuffle_split(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/export/home/rakh90100/miniconda3/envs/iris_d75_repro/lib/python3.12/site-packages/sklearn/model_selection/_split.py", line 2415, in _validate_shuffle_split
+    raise ValueError(
+ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+    status=failed alpha= beta= (0.8 s) ValueError: With n_samples=1, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+=== dropped_ball/small/02
+Found dynamics keyword: dropped_ball
+Data shape:  (3, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.84313726
+Here! init_phys for free fall 10.0
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.247056007385254 	 validation loss: 5.2084174156188965
+best model a 9.854172706604004
+best last a 9.730713844299316
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.854172706604004 beta=1.0 (20.0 s) 
+=== dropped_ball/small/04
+Found dynamics keyword: dropped_ball
+Data shape:  (2, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.83137256
+Here! init_phys for free fall 10.0
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.176137447357178 	 validation loss: 5.262913227081299
+best model a 9.993959426879883
+best last a 10.00320816040039
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.993959426879883 beta=1.0 (19.7 s) 
+=== dropped_ball/small/05
+Found dynamics keyword: dropped_ball
+Data shape:  (2, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.8352941
+Here! init_phys for free fall 10.0
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.468945503234863 	 validation loss: 5.457098007202148
+best model a 9.856130599975586
+best last a 9.839218139648438
+best model b 1.0
+best last b 1.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.856130599975586 beta=1.0 (19.5 s) 
+=== led/led_10s/01
+Found dynamics keyword: led
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 7.4870511293411255 	 validation loss: 9.062010765075684
+best model a 0.289930522441864
+best last a 0.19924265146255493
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.289930522441864 beta=0.0 (115.0 s) 
+=== led/led_10s/02
+Found dynamics keyword: led
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 7.161961317062378 	 validation loss: 10.004291534423828
+best model a 0.47198501229286194
+best last a 0.24709565937519073
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.47198501229286194 beta=0.0 (118.1 s) 
+=== led/led_10s/03
+Found dynamics keyword: led
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.958370685577393 	 validation loss: 9.44019889831543
+best model a 0.4400825798511505
+best last a 0.27785173058509827
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.4400825798511505 beta=0.0 (114.0 s) 
+=== led/led_10s/04
+Found dynamics keyword: led
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.950247764587402 	 validation loss: 9.098746299743652
+best model a 0.459877073764801
+best last a 0.2967464029788971
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.459877073764801 beta=0.0 (113.5 s) 
+=== led/led_10s/05
+Found dynamics keyword: led
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.948193907737732 	 validation loss: 9.638543128967285
+best model a 0.5036465525627136
+best last a 0.20317135751247406
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.5036465525627136 beta=0.0 (120.8 s) 
+=== led/led_2s/01
+Found dynamics keyword: led
+Data shape:  (90, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.697699069976807 	 validation loss: 7.226758003234863
+best model a 9.79538345336914
+best last a 10.259602546691895
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.79538345336914 beta=0.0 (28.3 s) 
+=== led/led_2s/02
+Found dynamics keyword: led
+Data shape:  (90, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.419027328491211 	 validation loss: 7.25311279296875
+best model a 9.785867691040039
+best last a 10.150121688842773
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.785867691040039 beta=0.0 (27.9 s) 
+=== led/led_2s/03
+Found dynamics keyword: led
+Data shape:  (90, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.338510036468506 	 validation loss: 7.2481369972229
+best model a 9.73452377319336
+best last a 9.86432933807373
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.73452377319336 beta=0.0 (28.1 s) 
+=== led/led_2s/04
+Found dynamics keyword: led
+Data shape:  (90, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.972549
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.566849231719971 	 validation loss: 6.866419792175293
+best model a 9.79505729675293
+best last a 10.432539939880371
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.79505729675293 beta=0.0 (27.0 s) 
+=== led/led_2s/05
+Found dynamics keyword: led
+Data shape:  (90, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.569843292236328 	 validation loss: 7.047652721405029
+best model a 9.795705795288086
+best last a 10.273268699645996
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.795705795288086 beta=0.0 (27.0 s) 
+=== led/led_5s/01
+Found dynamics keyword: led
+Data shape:  (270, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.718288898468018 	 validation loss: 7.53464937210083
+best model a 9.820174217224121
+best last a 5.75517463684082
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.820174217224121 beta=0.0 (52.9 s) 
+=== led/led_5s/02
+Found dynamics keyword: led
+Data shape:  (270, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 7.247945070266724 	 validation loss: 7.243494033813477
+best model a 9.819758415222168
+best last a 5.8805084228515625
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.819758415222168 beta=0.0 (49.6 s) 
+=== led/led_5s/03
+Found dynamics keyword: led
+Data shape:  (270, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.933128118515015 	 validation loss: 7.668398380279541
+best model a 9.81942081451416
+best last a 5.70416784286499
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.81942081451416 beta=0.0 (67.1 s) 
+=== led/led_5s/04
+Found dynamics keyword: led
+Data shape:  (270, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.978524684906006 	 validation loss: 7.793404579162598
+best model a 9.819828033447266
+best last a 5.887016296386719
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.819828033447266 beta=0.0 (65.7 s) 
+=== led/led_5s/05
+Found dynamics keyword: led
+Data shape:  (270, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9843137
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 7.813136339187622 	 validation loss: 8.306476593017578
+best model a 9.819385528564453
+best last a 5.708423614501953
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.819385528564453 beta=0.0 (63.3 s) 
+=== pendulum/pendulum_150/01
+Found dynamics keyword: pendulum
+Data shape:  (570, 10, 1, 56, 100)
+Data range: 
+Min:  0.15294118 
+Max:  0.6901961
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.347947716712952 	 validation loss: 5.1538920402526855
+best model a 1.2553658485412598
+best last a 1.2424629926681519
+best model b 0.1443023830652237
+best last b 0.12622855603694916
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.2553658485412598 beta=0.1443023830652237 (148.5 s) 
+=== pendulum/pendulum_150/02
+Found dynamics keyword: pendulum
+Data shape:  (888, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.69803923
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.447898070017497 	 validation loss: 5.764048337936401
+best model a 1.280152440071106
+best last a 1.2320479154586792
+best model b 0.20676259696483612
+best last b 0.09047558158636093
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.280152440071106 beta=0.20676259696483612 (212.4 s) 
+=== pendulum/pendulum_150/03
+Found dynamics keyword: pendulum
+Data shape:  (735, 10, 1, 56, 100)
+Data range: 
+Min:  0.1764706 
+Max:  0.7019608
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.384719467163086 	 validation loss: 5.693035840988159
+best model a 1.3076176643371582
+best last a 1.2455462217330933
+best model b 0.24807028472423553
+best last b 0.16443344950675964
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.3076176643371582 beta=0.24807028472423553 (186.5 s) 
+=== pendulum/pendulum_150/04
+Found dynamics keyword: pendulum
+Data shape:  (883, 10, 1, 56, 100)
+Data range: 
+Min:  0.16862746 
+Max:  0.69411767
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.402752002080281 	 validation loss: 5.771343469619751
+best model a 1.2744884490966797
+best last a 1.2266199588775635
+best model b 0.28220367431640625
+best last b 0.2214401811361313
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.2744884490966797 beta=0.28220367431640625 (212.1 s) 
+=== pendulum/pendulum_150/05
+Found dynamics keyword: pendulum
+Data shape:  (1235, 10, 1, 56, 100)
+Data range: 
+Min:  0.17254902 
+Max:  0.69411767
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.3986247181892395 	 validation loss: 5.771375417709351
+best model a 1.243358850479126
+best last a 1.22022545337677
+best model b 0.4443812966346741
+best last b 0.10825958102941513
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.243358850479126 beta=0.4443812966346741 (282.5 s) 
+=== pendulum/pendulum_45/01
+Found dynamics keyword: pendulum
+Data shape:  (524, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.6431373
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.144469618797302 	 validation loss: 5.694705009460449
+best model a 0.3821868896484375
+best last a 0.38474196195602417
+best model b 0.23172113299369812
+best last b 0.18498119711875916
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.3821868896484375 beta=0.23172113299369812 (145.5 s) 
+=== pendulum/pendulum_45/02
+Found dynamics keyword: pendulum
+Data shape:  (614, 10, 1, 56, 100)
+Data range: 
+Min:  0.24705882 
+Max:  0.627451
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.574247360229492 	 validation loss: 5.412863731384277
+best model a 0.4014171063899994
+best last a 0.3963199257850647
+best model b 0.26264193654060364
+best last b 0.20620138943195343
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.4014171063899994 beta=0.26264193654060364 (139.4 s) 
+=== pendulum/pendulum_45/03
+Found dynamics keyword: pendulum
+Data shape:  (544, 10, 1, 56, 100)
+Data range: 
+Min:  0.2 
+Max:  0.627451
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.620328068733215 	 validation loss: 5.629993915557861
+best model a 0.41517841815948486
+best last a 0.3960750699043274
+best model b 0.21089430153369904
+best last b 0.18431952595710754
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.41517841815948486 beta=0.21089430153369904 (146.6 s) 
+=== pendulum/pendulum_45/04
+Found dynamics keyword: pendulum
+Data shape:  (592, 10, 1, 56, 100)
+Data range: 
+Min:  0.23137255 
+Max:  0.63529414
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.576431155204773 	 validation loss: 5.6392669677734375
+best model a 0.3888499438762665
+best last a 0.40510332584381104
+best model b 0.17003020644187927
+best last b 0.24026840925216675
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.3888499438762665 beta=0.17003020644187927 (142.5 s) 
+=== pendulum/pendulum_45/05
+Found dynamics keyword: pendulum
+Data shape:  (440, 10, 1, 56, 100)
+Data range: 
+Min:  0.23137255 
+Max:  0.6392157
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.6221944491068525 	 validation loss: 5.515830039978027
+best model a 0.40486180782318115
+best last a 0.399860680103302
+best model b 0.203587606549263
+best last b 0.16931083798408508
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.40486180782318115 beta=0.203587606549263 (114.3 s) 
+=== pendulum/pendulum_90/01
+Found dynamics keyword: pendulum
+Data shape:  (947, 10, 1, 56, 100)
+Data range: 
+Min:  0.21568628 
+Max:  0.61960787
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.2796995639801025 	 validation loss: 5.482539415359497
+best model a 0.777786135673523
+best last a 0.7553313970565796
+best model b 0.16035573184490204
+best last b 0.1792818158864975
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.777786135673523 beta=0.16035573184490204 (206.2 s) 
+=== pendulum/pendulum_90/02
+Found dynamics keyword: pendulum
+Data shape:  (919, 10, 1, 56, 100)
+Data range: 
+Min:  0.22352941 
+Max:  0.61960787
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.344403028488159 	 validation loss: 5.593295097351074
+best model a 0.7551017999649048
+best last a 0.7625128030776978
+best model b 0.1787332147359848
+best last b 0.13828754425048828
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.7551017999649048 beta=0.1787332147359848 (211.0 s) 
+=== pendulum/pendulum_90/03
+Found dynamics keyword: pendulum
+Data shape:  (762, 10, 1, 56, 100)
+Data range: 
+Min:  0.21960784 
+Max:  0.61960787
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.277960681915284 	 validation loss: 5.46083402633667
+best model a 0.7502238750457764
+best last a 0.7641695737838745
+best model b 0.21385911107063293
+best last b 0.17593950033187866
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.7502238750457764 beta=0.21385911107063293 (183.5 s) 
+=== pendulum/pendulum_90/04
+Found dynamics keyword: pendulum
+Data shape:  (1271, 10, 1, 56, 100)
+Data range: 
+Min:  0.22352941 
+Max:  0.61960787
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.317928910255432 	 validation loss: 5.563124656677246
+best model a 0.7470735907554626
+best last a 0.7400816679000854
+best model b 0.14720793068408966
+best last b 0.13283787667751312
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.7470735907554626 beta=0.14720793068408966 (219.8 s) 
+=== pendulum/pendulum_90/05
+Found dynamics keyword: pendulum
+Data shape:  (580, 10, 1, 56, 100)
+Data range: 
+Min:  0.21568628 
+Max:  0.61960787
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.302373766899109 	 validation loss: 5.420970439910889
+best model a 0.7499129772186279
+best last a 0.7496230602264404
+best model b 0.13225775957107544
+best last b 0.1443043053150177
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.7499129772186279 beta=0.13225775957107544 (91.1 s) 
+=== sliding_block/high/01
+Found dynamics keyword: sliding_block
+Data shape:  (12, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.96862745
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.61772346496582 	 validation loss: 23.489625930786133
+best model a 9.006359100341797
+best last a 9.000849723815918
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.006359100341797 beta=10.0 (33.5 s) 
+=== sliding_block/high/02
+Found dynamics keyword: sliding_block
+Data shape:  (10, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.96862745
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.38680076599121 	 validation loss: 23.252286911010742
+best model a 8.654250144958496
+best last a 8.65181827545166
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.654250144958496 beta=10.0 (36.0 s) 
+=== sliding_block/high/03
+Found dynamics keyword: sliding_block
+Data shape:  (9, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.95686275
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.55558204650879 	 validation loss: 23.458765029907227
+best model a 9.242612838745117
+best last a 9.196718215942383
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.242612838745117 beta=10.0 (28.2 s) 
+=== sliding_block/high/04
+Found dynamics keyword: sliding_block
+Data shape:  (9, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.42270278930664 	 validation loss: 23.586896896362305
+best model a 8.250426292419434
+best last a 8.177506446838379
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.250426292419434 beta=10.0 (29.4 s) 
+=== sliding_block/high/05
+Found dynamics keyword: sliding_block
+Data shape:  (12, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.588911056518555 	 validation loss: 23.377933502197266
+best model a 8.750771522521973
+best last a 8.748363494873047
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.750771522521973 beta=10.0 (43.1 s) 
+=== sliding_block/low/01
+Found dynamics keyword: sliding_block
+Data shape:  (22, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8980392
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.384048461914062 	 validation loss: 23.067302703857422
+best model a 9.171439170837402
+best last a 9.05700397491455
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.171439170837402 beta=10.0 (26.0 s) 
+=== sliding_block/low/02
+Found dynamics keyword: sliding_block
+Data shape:  (19, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.89411765
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.161806106567383 	 validation loss: 23.116180419921875
+best model a 7.923479080200195
+best last a 7.908374309539795
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=7.923479080200195 beta=10.0 (37.7 s) 
+=== sliding_block/low/03
+Found dynamics keyword: sliding_block
+Data shape:  (26, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9019608
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.209381103515625 	 validation loss: 22.898574829101562
+best model a 8.89058780670166
+best last a 8.885456085205078
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.89058780670166 beta=10.0 (23.2 s) 
+=== sliding_block/low/04
+Found dynamics keyword: sliding_block
+Data shape:  (27, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8901961
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.17601776123047 	 validation loss: 22.91736602783203
+best model a 8.163625717163086
+best last a 8.117180824279785
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.163625717163086 beta=10.0 (22.3 s) 
+=== sliding_block/low/05
+Found dynamics keyword: sliding_block
+Data shape:  (25, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.8980392
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.046688079833984 	 validation loss: 22.821788787841797
+best model a 7.52113676071167
+best last a 7.498417854309082
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=7.52113676071167 beta=10.0 (23.9 s) 
+=== sliding_block/mid/01
+Found dynamics keyword: sliding_block
+Data shape:  (15, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9490196
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 22.899993896484375 	 validation loss: 23.074424743652344
+best model a 7.673050880432129
+best last a 7.6483235359191895
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=7.673050880432129 beta=10.0 (34.0 s) 
+=== sliding_block/mid/02
+Found dynamics keyword: sliding_block
+Data shape:  (17, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9529412
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 23.020145416259766 	 validation loss: 22.703367233276367
+best model a 7.96227502822876
+best last a 7.96227502822876
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=7.96227502822876 beta=10.0 (26.2 s) 
+=== sliding_block/mid/03
+Found dynamics keyword: sliding_block
+Data shape:  (15, 10, 1, 56, 100)
+Data range: 
+Min:  0.003921569 
+Max:  0.9607843
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 22.88499641418457 	 validation loss: 22.706361770629883
+best model a 8.351669311523438
+best last a 8.085686683654785
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.351669311523438 beta=10.0 (28.4 s) 
+=== sliding_block/mid/04
+Found dynamics keyword: sliding_block
+Data shape:  (12, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.9490196
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 22.811254501342773 	 validation loss: 22.88019561767578
+best model a 9.094415664672852
+best last a 9.068695068359375
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.094415664672852 beta=10.0 (39.2 s) 
+=== sliding_block/mid/05
+Found dynamics keyword: sliding_block
+Data shape:  (13, 10, 1, 56, 100)
+Data range: 
+Min:  0.007843138 
+Max:  0.95686275
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 22.926898956298828 	 validation loss: 22.804306030273438
+best model a 8.972719192504883
+best last a 8.971138954162598
+best model b 10.0
+best last b 10.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.972719192504883 beta=10.0 (45.0 s) 
+=== torricelli/large/01
+Found dynamics keyword: torricelli
+Data shape:  (1208, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 5.91619873046875 	 validation loss: 6.2962517738342285
+best model a 0.6025359034538269
+best last a 0.7362598180770874
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.6025359034538269 beta=0.0 (220.4 s) 
+=== torricelli/large/02
+Found dynamics keyword: torricelli
+Data shape:  (1170, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.96862745
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.2052112221717834 	 validation loss: 6.783513784408569
+best model a 9.51370620727539
+best last a 0.6410146355628967
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.51370620727539 beta=0.0 (217.4 s) 
+=== torricelli/large/03
+Found dynamics keyword: torricelli
+Data shape:  (1191, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.406702399253845 	 validation loss: 6.978478908538818
+best model a 8.757075309753418
+best last a 0.658048689365387
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=8.757075309753418 beta=0.0 (221.2 s) 
+=== torricelli/large/04
+Found dynamics keyword: torricelli
+Data shape:  (1188, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.41065776348114 	 validation loss: 6.7428297996521
+best model a 1.994563102722168
+best last a 0.7220311760902405
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=1.994563102722168 beta=0.0 (215.8 s) 
+=== torricelli/large/05
+Found dynamics keyword: torricelli
+Data shape:  (1188, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.94509804
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.491152882575989 	 validation loss: 6.92272686958313
+best model a 9.77774429321289
+best last a 0.7723277807235718
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=9.77774429321289 beta=0.0 (217.4 s) 
+=== torricelli/medium/01
+Found dynamics keyword: torricelli
+Data shape:  (1484, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9529412
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.574410533905029 	 validation loss: 6.968912760416667
+best model a 0.132765531539917
+best last a 0.09634122252464294
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.132765531539917 beta=0.0 (275.4 s) 
+=== torricelli/medium/02
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1526).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.8980392
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.61616153717041 	 validation loss: 6.650982697804769
+best model a 0.6212246417999268
+best last a 0.5591694116592407
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.6212246417999268 beta=0.0 (272.2 s) 
+=== torricelli/medium/03
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1513).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.92941177
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.499130010604858 	 validation loss: 6.487101395924886
+best model a 0.45937103033065796
+best last a 0.46862292289733887
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.45937103033065796 beta=0.0 (274.9 s) 
+=== torricelli/medium/04
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1515).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9137255
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.431029367446899 	 validation loss: 6.415647983551025
+best model a 0.6494050025939941
+best last a 0.5589512586593628
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.6494050025939941 beta=0.0 (270.3 s) 
+=== torricelli/medium/05
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1511).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9372549
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.380263423919677 	 validation loss: 6.431711514790853
+best model a 0.6634675860404968
+best last a 0.5958588719367981
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.6634675860404968 beta=0.0 (276.0 s) 
+=== torricelli/small/01
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 2032).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9607843
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.571360731124878 	 validation loss: 6.601862907409668
+best model a 0.08222092688083649
+best last a 0.07652248442173004
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.08222092688083649 beta=0.0 (277.2 s) 
+=== torricelli/small/02
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 2069).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9764706
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.289255237579345 	 validation loss: 6.257971445719401
+best model a 0.02718799002468586
+best last a 0.1263372004032135
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.02718799002468586 beta=0.0 (276.8 s) 
+=== torricelli/small/03
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 2042).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9647059
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.367493629455566 	 validation loss: 6.394196669260661
+best model a 0.08902355283498764
+best last a 0.1192745491862297
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.08902355283498764 beta=0.0 (279.9 s) 
+=== torricelli/small/04
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 2064).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.9490196
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.579587364196778 	 validation loss: 6.558559417724609
+best model a 0.07294697314500809
+best last a 0.08693951368331909
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.07294697314500809 beta=0.0 (302.3 s) 
+=== torricelli/small/05
+Found dynamics keyword: torricelli
+Subsampled to 1500 samples (was 1981).
+Data shape:  (1500, 10, 1, 56, 100)
+Data range: 
+Min:  0.0 
+Max:  0.98039216
+dt 0.05
+Using device: cuda
+Initial Loss 	 training loss: 6.390397834777832 	 validation loss: 6.354762077331543
+best model a 0.05253688991069794
+best last a 0.05251523479819298
+best model b 0.0
+best last b 0.0
+z2_encoder.shape:  torch.Size([1, 10, 1])
+    status=ok alpha=0.05253688991069794 beta=0.0 (288.8 s) 
+Done: 69 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_base_1step/clips.csv; 5 not ok.
+=== s3_unified_1step -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_unified_1step
+=== dropped_ball/large/01
+  Epoch 50: loss=1.582606
+  Epoch 100: loss=0.667516
+  Epoch 150: loss=0.277654
+  Epoch 200: loss=0.116898
+  Epoch 250: loss=0.080186
+  Epoch 300: loss=0.065253
+  Epoch 350: loss=0.054203
+  Epoch 400: loss=0.044791
+  Epoch 450: loss=0.036662
+  Epoch 500: loss=0.029707
+    status=ok gamma0=10.719416618347168 gamma1=1.1446542739868164 (17.4 s) 
+=== dropped_ball/large/03
+  Epoch 50: loss=1.499449
+  Epoch 100: loss=0.457724
+  Epoch 150: loss=0.220325
+  Epoch 200: loss=0.141118
+  Epoch 250: loss=0.108009
+  Epoch 300: loss=0.089306
+  Epoch 350: loss=0.075614
+  Epoch 400: loss=0.064530
+  Epoch 450: loss=0.055021
+  Epoch 500: loss=0.046785
+    status=ok gamma0=3.464327812194824 gamma1=1.6850621700286865 (12.0 s) 
+=== dropped_ball/large/05
+  Epoch 50: loss=2.593302
+  Epoch 100: loss=0.299024
+  Epoch 150: loss=0.264651
+  Epoch 200: loss=0.237853
+  Epoch 250: loss=0.211496
+  Epoch 300: loss=0.185710
+  Epoch 350: loss=0.160962
+  Epoch 400: loss=0.137963
+  Epoch 450: loss=0.117706
+  Epoch 500: loss=0.100975
+    status=ok gamma0=2.749157190322876 gamma1=1.5431733131408691 (12.0 s) 
+=== dropped_ball/medium/01
+  Epoch 50: loss=2.028741
+  Epoch 100: loss=0.528454
+  Epoch 150: loss=0.158532
+  Epoch 200: loss=0.085126
+  Epoch 250: loss=0.063487
+  Epoch 300: loss=0.050042
+  Epoch 350: loss=0.039681
+  Epoch 400: loss=0.031312
+  Epoch 450: loss=0.024611
+  Epoch 500: loss=0.019138
+    status=ok gamma0=1.5321162939071655 gamma1=0.25782570242881775 (11.9 s) 
+=== dropped_ball/medium/02
+  Epoch 50: loss=2.383039
+  Epoch 100: loss=0.369957
+  Epoch 150: loss=0.197601
+  Epoch 200: loss=0.120399
+  Epoch 250: loss=0.073148
+  Epoch 300: loss=0.049506
+  Epoch 350: loss=0.037633
+  Epoch 400: loss=0.028481
+  Epoch 450: loss=0.020539
+  Epoch 500: loss=0.013739
+    status=ok gamma0=1.3682161569595337 gamma1=0.5647903084754944 (11.9 s) 
+=== dropped_ball/small/01
+  Epoch 50: loss=0.588089
+  Epoch 100: loss=0.173280
+  Epoch 150: loss=0.070000
+  Epoch 200: loss=0.050871
+  Epoch 250: loss=0.040498
+  Epoch 300: loss=0.034068
+  Epoch 350: loss=0.029289
+  Epoch 400: loss=0.025136
+  Epoch 450: loss=0.021299
+  Epoch 500: loss=0.017724
+    status=ok gamma0=11.397282600402832 gamma1=0.6774132251739502 (11.9 s) 
+=== dropped_ball/small/02
+  Epoch 50: loss=1.046451
+  Epoch 100: loss=0.315620
+  Epoch 150: loss=0.151323
+  Epoch 200: loss=0.091430
+  Epoch 250: loss=0.068083
+  Epoch 300: loss=0.058600
+  Epoch 350: loss=0.052960
+  Epoch 400: loss=0.048468
+  Epoch 450: loss=0.044543
+  Epoch 500: loss=0.041002
+    status=ok gamma0=4.600492000579834 gamma1=1.4571982622146606 (11.9 s) 
+=== dropped_ball/small/04
+  Epoch 50: loss=0.579229
+  Epoch 100: loss=0.229532
+  Epoch 150: loss=0.132520
+  Epoch 200: loss=0.081781
+  Epoch 250: loss=0.053116
+  Epoch 300: loss=0.036425
+  Epoch 350: loss=0.026727
+  Epoch 400: loss=0.020494
+  Epoch 450: loss=0.015854
+  Epoch 500: loss=0.012286
+    status=ok gamma0=38.241676330566406 gamma1=2.078615427017212 (11.9 s) 
+=== dropped_ball/small/05
+  Epoch 50: loss=1.282306
+  Epoch 100: loss=0.319321
+  Epoch 150: loss=0.089580
+  Epoch 200: loss=0.057945
+  Epoch 250: loss=0.043053
+  Epoch 300: loss=0.032574
+  Epoch 350: loss=0.025167
+  Epoch 400: loss=0.019803
+  Epoch 450: loss=0.015822
+  Epoch 500: loss=0.012831
+    status=ok gamma0=9.057706832885742 gamma1=0.4122334420681 (11.9 s) 
+=== led/led_10s/01
+  Epoch 50: loss=0.021151
+  Epoch 100: loss=0.002374
+  Epoch 150: loss=0.000450
+  Epoch 200: loss=0.000087
+  Epoch 250: loss=0.000013
+  Epoch 300: loss=0.000577
+  Epoch 350: loss=0.002778
+  Epoch 400: loss=0.000002
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.000000
+    status=ok gamma0=8.465731620788574 gamma1=-1.1817220449447632 (11.9 s) 
+=== led/led_10s/02
+  Epoch 50: loss=0.030175
+  Epoch 100: loss=0.001564
+  Epoch 150: loss=0.000680
+  Epoch 200: loss=0.075843
+  Epoch 250: loss=0.000174
+  Epoch 300: loss=0.000007
+  Epoch 350: loss=0.000000
+  Epoch 400: loss=0.000000
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.016499
+    status=ok gamma0=3.9970836639404297 gamma1=0.15469616651535034 (11.9 s) 
+=== led/led_10s/03
+  Epoch 50: loss=0.022773
+  Epoch 100: loss=0.005900
+  Epoch 150: loss=0.014889
+  Epoch 200: loss=0.000438
+  Epoch 250: loss=0.000015
+  Epoch 300: loss=0.000000
+  Epoch 350: loss=0.002639
+  Epoch 400: loss=0.000366
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.000000
+    status=ok gamma0=8.09826374053955 gamma1=1.6042624711990356 (11.9 s) 
+=== led/led_10s/04
+  Epoch 50: loss=0.014875
+  Epoch 100: loss=0.000638
+  Epoch 150: loss=0.000071
+  Epoch 200: loss=0.000009
+  Epoch 250: loss=0.000001
+  Epoch 300: loss=0.000000
+  Epoch 350: loss=0.000659
+  Epoch 400: loss=0.003413
+  Epoch 450: loss=0.000036
+  Epoch 500: loss=0.000000
+    status=ok gamma0=9.797749519348145 gamma1=1.4153177738189697 (11.9 s) 
+=== led/led_10s/05
+  Epoch 50: loss=0.071247
+  Epoch 100: loss=0.001618
+  Epoch 150: loss=0.000421
+  Epoch 200: loss=0.000150
+  Epoch 250: loss=0.000045
+  Epoch 300: loss=0.000011
+  Epoch 350: loss=0.000005
+  Epoch 400: loss=0.000327
+  Epoch 450: loss=0.000002
+  Epoch 500: loss=0.000000
+    status=ok gamma0=3.1318492889404297 gamma1=0.30065956711769104 (11.9 s) 
+=== led/led_2s/01
+  Epoch 50: loss=0.005351
+  Epoch 100: loss=0.000860
+  Epoch 150: loss=0.000307
+  Epoch 200: loss=0.000671
+  Epoch 250: loss=0.000042
+  Epoch 300: loss=0.003973
+  Epoch 350: loss=0.000022
+  Epoch 400: loss=0.000000
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.000000
+    status=ok gamma0=8.801580429077148 gamma1=0.9811589121818542 (11.9 s) 
+=== led/led_2s/02
+  Epoch 50: loss=0.019579
+  Epoch 100: loss=0.010346
+  Epoch 150: loss=0.007389
+  Epoch 200: loss=0.005054
+  Epoch 250: loss=0.003103
+  Epoch 300: loss=0.001636
+  Epoch 350: loss=0.000711
+  Epoch 400: loss=0.000246
+  Epoch 450: loss=0.000067
+  Epoch 500: loss=0.000015
+    status=ok gamma0=23.019323348999023 gamma1=2.4051759243011475 (11.9 s) 
+=== led/led_2s/03
+  Epoch 50: loss=0.015903
+  Epoch 100: loss=0.007931
+  Epoch 150: loss=0.005253
+  Epoch 200: loss=0.003280
+  Epoch 250: loss=0.001817
+  Epoch 300: loss=0.000920
+  Epoch 350: loss=0.000408
+  Epoch 400: loss=0.000167
+  Epoch 450: loss=0.000066
+  Epoch 500: loss=0.000023
+    status=ok gamma0=23.151391983032227 gamma1=2.6442508697509766 (11.9 s) 
+=== led/led_2s/04
+  Epoch 50: loss=0.050760
+  Epoch 100: loss=0.011782
+  Epoch 150: loss=0.005492
+  Epoch 200: loss=0.003507
+  Epoch 250: loss=0.002036
+  Epoch 300: loss=0.001023
+  Epoch 350: loss=0.000431
+  Epoch 400: loss=0.000146
+  Epoch 450: loss=0.000042
+  Epoch 500: loss=0.000010
+    status=ok gamma0=11.968953132629395 gamma1=1.8985049724578857 (11.8 s) 
+=== led/led_2s/05
+  Epoch 50: loss=0.019050
+  Epoch 100: loss=0.005376
+  Epoch 150: loss=0.002071
+  Epoch 200: loss=0.000414
+  Epoch 250: loss=0.000029
+  Epoch 300: loss=0.000001
+  Epoch 350: loss=0.000000
+  Epoch 400: loss=0.000000
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.013522
+    status=ok gamma0=6.65354061126709 gamma1=1.5774515867233276 (11.8 s) 
+=== led/led_5s/01
+  Epoch 50: loss=0.016450
+  Epoch 100: loss=0.001742
+  Epoch 150: loss=0.000516
+  Epoch 200: loss=0.000115
+  Epoch 250: loss=0.000018
+  Epoch 300: loss=0.000002
+  Epoch 350: loss=0.000000
+  Epoch 400: loss=0.000000
+  Epoch 450: loss=0.000618
+  Epoch 500: loss=0.000040
+    status=ok gamma0=13.064905166625977 gamma1=1.7563365697860718 (8.0 s) 
+=== led/led_5s/02
+  Epoch 50: loss=0.028562
+  Epoch 100: loss=0.014975
+  Epoch 150: loss=0.007784
+  Epoch 200: loss=0.002422
+  Epoch 250: loss=0.012199
+  Epoch 300: loss=0.000096
+  Epoch 350: loss=0.000898
+  Epoch 400: loss=0.000024
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.020674
+    status=ok gamma0=12.670283317565918 gamma1=2.0225629806518555 (4.3 s) 
+=== led/led_5s/03
+  Epoch 50: loss=0.003748
+  Epoch 100: loss=0.000674
+  Epoch 150: loss=0.000253
+  Epoch 200: loss=0.000090
+  Epoch 250: loss=0.000027
+  Epoch 300: loss=0.000007
+  Epoch 350: loss=0.001240
+  Epoch 400: loss=0.003727
+  Epoch 450: loss=0.000008
+  Epoch 500: loss=0.000000
+    status=ok gamma0=8.194865226745605 gamma1=1.5840933322906494 (10.4 s) 
+=== led/led_5s/04
+  Epoch 50: loss=0.026188
+  Epoch 100: loss=0.003728
+  Epoch 150: loss=0.001062
+  Epoch 200: loss=0.000383
+  Epoch 250: loss=0.000137
+  Epoch 300: loss=0.000043
+  Epoch 350: loss=0.004645
+  Epoch 400: loss=0.000061
+  Epoch 450: loss=0.000009
+  Epoch 500: loss=0.000001
+    status=ok gamma0=14.162729263305664 gamma1=1.5057350397109985 (11.9 s) 
+=== led/led_5s/05
+  Epoch 50: loss=0.011029
+  Epoch 100: loss=0.000641
+  Epoch 150: loss=0.000301
+  Epoch 200: loss=0.000131
+  Epoch 250: loss=0.000051
+  Epoch 300: loss=0.000018
+  Epoch 350: loss=0.000005
+  Epoch 400: loss=0.000001
+  Epoch 450: loss=0.000000
+  Epoch 500: loss=0.000000
+    status=ok gamma0=4.463231563568115 gamma1=1.4309260845184326 (11.9 s) 
+=== pendulum/pendulum_150/01
+  Epoch 50: loss=2.478028
+  Epoch 100: loss=0.938865
+  Epoch 150: loss=0.588833
+  Epoch 200: loss=0.365270
+  Epoch 250: loss=0.233206
+  Epoch 300: loss=0.164883
+  Epoch 350: loss=0.132344
+  Epoch 400: loss=0.115681
+  Epoch 450: loss=0.105064
+  Epoch 500: loss=0.096856
+    status=ok gamma0=3.5068421363830566 gamma1=5.5097761154174805 (11.9 s) 
+=== pendulum/pendulum_150/02
+  Epoch 50: loss=2.899760
+  Epoch 100: loss=1.012848
+  Epoch 150: loss=0.536751
+  Epoch 200: loss=0.257821
+  Epoch 250: loss=0.132821
+  Epoch 300: loss=0.092075
+  Epoch 350: loss=0.076004
+  Epoch 400: loss=0.068307
+  Epoch 450: loss=0.063068
+  Epoch 500: loss=0.058650
+    status=ok gamma0=5.514183521270752 gamma1=4.637884616851807 (12.0 s) 
+=== pendulum/pendulum_150/03
+  Epoch 50: loss=2.976171
+  Epoch 100: loss=0.219839
+  Epoch 150: loss=0.074216
+  Epoch 200: loss=0.057323
+  Epoch 250: loss=0.312521
+  Epoch 300: loss=0.053078
+  Epoch 350: loss=0.043585
+  Epoch 400: loss=0.037712
+  Epoch 450: loss=0.033016
+  Epoch 500: loss=0.028857
+    status=ok gamma0=2.649090528488159 gamma1=2.579678773880005 (12.0 s) 
+=== pendulum/pendulum_150/04
+  Epoch 50: loss=1.700921
+  Epoch 100: loss=0.213588
+  Epoch 150: loss=0.108243
+  Epoch 200: loss=0.085082
+  Epoch 250: loss=0.068408
+  Epoch 300: loss=0.055578
+  Epoch 350: loss=0.045622
+  Epoch 400: loss=0.037854
+  Epoch 450: loss=0.031645
+  Epoch 500: loss=0.633756
+    status=ok gamma0=2.672713279724121 gamma1=2.7681732177734375 (11.9 s) 
+=== pendulum/pendulum_150/05
+  Epoch 50: loss=1.690721
+  Epoch 100: loss=0.917045
+  Epoch 150: loss=0.557660
+  Epoch 200: loss=0.356679
+  Epoch 250: loss=0.254093
+  Epoch 300: loss=0.203355
+  Epoch 350: loss=0.174510
+  Epoch 400: loss=0.154013
+  Epoch 450: loss=0.138155
+  Epoch 500: loss=0.124908
+    status=ok gamma0=2.324720859527588 gamma1=5.610025405883789 (12.0 s) 
+=== pendulum/pendulum_45/01
+  Epoch 50: loss=7.957954
+  Epoch 100: loss=6.105727
+  Epoch 150: loss=3.750663
+  Epoch 200: loss=2.543406
+  Epoch 250: loss=1.805806
+  Epoch 300: loss=1.299535
+  Epoch 350: loss=0.941902
+  Epoch 400: loss=0.695093
+  Epoch 450: loss=0.529530
+  Epoch 500: loss=0.418641
+    status=ok gamma0=0.5073739290237427 gamma1=3.5415518283843994 (11.0 s) 
+=== pendulum/pendulum_45/02
+  Epoch 50: loss=4.269010
+  Epoch 100: loss=2.336737
+  Epoch 150: loss=1.447351
+  Epoch 200: loss=0.883908
+  Epoch 250: loss=0.556368
+  Epoch 300: loss=0.386892
+  Epoch 350: loss=0.293916
+  Epoch 400: loss=0.237887
+  Epoch 450: loss=0.202516
+  Epoch 500: loss=0.179987
+    status=ok gamma0=3.3732051849365234 gamma1=6.349540710449219 (4.4 s) 
+=== pendulum/pendulum_45/03
+  Epoch 50: loss=2.798281
+  Epoch 100: loss=1.128772
+  Epoch 150: loss=0.614965
+  Epoch 200: loss=0.345475
+  Epoch 250: loss=0.225520
+  Epoch 300: loss=0.170558
+  Epoch 350: loss=0.141610
+  Epoch 400: loss=0.124587
+  Epoch 450: loss=0.113687
+  Epoch 500: loss=0.106012
+    status=ok gamma0=3.807844400405884 gamma1=5.831588268280029 (4.4 s) 
+=== pendulum/pendulum_45/04
+  Epoch 50: loss=5.079924
+  Epoch 100: loss=2.892339
+  Epoch 150: loss=2.228849
+  Epoch 200: loss=1.439004
+  Epoch 250: loss=1.092962
+  Epoch 300: loss=0.865390
+  Epoch 350: loss=0.753477
+  Epoch 400: loss=0.672414
+  Epoch 450: loss=0.619003
+  Epoch 500: loss=0.577506
+    status=ok gamma0=0.6658163666725159 gamma1=5.270285606384277 (4.4 s) 
+=== pendulum/pendulum_45/05
+  Epoch 50: loss=1.721526
+  Epoch 100: loss=0.730648
+  Epoch 150: loss=0.455044
+  Epoch 200: loss=0.389477
+  Epoch 250: loss=0.346055
+  Epoch 300: loss=0.319273
+  Epoch 350: loss=0.307575
+  Epoch 400: loss=0.280777
+  Epoch 450: loss=0.263798
+  Epoch 500: loss=0.248852
+    status=ok gamma0=8.480953216552734 gamma1=4.473287105560303 (4.4 s) 
+=== pendulum/pendulum_90/01
+  Epoch 50: loss=2.361250
+  Epoch 100: loss=1.195144
+  Epoch 150: loss=0.543209
+  Epoch 200: loss=0.315357
+  Epoch 250: loss=0.230103
+  Epoch 300: loss=0.183697
+  Epoch 350: loss=0.155345
+  Epoch 400: loss=0.135204
+  Epoch 450: loss=0.119815
+  Epoch 500: loss=0.107211
+    status=ok gamma0=3.3917882442474365 gamma1=5.130764484405518 (3.5 s) 
+=== pendulum/pendulum_90/02
+  Epoch 50: loss=2.969210
+  Epoch 100: loss=1.618600
+  Epoch 150: loss=1.094322
+  Epoch 200: loss=0.730818
+  Epoch 250: loss=0.494898
+  Epoch 300: loss=0.353299
+  Epoch 350: loss=0.268826
+  Epoch 400: loss=0.214456
+  Epoch 450: loss=0.176769
+  Epoch 500: loss=0.149854
+    status=ok gamma0=3.6668121814727783 gamma1=5.619438648223877 (2.8 s) 
+=== pendulum/pendulum_90/03
+  Epoch 50: loss=3.732175
+  Epoch 100: loss=1.479406
+  Epoch 150: loss=0.873048
+  Epoch 200: loss=0.513252
+  Epoch 250: loss=0.322526
+  Epoch 300: loss=0.224972
+  Epoch 350: loss=0.170173
+  Epoch 400: loss=0.137203
+  Epoch 450: loss=0.116937
+  Epoch 500: loss=0.103905
+    status=ok gamma0=3.593247413635254 gamma1=6.062411308288574 (2.8 s) 
+=== pendulum/pendulum_90/04
+  Epoch 50: loss=1.192304
+  Epoch 100: loss=1.177715
+  Epoch 150: loss=0.255618
+  Epoch 200: loss=0.181493
+  Epoch 250: loss=0.543677
+  Epoch 300: loss=0.158111
+  Epoch 350: loss=0.123997
+  Epoch 400: loss=0.106398
+  Epoch 450: loss=0.102591
+  Epoch 500: loss=0.296038
+    status=ok gamma0=16.271146774291992 gamma1=4.554953575134277 (2.8 s) 
+=== pendulum/pendulum_90/05
+  Epoch 50: loss=2.364476
+  Epoch 100: loss=1.253931
+  Epoch 150: loss=0.859783
+  Epoch 200: loss=0.629438
+  Epoch 250: loss=0.493905
+  Epoch 300: loss=0.409630
+  Epoch 350: loss=0.349046
+  Epoch 400: loss=0.298953
+  Epoch 450: loss=0.254254
+  Epoch 500: loss=0.213395
+    status=ok gamma0=6.744853496551514 gamma1=5.82436466217041 (2.7 s) 
+=== sliding_block/high/01
+  Epoch 50: loss=3.006901
+  Epoch 100: loss=1.199208
+  Epoch 150: loss=0.781830
+  Epoch 200: loss=0.537409
+  Epoch 250: loss=0.398970
+  Epoch 300: loss=0.322279
+  Epoch 350: loss=0.275321
+  Epoch 400: loss=0.241315
+  Epoch 450: loss=0.213614
+  Epoch 500: loss=0.189835
+    status=ok gamma0=2.5211989879608154 gamma1=5.054387092590332 (2.7 s) 
+=== sliding_block/high/02
+  Epoch 50: loss=2.974559
+  Epoch 100: loss=0.791473
+  Epoch 150: loss=0.307603
+  Epoch 200: loss=0.151299
+  Epoch 250: loss=0.077817
+  Epoch 300: loss=0.053282
+  Epoch 350: loss=0.044057
+  Epoch 400: loss=0.134099
+  Epoch 450: loss=0.037535
+  Epoch 500: loss=0.033576
+    status=ok gamma0=1.9173951148986816 gamma1=1.689833402633667 (2.7 s) 
+=== sliding_block/high/03
+  Epoch 50: loss=3.470884
+  Epoch 100: loss=2.044524
+  Epoch 150: loss=1.486764
+  Epoch 200: loss=1.116134
+  Epoch 250: loss=0.852152
+  Epoch 300: loss=0.659779
+  Epoch 350: loss=0.516196
+  Epoch 400: loss=0.407439
+  Epoch 450: loss=0.324798
+  Epoch 500: loss=0.262793
+    status=ok gamma0=1.1490150690078735 gamma1=5.645954608917236 (2.7 s) 
+=== sliding_block/high/04
+  Epoch 50: loss=5.492148
+  Epoch 100: loss=1.664861
+  Epoch 150: loss=1.142980
+  Epoch 200: loss=0.792842
+  Epoch 250: loss=0.553297
+  Epoch 300: loss=0.395104
+  Epoch 350: loss=0.293321
+  Epoch 400: loss=0.226993
+  Epoch 450: loss=0.181875
+  Epoch 500: loss=0.149789
+    status=ok gamma0=4.3208746910095215 gamma1=5.28885555267334 (2.7 s) 
+=== sliding_block/high/05
+  Epoch 50: loss=4.538013
+  Epoch 100: loss=1.499127
+  Epoch 150: loss=0.981130
+  Epoch 200: loss=0.621487
+  Epoch 250: loss=0.381542
+  Epoch 300: loss=0.236214
+  Epoch 350: loss=0.156648
+  Epoch 400: loss=0.114858
+  Epoch 450: loss=0.091531
+  Epoch 500: loss=0.076682
+    status=ok gamma0=1.1780126094818115 gamma1=4.088785171508789 (2.7 s) 
+=== sliding_block/low/01
+  Epoch 50: loss=2.476374
+  Epoch 100: loss=0.609193
+  Epoch 150: loss=0.139209
+  Epoch 200: loss=0.098156
+  Epoch 250: loss=0.071376
+  Epoch 300: loss=0.051015
+  Epoch 350: loss=0.037158
+  Epoch 400: loss=0.028910
+  Epoch 450: loss=0.024299
+  Epoch 500: loss=0.113069
+    status=ok gamma0=1.788482904434204 gamma1=1.3783148527145386 (2.7 s) 
+=== sliding_block/low/02
+  Epoch 50: loss=1.873070
+  Epoch 100: loss=1.049016
+  Epoch 150: loss=0.578928
+  Epoch 200: loss=0.360843
+  Epoch 250: loss=0.281387
+  Epoch 300: loss=5.480800
+  Epoch 350: loss=0.386250
+  Epoch 400: loss=0.242260
+  Epoch 450: loss=0.215679
+  Epoch 500: loss=0.200105
+    status=ok gamma0=3.214129686355591 gamma1=2.8898189067840576 (2.7 s) 
+=== sliding_block/low/03
+  Epoch 50: loss=5.564155
+  Epoch 100: loss=3.351631
+  Epoch 150: loss=2.005194
+  Epoch 200: loss=1.196986
+  Epoch 250: loss=0.716578
+  Epoch 300: loss=0.450544
+  Epoch 350: loss=0.331941
+  Epoch 400: loss=0.277549
+  Epoch 450: loss=0.241045
+  Epoch 500: loss=0.218490
+    status=ok gamma0=0.4629192352294922 gamma1=4.154707908630371 (2.7 s) 
+=== sliding_block/low/04
+  Epoch 50: loss=1.922337
+  Epoch 100: loss=0.912918
+  Epoch 150: loss=0.434440
+  Epoch 200: loss=0.204811
+  Epoch 250: loss=0.126595
+  Epoch 300: loss=0.103292
+  Epoch 350: loss=0.091652
+  Epoch 400: loss=0.082470
+  Epoch 450: loss=0.074341
+  Epoch 500: loss=0.066907
+    status=ok gamma0=2.9571475982666016 gamma1=4.504298686981201 (2.7 s) 
+=== sliding_block/low/05
+  Epoch 50: loss=2.683212
+  Epoch 100: loss=1.425865
+  Epoch 150: loss=0.848107
+  Epoch 200: loss=0.492572
+  Epoch 250: loss=0.296269
+  Epoch 300: loss=0.206762
+  Epoch 350: loss=0.167997
+  Epoch 400: loss=0.145572
+  Epoch 450: loss=0.127728
+  Epoch 500: loss=0.111258
+    status=ok gamma0=1.0865541696548462 gamma1=3.9415457248687744 (2.7 s) 
+=== sliding_block/mid/01
+  Epoch 50: loss=3.411615
+  Epoch 100: loss=2.234959
+  Epoch 150: loss=1.562874
+  Epoch 200: loss=1.054902
+  Epoch 250: loss=0.675159
+  Epoch 300: loss=0.411010
+  Epoch 350: loss=0.247617
+  Epoch 400: loss=0.159443
+  Epoch 450: loss=0.116284
+  Epoch 500: loss=0.094382
+    status=ok gamma0=0.7108837366104126 gamma1=2.881272554397583 (2.7 s) 
+=== sliding_block/mid/02
+  Epoch 50: loss=2.250767
+  Epoch 100: loss=1.139014
+  Epoch 150: loss=0.690253
+  Epoch 200: loss=0.448647
+  Epoch 250: loss=0.319758
+  Epoch 300: loss=0.246813
+  Epoch 350: loss=0.199040
+  Epoch 400: loss=0.163617
+  Epoch 450: loss=0.135587
+  Epoch 500: loss=0.112842
+    status=ok gamma0=1.3257167339324951 gamma1=5.249093055725098 (2.7 s) 
+=== sliding_block/mid/03
+  Epoch 50: loss=4.009211
+  Epoch 100: loss=0.531571
+  Epoch 150: loss=0.259908
+  Epoch 200: loss=0.205484
+  Epoch 250: loss=0.151663
+  Epoch 300: loss=0.112010
+  Epoch 350: loss=0.079051
+  Epoch 400: loss=0.058304
+  Epoch 450: loss=0.044550
+  Epoch 500: loss=0.034766
+    status=ok gamma0=0.9244754314422607 gamma1=-2.4987120628356934 (2.7 s) 
+=== sliding_block/mid/04
+  Epoch 50: loss=4.249770
+  Epoch 100: loss=2.404729
+  Epoch 150: loss=1.636371
+  Epoch 200: loss=1.112018
+  Epoch 250: loss=0.750533
+  Epoch 300: loss=0.523566
+  Epoch 350: loss=0.398764
+  Epoch 400: loss=0.336068
+  Epoch 450: loss=0.304938
+  Epoch 500: loss=0.286481
+    status=ok gamma0=1.1180001497268677 gamma1=5.775714874267578 (2.7 s) 
+=== sliding_block/mid/05
+  Epoch 50: loss=4.295552
+  Epoch 100: loss=2.311212
+  Epoch 150: loss=1.154717
+  Epoch 200: loss=0.527276
+  Epoch 250: loss=0.249070
+  Epoch 300: loss=0.155667
+  Epoch 350: loss=0.118695
+  Epoch 400: loss=0.097025
+  Epoch 450: loss=0.082398
+  Epoch 500: loss=0.071838
+    status=ok gamma0=1.531434416770935 gamma1=3.4944255352020264 (2.7 s) 
+=== torricelli/large/01
+  Epoch 50: loss=5.267517
+  Epoch 100: loss=3.496876
+  Epoch 150: loss=2.843176
+  Epoch 200: loss=2.342573
+  Epoch 250: loss=1.928579
+  Epoch 300: loss=1.576973
+  Epoch 350: loss=1.275221
+  Epoch 400: loss=1.016330
+  Epoch 450: loss=0.796338
+  Epoch 500: loss=0.612756
+    status=ok gamma0=0.22843365371227264 gamma1=5.28371524810791 (2.8 s) 
+=== torricelli/large/02
+  Epoch 50: loss=2.413793
+  Epoch 100: loss=3.222396
+  Epoch 150: loss=0.863649
+  Epoch 200: loss=0.574443
+  Epoch 250: loss=0.611382
+  Epoch 300: loss=0.394520
+  Epoch 350: loss=4.548664
+  Epoch 400: loss=0.447876
+  Epoch 450: loss=0.266288
+  Epoch 500: loss=0.185895
+    status=ok gamma0=29.313268661499023 gamma1=4.981409549713135 (2.8 s) 
+=== torricelli/large/03
+  Epoch 50: loss=3.422893
+  Epoch 100: loss=1.589621
+  Epoch 150: loss=0.877906
+  Epoch 200: loss=0.429275
+  Epoch 250: loss=0.375867
+  Epoch 300: loss=0.229601
+  Epoch 350: loss=0.845384
+  Epoch 400: loss=0.174424
+  Epoch 450: loss=0.112251
+  Epoch 500: loss=0.079990
+    status=ok gamma0=13.536150932312012 gamma1=3.697532892227173 (2.8 s) 
+=== torricelli/large/04
+  Epoch 50: loss=6.992568
+  Epoch 100: loss=3.305567
+  Epoch 150: loss=2.170793
+  Epoch 200: loss=1.457120
+  Epoch 250: loss=0.938664
+  Epoch 300: loss=2.176519
+  Epoch 350: loss=1.039057
+  Epoch 400: loss=0.562140
+  Epoch 450: loss=0.306761
+  Epoch 500: loss=8.710842
+    status=ok gamma0=0.2851727604866028 gamma1=0.9989937543869019 (2.8 s) 
+=== torricelli/large/05
+  Epoch 50: loss=5.142624
+  Epoch 100: loss=2.551374
+  Epoch 150: loss=1.794556
+  Epoch 200: loss=1.213047
+  Epoch 250: loss=0.796738
+  Epoch 300: loss=1.733308
+  Epoch 350: loss=1.117983
+  Epoch 400: loss=0.727998
+  Epoch 450: loss=0.469083
+  Epoch 500: loss=0.300674
+    status=ok gamma0=0.9381168484687805 gamma1=5.099982738494873 (2.8 s) 
+=== torricelli/medium/01
+  Epoch 50: loss=5.004982
+  Epoch 100: loss=2.674921
+  Epoch 150: loss=1.795843
+  Epoch 200: loss=1.167114
+  Epoch 250: loss=0.693019
+  Epoch 300: loss=0.374579
+  Epoch 350: loss=0.646713
+  Epoch 400: loss=0.470952
+  Epoch 450: loss=0.245538
+  Epoch 500: loss=0.128157
+    status=ok gamma0=1.1366910934448242 gamma1=3.9009153842926025 (2.8 s) 
+=== torricelli/medium/02
+  Epoch 50: loss=2.642269
+  Epoch 100: loss=1.525801
+  Epoch 150: loss=0.872310
+  Epoch 200: loss=1.941794
+  Epoch 250: loss=0.827646
+  Epoch 300: loss=0.433113
+  Epoch 350: loss=2.772247
+  Epoch 400: loss=1.177733
+  Epoch 450: loss=0.534290
+  Epoch 500: loss=0.276352
+    status=ok gamma0=4.018896102905273 gamma1=5.559462547302246 (2.8 s) 
+=== torricelli/medium/03
+  Epoch 50: loss=2.631460
+  Epoch 100: loss=1.473363
+  Epoch 150: loss=0.950420
+  Epoch 200: loss=1.431786
+  Epoch 250: loss=1.034502
+  Epoch 300: loss=0.579329
+  Epoch 350: loss=0.850052
+  Epoch 400: loss=0.576881
+  Epoch 450: loss=1.373049
+  Epoch 500: loss=0.563752
+    status=ok gamma0=26.79161834716797 gamma1=4.761498928070068 (2.8 s) 
+=== torricelli/medium/04
+  Epoch 50: loss=3.399346
+  Epoch 100: loss=2.213686
+  Epoch 150: loss=1.449323
+  Epoch 200: loss=0.911183
+  Epoch 250: loss=0.545567
+  Epoch 300: loss=1.736336
+  Epoch 350: loss=0.992873
+  Epoch 400: loss=0.576527
+  Epoch 450: loss=0.336994
+  Epoch 500: loss=12.950978
+    status=ok gamma0=0.8660147786140442 gamma1=4.972965717315674 (2.8 s) 
+=== torricelli/medium/05
+  Epoch 50: loss=3.421974
+  Epoch 100: loss=1.244892
+  Epoch 150: loss=3.126992
+  Epoch 200: loss=2.303187
+  Epoch 250: loss=1.737495
+  Epoch 300: loss=1.304706
+  Epoch 350: loss=0.970513
+  Epoch 400: loss=0.719009
+  Epoch 450: loss=0.536004
+  Epoch 500: loss=0.405543
+    status=ok gamma0=0.7698915004730225 gamma1=4.953156471252441 (2.8 s) 
+=== torricelli/small/01
+  Epoch 50: loss=3.459725
+  Epoch 100: loss=2.381208
+  Epoch 150: loss=2.513980
+  Epoch 200: loss=1.688257
+  Epoch 250: loss=1.251034
+  Epoch 300: loss=2.445074
+  Epoch 350: loss=2.579336
+  Epoch 400: loss=1.589441
+  Epoch 450: loss=1.128662
+  Epoch 500: loss=0.855319
+    status=ok gamma0=2.742417573928833 gamma1=4.337423801422119 (2.8 s) 
+=== torricelli/small/02
+  Epoch 50: loss=3.982813
+  Epoch 100: loss=2.486047
+  Epoch 150: loss=1.894231
+  Epoch 200: loss=1.437700
+  Epoch 250: loss=1.079999
+  Epoch 300: loss=2.925422
+  Epoch 350: loss=1.868671
+  Epoch 400: loss=1.307569
+  Epoch 450: loss=0.943268
+  Epoch 500: loss=0.696308
+    status=ok gamma0=2.693648338317871 gamma1=6.046133041381836 (2.8 s) 
+=== torricelli/small/03
+  Epoch 50: loss=4.118944
+  Epoch 100: loss=2.646260
+  Epoch 150: loss=1.923145
+  Epoch 200: loss=1.407688
+  Epoch 250: loss=1.042354
+  Epoch 300: loss=0.794645
+  Epoch 350: loss=0.621603
+  Epoch 400: loss=0.482127
+  Epoch 450: loss=0.359234
+  Epoch 500: loss=0.598343
+    status=ok gamma0=1.0576282739639282 gamma1=5.9170966148376465 (2.8 s) 
+=== torricelli/small/04
+  Epoch 50: loss=5.291027
+  Epoch 100: loss=3.777358
+  Epoch 150: loss=2.823747
+  Epoch 200: loss=2.161711
+  Epoch 250: loss=1.654654
+  Epoch 300: loss=1.252102
+  Epoch 350: loss=0.931522
+  Epoch 400: loss=7.894782
+  Epoch 450: loss=8.713410
+  Epoch 500: loss=8.711055
+    status=ok gamma0=0.3544752299785614 gamma1=2.4334797859191895 (2.9 s) 
+=== torricelli/small/05
+  Epoch 50: loss=4.088556
+  Epoch 100: loss=2.207120
+  Epoch 150: loss=1.455620
+  Epoch 200: loss=0.663348
+  Epoch 250: loss=0.984824
+  Epoch 300: loss=0.506997
+  Epoch 350: loss=0.359106
+  Epoch 400: loss=1.242592
+  Epoch 450: loss=0.362779
+  Epoch 500: loss=0.622917
+    status=ok gamma0=2.1725094318389893 gamma1=4.670440196990967 (2.8 s) 
+Done: 69 clips in /export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_unified_1step/clips.csv; 0 not ok.
+[s3_unified_1step] finished: all clips ok -> /export/home/rakh90100/learning_from_physics/Results/repro_d75/s3_unified_1step/clips.csv

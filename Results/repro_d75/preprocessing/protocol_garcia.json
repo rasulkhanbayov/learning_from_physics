@@ -1,0 +1,36 @@
+{
+ "name": "garcia",
+ "fps_nominal": 60.0,
+ "dynamics": {
+  "pendulum": {
+   "stride": 6,
+   "nf": 20,
+   "dt": 0.1
+  },
+  "torricelli": {
+   "stride": 6,
+   "nf": 20,
+   "dt": 0.1
+  },
+  "led": {
+   "stride": 1,
+   "nf": 20,
+   "dt": 0.016666666666666666
+  },
+  "sliding_block": {
+   "stride": 2,
+   "nf": 10,
+   "dt": 0.03333333333333333
+  },
+  "dropped_ball": {
+   "stride": 2,
+   "nf": 4,
+   "dt": 0.03333333333333333
+  },
+  "free_fall": {
+   "stride": 1,
+   "nf": 10,
+   "dt": 0.016666666666666666
+  }
+ }
+}
